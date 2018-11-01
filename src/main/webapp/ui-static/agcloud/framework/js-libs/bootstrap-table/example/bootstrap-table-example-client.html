@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html style="overflow-x: hidden;height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: auto;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>bootstrap表格使用示例</title>
+    <link href="../../../theme-libs/metronic-v5/default/assets/demo/default/base/agcloud_custom_metronic.css" rel="stylesheet" type="text/css" />
+    <link href="../../../theme-libs/metronic-v5/default/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../bootstrap-table.min.css" />
+    <link rel="stylesheet" href="../bootstrap-table-page.css" />
+    <script src="../../../theme-libs/metronic-v5/default/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../jquery1/jquery-1.11.3.min.js" ></script>
+    <script type="text/javascript" src="../bootstrap-table.min.js" ></script>
+    <script type="text/javascript" src="../bootstrap-table-zh-CN.min.js" ></script>
+    <script type="text/javascript" src="../bootstrap-table-page.js" ></script>
+</head>
+<body style="width: 100%;overflow-x: hidden;">
+<div>
+    <div id="local_data">
+        <table  id="customTable"
+                data-toggle="table"
+                data-sort-stable="true"
+                data-sort-name="PROBLEM_ROAD"
+                data-striped="true"
+                data-pagination="true"
+                data-page-list="[10, 20, 50, 100]"
+                data-side-pagination="client"
+                data-url="data.json">
+            <thead>
+            <tr>
+                <th data-field="PROBLEM_DESC" data-width="200" data-sortable="true" data-align="center" >问题描述</th>
+                <th data-field="PROBLEM_TYPE" data-formatter="">问题类型</th>
+                <th data-field="DEVICE_TYPE" data-formatter="">设施类型</th>
+                <th data-field="PROBLEM_LOCATION">问题地点</th>
+                <th data-field="PROBLEM_ROAD">问题道路</th>
+                <th data-field="URGENT_TYPE" data-formatter="testFormatter">紧急程度</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script>
+    function testFormatter(value, row, index, field) {
+        return value == 1 ? "紧急" : "一般";
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<div class="animated fadeInRight" id="expertlist">
+	<div class="col-sm-12 mainwrapper">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:7px;text-align:left;">查询条件</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" id="listExpName" placeholder="姓名">
+				</div>
+				<div class="col-sm-4" style="text-align:left;">
+					<button type="button" style="margin-left:50px" id="listExpertlistQueryBtn" class="btn btn-primary" >查询</button><!-- onclick="reloadData()"  -->
+				</div> 
+			</div>
+		</div>
+		<div id="expertlistToolbar" class="btn-group" style="padding-bottom:20px;">
+			<button id="expertlistAddBtn" type="button" class="btn btn-default"> <!-- onclick="addData()" -->
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加
+			</button>
+			<button id="expertlistDeleteBtn" type="button" class="btn btn-default"><!--  onclick="delData()" -->
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+			</button>
+		</div>
+		<table id="expertlistTable"></table>
+	</div>
+</div>

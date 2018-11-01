@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.augurit.awater.bpm.xcyh.reassign.mapper.ReassignProcessMapper" >
+    <sql id="allColumns" >
+        ID id,
+        TASK_ID taskId,
+        ASSIGNEE assignee,
+        ASSIGNEE_NAME assigneeName,
+        TASK_NAME taskName,
+        REASSIGN reassign,
+        REASSIGN_NAME reassignName,
+        REASSIGN_COMMENTS reassignComments,
+        REAS_SIGN_TIME reasSignTime
+    </sql>
+
+    <select id="getReassignProcessById" resultType="ReassignProcess" >
+        select
+        <include refid="allColumns"/>
+        from   DRI_REASSIGN_PROCESS
+        where  ID = #{id}
+    </select>
+    <select id="getReassingByTaskIds" parameterType="java.util.List" resultType="ReassignProcess">
+        SELECT <include refid="allColumns"/> FROM DRI_REASSIGN_PROCESS
+        <where> 1=1 AND
+              <foreach collection="list" index="index" item="item" open="(" separator=" OR " close=")">
+                  TASK_ID = #{item}
+              </foreach>
+        </where>
+    </select>
+
+    <select id="listReassignProcess" resultType="ReassignProcess" >
+        select
+        <include refid="allColumns"/>
+        from DRI_REASSIGN_PROCESS
+        <where> 1 = 1
+            <if test="id != null" >
+                AND ID = #{id}
+            </if>
+            <if test="taskId != null" >
+                AND TASK_ID = #{taskId}
+            </if>
+            <if test="assignee != null" >
+                AND ASSIGNEE = #{assignee}
+            </if>
+            <if test="assigneeName != null" >
+                AND ASSIGNEE_NAME = #{assigneeName}
+            </if>
+            <if test="taskName != null" >
+                AND TASK_NAME = #{taskName}
+            </if>
+            <if test="reassign != null" >
+                AND REASSIGN = #{reassign}
+            </if>
+            <if test="reassignName!= null" >
+                AND REASSIGN_NAME = #{reassignName}
+            </if>
+            <if test="reassignComments!= null" >
+                AND REASSIGN_COMMENTS = #{reassignComments}
+            </if>
+            <if test="reasSignTime != null" >
+                AND REAS_SIGN_TIME = #{reasSignTime}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertReassignProcess" parameterType="ReassignProcess" >
+        insert into DRI_REASSIGN_PROCESS (ID,TASK_ID,ASSIGNEE,ASSIGNEE_NAME,TASK_NAME,REASSIGN,REASSIGN_NAME,REASSIGN_COMMENTS,REAS_SIGN_TIME)
+        values  (#{id},#{taskId},#{assignee},#{assigneeName},#{taskName},#{reassign},#{reassignName},#{reassignComments},#{reasSignTime})
+    </insert>
+
+    <update id="updateReassignProcess" parameterType="ReassignProcess" >
+        update DRI_REASSIGN_PROCESS
+        <set>
+            <if test="id != null" >
+                ID = #{id},
+            </if>
+            <if test="taskId != null" >
+                TASK_ID = #{taskId},
+            </if>
+            <if test="assignee != null" >
+                ASSIGNEE = #{assignee},
+            </if>
+            <if test="assigneeName != null" >
+                ASSIGNEE_NAME = #{assigneeName},
+            </if>
+            <if test="taskName != null" >
+                TASK_NAME = #{taskName},
+            </if>
+            <if test="reassign != null" >
+                REASSIGN = #{reassign},
+            </if>
+            <if test="reassignName!= null" >
+                REASSIGN_NAME = #{reassignName},
+            </if>
+            <if test="reassignComments != null" >
+                REASSIGN_COMMENTS = #{reassignComments},
+            </if>
+            <if test="reasSignTime != null" >
+                REAS_SIGN_TIME = #{reasSignTime},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteReassignProcess"  >
+        delete from DRI_REASSIGN_PROCESS where ID = #{id}
+    </delete>
+</mapper>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>督办通知-事中报告督办</title>
+	    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="renderer" content="webkit">
+	    
+	    <link href="/awater/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+	    <link href="/awater/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+	    <link href="/awater/css/animate.css" rel="stylesheet">
+	    <link href="/awater/css/style.css?v=2.2.0" rel="stylesheet">
+	    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="content" style="width:100%;height:90%;padding:15px 20px 0px 20px;">
+           <form id="form" class="form-horizontal" >
+                <input type="hidden" id="yaId" name="yaId" >
+		        <input type="hidden" id="yaType" name="yaType">
+		        <div class="form-group">
+		        	<label class="col-sm-4 control-label"><input type="checkbox" id="sendSuper" name="radiobutton"  checked/>督办通知</label>
+		        	<label class="col-sm-4 control-label"><input type="checkbox" id="sendSuperSms" name="radiobutton" />短信通知</label>
+		        </div>
+		    	<div class="form-group">
+		    		<label class="col-sm-2 control-label">问题描述</label>
+                   	<div class="col-sm-8">
+                   		<textarea id="superviseContent" name="superviseContent" class="form-control" rows="4" style="resize: none;"></textarea>         
+                    </div>
+				</div>            
+          	</form>
+		</div>
+		<div style="height: 10%">
+			<div  align="center">
+        		<button class="btn btn-primary" type="submit" onclick="send()">发送通知</button>&nbsp;&nbsp;
+				<button class="btn btn-white" type="submit" onclick="closeWindow()">取消</button>
+			</div> 
+		</div>
+		<script src="/awater/lib/jquery.min.js"></script >
+		<script src="/awater/js/util_date.js" type="text/javascript"></script>
+		<script src="js/SuperviseMultiNews_SZ.js" type="text/javascript" ></script>
+	</body>
+</html>

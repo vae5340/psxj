@@ -1,0 +1,244 @@
+/**滚动狂样式*/
+::-webkit-scrollbar-thumb{background-color:#999;}
+::-webkit-scrollbar{width:6px;background-color:#F5F5F5;}
+
+html,body{width:100%;height:100%;padding:0;margin:0;overflow:hidden;font-size:12px;}
+div,ul,p,h1,h2,h3,h4,h5,dl,dt,dd,input{margin:0;padding:0;}
+li{list-style:none;}
+a{text-decoration:none;color:#333;}
+input{outline:none;}
+.clear:after{content:'';display:block;clear:both;overflow:hidden;}
+.clear{zoom:1;}
+#wrapper{height:100%;}
+#mapDiv{height:100%;width:100%;top:0px}
+.J_iframe { position:relative;}
+
+/*搜索框开始*/
+/*搜索框开始*/
+#search{width:335px;border-radius:2px;background:#fff;position:absolute;top:20px;left:20px;z-index:1000;box-shadow: 1px 2px 1px rgba(0,0,0,.15);}
+#inputBox{width:80%;overflow:hidden;height:36px;display:inline-block;}
+#sole-input {box-sizing: border-box;border: 0;padding: 9px 0;line-height: 20px;text-indent:20px;width:80%;font-size: 16px;height: 38px;color: #333;position: relative;border-radius: 2px 0 0 2px;}
+#search-button {pointer-events: auto;background: url(/awater_ui_sys/plugins/hplus/img/searchbox.png) no-repeat 0 -76px #3385ff;width: 57px;height: 38px;float: right;border: 0;padding: 0;cursor: pointer;border-radius: 0 2px 2px 0;box-shadow: 1px 2px 1px rgba(0,0,0,.15);}
+#selectLayer{width:315px;background:#fff;position:absolute;top:5em;left:2em;z-index:1000;padding:0.6em;display:none;box-shadow: 1px 2px 1px rgba(0,0,0,.15);}
+#selectLayer .layerStyle p{font-size:16px;color:#444;}
+#selectLayer .layerStyle li{float:left;padding-right:25px;}
+#selectLayer .layerStyle li a{display:block;padding:0.5em;color:#666;font-size:14px;}
+.icon{width: 0px;height: 0px;border: 10px;border-style: solid;position:relative;}
+.icon-bottom{border-color:#3385ff transparent transparent;top:12px;right:-10px;}
+.icon-up{border-color:transparent transparent #3385ff;bottom:12px;right:-10px;}
+
+.close{position:absolute;display:inline-block;width:24px;height:24px;overflow:hidden;top:0px;right:10px;}
+.close::before,.close::after{content:'';position:absolute;height:2px;width:100%;top:50%;left:0;margin-top:-1px;background:#60C0DD;}
+.close::before{transform:rotate(45deg);-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg);-ms-transform: rotate(45deg);-o-transform: rotate(45deg);}
+.close::after{transform:rotate(-45deg);-webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg);-ms-transform: rotate(-45deg);-o-transform: rotate(-45deg);}
+.close:hover::before,.close:hover::after{background:#3385ff ;}
+/*搜索结果展示框*/
+.infoPanel{width:100%;max-height:400px;overflow-y:auto;overflow-x:hidden}
+.infoTitle-t{line-height:45px;}
+.infoTitle-t li{width:100%;}
+.infoTitle-t li h3{font-size:16px;display:inline-block;color:#333;}
+.infoTitle-t li strong{font-size:12px;padding-left:5px;color:#666;}
+.infoTitle-t li a{float:right;width:32px;height:25px;line-height:25px;background:skyblue;text-align:center;font-family:"microsoft yahei";border-radius:2px;color:#333;font-size:12px;margin-top:20px;padding:0 5px;}
+/*搜索框结束*/
+
+/*信息列表框*/
+#tool-box{width:40px;height:40px;background:#eee;position:absolute;top:50%;right:0;margin-top:-71px;z-index:1000;box-shadow:1px 1px 2px 0 #666;}
+#tool-box li{width:100%;height:42px;}
+#tool-box li a{display:block;width:inherit;height:inherit;}
+/*#tool_1{background:url("../img/navigation.png") no-repeat;background-size:100% 100%;}*/
+#tool_1{background:url("../img/layer.png") no-repeat;background-size:100% 100%;}
+#tool_2{background:url("../img/measure.png") no-repeat;background-size:100% 100%;}
+#tool_selectTool{background:url("../img/layerBtn.png") no-repeat;background-size:100% 100%;}
+#tool_4{background:url("../img/select.png") no-repeat;background-size:90% 90%;}
+#tool_5{background:url("../img/interestPoint.png") no-repeat;background-size:90% 90%;}
+.popup{width:150px;height:auto;background:#eee;box-shadow:1px 1px 2px 0 #666;position:absolute;left:-150px;display:none;}
+.popup:after{content:"";position:absolute;top:0px;left:0px;display:block;border-width:10px 10px 10px 10px;border-style:solid;border-color:transparent #eee transparent transparent ;}
+.popup a{color:#666;}
+#list1{top:-100px;}
+#list1 li{width:100%;height:50%;text-align:center;border-bottom:2px solid #ccc ;color:#333;position:relative;}
+#list1 li a{line-height:40px;text-indent:-35px;}
+#list2{top:40px;}
+#list2 li{float:left;width:50%;height:100%;text-align:center;}
+#list2 li a{line-height:40px;padding:0 15px;}
+#list3{top:-100px;}
+#list3 li{width:100%;height:50%;text-align:center;border-bottom:2px solid #ccc ;color:#333;position:relative;}
+#list3 li a{line-height:40px;text-indent:-35px;}
+#list4{top:120px;}
+#list4 li{width:100%;height:50%;text-align:center;border-bottom:2px solid #ccc ;color:#333;position:relative;}
+#list4 li a{line-height:40px;text-indent:-35px;}
+#list5{top:160px;}
+#list5 li{width:100%;height:50%;text-align:center;border-bottom:2px solid #ccc ;color:#333;position:relative;}
+#list5 li a{line-height:40px;text-indent:-35px;}
+.highlight a{color:#3385ff  !important;}
+
+/*开关*/
+.bg_con{display:inline-block;position:absolute;top:10px;right:6px;}
+.layerSwitch{
+        display:none;
+    }
+    .layerSwitch:checked~label:after{
+        -webkit-transform: translateX(9px);
+    }
+    
+    .layerSwitch:checked~label:before{
+        background-color:#60C0DD;
+    }  
+/*信息列表框*/
+/*地图类型框*/
+#mapType{position:absolute;bottom:15px;right:10px;height:40px;width:180px;background:rgba(255,255,255,0);z-index:10;transition-duration: .4s;cursor:pointer;}
+#mapType .mapTypeCard{height:40px;width:60px;position:absolute;border-radius:2px;top:10px;right:15px;box-sizing:border-box;border:1px solid rgba(153,153,153,.42);background:url(../img/shadow.png) no-repeat 0 0;transition-duration:.4s;}
+#mapType .normal{background-position:0 0;right:15px;background: url(../img/maptype.png);}
+#mapType .earth{background:url("../img/maptype.png");background-position:0 -301px;border-left:1px solid rgba(153,153,153,1);}
+#mapType .dem{background:url("../img/maptype.png");background-position:0 -181px;border-left:1px solid rgba(153,153,153,1);}
+#mapType .mapTypeCard.active span,#mapType .mapTypeCard:hover span{background-color:#3385ff;}
+#mapType .mapTypeCard span{position:absolute;bottom:0;right:0;display:inline-block;padding:3px 3px 2px 4px;font-size:12px;height:12px;line-height:12px;color:#fff;border-top-left-radius:2px;}
+.expand #mapType{width:180px;/* background-color:rgba(255,255,255,.8); */}
+.expand #mapType .mapTypeCard .active{border:1px solid #3385ff;z-index:1000}
+.expand #mapType .normal{/* right:130px; */}
+.expand #mapType .earth{right:70px;}
+.expand #mapType .dem{right:10px;}
+.expand #mapType .mapTypeCard{background-image:url(../img/maptype.png);}
+/*地图类型框*/
+
+/*详细信息框*/
+.expandBox,.allInfoBox{position:absolute;background:#fff;overflow:hidden;box-shadow:1px 2px 1px rgba(0,0,0,.15);z-index:1000;}
+.expandBox{width:0em;height:22em;top:60px;left:29.6em;}
+.expandBox>p{font-size:14px;color:#333;display:inline-block;font-weight:bold;height:36px;line-height:36px;}
+.allInfoBox{width:32em;height:16em;top:1%;right:7em;display:none}
+.extentResultBox{position:absolute;background:#fff;overflow:hidden;box-shadow:1px 2px 1px rgba(0,0,0,.15);z-index:1000;}
+.extentResultBox{width:30%;max-height:50%;top:1%;right:7em;display:none}
+
+.legendWindowBox{position:absolute;background:#fff;box-shadow:1px 2px 1px rgba(0,0,0,.15);z-index:1000;}
+.legendWindowBox{width:200px;max-height:400px;left:0px}
+
+.popupVideoWindow{position:absolute;background:#fff;box-shadow:1px 2px 1px rgba(0,0,0,.15);z-index:1000;}
+.popupVideoWindow{width:100em;height:50em;}
+
+/*详细信息框*/
+
+/*图表*/
+.chart{width:inherit;height:inherit;margin-top:0px;}				
+.chartBox{height:inherit;width:100%;float:left;margin-right:0px;background:transparent;}
+.chartBox p{background:#3385ff ;width:100%;height:24px;color:#fff;text-shadow:0 1px 1px #333;height:24px;line-height:24px;font-size:14px;text-indent:15px;}		
+.p1{color:#333;}
+.p2{color:#593901;}
+.chartBox .chartbody{width:100%;height:inherit;min-width: 280px;}
+/*图表*/
+
+/*搜索框*/
+#sc-home-map-search {
+    text-align: center;
+    line-height: 60px;
+    width: 35%;
+    height: 70px;
+    position: absolute;
+    top: 0px;
+    left: 1%;
+    z-index: 1;/**1000*/
+}
+
+#sc-home-map-search-input {
+    width: 100%;
+    height: 40px;
+    margin: 10px auto;
+    font-size: 18px;
+    text-indent: 10px;
+    border: 1px solid #d0d0d0;
+    box-shadow: 3px 2px 6px 0px #B0B0B0;
+    border-radius: 5px;
+}
+
+#sc-home-map-search img {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+}
+.search_box{
+	position: fixed;
+	z-index:1000;
+	width:35%;
+	border-radius: 5px;
+	box-shadow:1px 1px 8px #999;
+	left:1%;
+	top:50px;
+	
+}
+
+.search_box .tab_box{
+	width:auto;
+	height: auto;
+	background-color: #f3f3f3;
+	padding: 10px 15px;
+}
+.search_box .tab_box a{
+	color: #565656;
+	margin:10px;
+	line-height: 25px;
+	text-decoration: none;
+}
+.search_box .tab_box a:hover {
+	color: #3385ff;
+	font-weight: bold;
+}
+.pullup{
+	height: 18px;
+	background: url(plugins/hplus/img/arrow_up.png) center no-repeat;
+	background-color: #eeeded;
+}
+.pulldown{
+	height: 18px;
+	background: url(plugins/hplus/img/arrow_down.png) center no-repeat;
+	background-color: #eeeded;
+}
+.search_box .content_box .pullup:hover {
+	background: url(plugins/hplus/img/pullup_hover.png) center no-repeat;
+	background-color: #eeeded;
+}
+.content_box .content {
+	float: left;
+	margin: 2px 2px 2px 2px;
+	width:260px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.content_box .content img {
+	vertical-align: middle;
+}
+.content_box .content a {
+	color: #565656;
+	line-height: 25px;
+	text-decoration: none;
+	margin-left: 4px;
+}
+.content_tab_box
+	overflow:auto;
+	height:450px;
+	padding:10px;
+}
+.content_box .content a:hover {
+	color: #3385ff;
+	font-weight: bold;
+
+}
+.active{
+	color: #3385ff;
+	font-weight: bold;
+	z-index:1000;
+}
+/*搜索框*/
+
+/**自定义样式-点击管线提示框*/
+.meumli{
+	/**border-bottom: solid 1px #ccc;*/
+    text-align: center;
+    padding: 5px 0;	
+}
+.meumul{/**border: solid 1px #ccc;width: 200px;*/
+	background: #fff;font-size:15px;margin-left: -10px;
+}
+.meumul li:hover {
+    background: skyblue;
+}

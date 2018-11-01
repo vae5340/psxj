@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   	<title>气象云图信息</title>
+	<meta charset="UTF-8">
+    <script type="text/javascript" src="../../lib/jquery.min.js?v=1.0.0"></script>
+	<script>
+		function changeType(type){
+				if(type==1){
+					$("#imgSelect").css('left',690);
+					$("#qxyb").html("<iframe src='http://products.weather.com.cn/product/radar/index/procode/JC_RADAR_AZ9771_JB'  frameborder='0' scrolling='no' style='margin-top:-220px;margin-left:-45px;width:1100px;height:850px;'></iframe>");
+				}else if(type==2){
+					$("#imgSelect").css('left',920);
+					$("#qxyb").html("<iframe src='http://218.22.3.217/index.php?c=tqsk&m=ldjc' width='1100' height='900' frameborder='0' scrolling='no' style='position: absolute; top:-150px; left:-190px; padding:0px; margin:0px;'> </iframe>");
+				}else if(type==3){
+					$("#imgSelect").css('left',920);
+					$("#qxyb").html("<iframe src='http://www.weather.com.cn/static/product_video_v2.php' width='1103' height='875' frameborder='0' scrolling='no' style='position: absolute; top:-30px; left:-100px; padding:0px; margin:0px;'></iframe>");
+				}else{
+					$("#imgSelect").css('left',905);
+					$("#qxyb").html("<iframe src='http://flash.weather.com.cn/typhoon_s/index.html' width='913' height='750' frameborder='0' scrolling='no' style='position: absolute; top:0px; left:0px; padding:0px; margin:0px;'> </iframe>");
+				}
+			}
+	</script>
+	<style>   
+		a {text-decoration:none}   
+		a:hover{color: red;} //鼠标移近：红色
+		table { 
+		border:1px #dfdfdf solid;
+		} 
+		td  { 
+		border:1px #dfdfdf solid;
+		} 
+		img {
+			padding: 4px 4px 4px 4px;
+		}
+	</style>  
+	
+  </head>
+  
+  <body >
+		<div id="qxyb" style="width:700px;overflow:hidden">
+			<iframe src='http://products.weather.com.cn/product/radar/index/procode/JC_RADAR_AZ9771_JB'  frameborder='0' scrolling='no' style='margin-top:-220px;margin-left:-45px;width:1100px;height:850px;'></iframe>
+		</div>
+	  <div id="imgSelect" align="center"  style="position: absolute; top:10px; left:690px; padding:0px; margin:10px;">
+	  	<table >
+	  		<tr >
+		   	  <td>
+			  		<a href="#" onclick="changeType(1)"><img alt="雷达图" src="image/ldat.png" width="250px" height="25%"></img></a>
+			  </td>
+		  	</tr>
+	  		<tr>
+			  <td >
+			  		<a href="#" onclick="changeType(3)"><img  alt="云图" src="image/yt.jpg" width="250px" height="25%"></img></a>
+			  </td>
+			</tr>
+	  		<tr>
+			  <td >
+			  		<a href="#" onclick="changeType(4)"><img  alt="台风路径图" src="image/tfljt.gif" width="250px" height="25%"></img></a>
+			  </td>
+		    </tr>
+	  </div>
+  </body>
+</html>

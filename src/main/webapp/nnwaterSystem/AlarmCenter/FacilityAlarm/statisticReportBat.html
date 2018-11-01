@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<head>
+		<title>设施设备运行数据质量报表-运行报表</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+
+		<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+		<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<style>
+		   	table td,th{
+		     	text-align:center;
+		   	}
+		   	.tableTr{
+		   		height: 80px;
+		   	}
+			.hover{
+				background-color: #cccc00;
+			}
+		</style>
+	</head>
+	<body style="background-color:#F1F1F3">  	
+	    <div style="height:100%;width:100%">
+			<ul id="ViewTab" class="nav nav-tabs nav-justified">
+				  <li class="active"><a href="#column" data-toggle="tab">柱状图</a></li>
+				  <li><a href="#pie" data-toggle="tab">饼状图</a></li>
+			</ul>
+			<div id="ViewTabContent" class="tab-content" style="height: 70%;">
+				<div class="tab-pane fade in active" id="column" style="padding-top:20px">
+					<div id="columnView" style="height:400px;width: 50%;float: left;"></div>
+					<div style="text-align: center;height:400px;width: 50%;float: left;">
+						<table id="columnTable"></table>
+				   	</div>
+				</div>
+				<div class="tab-pane fade" id="pie" style="padding-top:20px">
+					<div id="pieView" style="height:80%;width: 100%;float: left;"></div>
+					<!-- <div style="text-align: center;height:400px;width: 50%;float: left;">
+						<table id="pieTable"></table>
+				   	</div> -->
+				</div>
+			</div>
+	    </div>
+		<script type="text/javascript" src="/awater/lib/jquery.min.js"></script>
+		<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+		<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+  		<script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+		<script type="text/javascript" src="/awater/lib/highchart/js/highcharts.js"></script>
+		<script type="text/javascript" src="/awater/lib/highchart/js/modules/exporting.js"></script>
+		<script type="text/javascript" src="/awater/lib/highchart/js/highcharts-zh_cn.js"></script>
+		<script type="text/javascript" src="/awater/waterSystem/ssjk/js/ssjk-global.js"></script>
+		<script src="/awater/js/common.js"></script>
+		<script src="/awater/nnwaterSystem/AlarmCenter/FacilityAlarm/js/statisticReportBat.js"></script>
+	</body>
+</html>

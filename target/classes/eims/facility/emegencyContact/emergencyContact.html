@@ -1,0 +1,79 @@
+<div class="panel-group" id="emergencyContact" style="margin-top: 20px;padding:0 20px;">
+
+	<div class="panel panel-default">
+		<div class="panel-heading" style="background-color: #E5E5E5" onmouseover="this.style.backgroundColor='#D9EDF7'" onmouseout="this.style.backgroundColor='#E5E5E5'">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#emergencyContact" href="#collapseOne">			
+				<h4 class="panel-title">
+					市区防内涝抢险指挥部组织机构网络图
+				</h4>				
+			</a>
+		</div>
+		<div id="collapseOne" class="accordion-body collapse in">
+			<div class="panel-body">
+				<img id="jgt" src="/psemgy/eims/facility/emegencyContact/img/jgt3.png" style="margin-left: -50px;"/>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		
+		<div class="panel-heading" style="background-color: #E5E5E5" onmouseover="this.style.backgroundColor='#D9EDF7'" onmouseout="this.style.backgroundColor='#E5E5E5'">
+			<a class="accordion-toggle" data-toggle="collapse" data-parent="#emergencyContact" href="#collapseTwo">
+				<h4 class="panel-title">
+					各城区责任人通讯录
+				</h4>
+			</a>
+		</div>
+		
+		<div id="collapseTwo" class="panel-collapse collapse">
+			<div class="panel-body">
+				<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;padding-bottom:10px;">单位</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="listUnit" name="unit">
+				</div>
+				<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;">名称</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="listName"  name="name">
+				</div>
+				<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;">职务</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="listPost"  name="post">
+				</div>
+				<div class="col-sm-3" style="text-align:left;">
+					<button type="button" id="btn_queryLC" class="btn btn-primary">查询</button><!-- onclick="reloadDataLC()" -->
+					<button type="button" id="btn_addLC" class="btn btn-primary">新增</button><!--  onclick="addLC()"  -->
+					<button type="button" id="btn_delLC" class="btn btn-danger">删除选中</button> <!-- onclick="delLC()"  -->
+				</div>
+				<table id="leader_contact" ></table>
+			</div>
+		</div>
+	</div>
+
+	<div class="panel panel-default">
+		<div class="panel-heading" style="background-color: #E5E5E5" onmouseover="this.style.backgroundColor='#D9EDF7'" onmouseout="this.style.backgroundColor='#E5E5E5'">
+			<a data-toggle="collapse" data-parent="#emergencyContact" href="#collapseThree">			
+				<h4 class="panel-title">
+					防内涝指挥部通讯录
+				</h4>
+			</a>
+		</div>
+		
+		<div id="collapseThree" class="panel-collapse collapse">
+			<div class="panel-body">
+				<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;padding-bottom:10px;">单位</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="listCCname"  name="CCname">
+				</div>
+				<div class="col-sm-3" style="text-align:left;">
+					<button type="button" id="btn_queryCC" class="btn btn-primary">查询</button><!-- onclick="reloadDataCC()"  -->
+					<button type="button" id="btn_addCC" class="btn btn-primary">新增</button><!-- onclick="addCC()" -->
+					<button type="button" id="btn_delCC" class="btn btn-danger">删除选中</button> <!-- onclick="delCC()"  -->
+				</div>
+				<table id="controldept_contact"></table>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+

@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+<#assign base=request.contextPath />
+<!-- JS全局变量 -->
+<script type="text/javascript">
+    var ctx = "${request.contextPath}";
+</script>
+
+
+<!-- jquery and AgCloud Public JS 用模板技术的话,此处容易变成当前请求url的相对路径 -->
+<script src="${http_base_url}/${resSys}/js-libs/jquery1/jquery-1.11.3.min.js" type="text/javascript"></script>
+<!-- 引入AgCloud Framework框架公共JS，提供兼容性和统一样式支持，在引入easyui、bootstrap等JS库以后再引入该文件 -->
+<script src="${http_base_url}/${resSys}/js-libs/agcloud-common/agcloud.js" type="text/javascript"></script>
+<!-- 引入AgCloud Framework框架公共CSS -->
+<link href = "${http_base_url}/${resSys}/ui-themes/default/theme.css" type="text/css" rel="stylesheet"/>
+<link href = "${http_base_url}/${resSys}/ui-themes/default/reset.css" type="text/css" rel="stylesheet"/>

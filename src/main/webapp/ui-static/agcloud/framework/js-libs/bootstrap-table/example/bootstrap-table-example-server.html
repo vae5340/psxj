@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html style="overflow-x: hidden;height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: auto;">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>bootstrap表格使用示例</title>
+    <link href="../../../theme-libs/metronic-v5/default/assets/demo/default/base/agcloud_custom_metronic.css" rel="stylesheet" type="text/css" />
+    <link href="../../../theme-libs/metronic-v5/default/assets/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../bootstrap-table.min.css" />
+    <link rel="stylesheet" href="../bootstrap-table-page.css" />
+    <script src="../../../theme-libs/metronic-v5/default/assets/vendors/base/vendors.bundle.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../../jquery1/jquery-1.11.3.min.js" ></script>
+    <script type="text/javascript" src="../bootstrap-table.min.js" ></script>
+    <script type="text/javascript" src="../bootstrap-table-zh-CN.min.js" ></script>
+    <script type="text/javascript" src="../bootstrap-table-page.js" ></script>
+</head>
+<body style="width: 100%;overflow-x: hidden;">
+<div>
+    <div class="row-fluid" style="margin: 10px 0px">
+        <div class="col-lg-3 input-group">
+            <input id="searchInput_keyword" name="mykey" type="text" class="form-control"
+                   placeholder="关键字">
+            <span class="input-group-btn"><button onclick="searchBtnClick()" class="btn btn-info" type="button">查询</button></span>
+        </div>
+    </div>
+    <div id="local_data">
+        <table  id="customTable"
+                data-toggle="table"
+                data-pagination-detail-h-align="left"
+                data-pagination-show-page-go="true"
+                data-pagination="true"
+                data-page-list="[10, 20, 50, 100]"
+                data-side-pagination="server"
+                data-query-params="dealQueryParams"
+                data-url="/aplanmis/front/dynamic/view/getBootstrapPageViewData.do?viewId=f478979a-416a-4155-b654-12a4f43c7f0d">
+            <thead>
+            <tr>
+                <th data-field="PROBLEM_DESC" data-width="200" >问题描述</th>
+                <th data-field="PROBLEM_TYPE" data-formatter="">问题类型</th>
+                <th data-field="DEVICE_TYPE" data-formatter="">设施类型</th>
+                <th data-field="PROBLEM_LOCATION">问题地点</th>
+                <th data-field="PROBLEM_ROAD">问题道路</th>
+                <th data-field="URGENT_TYPE" data-formatter="testFormatter">紧急程度</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script>
+    var mdatatableId='customTable';
+    var bootstrapTable = $("#" + mdatatableId);
+    var commonQueryParams = [];//普通查询的对象，使用bootstrap-table-render.js时使用，格式 [{name: "keyword", value: "1"}]
+    function searchBtnClick() {
+        var keywordVal = $("#searchInput_keyword").val();
+        if(keywordVal!=""){
+            commonQueryParams.push({name:"keyword",value : keywordVal});
+        }else{
+            commonQueryParams = [];
+        }
+        bootstrapTable.bootstrapTable('refresh');
+    }
+    function dealQueryParams (params) {
+        //组装分页参数
+        var pageNum = (params.offset / params.limit) + 1;
+        var pagination = {
+            page : pageNum,
+            pages : pageNum,
+            perpage : params.limit
+        };
+        var sort = {
+            field : params.sort,
+            sort : params.order
+        };
+        var queryParam = {
+            pagination:pagination,
+            sort:sort
+        };
+        //组装查询参数,commonQueryParams {name: "keyword", value: "1"}，globalSearchParams是视图查询的参数
+        var buildParam = {};
+        if(commonQueryParams){
+            for (var i = 0; i < commonQueryParams.length; i++) {
+                buildParam['query[mykey][' + i + '][name]'] = commonQueryParams[i].name;
+                buildParam['query[mykey][' + i + '][value]'] = commonQueryParams[i].value.trim();
+            }
+        }
+        queryParam = $.extend(queryParam, buildParam);
+        return queryParam;
+    }
+    function testFormatter(value, row, index,field) {
+        return value == 1 ? "紧急" : "一般";
+    }
+</script>
+</body>
+</html>

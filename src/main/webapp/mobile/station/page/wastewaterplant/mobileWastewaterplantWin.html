@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../../lib/jquery.min.js"></script>
+    <link href="../../css/mobilerStationWin.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/css/jqx.base.css" type="text/css" />
+    <title>污水处理厂水质</title>
+    <script>
+        (function () {
+            document.documentElement.style.fontSize = document.documentElement.clientWidth * 31.25 / 750 + 'px';
+            window.addEventListener('resize', function () {
+                document.documentElement.style.fontSize = document.documentElement.clientWidth * 31.25 / 750 + 'px';
+            });
+        })();
+    </script>
+    <style>
+        .chart2table_btn {
+            position: absolute;
+            right:0;
+            top:3px;
+            height: 20px;
+            width: 20px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+<div class="app-panal-head app-panal-head-spe" style="height: 32px; opacity: 1;">
+    <span id="titleContent" class="app-panal-head-title" style="line-height: 32px;"></span>
+</div>
+<div class="header">
+    <ul class="nav">
+        <li>水质详情</li>
+        <li>过程线</li>
+        <li>
+            <div class="form-inline time-group">
+                <div class="form-group" id="dateGroup" style="display: none">
+                    <label for="date">从: </label>
+                    <input type="text" value="" id="from_date">
+                    <label for="date">至: </label>
+                    <input type="text" value="" id="to_date">
+                </div>
+                <div class="form-group" id="timeGroup">
+                    <label for="date">从: </label>
+                    <input type="text" value="" id="from_time">
+                    <label for="date">至: </label>
+                    <input type="text" value="" id="to_time">
+                </div>
+            </div>
+
+        </li>
+    </ul>
+</div>
+
+<div class="contentBox">
+    <div class="tabsContent">
+        <div id="contentDetail" class="contentDetail">
+            <div style="margin-top:15px; width:100%; text-align: left;">
+                <div class="basic-info-row">
+                    <div class="basic-info-cell">
+                        <div class="basic-info-cell-header">时间类型：</div>
+                        <div class="basic-info-cell-content">
+                            <b><label class="time_type"><input name="time_type" checked="" value="real" type="radio">实时</label>
+                                <label class="time_type"><input name="time_type" value="day" type="radio">日均</label></b>
+                        </div>
+                    </div>
+                    <div class="basic-info-cell">
+                        <div class="basic-info-cell-header">采集时间：</div>
+                        <div class="basic-info-cell-content"><span class="cjsj"></span></div>
+                    </div>
+                </div>
+                <div class="basic-info-row">
+                    <div class="basic-info-cell">
+                        <div class="basic-info-cell-header">站名：</div>
+                        <div class="basic-info-cell-content"><span class="zm"></span></div>
+                    </div>
+                    <div class="basic-info-cell">
+                        <div class="basic-info-cell-header">测站类型：</div>
+                        <div class="basic-info-cell-content"><span class="czlx"></span></div>
+                    </div>
+                </div>
+                <div id="detailContent">
+                    <div class="basic-info-row">
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">站号：</div>
+                            <div class="basic-info-cell-content"><span class="zh"></span></div>
+                        </div>
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">环境温度(℃)：</div>
+                            <div class="basic-info-cell-content"><span class="hjwd"></span></div>
+                        </div>
+                    </div>
+                    <div class="basic-info-row">
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">湿度(mg/L)：</div>
+                            <div class="basic-info-cell-content"><span class="sd"></span></div>
+                        </div>
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">水流量(l/s)：</div>
+                            <div class="basic-info-cell-content"><span class="sll"></span></div>
+                        </div>
+                    </div>
+                    <div class="basic-info-row">
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">化学需氧量(mg/L)：</div>
+                            <div class="basic-info-cell-content"><span class="hxxyl"></span></div>
+                        </div>
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">总氮(mg/L)：</div>
+                            <div class="basic-info-cell-content"><span class="zd"></span></div>
+                        </div>
+                    </div>
+                    <div class="basic-info-row">
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">总磷(mg/L)：</div>
+                            <div class="basic-info-cell-content"><span class="zl"></span></div>
+                        </div>
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">氨氮(mg/L)：</div>
+                            <div class="basic-info-cell-content"><span class="ad"></span></div>
+                        </div>
+                    </div>
+                    <div class="basic-info-row">
+                        <div class="basic-info-cell">
+                            <div class="basic-info-cell-header">溶解氧(mg/L)：</div>
+                            <div class="basic-info-cell-content"><span class="rjy"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="subnav-wrap">
+        <div class="subnav-main">
+            <div class="subpage active" style="overflow-x: scroll;">
+                <div id="hisChart" class="hisChart sub-echart" style="width: 590px"></div>
+                <div class="hisTable" style="width: 600px;display: none;" >
+                    <div id="historyList" ></div>
+                </div>
+                <div id="changeChartTable" title="查看数据" class="chart2table_btn table-icon" onclick="changeChartTable(this)"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $($('.nav li')[0]).addClass('select');
+    $($('.nav li')[0]).addClass('select');
+    $('.contentBox>div').eq(0).show().siblings().hide();
+    $('.nav li').click(function () {
+        var i = $(this).index();
+        if (i < 2) {
+            $(this).addClass('select').siblings().removeClass('select');
+            $('.contentBox>div').eq(i).show().siblings().hide();
+        }
+    });
+</script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/slickgrid/jquery.event.drag-2.2.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/slickgrid/slick.core.js"></script>
+<script type="text/javascript" src="../../../../lib/plugins/echarts/echarts3.8.4.js"></script>
+<script type="text/javascript" src="../../../../mobile/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../../../../lib/custom/utils/animate_load.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/slickgrid/slick.grid-2.1.0.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxcore.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxdata.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxbuttons.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxscrollbar.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxmenu.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.grouping.js"></script>
+<script src="./js/mobileWastewaterplantWin.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<form class="form-inline" action="/hz-score!ajaxSave.action" method="POST" id="myForm">
+	<input name="form.typeIndex" type="hidden" value="3">
+	<input name="tables[0].id" type="hidden" value=""/>
+	<input name="tables[1].id" type="hidden" value=""/>
+	<input name="tables[2].id" type="hidden" value=""/>
+	<input name="tables[3].id" type="hidden" value=""/>
+   <!-- 表单标题开始 -->
+    <center>
+		<h2>污水管网集中考核检查评分表</h2>   
+	</center>
+   <!-- 表单标题结束 -->
+   	<div class="form-group">
+		<label>考核评分人：</label>
+		<input type="text" name="form.person" value="" class="{required:true} form-control input-sm"></input>
+	</div>
+	<div class="form-group">
+		<label>时间：</label>
+		<input class="text {required:true} form-control input-sm" type="text" name="form.time" onfocus="WdatePicker();" value="" />
+	</div>
+	<div class="form-group">
+		<label>汇总：</label>
+		<select class="form-control input-sm" name="form.hzScoreSummaryId" id="hzSelect" style="height:26px;"></select>
+	</div>
+	<p></p>  
+    <!-- 列表开始 -->
+     <table class="table table-bordered table-hover">
+     	<tr>
+     		<th width="5%">序号</th><th width="15%">考核内容</th><th width="30%">评分标准</th><th width="5%">分值</th><th width="30%">存在问题</th><th width="5%">得分</th>
+     	</tr>
+     	<tr>
+     		<td>1</td>
+     		<td>管渠</td>
+     		<td>排水不畅通，积泥超过管径的1/5，未及时发现并上报擅自、野蛮接管，每处每次扣1分；流槽破损每处扣2分；管渠堵塞每处扣3分；坍塌每处扣5分。存在建设遗留问题的设施，需加强养护，未按要求加强养护的按上述标准扣分。</td>
+			<td>30</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[0].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[0].score" value="" class="{required:true,max:30,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>2</td>
+     		<td>检查井</td>
+     		<td>流槽井井底积泥深度超过管径的1/5，落底井井底积泥深度超过管底以下50mm，井盖板破损、错盖，井圈严重破损，未设置安全防护网的（含脱落）或标识牌的，污水检查井浮渣积聚大于井截面2/3，井底有异物阻水的，每处扣1分；井筒裂缝、渗水严重，每处扣2分；井盖板缺失的，扣5分。</td>
+			<td>30</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[1].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[1].score" value="" class="{required:true,max:30,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>3</td>
+     		<td>启闭设备、闸门</td>
+     		<td>缺油或启闭设备锈蚀等启闭不灵活的，每处扣1分；闸门破损、锈死等无法正常启闭的，倒虹井盖板、护栏缺损，未及时上报并制定维修计划的，每处扣2分。</td>
+			<td>20</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[2].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[2].score" value="" class="{required:true,max:20,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>4</td>
+     		<td>文明、安全操作</td>
+     		<td>不符合养护操作安全规定要求的每次扣2分，发生有责污水满溢，扣5-10分。  </td>
+			<td>20</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[3].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[3].score" value="" class="{required:true,max:20,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>5</td>
+     		<td>合计</td>
+     		<td></td>
+			<td>100</td>
+     		<td>/</td>
+    		<td><span id="result"></span></td>
+     	</tr>
+     </table>
+     <!-- 列表结束 -->
+   <!-- 表单按钮开始 -->
+   <center>
+	<a href="javascript:update();" class="btn btn-primary" >确定</a>
+	<a href="javascript:void(0);" onclick="$('#template').empty();slideDiv();" class="btn btn-default" >取消</a>
+   </center>
+   <!-- 表单按钮结束 -->
+</form>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ss-statistics-detail-type.html</title>
+	<meta charset="UTF-8">	
+	<link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
+	<link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../lib/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+	<link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>	
+  </head>
+  
+  <body>
+			开始时间：<input id="startTime" class="controls input-append date form_date" size="16" style="width:140px" type="text" value="" readonly></br>
+			结束时间：<input id="endTime" class="controls input-append date form_date" size="16" style="width:140px" type="text" value="" readonly>
+			<input class="btn btn-primary" type="button" value="查询" onclick="hisRecSearch()"/>
+    <table id="table">
+	</table>
+  </body>
+  <script src="../../lib/jquery.min.js?v=1.0.0"></script> 
+  <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+  <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+  <script src="../../lib/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+  <script src="../../lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+  
+  <script>
+  	$('#table').bootstrapTable({
+  	pagination: true, //分页
+  	locale:"zh-CN",//表格汉化
+    columns: [{
+        field: 'name',
+        title: '设施地址'
+    }, {
+        field: 'max',
+        title: '最高值(cm)'
+    }, {
+        field: 'average',
+        title: '平均值(cn)'
+    }, {
+        field: 'count',
+        title: '预警次数(次)'
+    }],
+    data: [{
+        name:'1-邕武路交通技师学院',
+        max: '86',
+        average: '17',
+        count: '7'
+    }, {
+       	name:'2-昆仑大道高速公路桥下',
+        max:'42',
+        average: '9',
+        count: '3'
+    },{
+        name:'3-五一路（废旧市场对面车道）',
+        max: '56',
+        average: '12',
+        count: '4'
+    }, {
+       	name:'4-沙井大道（公园大地段）',
+        max:'78',
+        average: '14',
+        count: '9'
+    },{
+        name:'5-南建路禽蛋市场',
+        max: '129',
+        average: '14',
+        count: '3'
+    },{
+       	name:'6-月湾路',
+        max:'109',
+        average: '14',
+        count: '4'
+    },{
+        name:'7-云景路凤翔路口',
+        max: '96',
+        average: '17',
+        count: '7'
+    },{
+       	name:'8-凤岭南路',
+        max:'78',
+        average: '19',
+        count: '15'
+    },{
+        name:'9-葛村路铁路桥底',
+        max: '104',
+        average: '14',
+        count: '17'
+    },{
+       	name:'10-民族大道（新民立交桥）',
+        max:'69',
+        average: '15',
+        count: '5'
+    },{
+        name:'11-民族大道（古城路口）',
+        max: '34',
+        average: '9',
+        count: '2'
+    },{
+       	name:'12-民族大道（园湖路口）',
+        max:'45',
+        average: '12',
+        count: '7'
+    }],
+    onClickRow:function(row, element, field){
+    	parent.locationPoint(108.273892,22.837801);
+    }
+});
+
+//时间控件
+    $('.form_date').datetimepicker({
+		format: 'yyyy-mm-dd hh:00:00',
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 1,
+		forceParse: 0,
+		minuteStep:10
+    });
+  </script>  
+</html>

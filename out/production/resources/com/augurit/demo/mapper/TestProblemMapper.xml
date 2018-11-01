@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--created by Administrator    2018-07-02 10:48:52 -->
+<!--0 一些前置信息配置 -->
+<mapper namespace="com.augurit.demo.mapper.TestProblemMapper" >
+<!--1 返回所有字段的SQL字句 -->
+<sql id="allColumns" >
+    PROBLEM_ID  problemId,
+    PROBLEM_LOCATION  problemLocation,
+    PROBLEM_ROAD  problemRoad,
+    DEVICE_TYPE  deviceType,
+    PROBLEM_TYPE  problemType,
+    URGENT_TYPE  urgentType,
+    PROBLEM_DESC  problemDesc,
+    HANDLE_MYSELF  handleMyself,
+    SEND_MESSAGE  sendMessage,
+    LOCATION_X  locationX,
+    LOCATION_Y  locationY,
+    CREATER  creater,
+    CREATE_TIME  createTime,
+    MODIFIER  modifier,
+    MODIFY_TIME  modifyTime,
+    MASTER_ENTITY_KEY masterEntityKey
+    </sql>
+
+<!--2 根据主键ID查询单个实体 -->
+<select id="getTestProblemById" resultType="TestProblem" >
+    select
+    <include refid="allColumns"/>
+    from    TEST_PROBLEM
+    where    PROBLEM_ID = #{id}
+</select>
+
+<select id="getTestProblemByMasterKey" resultType="TestProblem" >
+    select
+    <include refid="allColumns"/>
+    from    TEST_PROBLEM
+    where     MASTER_ENTITY_KEY = #{masterEntityKey}
+</select>
+
+<!--3 根据条件查询实体list -->
+    <select id="listTestProblem" resultType="TestProblem" >
+        select
+        <include refid="allColumns"/>
+        from    TEST_PROBLEM
+    <where>
+        <if test="problemId != null" >
+        AND    PROBLEM_ID = #{problemId}
+        </if>
+        <if test="problemLocation != null" >
+        AND    PROBLEM_LOCATION = #{problemLocation}
+        </if>
+        <if test="problemRoad != null" >
+        AND    PROBLEM_ROAD = #{problemRoad}
+        </if>
+        <if test="deviceType != null" >
+        AND    DEVICE_TYPE = #{deviceType}
+        </if>
+        <if test="problemType != null" >
+        AND    PROBLEM_TYPE = #{problemType}
+        </if>
+        <if test="urgentType != null" >
+        AND    URGENT_TYPE = #{urgentType}
+        </if>
+        <if test="problemDesc != null" >
+        AND    PROBLEM_DESC = #{problemDesc}
+        </if>
+        <if test="handleMyself != null" >
+        AND    HANDLE_MYSELF = #{handleMyself}
+        </if>
+        <if test="sendMessage != null" >
+        AND    SEND_MESSAGE = #{sendMessage}
+        </if>
+        <if test="locationX != null" >
+        AND    LOCATION_X = #{locationX}
+        </if>
+        <if test="locationY != null" >
+        AND    LOCATION_Y = #{locationY}
+        </if>
+        <if test="creater != null" >
+        AND    CREATER = #{creater}
+        </if>
+        <if test="createTime != null" >
+        AND    CREATE_TIME = #{createTime}
+        </if>
+        <if test="modifier != null" >
+        AND    MODIFIER = #{modifier}
+        </if>
+        <if test="modifyTime != null" >
+        AND    MODIFY_TIME = #{modifyTime}
+        </if>
+        <if test="masterEntityKey != null" >
+        AND    MASTER_ENTITY_KEY = #{masterEntityKey}
+        </if>
+    </where>
+    </select>
+<!--4 根据条件查询实体list,返回分页对象 -->
+
+<!--5 新增实体对象 -->
+<insert id="insertTestProblem" parameterType="TestProblem" >
+    insert into TEST_PROBLEM (
+PROBLEM_ID  ,PROBLEM_LOCATION  ,PROBLEM_ROAD  ,DEVICE_TYPE  ,PROBLEM_TYPE  ,URGENT_TYPE  ,PROBLEM_DESC  ,HANDLE_MYSELF  ,SEND_MESSAGE  ,
+LOCATION_X  ,LOCATION_Y  ,CREATER  ,CREATE_TIME  ,MODIFIER  ,MODIFY_TIME  ,MASTER_ENTITY_KEY
+    )  values  (
+#{problemId},#{problemLocation},#{problemRoad},#{deviceType},#{problemType},#{urgentType},#{problemDesc},#{handleMyself},#{sendMessage},
+#{locationX},#{locationY},#{creater},#{createTime},#{modifier},  #{modifyTime},  #{masterEntityKey}
+    )
+</insert>
+<!--6 修改实体对象 -->
+<update id="updateTestProblem" parameterType="TestProblem" >
+    update TEST_PROBLEM
+    <set >
+        <if test="problemId != null" >
+        PROBLEM_ID = #{problemId},
+        </if>
+        <if test="problemLocation != null" >
+        PROBLEM_LOCATION = #{problemLocation},
+        </if>
+        <if test="problemRoad != null" >
+        PROBLEM_ROAD = #{problemRoad},
+        </if>
+        <if test="deviceType != null" >
+        DEVICE_TYPE = #{deviceType},
+        </if>
+        <if test="problemType != null" >
+        PROBLEM_TYPE = #{problemType},
+        </if>
+        <if test="urgentType != null" >
+        URGENT_TYPE = #{urgentType},
+        </if>
+        <if test="problemDesc != null" >
+        PROBLEM_DESC = #{problemDesc},
+        </if>
+        <if test="handleMyself != null" >
+        HANDLE_MYSELF = #{handleMyself},
+        </if>
+        <if test="sendMessage != null" >
+        SEND_MESSAGE = #{sendMessage},
+        </if>
+        <if test="locationX != null" >
+        LOCATION_X = #{locationX},
+        </if>
+        <if test="locationY != null" >
+        LOCATION_Y = #{locationY},
+        </if>
+        <if test="creater != null" >
+        CREATER = #{creater},
+        </if>
+        <if test="createTime != null" >
+        CREATE_TIME = #{createTime},
+        </if>
+        <if test="modifier != null" >
+        MODIFIER = #{modifier},
+        </if>
+        <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime},
+        </if>
+        <if test="masterEntityKey != null" >
+            MASTER_ENTITY_KEY = #{masterEntityKey},
+        </if>
+    </set>
+    where PROBLEM_ID = #{problemId}
+</update>
+<!--7 删除实体对象,根据主键ID -->
+    <delete id="deleteTestProblem">
+        delete from   TEST_PROBLEM
+        where
+    PROBLEM_ID = #{id}
+    </delete>
+<!--8 删除实体对象列表,根据主键ID列表 -->
+<!--9 返回所有字段的对象map,用于级联 -->
+    <resultMap type="TestProblem" id="TestProblemMap">
+        <id property="problemId" column="PROBLEM_ID"/>
+        <result property="problemLocation" column="PROBLEM_LOCATION"/>
+        <result property="problemRoad" column="PROBLEM_ROAD"/>
+        <result property="deviceType" column="DEVICE_TYPE"/>
+        <result property="problemType" column="PROBLEM_TYPE"/>
+        <result property="urgentType" column="URGENT_TYPE"/>
+        <result property="problemDesc" column="PROBLEM_DESC"/>
+        <result property="handleMyself" column="HANDLE_MYSELF"/>
+        <result property="sendMessage" column="SEND_MESSAGE"/>
+        <result property="locationX" column="LOCATION_X"/>
+        <result property="locationY" column="LOCATION_Y"/>
+        <result property="creater" column="CREATER"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="modifier" column="MODIFIER"/>
+        <result property="modifyTime" column="MODIFY_TIME"/>
+        <result property="masterEntityKey" column="MASTER_ENTITY_KEY"/>
+    </resultMap>
+</mapper>

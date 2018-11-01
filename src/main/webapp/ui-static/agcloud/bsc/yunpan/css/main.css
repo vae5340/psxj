@@ -1,0 +1,78 @@
+#contents{
+    width: 100%;
+    height: 100%;
+    border: none;
+    overflow: auto;
+}
+.header{
+    padding: 5px 5px 5px 20px;
+    height: 62px;
+    background-color: 	#F7F7F7;
+}
+.slider{
+    width: 280px;
+    height: calc(100% - 65px);
+    top: 62px;
+    left: 0;
+    bottom: 0;
+    z-index: 9;
+    position: absolute;
+    background-color: 	#fff;
+    border-top: 1px solid #EAEAEA;
+}
+.slider .silder-title{
+    padding: 5px 5px 3px 10px;
+    font-weight: bolder;
+    font-size: 16px;
+    border-bottom: 1px solid #EAEAEA;
+}
+.slider .silder-title .expand{
+    margin-top: 4px;
+    width:16px;
+    height: 16px;
+    background-image:url("../img/expand.png");
+    background-repeat: no-repeat;
+    display:inline-block;
+    float: right;
+    cursor: pointer;
+}
+.slider .silder-title .collapse{
+    margin-left: 10px;
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    background-image:url("../img/collapse.png");
+    background-repeat: no-repeat;
+    display:inline-block;
+    float: right;
+    cursor: pointer;
+}
+.slider .tree-content{
+    padding-left: 8px;
+}
+.content{
+    top: 62px;
+    left: 280px;
+    bottom: 0;
+    right: 10px;
+    z-index: 1;
+    background: #fff;
+    /*border-top-left-radius: 5px;
+    border-top-right-radius: 5px;*/
+    position: absolute;
+    width:calc(100% - 280px);
+    height: calc(100% - 65px);
+    border: 1px solid #EAEAEA;
+}
+.logo{
+    width: 198px;
+    height: 48px;
+    background-image:url("../img/admin_logo.png");
+    background-repeat: no-repeat;
+    display:inline-block;
+}
+.org-name{
+    font-size: 16px;float: right;
+    margin-top: 30px;
+    font-family:"Helvetica Neue", "Helvetica", "Microsoft Yahei", "微软雅黑", "Lantinghei SC", "STXihei", "WenQuanYi Micro Hei", Arial, sans-serif
+}

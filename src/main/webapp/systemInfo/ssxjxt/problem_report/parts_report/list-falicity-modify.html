@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title>统计列表</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<link href="/psxj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/psxj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:1px;background-color:#F5F5F5;}
+		</style>
+  	</head>
+  	<body>
+	 <div id="mapInfo_content"></div>
+  	<div class="col-sm-12">
+				<div class="panel-body">
+					<div id="chartContainer" style="height:200px;"></div>
+					<div style="padding : 10px">
+						<div class="wellQueryBar">
+							<button type="button" class="btn btn-primary" id="thisDayBtn">今日</button>
+							<button type="button" class="btn btn-default" id="thisMonthBtn" style="">本月</button>
+							<button type="button" class="btn btn-default" id="thisYearBtn" style="">本年</button>
+							<button type="button" class="btn btn-default" id="last30DaysBtn" style="">最近30天</button>
+							<input type="hidden" id="startTime"/>
+						</div>
+			   		 	<!--<label class="col-sm-1 control-label col-sm-cous" >设施类型</label>-->
+			            <!--<div class="col-sm-2">-->
+			                 <!--<select class="form-control input-sm" id="objectType" name="objectType">-->
+			                 	<!--<option value="all">所有</option>-->
+								 <!--<option value="valve">阀门</option>-->
+								 <!--<option value="pump">泵站</option>-->
+								 <!--<option value="well">窖井</option>-->
+								 <!--<option value="spout">排放口</option>-->
+								 <!--<option value="yly">溢流堰</option>-->
+								 <!--<option value="pm">拍门</option>-->
+								 <!--<option value="comb">雨水口</option>-->
+								 <!--<option value="pipe">排水管道</option>-->
+			                 <!--</select>-->
+			            <!--</div>-->
+			   		 	<!--<label class="col-sm-1 control-label col-sm-cous">设施编号</label>-->
+			            <!--<div class="col-sm-2">-->
+		                      <!--<select class="form-control input-sm" id="1" name="1">-->
+		                          <!--<option></option>-->
+		                          <!--<option value="1">小明</option>-->
+		                          <!--<option value="2">小黄</option>-->
+		                      <!--</select>-->
+			            <!--</div>-->
+						<!--<label class="col-sm-1 control-label col-sm-cous">所属区域</label>-->
+						<!--<div class="col-sm-2">-->
+							<!--<select class="form-control input-sm" id="district" name="district">-->
+								<!--<option value="">全部</option>-->
+								<!--<option>天河区</option>-->
+								<!--<option>番禺区</option>-->
+								<!--<option>黄浦区</option>-->
+								<!--<option>白云区</option>-->
+								<!--<option>南沙区</option>-->
+								<!--<option>海珠区</option>-->
+								<!--<option>荔枝区</option>-->
+								<!--<option>花都区</option>-->
+								<!--<option>越秀区</option>-->
+								<!--<option>增城区</option>-->
+								<!--<option>从化区</option>-->
+								<!--<option>广州市净水有限公司</option>-->
+								<!--<option>开发区建设和环境保护局</option>-->
+							<!--</select>-->
+						<!--</div>-->
+						<!--<label class="col-sm-1 control-label col-sm-cous">上报人</label>-->
+						<!--<div class="col-sm-2">-->
+							<!--<select class="form-control input-sm" id="sttp" name="sttp">-->
+								<!--<option></option>-->
+								<!--<option value="1">小明</option>-->
+								<!--<option value="2">小黄</option>-->
+							<!--</select>-->
+						<!--</div>-->
+
+			             <!--<div class="col-sm-1" style="text-align:left;">-->
+							<!--<button type="button" class="btn btn-primary" onclick="search()">查询</button>-->
+						 <!--</div> -->
+		       		</div>
+					<div style="padding-top:30px;">
+				     	<div class="col-sm-12 mainwrapper" style="padding-bottom: 0px; margin-left: -35px">
+				     		<table id="table" >
+
+							</table>
+				     	</div>
+					</div>
+				</div>
+	</div>
+	<br/><br/>
+  	</body>
+	 <script src="/psxj/lib/jquery.min.js?v=1.0.0"></script>
+	  <script src="/psxj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	  <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+	  <script src="/psxj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="js/echarts.js"></script>
+<!-- <script src="../js/initMap.js"></script> -->
+	<script src="js/list-falicity-modify.js"></script>
+</html>

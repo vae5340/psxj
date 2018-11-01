@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="/psxj/ui-static/agcloud/bpm/front/process/diagram/display/jquery.qtip.min.css" />
+    <link type="text/css" rel="stylesheet" href="/psxj/ui-static/agcloud/bpm/front/process/diagram/display/displaymodel.css" />
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+    <!--<script src="/psxj/systemInfo/ssxjxt/lib/asi/swf/swfobject.js"></script>-->
+    <!--<script src="/psxj/systemInfo/ssxjxt/lib/asi/panal/panal.js"></script>-->
+    <script type="text/javascript" src="/psxj/ui-static/agcloud/bpm/front/process/diagram/display/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="/psxj/ui-static/agcloud/bpm/front/process/diagram/display/raphael.js"></script>
+    <script type="text/javascript" src="/psxj/ui-static/agcloud/bpm/front/process/diagram/display/bpmn-draw.js"></script>
+    <script type="text/javascript" src="/psxj/ui-static/agcloud/bpm/front/process/diagram/display/bpmn-icons.js"></script>
+    <script type="text/javascript" src="/psxj/ui-static/agcloud/bpm/front/process/diagram/display/Polyline.js"></script>
+    <script type="text/javascript">
+        var modelDiv = jQuery('#bpmnModel');
+        var modelId = modelDiv.attr('data-model-id');
+        var modelType = modelDiv.attr('data-model-type');
+
+        var customActivityColors = modelDiv.attr('data-activity-color-mapping');
+        if (customActivityColors !== null && customActivityColors !== undefined && customActivityColors.length > 0) {
+            customActivityColors = JSON.parse(customActivityColors);
+        }
+
+       var customActivityToolTips = modelDiv.attr('data-activity-tooltips');
+        if (customActivityToolTips !== null && customActivityToolTips !== undefined && customActivityToolTips.length > 0) {
+        }
+
+        var customActivityBackgroundOpacity = modelDiv.attr('data-activity-opacity');
+        var NORMAL_STROKE = 1;
+        var MAIN_STROKE_COLOR = "#585858";
+        var COMPLETED_COLOR = "#bbbbbb";
+        var elementsAdded = new Array();
+        var elementsRemoved = new Array();
+        var NORMAL_STROKE = 1;
+        var SEQUENCEFLOW_STROKE = 1.5;
+        var ASSOCIATION_STROKE = 2;
+        var TASK_STROKE = 1;
+        var TASK_HIGHLIGHT_STROKE = 2;
+        var CALL_ACTIVITY_STROKE = 2;
+        var ENDEVENT_STROKE = 3;
+
+        var COMPLETED_COLOR = "#bbbbbb";
+        var CURRENT_COLOR = "#bbbbbb";
+        var HOVER_COLOR = "#dea91c";
+        var ACTIVITY_STROKE_COLOR = "#bbbbbb";
+        var ACTIVITY_FILL_COLOR = "#f9f9f9";
+        var MAIN_STROKE_COLOR = "#585858";
+        var COMPLETED_ACTIVITY_FILL_COLOR = "#d7d7d7";
+        var CURRENT_ACTIVITY_FILL_COLOR = "#99e3a2";
+
+        var TEXT_PADDING = 3;
+        var ARROW_WIDTH = 4;
+
+        var INITIAL_CANVAS_WIDTH;
+        var INITIAL_CANVAS_HEIGHT;
+
+        var paper;
+        var viewBox;
+        var viewBoxWidth;
+        var viewBoxHeight;
+
+        var canvasWidth;
+        var canvasHeight;
+    </script>
+    <script type="text/javascript" language="JavaScript">
+        var processInstenceId;
+        var modelUrl;
+        var isCheck;
+        var serverName;
+        var herf = window.location.href;
+        /*if (herf.split("?")[1] != undefined && herf.split("?")[1].split("&")[0] != undefined && herf.split("?")[1].split("&")[0].split("=")[1] != undefined) {
+            serverName = herf.split("?")[1].split("&")[0].split("=")[1];
+        }
+        if (herf.split("?")[1] != undefined && herf.split("?")[1].split("&")[1] != undefined && herf.split("?")[1].split("&")[1].split("=")[1] != undefined) {
+
+            taskInstDbid = herf.split("?")[1].split("&")[1].split("=")[1];
+        }
+        if (herf.split("?")[1] != undefined && herf.split("?")[1].split("&")[1] != undefined && herf.split("?")[1].split("&")[2].split("=")[1] != undefined) {
+            processInstenceId = herf.split("?")[1].split("&")[2].split("=")[1];
+        }
+        if (herf.split("?")[1] != undefined && herf.split("?")[1].split("&")[1] != undefined && herf.split("?")[1].split("&")[3].split("=")[1] != undefined) {
+            processDefId = herf.split("?")[1].split("&")[3].split("=")[1];
+        }*/
+        var Index = {
+            init: function(dom){
+                var that = this;
+                serverName = dom.serverName;
+                processInstenceId = dom.processInstenceId;
+                isCheck = dom.isCheck;
+                modelUrl = dom.modelUrl;
+                var params = {
+                    menu:"false",
+                    allowFullScreen:"false",
+                    allowScriptAccess:"always",
+                    bgcolor:"#fff",
+                    wmode:"window"
+                };
+                _showProcessDiagram(modelUrl);
+                // var param ="url=/"+serverName+"&taskInstDbid="+taskInstDbid+"&processInstenceId="+processInstenceId+"&processDefId="+processDefId;
+                // swfobject.embedSWF("/"+serverName+"/adswf/engine/fd/monitorIndex.swf?"+param,"altContent","100%","100%","9.0.0",null,null,params);
+            }/*,
+            reset: function() {
+            },
+            renderUI: function(){
+                //getTabs();
+            },
+
+            bindUI: function(){
+                var that = this;
+            }*/
+        }
+
+
+        //工作流
+        function _showProcessDiagram(modelUrl) {
+            var request = jQuery.ajax({
+                type: 'get',
+                url: modelUrl + '?nocaching=' + new Date().getTime(),
+                success:function (data, textStatus, jqXHR) {
+                    if ((!data.elements || data.elements.length == 0) && (!data.pools || data.pools.length == 0)) return;
+
+                    var INITIAL_CANVAS_WIDTH = data.diagramWidth+30;
+                    var INITIAL_CANVAS_HEIGHT = data.diagramHeight + 50;
+                    var canvasWidth = INITIAL_CANVAS_WIDTH;
+                    var canvasHeight = INITIAL_CANVAS_HEIGHT;
+                    var viewBoxWidth = INITIAL_CANVAS_WIDTH;
+                    var viewBoxHeight = INITIAL_CANVAS_HEIGHT;
+
+
+
+                    jQuery('#bpmnModel').width(INITIAL_CANVAS_WIDTH);
+                    jQuery('#bpmnModel').height(INITIAL_CANVAS_HEIGHT);
+                    paper = Raphael(document.getElementById('bpmnModel'), canvasWidth, canvasHeight);
+                    paper.setViewBox(0, 0, viewBoxWidth, viewBoxHeight, false);
+                    paper.renderfix();
+
+                    if (data.pools) {
+                        for (var i = 0; i < data.pools.length; i++) {
+                            var pool = data.pools[i];
+                            _drawPool(pool);
+                        }
+                    }
+
+                    var modelElements = data.elements;
+
+                    for (var i = 0; i < modelElements.length; i++) {
+                        var element = modelElements[i];
+                        //try {
+                        var drawFunction = eval("_draw" + element.type);
+                        drawFunction(element);
+                    }
+
+                    if (data.flows) {
+                        for (var i = 0; i < data.flows.length; i++) {
+                            var flow = data.flows[i];
+                            if (flow.type === 'sequenceFlow') {
+                                _drawFlow(flow);
+                            } else if (flow.type === 'association') {
+                                _drawAssociation(flow);
+                            }
+                        }
+                    }
+                },
+                error:function (jqXHR, textStatus, errorThrown) {
+                    alert("error");
+                }
+            });
+
+        }
+
+        function _addHoverLogic(element, type, defaultColor)
+        {
+            var strokeColor = _bpmnGetColor(element, defaultColor);
+            var topBodyRect = null;
+            if (type === "rect")
+            {
+                topBodyRect = paper.rect(element.x, element.y, element.width, element.height);
+            }
+            else if (type === "circle")
+            {
+                var x = element.x + (element.width / 2);
+                var y = element.y + (element.height / 2);
+                topBodyRect = paper.circle(x, y, 15);
+            }
+            else if (type === "rhombus")
+            {
+                topBodyRect = paper.path("M" + element.x + " " + (element.y + (element.height / 2)) +
+                    "L" + (element.x + (element.width / 2)) + " " + (element.y + element.height) +
+                    "L" + (element.x + element.width) + " " + (element.y + (element.height / 2)) +
+                    "L" + (element.x + (element.width / 2)) + " " + element.y + "z"
+                );
+            }
+
+            var opacity = 0;
+            var fillColor = "#ffffff";
+            if (jQuery.inArray(element.id, elementsAdded) >= 0)
+            {
+                opacity = 0.2;
+                fillColor = "green";
+            }
+
+            if (jQuery.inArray(element.id, elementsRemoved) >= 0)
+            {
+                opacity = 0.2;
+                fillColor = "red";
+            }
+
+            topBodyRect.attr({
+                "opacity": opacity,
+                "stroke" : "none",
+                "fill" : fillColor
+            });
+            _showTip(jQuery(topBodyRect.node), element);
+
+            topBodyRect.mouseover(function () {
+                paper.getById(element.id).attr({"stroke": HOVER_COLOR});
+            });
+
+            topBodyRect.mouseout(function () {
+                paper.getById(element.id).attr({"stroke": strokeColor});
+            });
+        }
+
+
+        function _showTip(htmlNode, element)
+        {
+            // Custom tooltip
+            var documentation = undefined;
+            if (customActivityToolTips) {
+                if (customActivityToolTips[element.name]) {
+                    documentation = customActivityToolTips[element.name];
+                } else if (customActivityToolTips[element.id]) {
+                    documentation = customActivityToolTips[element.id];
+                } else {
+                    documentation = ''; // Show nothing if custom tool tips are enabled
+                }
+            }
+            // Default tooltip, no custom tool tip set
+            if (documentation === undefined) {
+                var documentation = "";
+                if (element.name && element.name.length > 0) {
+                    //documentation += "<b>Name</b>: <i>" + element.name + "</i><br/><br/>";
+                }
+
+                if (element.properties) {
+                    for (var i = 0; i < element.properties.length; i++) {
+                        var propName = element.properties[i].name;
+                        if (element.properties[i].type && element.properties[i].type === 'list') {
+                            documentation += '<b>' + propName + '</b>:<br/>';
+                            for (var j = 0; j < element.properties[i].value.length; j++) {
+                                documentation += '<i>' + element.properties[i].value[j] + '</i><br/>';
+                            }
+                        }
+                        else {
+                            documentation += '<b>' + propName + '</b>: <i>' + element.properties[i].value + '</i><br/>';
+                        }
+                    }
+                }
+            }
+
+            var text = element.type + " ";
+            if (element.name && element.name.length > 0)
+            {
+                text += element.name;
+            }
+            else
+            {
+                text += element.id;
+            }
+            htmlNode.qtip({
+                content: {
+                    text: documentation,
+                    title: {
+                        text: text
+                    }
+                },
+                position: {
+                    my: 'top left',
+                    at: 'bottom center',
+                    viewport: jQuery('#bpmnModel')
+                },
+                hide: {
+                    fixed: true, delay: 500,
+                    event: 'click mouseleave'
+                },
+                style: {
+                    classes: 'ui-tooltip-kisbpm-bpmn'
+                }
+            });
+        }
+    </script>
+</head>
+<body style="height: 96%;">
+<div id="bpmnModel" style="padding: 0">
+</div>
+</body>
+</html>

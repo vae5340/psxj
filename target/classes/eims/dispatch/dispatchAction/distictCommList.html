@@ -1,0 +1,32 @@
+<div class="col-sm-12 mainwrapper" id="distictCommList">
+	<div id="toolbar" style="padding-bottom: 10px;">
+		<button type="button" class="btn btn-w-m btn-primary" id="addSmsWindowBtn" data-id="addSmsWindow">短信发布</button><!-- onclick="addSmsWindow();" -->
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">发布状态</label>
+			<div class="col-sm-2">
+				<select class="form-control" id="sendStatus" name="sendStatus">
+					<option></option>
+					<option value="2">发送成功</option>
+					<option value="3">发送失败</option>
+					<option value="1">未发送</option>
+				</select>
+			</div>
+			<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">开始时间</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="sendTime">
+			</div>
+			<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">结束时间</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="endTime">
+			</div>
+			<div class="col-sm-1" style="text-align:left;">
+				<button type="button" id="btn_query" class="btn btn-primary">查询</button>
+			</div> 
+		</div>
+	</div> 
+	<div style="margin:10px">
+		<table id="table"></table>
+	</div>
+</div> 

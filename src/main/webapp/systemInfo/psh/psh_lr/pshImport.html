@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/awater_swj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/awater_swj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	    <link href="/awater_swj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput-master/css/fileinput.min.css" rel="stylesheet">
+	    <link href="/awater_swj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<link href="/awater_swj/systemInfo/js/style.css" rel="stylesheet"/>
+	    <link href="/awater_swj/systemInfo/js/viewer/viewer.min.css" rel="stylesheet"/>
+	    <link href="/awater_swj/systemInfo/ssxjxt/style/blue/css/validate.css" rel="stylesheet">
+	    <style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			.form-group{
+				margin-bottom: 8px;
+			}
+			/* .form-group{
+			height: 25px;
+			}
+			.area{
+			height: 42px;
+			}
+			.img{
+			height: 100px;
+			} */
+			.col-sm-2{
+				text-align: center;
+				margin-left: 0px;
+			}
+			.table th, .table td {  
+				text-align: center;  
+				vertical-align: middle!important;  
+			} 
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+		</style>
+  	</head>
+  	<body>
+  	<div class="col-sm-12">
+  		<div class="table" id="tabs-11110">
+			<div class="tab-content">
+				<div class="tab-pane active" id="panel-qs">
+					<form id="uploadform" class="form-horizontal" role="form"  style="margin-top:15px;">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">导入模板<font color="red">*</font>:</label>
+							<div class="col-sm-10" style="padding-top:7px">
+								<input type="radio" name="model"  value="0" > 南沙区模板
+								<input type="radio" name="model"  value="1" > 非南沙区模板
+							</div>
+						</div>
+						<div class="form-group">
+	                        <label class="control-label col-sm-2">导入图片zip文件<font color="red">*</font>:</label>
+	                        <div class="col-sm-10">
+	                            <input type="file" name="file" id="uploadfileTp" multiple class="file-loading form-control" />
+	                        </div>
+	                    </div>
+	                    <div class="form-group">
+	                        <label class="control-label col-sm-2">导入excel文件<font color="red">*</font>:</label>
+	                        <div class="col-sm-10">
+	                            <input type="file" name="file" id="uploadfile" multiple class="file-loading form-control" />
+	                        </div>
+	                    </div>
+	                </form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+  	</body>
+	 <script src="/awater_swj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script> 
+	 <script src="/awater_swj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+  	<script src="/awater_swj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+	 <script src="/awater_swj/systemInfo/js/viewer/viewer.min.js"></script> 
+	  <script src="/awater_swj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+	  <script src="/awater_swj/js/util_date.js" type="text/javascript"></script>
+	  <!-- <script src="/awater_swj/lib/plugins/layui/layui.js"></script> -->
+	  <script src="/awater_swj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/awater_swj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/awater_swj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+     <script src="/awater_swj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+     <script src="/awater_swj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput-master/js/locales/zh.js"></script>
+     <script type="text/javascript">
+     var isClick=false;
+     var model=null;
+     var tips;
+     $(function(){
+    	 $("#uploadfileTp").fileinput({
+    	        language: 'zh', //设置语言
+    	        uploadUrl: "/agsupport_swj/asi/facilitymgr/facilitymgr/uploadfile!improtTp.action", //上传的地址
+    	        allowedFileExtensions: ['zip'],//接收的文件后缀,'doc','docx','xlsx','txt','xls'
+    	        uploadExtraData:function(previewId,index){
+    	           return {"model":model};
+    	        },
+    	        uploadAsync: true, //默认异步上传
+    	        showUpload: false, //是否显示上传按钮
+    	        showRemove : true, //显示移除按钮
+    	        showCancel: true,
+    	        showClose: true,
+    	        showPreview : false, //是否显示预览
+    	        showCaption: true,//是否显示标题
+    	        browseClass: "btn btn-primary", //按钮样式
+    	        dropZoneEnabled: false,//是否显示拖拽区域
+    	        //minImageWidth: 50, //图片的最小宽度
+    	        //minImageHeight: 50,//图片的最小高度
+    	        //maxImageWidth: 1000,//图片的最大宽度
+    	        //maxImageHeight: 1000,//图片的最大高度
+    	        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+    	        //minFileCount: 0,
+    	        maxFileSize:1000000,
+    	        maxFileCount: 1, //表示允许同时上传的最大文件个数
+    	        enctype: 'multipart/form-data',
+    	        validateInitialCount:true,
+    	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+    	        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+    	        slugCallback: function(filename) {
+    	            return filename.replace('/\s/g', '_').replace('(', '_').replace(')', '_').replace('[', '_').replace(']', '_');
+    	        }
+    	    }).on('fileerror', function(event, data, msg) {
+    	    	layer.close(tips);
+    	    	isClick=false;
+     			layer.alert("图片导入失败！",function(){
+     				layer.close(layer.index);
+             	});
+    	    }).on("fileuploaded", function (event, data, previewId, index) {
+    	        //$("#uploadfile").initFileActions();
+    	    	if(data.response.success){
+    	    		/* layer.alert("图片导入成功！",function(){
+    	    			layer.close(layer.index);
+                 	}); */
+    	    		$("#uploadfile").fileinput("upload");
+    	    	}else{
+    	    		layer.close(tips);
+    	    		isClick=false;
+    	    		layer.alert("图片导入失败！",function(){
+    	    			layer.close(layer.index);
+                 	});
+    	    	}
+    	    });
+    	 $("#uploadfile").fileinput({
+   	        language: 'zh', //设置语言
+   	        uploadUrl: "/agsupport_swj/asi/facilitymgr/facilitymgr/uploadfile!improtExcel.action", //上传的地址
+   	        allowedFileExtensions: ['xlsx', 'xls'],//接收的文件后缀,'doc','docx','xlsx','txt','xls'
+   	        uploadExtraData:function(previewId,index){
+   	           return {"model":model};
+   	        },
+   	        uploadAsync: true, //默认异步上传
+   	        showUpload: false, //是否显示上传按钮
+   	        showRemove : true, //显示移除按钮
+   	        showCancel: true,
+   	        showClose: true,
+   	        showPreview : false, //是否显示预览
+   	        showCaption: true,//是否显示标题
+   	        browseClass: "btn btn-primary", //按钮样式
+   	        dropZoneEnabled: false,//是否显示拖拽区域
+   	        //minImageWidth: 50, //图片的最小宽度
+   	        //minImageHeight: 50,//图片的最小高度
+   	        //maxImageWidth: 1000,//图片的最大宽度
+   	        //maxImageHeight: 1000,//图片的最大高度
+   	        //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+   	        //minFileCount: 0,
+   	        maxFileSize:1000,
+   	        maxFileCount: 1, //表示允许同时上传的最大文件个数
+   	        enctype: 'multipart/form-data',
+   	        validateInitialCount:true,
+   	        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+   	        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+   	        slugCallback: function(filename) {
+   	            return filename.replace('/\s/g', '_').replace('(', '_').replace(')', '_').replace('[', '_').replace(']', '_');
+   	        }
+   	    }).on('fileerror', function(event, data, msg) {
+   	    	layer.close(tips);
+   	    	isClick=false;
+    		layer.alert("排水户导入失败！",function(){
+    			layer.close(layer.index);
+            });
+   	    }).on("fileuploaded", function (event, data, previewId, index) {
+   	        //$("#uploadfile").initFileActions();
+   	        layer.close(tips);
+   	    	if(data.response.success){
+   	    		window.parent.$("#table").bootstrapTable("refresh");
+   	    		layer.alert(data.response.message,function(){
+   	    			
+                    window.parent.layer.closeAll();
+                });
+   	    	}else{
+   	    		isClick=false;
+   	    		layer.alert(data.response.message,function(){
+   	    			layer.close(layer.index);
+                });
+   	    	}
+   	    });
+     });
+     function importEmp(){
+    	 if(!isClick){
+    		 var uploadFile = document.getElementById("uploadfile").value;
+    		 var uploadFileTp = document.getElementById("uploadfileTp").value;
+       	     if($('input[name="model"]:checked').val() == undefined){
+       	    	layer.msg('请选择导入模板', {icon: 7});
+    			return;
+       	     }
+	       	 if(uploadFileTp == null || uploadFileTp == ''){    
+     	     	layer.msg('请选择要导入的图片zip文件', {icon: 7});
+	  			return;
+     	     }
+       	     if(uploadFile == null || uploadFile == ''){    
+       	     	layer.msg('请选择要导入的excel文件', {icon: 7});
+    			return;
+       	     }
+       	     isClick=true;
+       	  	 model=$('input[name="model"]:checked').val();
+       	  	 $("#uploadfileTp").fileinput("upload");
+       	  	 //$("#uploadfile").fileinput("upload");
+	       	 tips=layer.msg('导入中，请稍等...', {
+	       		  icon: 16,
+	       		  shade: 0.01,
+	       		  time:false
+	       		});
+    	 }
+   	 }
+     </script>
+</html>

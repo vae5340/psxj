@@ -1,0 +1,254 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+		<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	   
+<link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	    <link href="../../css/animate.min.css" rel="stylesheet">	    
+	    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+	    <link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+	    <script src="../../lib/jquery.min.js?v=2.1.4"></script>
+	    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+	    <script src="../../lib/content.min.js?v=1.0.0"></script>
+	    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.js"></script>  
+	    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	    <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script>
+	    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>  
+	    <script src="/awater/waterSystem/establishment/js/nnArea.js"></script>   
+	    <script src="/awater/js/util_date.js" type="text/javascript"></script>
+	    <script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+        <script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+		<style>
+			table th{font-size:15px;font-weight:400}
+		    .control-label{font-weight:400}
+		    .col-sm-6 .form-control,.col-sm-8 .form-control{font-size:13px;font-weight:400;padding: 0px 6px;height:28px}
+		    .btn_query{height:25px;width:100%}
+	    </style>    
+		<script type="text/javascript">
+			function showPoint(){
+				var frames=window.parent.window.document.getElementById("main"); 
+				frames.contentWindow.getInfo(); 
+			}	
+		</script>
+	</head>
+
+<body style="background: rgba(194,233,255,0.8);height:300px;">
+<div class="animated fadeInRight">
+        <div class="tabletitle"></div>
+		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:8px;text-align:left;">预报类型</label>
+		<div class="col-sm-8" style="margin-bottom:5px;width:74%">
+			<select class="form-control" id="type">	
+			  <option></option>
+			  <option value="3">三小时</option>	
+			  <option value="6">六小时</option>		
+			  <option value="12">十二小时</option>			
+			</select>
+		</div>
+		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:8px;text-align:left;">起始时间</label>
+		<div class="col-sm-8" style="margin-bottom:5px;width:74%">
+			<select class="form-control" id="time">	
+			</select>
+		</div>	
+		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:8px;text-align:left;">预报时长</label>
+		<div class="col-sm-5" style="margin-bottom:10px;width:120px;padding-right:10px">
+			<select class="form-control" id="period">
+			</select>
+		</div>
+		<div class="col-sm-2" style="text-align:left;padding:2px 0px 0px 0px">
+			<button type="button" id="btn_query" class="btn" onclick="queryData()" style="padding:4px 6px">查询</button>
+		</div>
+		<div class="col-sm-2" style="text-align:left;padding:2px 0px 0px 0px">
+			<button type="button" id="btn_query" class="btn" onclick="playData()" style="padding:4px 6px">播放</button>
+		</div>
+		<table id="table"></table>
+    </div>
+    <script src="/awater/js/common.js"></script>
+	<script type="text/javascript">
+	function changeTable(heightValue){
+		$('#table').bootstrapTable('resetView', {
+			height: heightValue-200
+		});
+	}
+		
+    $(function(){
+  		   $("#type").on("change",function(){
+	           if(!$("#type").val())
+	               return;
+	           $("#time").empty();  
+	           $("#period").empty();     		       
+   		       $.ajax({ url: "/agsupport/rest/swmmTimeseriesRest/getGridTime/?type="+$("#type").val(), 
+					 dataType:'json',
+					 async: false,
+					 success: function(results){
+					    $("#time").append("<option></option>");	        
+					    for(var i in results){
+	                         $("#time").append("<option value="+results[i].TIME+">"+getLocalTime(results[i].TIME)+"</option>");	        
+					    }
+				  	 },
+					 error:function(e){
+						alert("error");
+					 }
+		        });	
+  		   });
+  		   
+  		   $("#time").on("change",function(){   		      
+  		        if(!$("#time").val())
+  		               return;
+  		        $("#period").empty();     		       
+  		        $.ajax({ url: "/agsupport/rest/swmmTimeseriesRest/getFutureTime/?time="+$("#time").val()+"&type="+$("#type").val(),
+					  dataType:'json',
+					  async: false,
+					  success: function(results){
+					    $("#period").append("<option></option>");	        
+					    for(var i in results){
+	                            $("#period").append("<option value="+results[i].FUTURE_HOUR+">"+results[i].FUTURE_HOUR+"小时</option>");	        
+					    }
+				  	 },
+					 error:function(e){
+						alert("error"); 
+					 }
+			    });       
+  		   });
+  		   
+  		   $.ajax({ 
+ 		      url: "/agsupport/rest/swmmTimeseriesRest/getCoorData",
+			  dataType:'json',
+			  async: false,
+			  success: function(result){
+			    var coorData=result.COORDATA;
+			    coorArr=coorData.split(";");
+		  	 },
+			 error:function(e){
+				alert("error"); 
+			 }
+		});   
+    });
+    
+    var intervalIndex;
+    var coorArr=[];
+	function queryData(){
+	    if(!$("#type").val()||!$("#time").val()||!$("#period").val()){
+	        parent.layer.msg("请选择全部选项");
+	        return;
+	    }
+	    parent.AutoClickLenged(31);
+		var query=new Object();
+	    query.type=$("#type").val();
+	    query.time=$("#time").val();
+	    query.period=$("#period").val();
+		$.ajax({ 
+		      url: "/agsupport/rest/swmmTimeseriesRest/getImages", 
+	          data:query,
+			  dataType:'json',
+			  async: false,
+			  success: function(results){
+			      $("#table").bootstrapTable("destroy");
+			      $("#table").bootstrapTable({
+						toggle:"table",
+						data:results,
+						height:parent.$("#leftDiv").height()-parent.$("#funPannel").height()-200,
+						rowStyle:"rowStyle",
+						cache: false, 
+						pagination:true,
+						striped: true,
+						pageNumber:1,
+					    pageSize: 10,
+						pageList: [10, 25, 50, 100],
+						queryParams: queryParams,
+						sidePagination: "client",
+						columns: [{field: 'NAME',title: '预报名称',halign:'center'}]
+					});
+		  	 },
+			 error:function(e){
+				alert("error");
+			 }
+		});
+    }
+    
+    function playData(){
+	    if(!$("#type").val()||!$("#time").val()||!$("#period").val()){
+	        parent.layer.msg("请选择全部选项");
+	        return;
+	    }
+		var query=new Object();
+	    query.type=$("#type").val();
+	    query.time=$("#time").val();
+	    query.period=$("#period").val();
+		$.ajax({ 
+		      url: "/agsupport/rest/swmmTimeseriesRest/getImages", 
+	          data:query,
+			  dataType:'json',
+			  async: false,
+			  success: function(results){
+	                images=results;
+	                parent.centerGridMapLayer();
+                    parent.map.disableScrollWheelZoom();
+			        intervalIndex=setInterval("loadImg()",2000);
+		  	  },
+			  error:function(e){
+				 alert("error");
+			  }
+		});
+    }
+    	
+    var imgIndex=0,images;
+    function loadImg(){
+       if(imgIndex<images.length){
+          parent.map.graphics.clear();
+          var valueArr=images[imgIndex].MAIN_CONTENT.split(",");
+          /*if(imgIndex==images.length-1)
+             var options={title:images[imgIndex].NAME,coorData:coorArr,valueData:valueArr,play:false};
+          else  
+             var options={title:images[imgIndex].NAME,coorData:coorArr,valueData:valueArr,play:true};*/
+          var options={title:images[imgIndex].NAME,coorData:coorArr,valueData:valueArr};
+          parent.addImgToMap(parent.serverUrl+"/agsupport/uploadFile/gpImage/"+images[imgIndex].IMG_NAME);
+          if(parent.$(".rainfall-model-title").length||!imgIndex){
+	          parent.rainfallModelFunctions.use(options);	  
+		      imgIndex++;
+	      }else{
+	          imgIndex=0;
+              parent.map.enableScrollWheelZoom();
+              clearInterval(intervalIndex);
+              intervalIndex=0;
+	      }
+       }else{
+          imgIndex=0;
+          parent.map.enableScrollWheelZoom();
+          clearInterval(intervalIndex);
+          intervalIndex=0;
+       }   
+	}
+	
+	function queryParams(params){
+       return {
+        limit:params.limit,
+        offset:params.offset
+       };
+    }
+    
+    $("#table").on('post-body.bs.table', function (row,obj){
+		$(".fixed-table-body").mCustomScrollbar({
+			mouseWheelPixels:300
+		});				
+	});
+	
+	$("#table").on('click-row.bs.table', function (row,obj){
+		  window.parent.createNewtab("mapDiv","地图服务");
+	      parent.centerGridMapLayer();
+	      parent.map.graphics.clear();
+	      parent.gridGraphicLayer.clear();
+          var valueArr=obj.MAIN_CONTENT.split(",");
+          var options={title:obj.NAME,coorData:coorArr,valueData:valueArr,play:false};
+          parent.rainfallModelFunctions.use(options);
+          setTimeout(function(){
+		       parent.addImgToMap("/agsupport/uploadFile/gpImage/"+obj.IMG_NAME);
+		  },500);
+    });
+    </script>
+</body>
+</html>

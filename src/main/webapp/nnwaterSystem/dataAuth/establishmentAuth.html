@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="zh-CN">
+<head>
+    <title>设施数据授权</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    
+	<link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet"/>
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet"/>
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet"/>
+	<link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet"/>
+    <link href="../../css/animate.min.css" rel="stylesheet"/>
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet"/>
+    <link href="../../lib/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+
+	
+	<link rel="stylesheet" href="css/zTreeStyle/metro.css"/>
+    <!--<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>-->
+</head>
+<body>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeIn">
+ <div class="ibox-content"> 
+	<div class="row">
+			<div class="col-sm-3">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						角色
+					</div>
+					<div class="panel-body">
+						<ul id="roleTree" class="ztree" style="width:360px; overflow:auto;"></ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="tabs-left">
+                      <ul class="nav nav-tabs">
+                          <li class="active"><a data-toggle="tab" href="#tab-8"> 设施目录</a>
+                          </li>
+                      </ul>
+                      <div class="tab-content ">
+                          <div id="tab-8" class="tab-pane active">
+                              <div class="panel-body">
+                                 <ul id="combTree" class="ztree" style="width:360px; overflow:auto;"></ul>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<center><button type="button" id="saveBtn" class="btn btn-primary">保存</button></center>
+			</div>
+		</div>
+	 </div>
+</div>
+
+<script src="../../lib/jquery.min.js?v=2.1.4"></script>
+<script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+<script src="../../lib/content.min.js?v=1.0.0"></script>
+<script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="../../lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../../lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script src="../../lib/plugins/toastr/toastr.min.js"></script>
+<script src="../../lib/plugins/layer-v2.3/layer/layer.js"></script>
+<script src="../../lib/plugins/validate/jquery.validate.min.js"></script>
+<script src="../../lib/plugins/validate/messages_zh.min.js"></script>
+<script src="js/jquery.ztree.all-3.5.min.js"></script>
+<script src="js/establishmentAuth.js"></script>
+</body>
+</html>

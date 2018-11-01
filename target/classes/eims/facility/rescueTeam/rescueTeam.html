@@ -1,0 +1,27 @@
+<div class="container-fluid" id="rescueTeam">
+	<div class="row-fluid">
+		<div style="float: left;width: 250px;padding:0 10px;">
+			<div class="well sidebar-nav" style="padding:0;">
+				<div style="background-color: #8DCEF3;padding: 2px;">应急抢险队伍信息</div>
+				<ul id="teamtree" class="ztree"></ul>
+			</div>
+		</div>
+		<div style="float: left;width:calc(100% - 270px);">
+			<div class="panel panel-default" style="margin:0px 10px 10px 10px">
+				<div class="panel-heading" style="padding:5px 10px">查询条件</div>
+				<div class="panel-body">
+					<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top:5px;">队伍名称</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="searchTeamName">
+					</div>
+					<div class="col-sm-4" style="text-align:left;">
+						<button type="button" style="margin-left:50px" class="btn btn-primary" id="rescueTeamSearchBtn">查询</button><!-- onclick="searchData(false)"  -->
+					</div> 
+				</div> 
+			</div>
+			<div style="margin:10px">
+				<table id="rescueTeamTable"></table>
+			</div>
+		</div>
+	</div>
+</div>

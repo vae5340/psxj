@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>	
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+  </head>
+  <style>
+     lable{font-size:15px}
+  </style>
+  <body>
+       <div id="panelContent" style="padding:20px 20px 0px 20px">
+         <div class="btn-group">
+               <button type="button" id="pointSel" onclick="drawTool('point')" class="btn btn-default">点选</button>	
+               <button type="button" id="polylineSel" onclick="drawTool('polyline')" class="btn btn-default">线选</button>
+               <button type="button" id="rectangleSel" onclick="drawTool('rectangle')" class="btn btn-default">矩形</button>	
+               <button type="button" id="polygonSel" onclick="drawTool('polygon')" class="btn btn-default">多边形</button>	                    	     
+          </div>
+          <div style="padding-top:20px">
+		      <label class="control-label" style="font-size:15px;font-weight:500;width:80px;padding-top:7px;float:left">缓冲距离：</label>
+		      <div style="width:150px;float:left;padding-top:12px;padding-right:10px">
+		         <div id="slider"></div>
+		      </div>
+	          <input type="text" class="form-control" id="bufferDistance" style="width:80px;text-align:center;display:inline" pattern="^[0-9]*$" data-bv-regexp-message="请输入有效数字"> 
+              <label class="control-label" style="font-size:15px;font-weight:500;width:20px;padding-top:7px">米</label>
+          </div>
+          <div align="right" style="padding-top:20px">
+           <button type="button" class="btn btn-primary" id="queryBtn" onclick="spatialQuery()">查询</button>&nbsp;&nbsp;&nbsp;	            
+           <button type="button" class="btn btn-default" id="closeBtn" onclick="closeJsPanel()">关闭</button>
+          </div>
+       </div>   
+	<script>
+	     $(function(){
+	        $("#slider").slider({
+		         value:0,
+		         max:100,
+		         //slide: refreshBuffer,
+		         change:refreshBuffer
+	         });
+	         
+	         $("#bufferDistance").on("change",function(){
+		         refreshBufferValue();   
+	         });
+	     });
+	     
+	     var pipeMapService=arcgisBaseUrl+"/arcgis/rest/services/nnpsfacility/MapServer"; 
+	     function refreshBuffer(){
+	        if($("#slider").slider("value")<100){
+		        $("#bufferDistance").val($("#slider").slider("value"));
+			    if(selectedArea){
+			       var evtObj={"geometry":selectedArea};
+			       selectSpatialArea(evtObj);
+			    }
+		    }
+		 }
+		 
+		 function refreshBufferValue(){		
+		   if($("#bufferDistance").val()<100)
+	         $("#slider").slider("value",$("#bufferDistance").val());
+	       else if($("#bufferDistance").val()>=100){
+	         	$("#slider").slider("value",100);
+		        if(selectedArea){
+			        var evtObj={"geometry":selectedArea};
+			        selectSpatialArea(evtObj);
+				}
+	         }
+	       else
+	         $("#slider").slider("value",0); 
+		 }
+		 
+	     function drawTool(type){ 
+	         switch(type){
+				 case "point":
+		             symbol= new esri.symbol.SimpleMarkerSymbol(esri.symbol.SimpleMarkerSymbol.STYLE_CIRCLE,5,
+		             (new esri.symbol.SimpleLineSymbol()).setColor(new esri.Color("red")),new  esri.Color([255,0,0]));
+		             pipeGis.toolBar.tb.activate(esri.toolbars.Draw.POINT);  
+		             break;
+		        case "polyline":
+		             symbol= (new esri.symbol.SimpleLineSymbol()).setColor(new esri.Color("red"));
+		             pipeGis.toolBar.tb.activate(esri.toolbars.Draw.POLYLINE);  
+		             break;
+		        case "circle":
+		        	 symbol= (new esri.symbol.SimpleFillSymbol()).setOutline((new esri.symbol.SimpleLineSymbol()).setColor(new esri.Color("red")));	        
+		             pipeGis.toolBar.tb.activate(esri.toolbars.Draw.CIRCLE);  
+		             break;  
+		        case "rectangle":
+		        	 symbol= (new esri.symbol.SimpleFillSymbol()).setOutline((new esri.symbol.SimpleLineSymbol()).setColor(new esri.Color("red")));	        
+		             pipeGis.toolBar.tb.activate(esri.toolbars.Draw.RECTANGLE);  
+		             break;
+		        case "polygon":
+		        	 symbol= (new esri.symbol.SimpleFillSymbol()).setOutline((new esri.symbol.SimpleLineSymbol()).setColor(new esri.Color("red")));	        
+		             pipeGis.toolBar.tb.activate(esri.toolbars.Draw.POLYGON);  
+		             break;            
+		     }	       
+		     pipeGis.toolBar.tb.on("draw-end", selectSpatialArea);	             
+	    }
+	    var symbol;
+	     
+	    function selectSpatialArea(evtObj){ 
+	        selectedArea=null; 
+	        bufferArea=null; 
+	   		map.graphics.clear();
+	        selectedArea=evtObj.geometry;
+	        if($("#bufferDistance").val()>0){
+		        var params = new esri.tasks.BufferParameters();
+		        params.geodesic = true;
+		        params.distances = [$("#bufferDistance").val()];
+		        params.unit = esri.tasks.GeometryService.UNIT_METER;
+		        
+		        if(selectedArea.type == "polygon") {
+	                pipeGis.geometryService.simplify([selectedArea], function(geometries) {
+	                params.geometries = geometries;
+	                pipeGis.geometryService.buffer(params, showBuffer);                
+	              });
+	            }else{
+	              params.geometries = [selectedArea];
+	              pipeGis.geometryService.buffer(params, showBuffer);                             
+	            }
+	        }else{
+	          var graphic = new esri.Graphic(selectedArea, symbol);
+	          map.graphics.add(graphic);                   
+	        }		
+	   }
+	   
+	   function showBuffer(bufferedGeometries) {
+	        var symbol = new esri.symbol.SimpleFillSymbol(
+	           esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+	          new esri.symbol.SimpleLineSymbol(
+	            esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+	            new esri.Color([255,0,0,0.65]), 2
+	          ),
+	          new esri.Color([255,0,0,0.35])
+	        );
+	
+	        $.each(bufferedGeometries, function() {
+	          var graphic = new esri.Graphic(this, symbol);
+	          map.graphics.add(graphic);
+	          bufferArea=this;         
+	        });
+	   }
+	   
+	   var selectedArea,bufferArea;
+	   function spatialQuery(){
+		    if(!selectedArea)
+		      return;
+		    pipeGis.toolBar.tb.deactivate();
+	        var identifyTask = new esri.tasks.IdentifyTask(pipeMapService);
+	        var identifyParams = new esri.tasks.IdentifyParameters();
+	        identifyParams.tolerance = 3;
+	        identifyParams.returnGeometry = true;
+	        var lIds=pipeLayers.pipePointLayer.subIds.concat(pipeLayers.drainageLayer.subIds);
+	        lIds[lIds.length]=pipeLayers.pipeLayer.layerId;
+	        lIds[lIds.length]=pipeLayers.conduitLayer.layerId;
+	        identifyParams.layerIds = lIds;              
+	        identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_ALL;
+	        identifyParams.mapExtent = map.extent;
+	        if(bufferArea)
+	           identifyParams.geometry=bufferArea;
+	        else
+	           identifyParams.geometry=selectedArea;
+	        
+	        makeWait();
+	     	setTimeout(function(){
+		        identifyTask.execute(identifyParams,function(results){
+		        	//selectedArea=null; 		
+			        var tableData=[];
+			        if(results.length==20000)
+			           layer.msg("提示：查询结果记录大于20000，只显示前20000条记录");
+			        $.each(results, function() { 
+			           var attrs=this.feature.attributes;
+			           if(this.feature.geometry){
+				           attrs["geometry"]=this.feature.geometry;
+				           attrs["layerId"]=this.layerId;
+				           tableData.push(attrs);
+			           }    
+			        });
+		            showResultWindow(tableData);
+		        });
+	        },500);  
+	   }
+	  
+	   function showResultWindow(tableData){
+	        document.getElementById("leftMenuTable").src="/awater/nnwaterSystem/PipeNetwork/multiQueryResult.html";		
+	        var fm1=parent.window.frames["leftMenuTable"]; 
+	        var fmState=function(){ 
+		          var state=null;   
+		          if(document.readyState){     	              
+		                 state=fm1.document.readyState;   
+			               if(state=="complete" || !state){
+			                    var pipelineData=tableData.filter(function (value) {
+								      if(value.layerId==pipeLayers.pipeLayer.layerId)
+								        return value;
+							    });
+							    var conduitData=tableData.filter(function (value) {
+								      if(value.layerId==pipeLayers.conduitLayer.layerId)
+								        return value;
+								});
+							    var pipePointData=tableData.filter(function (value) {
+								      if(pipeLayers.pipePointLayer.subIds.indexOf(value.layerId)>-1)
+								        return value;
+								});
+							    var drainageData=tableData.filter(function (value) {
+								      if(pipeLayers.drainageLayer.subIds.indexOf(value.layerId)>-1)
+								        return value;
+								});
+			                   document.getElementById("leftMenuTable").contentWindow.$("#pipelineNum").html("记录总数："+pipelineData.length+"条");
+			                   document.getElementById("leftMenuTable").contentWindow.$("#conduitNum").html("记录总数："+conduitData.length+"条");
+			                   document.getElementById("leftMenuTable").contentWindow.$("#pipePointNum").html("记录总数："+pipePointData.length+"条");
+			                   document.getElementById("leftMenuTable").contentWindow.$("#drainageNum").html("记录总数："+drainageData.length+"条");
+					           
+					           document.getElementById("leftMenuTable").contentWindow.$("#pipelineTable").bootstrapTable({
+									toggle:"table",
+									height:350,
+									data: pipelineData,
+									rowStyle:"rowStyle",
+									cache: false, 
+									pagination:true,
+									striped: true,
+									pageNumber:1,
+								    pageSize: 10,
+									pageList: [10, 25, 50, 100],
+									queryParams: queryParams,
+									sidePagination: "client",
+									columns: [
+								    	//{field:'PIPEID',visible: true,title: '排水管标识码',align:'center'},
+										//{field:'PIPE_CATEGORY',visible: true,title: '管道类别',formatter:categoryFormat,align:'center'},
+										//{field:'PIPE_LEN',visible: true,title: '管道长度',formatter:lengthFormat,align:'center'}]
+										{field:'排水管标识码',visible: true,title: '排水管标识码',align:'center'},
+										{field:'管道类别',visible: true,title: '管道类别',formatter:categoryFormat,align:'center'},
+										{field:'管道长度',visible: true,title: '管道长度',formatter:lengthFormat,align:'center'}]
+						       });	
+						       document.getElementById("leftMenuTable").contentWindow.$("#conduitTable").bootstrapTable({
+									toggle:"table",
+									height:350,
+									data: conduitData,
+									rowStyle:"rowStyle",
+									cache: false, 
+									pagination:true,
+									striped: true,
+									pageNumber:1,
+								    pageSize: 10,
+									pageList: [10, 25, 50, 100],
+									queryParams: queryParams,
+									sidePagination: "client",
+									columns: [
+									    //{field:'CONDUITID',visible: true,title: '排水渠标识码',align:'center'},
+										//{field:'CONDUIT_CATEGORY',visible: true,title: '渠道类别',formatter:categoryFormat,align:'center'},
+										//{field:'CONDUIT_LEN',visible: true,title: '渠道长度',formatter:lengthFormat,align:'center'}]
+										{field:'排水渠标识码',visible: true,title: '排水渠标识码',align:'center'},
+										{field:'渠道类别',visible: true,title: '渠道类别',formatter:categoryFormat,align:'center'},
+										{field:'渠道长度',visible: true,title: '渠道长度',formatter:lengthFormat,align:'center'}]
+						       });	
+						       document.getElementById("leftMenuTable").contentWindow.$("#pipePointTable").bootstrapTable({
+									toggle:"table",
+									height:350,
+									data: pipePointData,
+									rowStyle:"rowStyle",
+									cache: false, 
+									pagination:true,
+									striped: true,
+									pageNumber:1,
+								    pageSize: 10,
+									pageList: [10, 25, 50, 100],
+									queryParams: queryParams,
+									sidePagination: "client",
+									columns: [
+									    {visible: true,title: '管点类型',formatter:pointTypeFormat,align:'center'},
+										{visible: true,title: '标志码',formatter:pointCodeFormat,align:'center'}]
+						       });
+						       document.getElementById("leftMenuTable").contentWindow.$("#drainageTable").bootstrapTable({
+									toggle:"table",
+									height:350,
+									data: drainageData,
+									rowStyle:"rowStyle",
+									cache: false, 
+									pagination:true,
+									striped: true,
+									pageNumber:1,
+								    pageSize: 10,
+									pageList: [10, 25, 50, 100],
+									queryParams: queryParams,
+									sidePagination: "client",
+									columns: [
+									    {visible: true,title: '排水设施类型',formatter:drainageTypeFormat,align:'center'},
+										{visible: true,title: '标志码',formatter:drainageCodeFormat,align:'center'}]
+						       });
+	
+							   document.getElementById("leftMenuTable").contentWindow.$("#pipelineTable").on('click-row.bs.table', function (row,obj) {
+							       centerAtGeometry(obj.geometry);
+						       });
+						        document.getElementById("leftMenuTable").contentWindow.$("#conduitTable").on('click-row.bs.table', function (row,obj) {
+							       centerAtGeometry(obj.geometry);
+						       });
+						        document.getElementById("leftMenuTable").contentWindow.$("#pipePointTable").on('click-row.bs.table', function (row,obj) {
+							       centerAtGeometry(obj.geometry);
+						       });
+						        document.getElementById("leftMenuTable").contentWindow.$("#drainageTable").on('click-row.bs.table', function (row,obj) {
+							       centerAtGeometry(obj.geometry);
+						       });
+						       
+						       for(var i=0;i<pipelineData.length;i++){
+						           map.graphics.add( new esri.Graphic(pipelineData[i].geometry, pipeGis.symbol.lineSymbol));
+						       }
+						       for(var i=0;i<conduitData.length;i++){
+						           map.graphics.add( new esri.Graphic(conduitData[i].geometry, pipeGis.symbol.lineSymbol));
+						       }
+						       for(var i=0;i<pipePointData.length;i++){
+						           map.graphics.add( new esri.Graphic(pipePointData[i].geometry, pipeGis.symbol.markerSymbol));
+						       }
+						       for(var i=0;i<drainageData.length;i++){
+						           map.graphics.add( new esri.Graphic(drainageData[i].geometry, pipeGis.symbol.markerSymbol));
+						       }
+						       
+						       makeDefault();		        
+						       
+						       if(fmState.timeoutInt){ 
+						            window.clearTimeout(fmState.timeoutInt);
+						            return;	
+							   }
+		                 }   
+		                 window.setTimeout(fmState,10); 
+		          } 
+	        }; 
+	        fmState.timeoutInt = window.setTimeout(fmState,400); 
+	   }  
+	   
+	   function queryParams(params) {
+	        return {
+		        limit:params.limit,
+		        offset:params.offset
+	        };
+	   }
+	    
+	  function pointTypeFormat(value, row, index){
+	      switch(row.layerId){
+	         case pipeLayers.pipePointLayer.subLayers.outfallLayer.layerId:
+	            return "排放口";
+	      	 case pipeLayers.pipePointLayer.subLayers.juncLayer.layerId:
+	            return "检查井";
+	      	 case pipeLayers.pipePointLayer.subLayers.inletLayer.layerId:
+	            return "雨水口";
+	      	 case pipeLayers.pipePointLayer.subLayers.valveLayer.layerId:
+	            return "阀门";
+	      }
+	   }
+	   
+	   function pointCodeFormat(value, row, index){
+	      switch(row.layerId){
+	         case pipeLayers.pipePointLayer.subLayers.outfallLayer.layerId:
+	            //return row.OUTFALLID;
+	            return row.排放口标识码;
+	      	 case pipeLayers.pipePointLayer.subLayers.juncLayer.layerId:
+	            //return row.NODEID;
+	            return row.检查井标识码;
+	      	 case pipeLayers.pipePointLayer.subLayers.inletLayer.layerId:
+	            //return row.COMBID;
+	            return row.雨水口标识码;
+	      	 case pipeLayers.pipePointLayer.subLayers.valveLayer.layerId:
+	            //return row.VALVEID;
+	            return row.阀门标识码;
+	      }
+	   }
+	   
+	   function drainageTypeFormat(value, row, index){
+	      switch(row.layerId){
+	         case pipeLayers.drainageLayer.subLayers.gateLayer.layerId:
+	            return "闸门";
+	      	case pipeLayers.drainageLayer.subLayers.weirLayer.layerId:
+	            return "溢流堰";
+	      	case pipeLayers.drainageLayer.subLayers.pumpLayer.layerId:
+	            return "排水泵站";
+	      }
+	   }
+	   
+	   function categoryFormat(value, row, index){
+		  switch(parseInt(value)){
+	             case 1:   	              
+	                return "雨水";
+	             case 2:   	              
+	                return "污水";
+	             case 3:   	              
+	                return "合流";
+	             case 4:   	              
+	                return "其它";
+	        }	  
+		    return "";
+	   }
+	   
+	   function drainageCodeFormat(value, row, index){
+	     switch(row.layerId){
+	        case pipeLayers.drainageLayer.subLayers.gateLayer.layerId:
+	            //return row.GATEID;
+	            return row.闸门标识码;
+	      	case pipeLayers.drainageLayer.subLayers.weirLayer.layerId:
+	            //return row.WEIRID;
+	            return row.溢流堰标识码;
+	      	case pipeLayers.drainageLayer.subLayers.pumpLayer.layerId:
+	            //return row.PUMPSTATIONID;
+	            return row.排水泵站标识码;
+	      }
+	   }
+	   
+	   function makeWait(){
+	      $("#panelContent").css("cursor","wait");
+	      $("#queryBtn").css("cursor","wait");
+	      $("#closeBtn").css("cursor","wait");
+	   }
+	 
+	   function makeDefault(){
+	      $("#panelContent").css("cursor","default");
+	      $("#queryBtn").css("cursor","default");
+	      $("#closeBtn").css("cursor","default");
+	   }
+	</script>
+  </body>
+</html>

@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/psxj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/psxj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<!-- <link href="/psxj/systemInfo/js/style.css" rel="stylesheet"/> -->
+	    <link href="/psxj/systemInfo/js/viewer/viewer.min.css" rel="stylesheet"/>
+	    <style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			/* .form-control {
+			    overflow-x: hidden;
+			    height: 25px;
+			} */
+			.form-group{
+				margin-bottom: 10px;
+			}
+			/* .form-group{
+			height: 25px;
+			}
+			.area{
+			height: 42px;
+			}
+			.img{
+			height: 100px;
+			} */
+			.col-sm-2{
+				text-align: center;
+				margin-left: 0px;
+				width: 120px;
+			}
+			.table th, .table td {  
+				text-align: center;  
+				vertical-align: middle!important;  
+			}
+			.yclssDiv{
+				border-style: dashed;
+				border-width: 2px;
+				border-color: #979798;
+				padding:10px 0px;
+			}
+			.lbsm{
+				font-weight: 100;
+			}
+			li {
+				width: 45%;
+				display : inline-block;
+				padding-top: 10px;
+				margin-left: 0;
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+		</style>
+  	</head>
+  	<body>
+  	<div class="col-sm-12">
+  		<div class="panel panel-default">
+			<ul id="myTab" class="nav nav-tabs nav-justified">
+	            <li class="active" id="jbqk_li"><a href="#jbqk_Tab" data-toggle="tab">基本情况</a></li>
+	            <li id="hylb_li"><a href="#hylb_Tab" data-toggle="tab">行业类别</a></li>
+	            <li id="jbqk2_li"><a href="#jbqk2_Tab" data-toggle="tab">接驳情况</a></li>
+	            <li id="yclss_li"><a href="#yclss_Tab" data-toggle="tab">预处理设施</a></li>
+			</ul>
+			<!--tab内容-->
+	        <div id="myTabContent" class="tab-content" style="margin-top:0px;overflow-x: hidden; overflow-y: auto; height: 100% width:auto;">
+	            <div  class="tab-pane fade in active" id="jbqk_Tab">
+	                <form id="jbqk" class="form-horizontal" >
+						<div class="modal-body">
+							<input type="hidden" id="id" name="id"/>
+							<input type="hidden" id="markPersonId" name="markPersonId"/>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">审核状态</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="state" name="state" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group img">
+								<label class="col-sm-2 control-label">图片列表</label>
+								<div class="col-sm-10" style="border: 1px solid #b5bcc7;border-radius:5px;left:15px;width:calc(83.3333% - 30px);">
+									<ul id="img-view" style="list-style: none;margin-left:-40px"></ul>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排水户名称</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="name" name="name" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">所属镇(街)</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="town" name="town" readonly="readonly"/>
+								</div>
+							</div>
+							<!-- <div class="form-group">
+								<label class="col-sm-2 control-label">排水单元编号</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="psdy" name="psdy" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排水单元名称</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="fqname" name="fqname" readonly="readonly"/>
+								</div>
+							</div> -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">门牌号</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="mph" name="mph" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">月用水量(吨)</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="volume" name="volume" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group area">
+								<label class="col-sm-2 control-label">详细地址</label>
+								<div class="col-sm-10">
+									<textarea rows="2" class="form-control" id="addr" name="addr"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">产权人姓名</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="owner" name="owner" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">产权人联系电话</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="ownerTele" name="ownerTele" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">经营人(法人)姓名</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="operator" name="operator" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">经营人(法人)联系电话</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="operatorTele" name="operatorTele" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">工商营业执照</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert1" id="cert1-0" value="0" disabled> 无
+									<input type="radio" name="hasCert1" id="cert1-1" value="1" disabled> 有
+								</div>
+							</div>
+							<div class="form-group yyzz" style="display:none">
+								<label class="col-sm-2 control-label">营业执照编码</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="cert1Code" name="cert1Code" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group img yyzz" style="display:none">
+								<label class="col-sm-2 control-label">营业执照图片</label>
+								<div class="col-sm-10" style="border: 1px solid #b5bcc7;border-radius:5px;left:15px;width:calc(83.3333% - 30px);">
+									<ul id="yyzz-img-view" style="list-style: none;margin-left:-40px"></ul>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">接驳意见核准书</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert2" id="cert2-0" value="0" disabled> 无
+									<input type="radio" name="hasCert2" id="cert2-1" value="1" disabled> 有
+								</div>
+							</div>
+							<div class="form-group img hzs" style="display:none">
+								<label class="col-sm-2 control-label">核准书图片</label>
+								<div class="col-sm-10" style="border: 1px solid #b5bcc7;border-radius:5px;left:15px;width:calc(83.3333% - 30px);">
+									<ul id="hzs-img-view" style="list-style: none;margin-left:-40px"></ul>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排水许可证</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert3" id="cert3-0" value="0" disabled> 无
+									<input type="radio" name="hasCert3" id="cert3-1" value="1" disabled> 有
+								</div>
+							</div>
+							<div class="form-group psxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证编码</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="cert3Code" name="cert3Code" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group img psxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证图片</label>
+								<div class="col-sm-10" style="border: 1px solid #b5bcc7;border-radius:5px;left:15px;width:calc(83.3333% - 30px);">
+									<ul id="psxkz-img-view" style="list-style: none;margin-left:-40px"></ul>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排污许可证</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert4" id="cert4-0" value="0" disabled> 无
+									<input type="radio" name="hasCert4" id="cert4-1" value="1" disabled> 有
+								</div>
+							</div>
+							<div class="form-group pwxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证编码</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="cert4Code" name="cert4Code" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group img pwxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证图片</label>
+								<div class="col-sm-10" style="border: 1px solid #b5bcc7;border-radius:5px;left:15px;width:calc(83.3333% - 30px);">
+									<ul id="pwxkz-img-view" style="list-style: none;margin-left:-40px"></ul>
+								</div>
+							</div>
+							<div class="form-group area" style="margin-top: 2px;">
+								<label class="col-sm-2 control-label">上报说明</label>
+								<div class="col-sm-10">
+									<textarea rows="2" id="description" name="description" class="form-control"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">上报人</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="markPerson" name="markPerson" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">上报单位</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="parentOrgName" name="parentOrgName" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">上报时间</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control"  data-date-format="yyyy-mm-dd hh:ii:ss"
+										id="markTime" name="markTime" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">最后编辑时间</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control"  data-date-format="yyyy-mm-dd hh:ii:ss"
+										id="updateTime" name="updateTime" />
+								</div>
+							</div>
+							<div style="display: none" id="shDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">审核人</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="checkPerson" name="checkPerson" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">审核时间</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" data-date-format="yyyy-mm-dd hh:ii"
+											id="checkTime" name="checkTime" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">审核备注</label>
+									<div class="col-sm-10">
+										<textarea rows="2" cols="2" id="checkDesription" name="checkDesription" class="form-control" disabled="disabled"></textarea>
+									</div>
+								</div>
+								<br>
+								<a onclick="checkRecord()" class='btn btn-primary '>查看历史审核意见</a>
+							</div>		
+						</div>
+					</form>
+	            </div>
+	            <div class="tab-pane" id="hylb_Tab">
+	                <form id="hylb" class="form-horizontal" >
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">污水类别</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="dischargerType1" name="dischargerType1" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">单位类型</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="dischargerType2" name="dischargerType2" readonly="readonly"/>
+								</div>
+							</div>
+						</div>
+					</form>
+	            </div>
+	            <div class="tab-pane" id="jbqk2_Tab">
+	            	<form id="jbqk2" class="form-horizontal" >
+						<div class="modal-body" id="jbqkForm">
+							
+						</div>
+					</form>
+	            </div>
+	            <div class="tab-pane" id="yclss_Tab">
+	            	<form id="yclss" class="form-horizontal" >
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">隔油池</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac1"  value="无" disabled> 无
+									<input type="radio" name="fac1"  value="有" disabled> 有
+								</div>
+							</div>
+							<div style="display: none" id="gyc" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac1Cont"  value="开启" disabled> 开启
+										<input type="radio" name="fac1Cont"  value="关闭" disabled> 关闭
+										<input type="radio" name="fac1Cont"  value="故障" disabled> 故障
+										<input type="radio" name="fac1Cont"  value="其他" disabled> 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="gycYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="fac1Cont"  readonly="readonly"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac1Main"  value="是" disabled> 是
+										<input type="radio" name="fac1Main"  value="否" disabled> 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac1Record"  value="有" disabled> 有
+										<input type="radio" name="fac1Record"  value="无" disabled> 无
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">格栅</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac2"  value="无" disabled> 无
+									<input type="radio" name="fac2"  value="有" disabled> 有
+								</div>
+							</div>
+							<div style="display: none" id="gs" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac2Cont"  value="开启" disabled> 开启
+										<input type="radio" name="fac2Cont"  value="关闭" disabled> 关闭
+										<input type="radio" name="fac2Cont"  value="故障" disabled> 故障
+										<input type="radio" name="fac2Cont"  value="其他" disabled> 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="gsYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="fac2Cont"  readonly="readonly"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac2Main"  value="是" disabled> 是
+										<input type="radio" name="fac2Main"  value="否" disabled> 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac2Record"  value="有" disabled> 有
+										<input type="radio" name="fac2Record"  value="无" disabled> 无
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">沉淀池</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac3"  value="无" disabled> 无
+									<input type="radio" name="fac3"  value="有" disabled> 有
+								</div>
+							</div>
+							<div style="display: none" id="cdc" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac3Cont"  value="开启" disabled> 开启
+										<input type="radio" name="fac3Cont"  value="关闭" disabled> 关闭
+										<input type="radio" name="fac3Cont"  value="故障" disabled> 故障
+										<input type="radio" name="fac3Cont"  value="其他" disabled> 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="cdcYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="fac3Cont"  readonly="readonly"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac3Main"  value="是" disabled> 是
+										<input type="radio" name="fac3Main"  value="否" disabled> 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac3Record"  value="有" disabled> 有
+										<input type="radio" name="fac3Record"  value="无" disabled> 无
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">其他预处理设施</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac4"  value="无" disabled> 无
+									<input type="radio" name="fac4"  value="有" disabled> 有
+								</div>
+							</div>
+							<div style="display: none" id="qtyclss" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">设施名称</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="ssmc" name="ssmc" readonly="readonly"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac4Cont"  value="开启" disabled> 开启
+										<input type="radio" name="fac4Cont"  value="关闭" disabled> 关闭
+										<input type="radio" name="fac4Cont"  value="故障" disabled> 故障
+										<input type="radio" name="fac4Cont"  value="其他" disabled> 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="qtyclssYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="fac4Cont"  readonly="readonly"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac4Main"  value="是" disabled> 是
+										<input type="radio" name="fac4Main"  value="否" disabled> 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账</label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac4Record"  value="有" disabled> 有
+										<input type="radio" name="fac4Record"  value="无" disabled> 无
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+	            </div>
+	        </div>
+		</div>
+	</div>
+	
+  	</body>
+	 <script src="/psxj/lib/jquery.min.js?v=1.0.0"></script>
+	 <script src="/psxj/systemInfo/js/viewer/viewer.min.js"></script>
+	  <script src="/psxj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	  <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+	  <!-- <script src="/psxj/lib/plugins/layui/layui.js"></script> -->
+	  <script src="/psxj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<!-- <script src="js/echarts.js"></script> -->
+	<script src="js/pshInput.js"></script>
+</html>

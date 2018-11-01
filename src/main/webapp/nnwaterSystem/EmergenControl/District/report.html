@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title></title>
+    <link href="/awater/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="/awater/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>
+    
+    <script src="/awater/lib/jquery.min.js"></script >
+    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.js"></script>
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">  
+
+    <script type='text/javascript'>
+        $(window).load(function(){
+            $("#tableDiv").mCustomScrollbar();
+        });
+    </script>
+</head>
+
+<body>
+       <div class="content" style="width:100%;height:90%;padding:15px 20px 0px 20px;">
+           <form id="form" class="form-horizontal">
+		    	<div class="form-group" >
+		    		<label class="col-sm-2 control-label">问题描述</label>
+                   	<div class="col-sm-8">
+                   		<textarea id="textQ" name="textQ" class="form-control" rows="3" style="max-width: 100%;"></textarea>         
+                    </div>
+				</div>
+				<div class="form-group" >
+		    		<label class="col-sm-2 control-label">上报问题</label>
+                   	<div class="col-sm-8">
+                   		<div id="tableDiv" style="width:100%;height:200px;overflow:auto;border-top:1px solid #23C6C8;">
+		                    <table id="DataTables"></table>
+						</div>
+                    </div>
+				</div>
+				<div class="form-group" >
+		    		<label class="col-sm-2 control-label">问题接收方</label>
+                   	<div class="col-sm-8">
+                   		<select class="form-control">
+	                        <option>选项 1</option>
+	                        <option>选项 2</option>
+	                        <option>选项 3</option>
+	                        <option>选项 4</option>
+	                    </select>
+                    </div>
+				</div>
+                <div class="form-group" >
+		    		<label class="col-sm-2 control-label">调度指令</label>
+                   	<div class="col-sm-8">
+                   		<select class="form-control">
+	                        <option>选项 1</option>
+	                        <option>选项 2</option>
+	                        <option>选项 3</option>
+	                        <option>选项 4</option>
+	                    </select> 
+                    </div>
+				</div>
+				<div class="form-group" >
+		    		<label class="col-sm-2 control-label">备注</label>
+                   	<div class="col-sm-8">
+                   		<input type="text" name="" class="form-control" placeholder="请输入文本">
+                    </div>
+				</div>                           
+          	</form>
+		</div>
+		<div style="height: 10%;">
+			<div  align="center">
+        		<button class="btn btn-primary" type="submit">上报问题</button>&nbsp;&nbsp;
+				<button class="btn btn-primary" type="submit">请求增援</button>&nbsp;&nbsp;
+				<button class="btn btn-primary" type="submit">撤销布防</button>&nbsp;&nbsp;
+				<button class="btn btn-white" type="submit">取消</button>
+			</div> 
+       </div>
+       <script type="text/javascript">
+			
+        $("#DataTables").bootstrapTable({
+			toggle:"table",
+			url:"/awater/data/emegenProblem.json",
+			clickToSelect:true,
+			rowStyle:"rowStyle",
+				pagination:false,
+				search:false,
+				columns: [
+					{field:'id',visible: false,title: 'id'},
+					{field:'name',title: '事件名称',align:'center'},
+					{field:'date',title: '上报时间',align:'center'},
+					{field:'user',title: '上报人',align:'center'},
+					{field:'status',title: '状态',align:'center'}
+				]
+		});
+       </script>
+</body>
+
+</html>

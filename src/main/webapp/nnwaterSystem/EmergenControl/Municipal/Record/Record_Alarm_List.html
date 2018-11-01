@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+    	<meta charset="utf-8">
+	    <title>市级应急预案管理</title>
+	    <link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	    <link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	    <link href="/awater/css/animate.min.css" rel="stylesheet">
+	    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+        <link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>	
+        
+	    <script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+	    <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+		<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	    <!--<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>-->
+	    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	    <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script >
+		<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>	
+  </head>
+	  
+	<body>
+		<div class="animated fadeInRight">
+			<table id="tableMuni"></table>
+			<div style="text-align: right;padding-top:15px;border-top:1px solid #e7eaec">
+				<div class="col-md-5 col-md-offset-5">
+					<button class="btn btn-primary" type="button" onclick="selectYA()">确定</button>
+					<button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+				</div>
+			</div>
+        </div>
+        
+        <script type="text/javascript">
+
+			var DictList=null;
+			
+			function format_grade(value, row, index){
+				if(DictList){
+					 for (var item in DictList["templateGrade"]){
+						if(value==DictList["templateGrade"][item].itemCode){
+						    gradeList[value]=DictList["templateGrade"][item].itemName
+							return DictList["templateGrade"][item].itemName;
+					   }		
+					}
+					return '';
+				} else {
+					$.ajax({
+						method : 'GET',
+						url : location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-template-city!getAllDict.action',
+						async : false,
+						dataType : 'json',
+						success : function(data) {
+							DictList=data;	
+						},
+						error : function() {
+							alert('error');
+						}
+					});
+					for (var item in DictList["templateGrade"]){
+						if(value==DictList["templateGrade"][item].itemCode){
+							gradeList[value]=DictList["templateGrade"][item].itemName						
+							return DictList["templateGrade"][item].itemName;
+					    }		
+					}
+					return '';
+				}
+			}
+			var gradeList=[];
+			function format_type(value, row, index){
+				if(DictList){
+					 for (var item in DictList["templateType"]){
+						if(value==DictList["templateType"][item].itemCode)
+							return DictList["templateType"][item].itemName;
+					}
+					return '';
+				} else {
+					$.ajax({
+						method : 'GET',
+						url : location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-template-city!getAllDict.action',
+						async : false,
+						dataType : 'json',
+						success : function(data) {
+							DictList=data;	
+						},
+						error : function() {
+							alert('error');
+						}
+					});
+					for (var item in DictList["templateType"]){
+						if(value==DictList["templateType"][item].itemCode)
+							return DictList["templateType"][item].itemName;
+					}
+					return '';
+				}
+			}
+	        $(function(){                  
+				$("#tableMuni").bootstrapTable({
+					toggle:"table",
+					height:300,
+					url:location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/ya-record-city!listJsonRainReport.action",
+					rowStyle:"rowStyle",
+					toolbar: '#toolbar',
+					cache: false, 
+					striped: true,
+					checkboxHeader:false,
+					singleSelect:true,
+					clickToSelect:true,
+					sidePagination: "server",
+					columns: [
+						{visible:true,checkbox:true},
+						{field:'templateNo',visible: true,title: '预案编号',width:"15%"},
+						{field:'templateName',visible: true,title: '预案名称',align:'center'},
+						{field:'templateGrade',visible: true,title: '预案级别',align:'center',formatter:format_grade},
+						{field:'templateType',visible: true,title: '预案类型',align:'center',formatter:format_type},
+						{field:'templateContent',visible: true,title: '预案内容',halign:'center'},
+						{field:'recordCreatePerson',visible: true,title: '编制人',align:'center'}
+					]
+				});
+			});
+			$(window).load(function(){
+				$("#tableMuni").on('post-body.bs.table', function (row,obj) {
+					$(".fixed-table-body").mCustomScrollbar({mouseWheelPixels:600});
+				});
+	    	});
+	    	function selectYA(){
+				var selectObj=$('#tableMuni').bootstrapTable('getSelections');
+				if(selectObj.length==0){
+					parent.layer.msg('请先选中预案模板');
+				} else {
+					$.ajax({
+						type: 'post',
+						url : location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-rain-report!saveCityJson.action',
+						data:{"cityYaId":selectObj[0].id},
+						dataType : 'json',  
+						success : function(data) {
+							parent.layer.msg(data.result);
+							showWindow(data.form.id);
+							setTimeout("parent.layer.closeAll()", 2000);
+						},
+						error : function() {
+							parent.layer.msg("操作失败");
+						}
+					});
+				}
+				
+	    	}
+	    	function showWindow(id){
+				var url="/awater/nnwaterSystem/EmergenControl/Municipal/RainNews/list.html?id="+id;
+				parent.parent.createNewtab(url,"防汛应急响应一雨一报"); 	
+			}
+   		   function cancel(){
+		      parent.layer.close(parent.layer.getFrameIndex(window.name));
+		   }
+		</script>
+	</body>
+</html>

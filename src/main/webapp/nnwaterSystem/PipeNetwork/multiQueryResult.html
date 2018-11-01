@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="favicon.ico"> 
+	<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/awater/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/awater//css/animate.min.css" rel="stylesheet">
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+    <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/awater/lib/content.min.js?v=1.0.0"></script>
+    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>  
+    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script> 
+
+    <style>
+      table th{font-size:15px;font-weight:400}
+     .control-label{font-weight:400}
+     .col-sm-6 .form-control,.col-sm-8 .form-control{font-size:11px;font-weight:400;padding: 0px 6px;height:28px}
+     .pagination-info,.page-list,.pull-right .pagination{font-size:13px;font-weight:400;padding-left:5px}    
+     .btn_query{height:25px;width:100%}
+    </style>    
+</head>
+
+<body style="background: rgba(194,233,255,0.8);height:300px;">
+   <div class="animated fadeInRight">
+           <h3 align="center">查绚结果</h3>
+		   <ul id="myTab" class="nav nav-tabs nav-justified">
+			  <li class="active" style="width:70px"><a href="#pipeline" data-toggle="tab">管线</a></li>
+			  <li style="width:70px"><a href="#conduit" data-toggle="tab">沟渠</a></li>
+			  <li style="width:70px"><a href="#pipePoint" data-toggle="tab">管点</a></li>
+			  <li style="width:110px"><a href="#drainage" data-toggle="tab">排水设施</a></li>
+		   </ul>
+		   <div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="pipeline">
+				   <label class="control-label col-sm-1" id="pipelineNum" style="width:180px;padding-top:10px;text-align:left;"></label>
+		           <table id="pipelineTable"></table>   
+				</div>
+				<div class="tab-pane fade" id="conduit">
+				   <label class="control-label col-sm-1" id="conduitNum" style="width:180px;padding-top:10px;text-align:left;"></label>
+		           <table id="conduitTable"></table>
+				</div>
+				<div class="tab-pane fade" id="pipePoint">
+				   <label class="control-label col-sm-1" id="pipePointNum" style="width:180px;padding-top:10px;text-align:left;"></label>
+		           <table id="pipePointTable"></table>
+				</div>
+				<div class="tab-pane fade" id="drainage">
+				   <label class="control-label col-sm-1" id="drainageNum" style="width:180px;padding-top:10px;text-align:left;"></label>
+		           <table id="drainageTable"></table>
+				</div>
+		  </div>	
+    </div>
+    <script src="/awater/js/common.js"></script>
+	<script type="text/javascript">
+	function changeTable(heightValue){
+		$('#pipelineTable').bootstrapTable('resetView',{
+			height: heightValue-40
+		});
+		$('#conduitTable').bootstrapTable('resetView',{
+			height: heightValue-40
+		});
+		$('#pipePointTable').bootstrapTable('resetView',{
+			height: heightValue-40
+		});
+		$('#drainageTable').bootstrapTable('resetView',{
+			height: heightValue-40
+		});
+	}
+	
+    $(function(){      
+    	$("#pipelineTable").on('post-body.bs.table', function (row,obj){
+			$(".fixed-table-body").mCustomScrollbar({
+				mouseWheelPixels:300
+			});			
+		});
+		
+		$("#conduitTable").on('post-body.bs.table', function (row,obj){
+			$(".fixed-table-body").mCustomScrollbar({
+				mouseWheelPixels:300
+			});				
+		});
+		$("#pipePointTable").on('post-body.bs.table', function (row,obj){
+			$(".fixed-table-body").mCustomScrollbar({
+				mouseWheelPixels:300
+			});				
+		});
+		$("#drainageTable").on('post-body.bs.table', function (row,obj){
+			$(".fixed-table-body").mCustomScrollbar({
+				mouseWheelPixels:300
+			});				
+		});
+    });
+    </script>
+</body>
+</html>

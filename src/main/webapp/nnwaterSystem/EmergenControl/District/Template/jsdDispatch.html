@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>积水点调度配置</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+    
+    <link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet">    
+	<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+	<link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+	<link href="/awater/css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet">
+	<link href="/awater/lib/zTree/css/zTreeStyle/metro.css" type="text/css" rel="stylesheet" >
+	<link href="/awater/css/plugins/bootstrapvalidator/bootstrapValidator.css" rel="stylesheet">
+	<link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>
+	   
+	<script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<script src="/awater/lib/plugins/bootstrap-select/bootstrap-select.js"></script>
+	<script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script>
+	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel-3.0.6.min.js"></script>
+	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>  
+	<script src="/awater/lib/plugins/bootstrapvalidator/bootstrapValidator.js"></script> 
+	<script src="/awater/lib/plugins/bootstrapvalidator/language/zh_CN.js"></script> 	
+    <style>
+		.nav > li > a{display:block;padding:5px;outline:none;}
+		.dimIframe{width:100%;min-height:420px;frameborder:no; border:0;marginwidth:0; marginheight:0; allowtransparency:"yes"}
+		.bootstrap-table .table, .bootstrap-table .table > tbody > tr > td, .bootstrap-table .table > tbody > tr > th, .bootstrap-table .table > tfoot > tr > td, .bootstrap-table .table > tfoot > tr > th, .bootstrap-table .table > thead > tr > td{padding :2px !important}
+	    input.form-control{height:28px}
+	</style>	
+	<script type="text/javascript">
+	    $(window).resize(function () {
+			$('#table_good').bootstrapTable('resetView');
+			$('#table_team').bootstrapTable('resetView');
+		});
+		
+	    (function($){
+	        $(window).load(function(){
+    			$("#table_team").on('post-body.bs.table', function (row,obj) {
+					$(".fixed-table-body").mCustomScrollbar();
+					   $('#form').bootstrapValidator();							
+				});
+											         								
+				$("#table_good").on('post-body.bs.table', function (row,obj) {
+					$(".fixed-table-body").mCustomScrollbar();
+				});				
+    		});
+    	})(jQuery);
+	</script>
+  </head>
+  
+  <body style="overflow:scroll;height:100%;overflow:hidden;">
+    <form id="form" class="form-horizontal">    
+		<div style="height:calc( 100% - 45px );width:100%">
+			<ul id="myTab" class="nav nav-tabs nav-justified">
+				  <li class="active"><a href="#comb" data-toggle="tab" style="height:10%">人员调度</a></li>
+				  <li><a href="#video" data-toggle="tab">物资调度</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content" style="height:90%">
+				<div class="tab-pane fade in active" id="comb">
+					 <div class="form-group" style="margin:0px">
+				     	<table id="table_team"></table>
+				     </div>				     
+				</div>
+				<div class="tab-pane fade" id="video">
+					 <div class="form-group" style="margin:0px">
+					     <table id="table_good"></table>
+					 </div>
+				</div>
+			</div>	
+	    </div>
+	</form>    	  
+    <div style="width:100%;height:45px;padding-top:5px;border-top:1px solid #e7eaec;bottom:2px;position:absolute">
+		<div class="col-sm-4 col-sm-offset-10">
+			<button class="btn btn-primary" type="button" onclick="save()" id="save" style="margin-left:20px">保存</button>
+			<button class="btn btn-primary" type="button" onclick="closeWindow()" id="close" style="display:none;margin-left:20px">关闭</button>
+		</div>
+	</div>
+	<script type="text/javascript">
+  		function getQueryStr(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = decodeURI(window.location.search).substr(1).match(reg);
+			if (r != null) 
+				return unescape(r[2]);
+			return "";
+		}
+		
+   		var jsdId=getQueryStr("combId");
+   	    var modelId=getQueryStr("modelId");
+   	    var type=getQueryStr("type");
+   	    var view=getQueryStr("view");    	    
+     	    
+   	    function operateFormatterNum(value, row, index) {     
+		   return value+row.unit;
+        };
+        
+     	function operateFormatter(value, row, index){     
+	        if(value==undefined)
+			   return "";
+			else
+			   return value;
+	   };
+	   
+	   function operateFormatterNum(value, row, index) {     
+			   return value+row.unit;
+	   };
+	   
+	   function getInputNumGood(value, row, index){
+			if(value)
+				return "<input type='text' name='gnumbervalue"+row["id"]+"' class='form-control' max='"+row["amount"]+"' 'min='0' onblur='resetValue(this)' value="+value+" style='text-align:center;width:80px;margin-left:30px'>";
+			else
+				return "<input type='text' name='gnumbervalue"+row["id"]+"' class='form-control'  max='"+row["amount"]+"' min='0' value='0' style='text-align:center;width:80px;margin-left:30px'></input>";
+		}
+		
+		function getInputNumTeam(value, row, index){
+			if(value)
+				return "<input type='text' name='tnumbervalue"+row["id"]+"' class='form-control'  max='"+row["amount"]+"' min='0' onblur='resetValue(this)' value="+value+" style='text-align:center;width:80px;margin-left:30px'>";
+			else
+				return "<input type='text' name='tnumbervalue"+row["id"]+"' class='form-control'  max='"+row["amount"]+"' min='0' value='0'  style='text-align:center;width:80px;margin-left:30px'></input>";
+		}	    
+	     
+	     function resetValue(o){
+	        if($(".help-block:visible")[0]){
+	           $("#save").prop("disabled",true);
+	        }  else {
+	           $("#save").prop("disabled",false);	          
+	        }  
+	     }
+	     
+	    function peopleFormat(value, row, index){
+		    return value+"人";		
+		} 	
+ 		$(function(){
+	        if(view!=""){
+	         	 $("#save").hide();	        
+	             $("#close").show();		           
+	        }			        	
+			$.ajax({
+			method : 'GET',
+			url : '/agsupport/ya-good-dispatch!inputJsdJson.action?jsdId='+jsdId+"&modelId="+modelId+"&type="+type,
+			async : true,
+			dataType : 'json',
+			success : function(data) {			
+				//var goodTableRows=JSON.parse(data.Goodmap["goodTable"]).rows;
+				$("#table_good").bootstrapTable({
+					toggle:"table",
+					data:data.Goodmap["goodTable"],
+					rowStyle:"rowStyle",
+					height:320,
+					cache: false, 
+					checkboxHeader:false,
+					singleSelect:false,
+					clickToSelect:true,
+					sidePagination: "server",
+					columns: [
+						{field:'id',visible: false,title: '编号'},
+						{field:'name',visible: true,title: '物资名称',align:'center'},
+						{field:'code',visible: true,title: '物资代码',align:'center'},
+						{field:'model',visible: true,title: '型号',align:'center'},
+						{field:'dispAmount',visible: true,title: '调度数量',formatter:getInputNumGood,align:'center'},
+						{field:'amount',visible: true,title: '剩余数量',align:'center',formatter:'operateFormatterNum'}]
+				});
+				
+				$.each(data.Goodmap["goodTable"],function(index,item){
+					 if(item["goodChecked"]==1)
+					   $("#table_good").bootstrapTable("check",index);
+				});
+				
+				$("#table_team").bootstrapTable({
+					toggle:"table",
+					data:data.Teammap["teamTable"],
+					rowStyle:"rowStyle",
+					height:320,  
+					cache: false, 
+					checkboxHeader:false,
+					singleSelect:false,
+					clickToSelect:true,
+					sidePagination: "server",
+					columns: [
+						{field:'id',visible: false,title: '编号'},
+						{field:'name',visible: true,title: '名称',align:'center'},
+						{field:'contact',visible: true,title: '联系人',align:'center'},
+						{field:'phone',visible: true,title: '电话',align:'center'},
+						{field:'dispAmount',visible: true,title: '调度数量',formatter:getInputNumTeam,align:'center'},
+						{field:'amount',visible: true,title: '剩余人数',formatter:peopleFormat,align:'center'}
+					]
+				});
+				
+				$.each(data.Teammap["teamTable"],function(index,item){
+					 if(item["teamChecked"]==1)
+					   $("#table_team").bootstrapTable("check",index);
+				});	   
+			},
+			error : function(error) {
+				alert('error');
+			}
+		});
+	});
+	  
+	function save(){
+		var goods=$("#table_good").bootstrapTable("getData");
+		var goodIds=[];
+		var gDispAmounts=[];
+		for(index in goods) {
+			var amount=$("input[name='gnumbervalue"+goods[index]["id"]+"']").val();
+			if(amount>0){
+				goodIds.push(goods[index]["id"]);
+				gDispAmounts.push(amount);
+			}
+		}
+		var goodIdsStr=goodIds.join(",");
+		var gDispAmountsStr=gDispAmounts.join(",");
+		
+		var teams=$("#table_team").bootstrapTable("getData");
+		var teamIds=[];
+		var tDispAmounts=[];
+		for(index in teams) {
+			var amount=$("input[name='tnumbervalue"+teams[index]["id"]+"']").val();
+			if(amount>0){
+				teamIds.push(teams[index]["id"]);
+				tDispAmounts.push(amount);
+			}					
+		}
+		
+		if(teams[0]){
+		   var teamData=teams[0].contact+","+$("input[name='tnumbervalue"+teams[index]["id"]+"']").val();
+		   /*if(yaType==1){
+		  		 parent.refreshJsdTeam(teamData);		
+		   }*/
+		}
+		
+		var teamIdsStr=teamIds.join(",");
+		var tDispAmountsStr=tDispAmounts.join(",");
+
+		var dataparam="jsdId="+jsdId+"&modelId="+modelId+"&goodIdsStr="+goodIdsStr+"&teamIdsStr="+teamIdsStr+"&gDispAmountsStr="+gDispAmountsStr+"&tDispAmountsStr="+tDispAmountsStr+"&type="+type;
+		
+		$.ajax({
+			type: 'post',
+			url :'/agsupport/ya-good-dispatch!saveJsdDispatch.action',
+			data: dataparam,
+			dataType : 'json',  
+			success : function(data) {
+				SetRecordDispatchIds(data);
+			    parent.layer.msg(data.result);
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+			},
+			error : function(e) {
+				parent.layer.msg('error');
+			}
+		});
+	}
+	   	//设置启动预案的积水点调度ids-启动预案后将该调度的model改为当前预案id
+	    function SetRecordDispatchIds(data){
+	    	var goodDispatchIds = parent.$("#goodDispatchIds").val();
+	    	if(goodDispatchIds)
+	    		parent.$("#goodDispatchIds").val(goodDispatchIds+","+data.goodDispatchIds);
+	    	else
+	    		parent.$("#goodDispatchIds").val(data.goodDispatchIds);
+	    	
+	    	var teamDispatchIds = parent.$("#teamDispatchIds").val();
+	    	if(teamDispatchIds)
+	    		parent.$("#teamDispatchIds").val(teamDispatchIds+","+data.teamDispatchIds);
+	    	else
+	    		parent.$("#teamDispatchIds").val(data.teamDispatchIds);
+	    }
+		function closeWindow() {
+			parent.layer.close(parent.layer.getFrameIndex(window.name));
+		}
+	</script>
+  </body>
+</html>

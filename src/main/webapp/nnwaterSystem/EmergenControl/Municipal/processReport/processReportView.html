@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title></title>
+    <link href="/awater/font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet" ></link>    
+    <link href="/awater/css/style.min.css" type="text/css" rel="stylesheet" ></link>    
+    <link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet">   
+    <link href="/awater/css/animate.min.css" rel="stylesheet">
+    <link href="/awater/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="/awater/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    
+  	<script src="/awater/lib/jquery.min.js?v=1.0.0"></script> 
+  	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script> 
+  	<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script> 
+  	<script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>   			 			
+    <script src="/awater/lib/hplus.min.js?v=2.2.0"></script>
+    <script src="/awater/lib/plugins/pace/pace.min.js"></script>
+    <script src="/awater/lib/plugins/summernote/summernote.min.js"></script>
+  	<script src="/awater/lib/plugins/summernote/summernote-zh-CN.js"></script>
+    <script src="/awater/lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.js"></script>
+   	<script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>
+    <script src="/awater/js/util_date.js" type="text/javascript"></script>	    
+    <script type='text/javascript'>
+        $(window).load(function(){
+            $("#tableDiv").mCustomScrollbar();
+        });
+    </script>
+    <style>
+		.p_content{
+			text-indent:2em;
+			font-size: 21px;
+			font-family: '宋体';
+			text-justify:inter-ideograph;
+			Line-height:37px";
+		}
+	</style>
+</head>
+
+<body style="padding:0.5cm 1.2cm 0.5cm 1.5cm;">
+  	   <p id="reportName" class="text-center"  style="font-family: '宋体';font-size: 29px;"></p>
+  	   <div id="reportContent" class="p_content" style="padding-bottom:20px"></div>
+	   <table id="table"></table>
+       <script>
+			//数据填充	    
+			function getQueryStr(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = decodeURI(window.location.search).substr(1).match(reg);
+				if (r != null) return unescape(r[2]); return "";
+			}
+			
+			var id=getQueryStr("id");			
+		    var yaId=getQueryStr("yaId");
+		    
+		    function format_status(value, row, index){
+				if(value==0)
+					return "上报";
+				return "核查";
+		    }
+		    
+		    function format_view(value, row, index){
+				return "<a href=\"#\" onclick=\"showProblem("+row.id+")\">"+value+"</a>";
+		    }    
+		    
+		    function format_date(value, row, index){
+				if(value)
+					return getLocalTime(value.time);
+				return '';
+		    }
+		    
+		    function addBtnCol(value, row, index){
+			    return "<button id=\"btn_edit\" type=\"button\" class=\"btn btn-primary\" style=\"border:1px solid transparent;\" onclick=\"showJsdReport("+row.id+")\"><span class=\"glyphicon\" aria-hidden=\"true\"></span>详细</button>";
+			}
+			
+			function queryParams(params) {
+		       	return {
+			        pageSize:params.limit,
+			        pageNo: params.offset/params.limit+1
+		        };
+			}
+			
+			function showJsdReport(id){
+				layer.open({
+				  type: 2,
+				  title: '查看积水点报告',
+				  shadeClose: true,
+				  shade: 0.5,
+				  area: ['900px', '550px'],
+				  content: 'jsdReportInput.html?id='+id+'&view='+1
+				}); 	
+			}	   
+		      
+   			$(function(){
+	            if(id!=null){
+	               $.ajax({
+						method:'GET',
+						url:location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-process-report!inputJson.action',
+						data:{"id":id},
+						dataType : 'json',  
+						async:false,
+						success:function(data){
+						    $('#reportName').html(data.form.reportName)
+							$('#reportContent').html(data.form.reportContent);
+							timeline = getLocalTime(data.form.reportCreateTime.time);
+						},
+						error:function (e){
+							layer.msg("error");
+						}
+					});     	            	           
+				
+				   	$("#table").bootstrapTable({
+						toggle:"table",
+						height:parent.$("#content-main").height()-270,														
+						url:location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/ya-jsd-report!listJson.action?yaId="+yaId,
+						rowStyle:"rowStyle",
+						toolbar: '#toolbar',
+						pagination:true,
+						sortable: false,
+						striped: true,
+						pageNumber:1,
+						pageSize: 10,
+						pageList: [10, 25, 50, 100],
+						cache: false,
+						queryParams: queryParams,
+						sidePagination: "server",
+						columns: [
+							{visible:true,checkbox:true},
+							{field:'jsdName',visible: true,title: '积水点名称',align:"center"},
+							{field:'jsReason',visible: true,title: '积水原因',align:"center"},
+							{field:'dutyUnit',visible: true,title: '责任单位',align:"center"},
+							{field:'dutyPerson',visible: true,title: '责任人',align:"center"},
+							{field:'reportCreater',visible: true,title: '创建人',align:"center"},
+							{field:'reportCreateTime',visible: true,title: '创建时间',formatter:format_date,align:"center"},
+							{visible: true,title: '操作',formatter:addBtnCol,width:100,align:"center"}
+						]
+					});
+				}
+            });
+            
+            function showProblem(id){			
+				layer.open({
+						type: 2,
+						title: '应急问题详细',
+						maxmin: true, 
+						area: ['900px', '600px'],
+					    content: '/awater/nnwaterSystem/EmergenControl/ProblemReport/ProblemReport_Input.html?id='+id
+				});
+			 }
+       </script>
+</body>
+</html>

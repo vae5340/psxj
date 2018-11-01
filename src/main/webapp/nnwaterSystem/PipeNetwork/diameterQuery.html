@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>	
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<style>
+      .control-label{font-size:15px;font-weight:500}
+      .borderCss{border:1px solid #ccc;border-radius:4px;height:30px;font-size:14px}
+   </style>
+  </head>
+  
+  <body>
+    <div id="panelContent" style="padding:20px 0px 0px 15px"> 
+      	<label class="control-label">管网图层</label>&nbsp;&nbsp;&nbsp;
+		<select class="borderCss" style="width:215px" id="pipeLayerName">
+			<option></option>
+			<option value=1>雨水管线</option>
+			<option value=2>污水管线</option>
+			<option value=3>雨污合流管线</option>
+			<option value=4>雨水渠道</option>
+			<option value=5>污水渠道</option>
+			<option value=6>雨污合流渠道</option>
+		</select>
+		<br>
+		<br>
+		<label class="control-label">查询条件</label>&nbsp;&nbsp;&nbsp;
+		<label class="control-label">管径</label>
+		<select class="borderCss" style="width:80px;" id="operator">
+		</select>
+		<input type="text" class="borderCss" style="width:70px"  id="attributeValue">
+		<label class="control-label" id="conduitLabel" style="display:none">×</label>
+	    <input type="text" class="borderCss" style="width:70px;display:none" id="attributeValue2">	
+        <div align="right" style="padding:20px 20px 0px 0px">
+	         <button type="button" class="btn btn-primary" id="queryBtn" onclick="pipeSizeQuery()">查询</button>&nbsp;&nbsp;&nbsp;	            
+	         <button type="button" class="btn btn-default" id="closeBtn" onclick="closeJsPanel()">关闭</button>
+        </div>
+    </div>
+	<script>     
+       $(function(){
+		  for(var i=0;i<pipeAttributes.pipeAttr.name.length;i++){
+		      $("#attributeName").append("<option value="+pipeAttributes.pipeAttr.name[i]+">"+pipeAttributes.pipeAttr.alias[i]+"</option>");	    
+		  }        			  
+	      $("#operator").append("<option value='='>等于</option>");
+	      $("#operator").append("<option value='>'>大于</option>");	       
+	      $("#operator").append("<option value='<'>小于</option>");
+      
+          $("#pipeLayerName").on("change",function(){
+             if($("#pipeLayerName").val()=="1"||$("#pipeLayerName").val()=="2"||$("#pipeLayerName").val()=="3"){
+                 $("#conduitLabel").hide();
+                 $("#attributeValue2").hide();
+             }else{
+                 $("#conduitLabel").show();
+                 $("#attributeValue2").show();
+             }          
+          });
+       })
+       
+       var pipeMapService=arcgisBaseUrl+"/arcgis/rest/services/nnpsfacility/MapServer"; 
+	   
+	   function pipeSizeQuery2(){
+	            var url,sql;
+	            switch($("#pipeLayerName").val()){
+		             case "1":   	     
+		                 url =pipeMapService+"/"+pipeLayers.pipeLayer.layerId;  
+		                 sql="Pipe_Category = 1";
+		                 if($("#attributeValue").val())
+		                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+		                 break;
+		             case "2":   	              
+		                 url =pipeMapService+"/"+pipeLayers.pipeLayer.layerId;  
+		                 sql="Pipe_Category = 2";
+		                 if($("#attributeValue").val())
+		                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+		                 break;
+		             case "3":   	              
+		                 url =pipeMapService+"/"+pipeLayers.pipeLayer.layerId;  
+		                 sql="Pipe_Category = 3";
+		                 if($("#attributeValue").val())
+		                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val(); 
+		                 break;
+		             case "4":   	              
+		                 url =pipeMapService+"/"+pipeLayers.conduitLayer.layerId;  
+		                 sql="Conduit_Category = 1";
+		                 if($("#attributeValue").val())
+		                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val(); 
+		                 if($("#attributeValue2").val())
+		                    sql+=" and Shape_Data2"+$("#operator").val()+$("#attributeValue2").val();  
+		                 break;
+		             case "5":   	              
+		                 url =pipeMapService+"/"+pipeLayers.conduitLayer.layerId;  
+		                 sql="Conduit_Category = 2";
+		                 if($("#attributeValue").val())
+		                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val(); 
+		                 if($("#attributeValue2").val())
+		                    sql+=" and Shape_Data2"+$("#operator").val()+$("#attributeValue2").val();    
+		                 break;
+		             case "6":   	              
+		                 url =pipeMapService+"/"+pipeLayers.conduitLayer.layerId;  
+		                 sql="Conduit_Category = 3";
+		                 if($("#attributeValue").val())
+		                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val(); 
+		                 if($("#attributeValue2").val())
+		                    sql+=" and Shape_Data2"+$("#operator").val()+$("#attributeValue2").val();
+		                 break;
+		        }	
+		        var queryTask = new esri.tasks.QueryTask(url);
+			    var query = new esri.tasks.Query(); 		
+			    query.where = sql;	
+				query.outFields = ["*"];
+				query.returnGeometry = true;
+				queryTask.execute(query,function(results){
+				    var tableData=[];
+			        $.each(results.features, function(i) { 
+			           var attrs=this.attributes;
+			           if(this.geometry){
+				           attrs["geometry"]=this.geometry;         
+				           tableData.push(attrs);
+			           }    
+			        });
+				    showResultWindow(tableData);
+				},function(e){
+				   alert("error")}
+				);
+	   }
+   
+       function pipeSizeQuery(){
+          if(!$("#attributeValue").val())
+          {
+             layer.msg("请输入管径数值",{icon:7});
+             return;
+          } 
+           var sql;
+           switch($("#pipeLayerName").val()){
+	             case "1":   	     
+	                 sql="select rownum as RN,OBJECTID,PIPEID,PIPE_CATEGORY,PIPE_LEN from sde.ps_pipe where Pipe_Category = 1";
+	                  if($("#attributeValue").val())
+	                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+	                 break;
+	             case "2":   	              
+	                 sql="select rownum as RN,OBJECTID,PIPEID,PIPE_CATEGORY,PIPE_LEN from sde.ps_pipe where Pipe_Category = 2";
+	                  if($("#attributeValue").val())
+	                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+	                 break;
+	             case "3":   	              
+	                  sql="select rownum as RN,OBJECTID,PIPEID,PIPE_CATEGORY,PIPE_LEN from sde.ps_pipe where Pipe_Category = 3";
+	                  if($("#attributeValue").val())
+	                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+	                 break;
+	             case "4":   	              
+	                 sql="select rownum as RN,OBJECTID,PIPEID,PIPE_CATEGORY,PIPE_LEN from sde.ps_conduit where Conduit_Category = 1";
+	                 if($("#attributeValue").val())
+	                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+	                 if($("#attributeValue2").val())
+	                    sql+=" and Shape_Data2"+$("#operator").val()+$("#attributeValue2").val();  
+	                 break;
+	             case "5":   	              
+	                sql="select rownum as RN,OBJECTID,PIPEID,PIPE_CATEGORY,PIPE_LEN from sde.ps_conduit where Conduit_Category = 2";
+	                 if($("#attributeValue").val())
+	                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+	                 if($("#attributeValue2").val())
+	                    sql+=" and Shape_Data2"+$("#operator").val()+$("#attributeValue2").val();  
+	                 break;
+	             case "6":   	              
+	                sql="select rownum as RN,OBJECTID,PIPEID,PIPE_CATEGORY,PIPE_LEN from sde.ps_conduit where Conduit_Category = 3";
+	                 if($("#attributeValue").val())
+	                    sql+=" and Shape_Data1"+$("#operator").val()+$("#attributeValue").val();
+	                 if($("#attributeValue2").val())
+	                    sql+=" and Shape_Data2"+$("#operator").val()+$("#attributeValue2").val();  
+	                 break;
+		    }	
+            makeWait();
+		    setTimeout(function(){
+				showResultWindow(location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/rest/pscomb/GetAttrQueryData?sql="+encodeURIComponent(sql));   
+            },500);  
+		}	
+		
+	   function showResultWindow(url){
+	        document.getElementById("leftMenuTable").src="/awater/nnwaterSystem/PipeNetwork/queryResult.html";		
+	        var fm1=parent.window.frames["leftMenuTable"]; 
+	        var fmState=function(){ 
+		          var state=null;   
+		          if(document.readyState){     	              
+		                 state=fm1.document.readyState;   
+			               if(state=="complete"||!state){
+			               		 if($("#pipeLayerName").val()==1||$("#pipeLayerName").val()==2||$("#pipeLayerName").val()==3){
+							         document.getElementById("leftMenuTable").contentWindow.$("#table").bootstrapTable({
+										toggle:"table",
+										height:400,
+										url: url,
+										ajaxOptions:{async:false},
+										rowStyle:"rowStyle",
+										cache: false, 
+										pagination:true,
+										striped: true,
+										pageNumber:1,
+									    pageSize: 10,
+										pageList: [10, 25, 50, 100],
+										queryParams: queryParams,
+										sidePagination: "server",
+										columns: [
+										    {field:'PIPEID',visible: true,title: '排水管标识码',align:'center'},
+											{field:'PIPE_CATEGORY',visible: true,title: '管道类别',formatter:categoryFormat,align:'center'},
+											{field:'PIPE_LEN',visible: true,title: '管道长度',formatter:lengthFormat,align:'center'}]
+							         });		
+					              }else{
+						             document.getElementById("leftMenuTable").contentWindow.$("#table").bootstrapTable({
+										toggle:"table",
+										height:400,
+										url: url,
+										ajaxOptions:{async:false},
+										rowStyle:"rowStyle",
+										cache: false, 
+										pagination:true,
+										striped: true,
+										pageNumber:1,
+									    pageSize: 10,
+										pageList: [10, 25, 50, 100],
+										queryParams: queryParams,
+										sidePagination: "server",
+										columns: [
+										    {field:'CONDUITID',visible: true,title: '排水渠标识码',align:'center'},
+											{field:'CONDUIT_CATEGORY',visible: true,title: '渠道类别',formatter:categoryFormat,align:'center'},
+											{field:'CONDUIT_LEN',visible: true,title: '渠道长度',formatter:lengthFormat,align:'center'}]
+								   });		
+						        }
+							   document.getElementById("leftMenuTable").contentWindow.$table.on('click-row.bs.table', function (row,obj) {
+							       findGeometry(obj.OBJECTID);
+						       });
+						       if(fmState.timeoutInt){ 
+							          window.clearTimeout(fmState.timeoutInt);
+							          return;	
+							   }
+		                 }   
+		                 window.setTimeout(fmState,10); 
+		          } 
+	        }; 
+	        fmState.timeoutInt = window.setTimeout(fmState,400); 
+	   }
+	   
+	   function queryParams(params) {
+	        return {
+		        limit:params.limit,
+		        offset:params.offset
+	        };
+	    }
+	    
+	   function typeFormat(value, row, index){
+	        return $("#pipeLayerName").find("option:selected").text();
+	   }
+	   
+	   function findGeometry(objId){
+	        var layerId;
+            if($("#pipeLayerName").val()==1||$("#pipeLayerName").val()==2||$("#pipeLayerName").val()==3)
+	            layerId=pipeLayers.pipeLayer.layerId;
+            else
+                layerId=pipeLayers.conduitLayer.layerId;
+
+	        var queryTask = new esri.tasks.QueryTask(pipeMapService+"/"+ layerId);
+		    var query = new esri.tasks.Query();
+		    query.where = "OBJECTID="+objId;	
+			query.outFields = ["*"];
+			query.returnGeometry = true;
+			queryTask.execute(query,function(result){
+			        centerAtGeometry(result.features[0].geometry);
+					},function(e){
+			   alert("error")}
+			);
+	   }
+	   
+	   function categoryFormat(value, row, index){
+		  switch(parseInt(value)){
+	             case 1:   	              
+	                return "雨水";
+	             case 2:   	              
+	                return "污水";
+	             case 3:   	              
+	                return "合流";
+	             case 4:   	              
+	                return "其它";
+	        }	  
+		    return "";
+	   } 
+	   
+	   function lengthFormat(value, row, index){  
+	      return parseFloat(value).toFixed(2)+"米&nbsp;";
+       } 
+       
+       function makeWait(){
+	      $("#panelContent").css("cursor","wait");
+	      $("#queryBtn").css("cursor","wait");
+	      $("#closeBtn").css("cursor","wait");
+	   }
+	 
+	   function makeDefault(){
+	      $("#panelContent").css("cursor","default");
+	      $("#queryBtn").css("cursor","default");
+	      $("#closeBtn").css("cursor","default");
+	   }
+	</script>
+  </body>
+</html>

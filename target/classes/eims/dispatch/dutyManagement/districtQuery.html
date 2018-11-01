@@ -1,0 +1,32 @@
+<div id="districtQuery">
+	<div style="width:100%;text-align:center;font-size:35px;background-color:#FFFFFF;line-height:75px;margin-top:30px;">
+		<font face="宋体" style="letter-spacing:8px;">成员单位查询</font>
+	</div>
+	<div class="col-sm-12 mainwrapper" style="padding-top:0px">
+		<div class="panel panel-default">
+			<div class="panel-body" style="padding:10px 15px">
+				<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:7px;text-align:left;">成员单位</label>
+				<div class="col-sm-2">
+					<select class="form-control" id="districtQuery_district">
+						<option value="">全部</option>
+					</select>
+				</div>
+				<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:7px;text-align:left;">开始时间</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="districtQuery_startTime"/>
+				</div>
+				<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:7px;text-align:left;">结束时间</label>
+				<div class="col-sm-2" style="padding-right:0px">
+					<input type="text" class="form-control" id="districtQuery_endTime"/>
+				</div>
+				<div class="col-sm-3" style="text-align:left;">
+					<a style="font-weight:bold" id="districtQueryGetToday">当天</a><!-- onclick="getToday()" -->
+					<button type="button" style="margin-left:30px" id="districtQueryBtn" class="btn btn-primary" >查询</button><!-- onclick="queryDuty()" -->
+					<button type="button" style="margin-left:15px" id="districtQueryExportBtn" class="btn btn-primary">导出</button> <!-- onclick="exportTable()" -->
+				</div>
+			</div>
+		</div>
+		<table id="districtQuery_table">
+		</table>
+	</div>
+</div>

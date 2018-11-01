@@ -1,0 +1,99 @@
+.swmm-global-setting-panel {
+  position: absolute;
+  top: 150px;
+  right: 0;
+  background: #FFFFFF;
+  z-index: 40;
+  padding: 1em;
+  box-shadow: 0 0 10px #555555;
+  border-radius: 10px; }
+  .swmm-global-setting-panel.swmm-global-setting-panel-hidden {
+    display: none; }
+  .swmm-global-setting-panel .title {
+    text-align: center;
+    border-bottom: solid thin #CCCCCC;
+    background: #FFFFFF; }
+  .swmm-global-setting-panel .content {
+    border-bottom: solid thin #CCCCCC; }
+    .swmm-global-setting-panel .content .info-title {
+      color: #000000;
+      font-weight: bold; }
+    .swmm-global-setting-panel .content .project-info-list.empty {
+      width: 100%;
+      text-align: center; }
+  .swmm-global-setting-panel .control-btns {
+    text-align: center;
+    padding-top: 10px; }
+
+.swmm-project-chooser {
+  position: absolute;
+  width: 55%;
+  height: 40%;
+  min-height: 200px;
+  min-width: 600px;
+  left: 22.5%;
+  top: 15%;
+  background: #FFFFFF;
+  z-index: 41;
+  box-shadow: 0 0 10px #666666;
+  border-radius: 8px;
+  overflow: hidden; }
+  .swmm-project-chooser .swmm-project-chooser-title {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    text-align: center;
+    font-size: 1.2em;
+    border-bottom: solid thin #CCCCCC;
+    background: #FFFFFF; }
+  .swmm-project-chooser .swmm-project-chooser-table-wrapper {
+    height: 100%;
+    padding-top: 22px;
+    padding-bottom: 34px;
+    overflow: scroll; }
+    .swmm-project-chooser .swmm-project-chooser-table-wrapper[data-role=scheme] {
+      width: 20%;
+      float: left; }
+    .swmm-project-chooser .swmm-project-chooser-table-wrapper[data-role=project] {
+      width: 80%; }
+    .swmm-project-chooser .swmm-project-chooser-table-wrapper table {
+      width: 100%; }
+      .swmm-project-chooser .swmm-project-chooser-table-wrapper table thead tr {
+        background: #F2F2F2; }
+        .swmm-project-chooser .swmm-project-chooser-table-wrapper table thead tr th {
+          padding: 5px 5px 5px 5px;
+          white-space: nowrap;
+          text-align: center; }
+      .swmm-project-chooser .swmm-project-chooser-table-wrapper table tbody {
+        /*
+        tr:nth-child(even){
+            background: #EFEFEF;
+        }
+        */ }
+        .swmm-project-chooser .swmm-project-chooser-table-wrapper table tbody tr {
+          background: #FFFFFF;
+          border-bottom: solid thin #CCCCCC; }
+          .swmm-project-chooser .swmm-project-chooser-table-wrapper table tbody tr td {
+            padding: 5px 5px 5px 5px;
+            text-align: center;
+            text-align: center; }
+        .swmm-project-chooser .swmm-project-chooser-table-wrapper table tbody tr.selected {
+          background: #EEEEEE; }
+        .swmm-project-chooser .swmm-project-chooser-table-wrapper table tbody tr:hover {
+          background: #EBEBEB;
+          color: #0000FF;
+          cursor: pointer; }
+  .swmm-project-chooser .swmm-project-chooser-control-btns {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    padding: 5px;
+    text-align: center;
+    border-top: solid thin #CCCCCC;
+    background: #FFFFFF; }
+    .swmm-project-chooser .swmm-project-chooser-control-btns button {
+      height: 24px;
+      margin-left: 5px;
+      margin-right: 5px; }
+
+/*# sourceMappingURL=swmm-global-setting-panel.css.map */

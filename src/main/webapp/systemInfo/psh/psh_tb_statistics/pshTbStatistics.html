@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/awater_swj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/awater_swj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/awater_swj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	   <style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+			.layui-layer-btn{
+				background: #eee;
+			}
+		</style>
+  	</head>
+  	<body>
+  		<input type="hidden" id="parentOrgName"/>
+  		<input type="hidden" id="teamOrgName"/>
+  		<div class="panel panel-default">
+			 <ul id="myTab" class="nav nav-tabs nav-justified">
+	           <li class="active" id="one_li"><a href="#" data-toggle="tab" onclick="loadEcharts('1');">排水户数据量统计</a></li> 
+	           <li id="two_li"><a href="#" data-toggle="tab" onclick="loadEcharts('2');">App安装统计</a></li> 
+	           <li id="three_li"><a href="#" data-toggle="tab"  onclick="loadEcharts('3');">人员落实统计</a></li>
+	        </ul>
+			<!--tab内容-->
+			<div id="myTabContent" class="tab-content" style="margin-top:0px;overflow-x: hidden; overflow-y: auto; height: 100% width:auto;">
+	            <div  class="tab-pane fade in active" id="one_Tab">
+	                <div style="margin-top: 10px;">
+	                   <!-- 图表开始1 -->
+						<div id="oneChartContainer" style="height:400px;width:100%;"></div>
+						<div  class="tab-pane" id="one_Tab1">
+			                <div style="margin-top: 10px;">
+			                 	<div id="oneChartContainer1" style="height:400px;width:100%;"></div>
+			                </div>
+			            </div>
+			            <div  class="tab-pane" id="one_Tab2" style="display:none">
+			                <div style="margin-top: 10px;">
+			                 		<table id="oneTable"></table>
+							 </div>
+			            </div>
+					<!-- 图表结束1 -->
+	               </div>
+	            </div>
+	             <div class="tab-pane" id="two_Tab">
+	                <div style="margin-top: 10px;">
+	                    <!-- 图表开始2 -->
+						<div id="twoChartContainer" style="height:400px;width:100%;"></div>
+						<div  class="tab-pane" id="two_Tab1">
+			                <div style="margin-top: 10px;">
+			                 	<div id="twoChartContainer1" style="height:400px;width:100%;"></div>
+			                </div>
+			            </div>
+			            <div  class="tab-pane" id="two_Tab2" style="display:none">
+			                <div style="margin-top: 10px;">
+			                 	<table id="twoTable"></table>
+							</div>
+			            </div>
+						<!-- 图表结束 2-->
+	                </div>
+	            </div>
+	            <div class="tab-pane" id="three_Tab">
+	                <div style="margin-top: 10px;">
+	                    <!-- 图表开始3 -->
+						<div id="threeChartContainer" style="height:400px;width:100%;"></div>
+						<div  class="tab-pane" id="three_Tab1">
+			                <div style="margin-top: 10px;">
+			                 	<div id="threeChartContainer1" style="height:400px;width:100%;"></div>
+			                </div>
+			            </div>
+			            <div  class="tab-pane" id="three_Tab2" style="display:none">
+			                <div style="margin-top: 10px;">
+			                 	<table id="threeTable"></table>
+							</div>
+			            </div>
+						<!-- 图表结束 3-->
+	                </div>
+	            </div>
+	        </div>
+		</div>
+	</body>
+	 <script src="/awater_swj/lib/jquery.min.js?v=1.0.0"></script> 
+	  <script src="/awater_swj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+	  <script src="/awater_swj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	 <script src="/awater_swj/js/util_date.js" type="text/javascript"></script>
+	<script src="/awater_swj/systemInfo/ssxjxt/lib/echarts/echarts.js"></script>
+	<script src="js/echart_options.js"></script>
+	<script src="js/pshTbStatistics.js"></script>
+</html>

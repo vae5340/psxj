@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>水质</title>
+  
+	<link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../../css/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	
+</head>
+
+<body class="gray-bg">
+    <div class="animated fadeInRight">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+            	<div class="panel panel-default">
+					<!--<div class="panel-heading">查询条件</div>
+					-->
+					<div class="panel-body">
+						<input type="hidden" value="real" id="txt_search_tableType"/>
+						<form id="formSearch" class="form-horizontal">
+							<div class="form-group" style="margin-top:15px">
+								<label class="control-label col-sm-1" for="txt_search_departmentname">编码</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" id="txt_search_station_name">
+								</div>
+								<label class="control-label col-sm-1" for="txt_search_statu">起始日期</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control form_date" data-date-format="yyyy-mm-dd hh:ii" id="txt_search_startDate" >
+								</div>
+								<label class="control-label col-sm-1" for="txt_search_statu">结束日期</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control form_date" data-date-format="yyyy-mm-dd hh:ii" id="txt_search_endDate" >
+								</div>
+								<div class="col-sm-3" style="text-align:left;">
+									<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div> 
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        
+						<div class="example-wrap">
+                            <div class="example">
+                                <!--
+								<div class="btn-group hidden-xs" id="itemDimTableEventsToolbar" role="group">
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toAdd()">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>新增
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toUpdate('')" >
+                                        <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>编辑
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" onclick="isDelete()"> 
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>删除
+                                    </button>
+									<button type="button" class="btn btn-outline btn-default">
+                                        <i class="glyphicon glyphicon-wrench" aria-hidden="true"></i>设置
+                                    </button>
+                                </div>
+								-->
+                                <table id="itemDimTableEvents">
+									
+                                </table>
+                            </div>
+                        </div>
+						
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Basic -->
+    </div>
+	
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="itemDimModal" tabindex="-1" role="dialog" 
+	   aria-labelledby="itemDimModalLabel" aria-hidden="true">
+		   <div class="modal-dialog" style="width:900px;">
+			  <div class="modal-content">
+				 <div class="modal-header">
+					<button type="button" class="close" 
+					   data-dismiss="modal" aria-hidden="true">
+						  &times;
+					</button>
+					<h4 class="modal-title" id="itemDimModalLabel">
+					   新增
+					</h4>
+				 </div>
+				 <div class="modal-body">
+					<form method="post" id="itemDimForm" class="form-horizontal">
+						<input type="hidden" id="id" />
+						<div class="form-group">
+							<label class="col-sm-2 control-label">指标编码</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="itemId" name="itemId">
+							</div>
+							<label class="col-sm-2 control-label">指标名称</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="itemName" name="itemName">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">工程编码</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="sttnId" name="sttnId">
+							</div>
+							<label class="col-sm-2 control-label">监测类型</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="itemType" name="itemType">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">属性标识</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="itemTag" name="itemTag">
+							</div>
+							<label class="col-sm-2 control-label">计量单位</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="unit" name="unit">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">显示排序</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="sort" name="sort">
+							</div>
+							<label class="col-sm-2 control-label">传输频率</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="rate" name="rate">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">上限</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="upperLimit" name="upperLimit">
+							</div>
+							<label class="col-sm-2 control-label">下限</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="lowerLimit" name="lowerLimit">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">波动限制</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="surgeLimit" name="surgeLimit">
+							</div>
+							<label class="col-sm-2 control-label">工程ID</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="codeId" name="codeId">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">父项</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="parentItem" name="parentItem">
+							</div>
+							<label class="col-sm-2 control-label">警告值1</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="warnLimit" name="warnLimit">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">警告值2</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="warnLimit2" name="warnLimit2">
+							</div>
+							<label class="col-sm-2 control-label">警告值3</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="warnLimit3" name="warnLimit3">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">警告值4</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="warnLimit4" name="warnLimit4">
+							</div>
+							<label class="col-sm-2 control-label">警告值5</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="warnLimit5" name="warnLimit5">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">警告值6</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="warnLimit6" name="warnLimit6">
+							</div>
+							<label class="col-sm-2 control-label">是否显示</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="isShow" name="isShow">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">基础值1</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="baseValue1" name="baseValue1">
+							</div>
+							<label class="col-sm-2 control-label">基础值2</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="baseValue2" name="baseValue2">
+							</div>
+						</div>
+						<div class="hr-line-dashed"></div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">默认显示</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="defaultShow" name="defaultShow">
+							</div>
+							
+						</div>
+						
+					</form>
+				 </div>
+				 
+				 <div class="modal-footer">
+					<button type="button" onclick="toSave()" id="submitBtn" class="btn btn-primary">
+					   提交
+					</button>
+					<button type="button" class="btn btn-default" onclick="clearnItemDimForm()" data-dismiss="modal">关闭
+					</button>
+				 </div>
+			  </div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="delcfmModel">  
+	  <div class="modal-dialog">  
+		<div class="modal-content message_align">  
+		  <div class="modal-header">  
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+			<h4 class="modal-title">提示信息</h4>  
+		  </div>  
+		  <div class="modal-body">  
+			<p>您确认要删除吗？</p>  
+		  </div>  
+		  <div class="modal-footer">  
+			 <input type="hidden" id="url"/>  
+			 <a  onclick="doDelete()" class="btn btn-success" data-dismiss="modal">确定</a>  
+			 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+		  </div>  
+		</div><!-- /.modal-content -->  
+	  </div><!-- /.modal-dialog -->  
+	</div>
+	
+	<script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script src="../../lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="../../lib/plugins/toastr/toastr.min.js"></script>
+	<script src="js/water.js"></script> 
+</body>
+</html>

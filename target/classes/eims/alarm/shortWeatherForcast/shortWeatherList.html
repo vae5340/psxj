@@ -1,0 +1,82 @@
+<div class="container-fluid" style="padding-top: 10px;">
+	<div class="row-fluid">
+	
+		<div style="width:100%;margin-top: -5px; ">
+			<ul id="Tab" class="nav nav-tabs">
+				<li class="active"><a href="#jgxx" data-toggle="tab">三小时天气</a></li>
+				<li><a href="#ryxx" data-toggle="tab">六小时天气</a></li>
+				<li><a href="#gyxx" data-toggle="tab">二十四小时天气</a></li>
+			</ul>
+		<div id="myTabContent" class="tab-content"> 
+		<div class="tab-pane fade in active" id="jgxx"> 
+			<div class="panel panel-default" style="margin:0px 0px 0px 0px">
+				<div class="panel-body">
+					<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">预报时间</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id=sendTimeThree>
+					</div>
+					<div class="col-sm-1" style="text-align: center;height: 34px;line-height: 34px;padding: 0px;width: 30px;">
+						<span>至</span>
+					</div>					
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id=endTimeThree>
+					</div>
+					<div class="col-sm-1" style="text-align:left;">
+						<button id="searchThreeBtn" type="button" class="btn btn-primary">查询</button>
+					</div> 
+				</div> 
+			</div>
+			<div style="margin:10px">
+				<table id="tableThree"></table>
+			</div> 					
+		</div>
+		
+		<div class="tab-pane fade" id="ryxx"> 
+			<div class="panel panel-default" style="margin:0px 0px 0px 0px">
+				<div class="panel-body">
+					<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">预报时间</label>
+						<div class="col-sm-2">
+						<input type="text" class="form-control" id=sendTimeSix>
+						</div>
+						<div class="col-sm-1" style="text-align: center;height: 34px;line-height: 34px;padding: 0px;width: 30px;">
+							<span>至</span>
+						</div>
+						<div class="col-sm-2">
+						<input type="text" class="form-control" id="endTimeSix">
+						</div>
+						<div class="col-sm-1" style="text-align:left;">
+						<button id="searchSixBtn" type="button" class="btn btn-primary">查询</button>
+						</div> 
+				</div> 
+			</div>
+			<div style="margin:10px">
+				<table id="tableSix"></table>
+			</div> 				
+		</div>
+		<div class="tab-pane fade" id="gyxx"> 
+			<div class="panel panel-default" style="margin:0px 0px 0px 0px">
+				<div class="panel-body">
+					<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">预报时间</label>
+						<div class="col-sm-2">
+						<input type="text" class="form-control" id=sendTimeSeven>
+						</div>
+						<div class="col-sm-1" style="text-align: center;height: 34px;line-height: 34px;padding: 0px;width: 30px;">
+							<span>至</span>
+						</div>
+						<div class="col-sm-2">
+						<input type="text" class="form-control" id="endTimeSeven">
+						</div>
+						<div class="col-sm-1" style="text-align:left;">
+						<button id="searchSevenBtn" type="button" class="btn btn-primary">查询</button>
+						</div> 
+				</div> 
+			</div>
+			<div style="margin:10px">
+				<table id="tableSeven"></table>
+			</div> 				
+		</div>
+		</div>
+	</div>
+</div>
+	  
+

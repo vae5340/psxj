@@ -1,0 +1,59 @@
+/**
+ * CSS Reset
+ * From Blueprint reset.css
+ * http://blueprintcss.googlecode.com
+ */
+
+html, body, div, span, object, iframe, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, fieldset, form, label, legend, caption, tbody, tfoot, thead {margin:0;padding:0;border:0;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:center;}
+table {font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;border-collapse:separate;border-spacing:0;}
+caption, th, td {font-weight:normal;}
+blockquote:before, blockquote:after, q:before, q:after {content:"";}
+blockquote, q {quotes:"" "";}
+a img {border:none;}
+
+/**
+ * Basic Typography
+ */
+body {
+    font-family: "Lucida Grande", Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+    font-size: 80%;
+    color: #222;
+    background: #fff;
+}
+
+a[href] {
+    color: #436976;
+    background-color: transparent;
+}
+
+/**
+*20110513添加
+*/
+.areaSearch a { text-decoration:none;color:#C79364;}
+
+.subLink{
+	line-height : 1.6em;
+	color : #2200c1;
+	text-align : left;
+}
+.subLinks{
+	line-height : 1.6em;
+	color : #2200c1;
+	text-align : left;
+}
+
+.subLink a { color:#0E687D;text-decoration:none;}
+.subLink a:hover { color:#FF0000;}
+.subLinks a { color:#E7F3F9;text-decoration:none;}
+
+
+/**
+ * Map Examples Specific
+ */
+.smallmap {
+    width: 100%;
+    height: 95%;
+}
+#tags {
+    display: none;
+}

@@ -1,0 +1,640 @@
+/**ztree扩展样式**/
+.ztree li span.button.unit_ico_open, .ztree li span.button.unit_ico_close{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/unit.png) no-repeat scroll 0 0 transparent;
+}
+.ztree li span.button.unit_ico_docu{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/unit.png) 0 0 no-repeat;
+}
+
+
+.ztree li span.button.department_ico_open, .ztree li span.button.department_ico_close{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/department.png) 0 0 no-repeat;
+}
+.ztree li span.button.department_ico_docu{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/department.png) 0 0 no-repeat;
+}
+
+.ztree li span.button.group_ico_open, .ztree li span.button.group_ico_close{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/group.png) 0 0 no-repeat;
+}
+.ztree li span.button.group_ico_docu{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/group.png) 0 0 no-repeat;
+}
+
+.ztree li span.button.pos_ico_open, .ztree li span.button.pos_ico_close{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/pos.png) 0 0 no-repeat;
+}
+.ztree li span.button.pos_ico_docu{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/pos.png) 0 0 no-repeat;
+}
+
+
+.ztree li span.button.user_ico_open, .ztree li span.button.user_ico_close{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/user.png) 0 0 no-repeat;
+}
+.ztree li span.button.user_ico_docu{
+	margin-left:5px;
+	margin-right:5px;
+	vertical-align:middle;
+	background:url(../icons/16/user.png) 0 0 no-repeat;
+}
+
+.ztree li span.button.user_female_ico_open, .ztree li span.button.user_female_ico_close{
+    margin-left:5px;
+    margin-right:5px;
+    vertical-align:middle;
+    background:url(../icons/16/user_female.png) 0 0 no-repeat;
+}
+.ztree li span.button.user_female_ico_docu{
+    margin-left:5px;
+    margin-right:5px;
+    vertical-align:middle;
+    background:url(../icons/16/user_female.png) 0 0 no-repeat;
+}
+
+/**刷新按钮**/
+#centerPanel  .dc-refresh {
+	float: right;
+	width: 27px;
+	height: 35px;
+	display: inline-block;
+	background: url(../icons/16/dc-refresh.png) no-repeat 50%;
+	margin: 0 18px 0 0;
+}
+
+#centerPanel  .dc-refresh:hover {
+	background: url(../icons/16/dc-refresh-hove.png.png) no-repeat 50%
+}
+
+/**列表、微缩图**/
+#centerPanel .grid {
+	float: right;
+	height: 27px;
+	width: 35px;
+	background: url(../icons/16/uploadImg.png) -73px 0 no-repeat;
+	margin:6px 18px 0 0
+}
+
+
+#centerPanel .list {
+	float: right;
+	height: 27px;
+	width: 37px;
+	background: url(../icons/16/uploadImg.png) -36px -37px no-repeat;
+	margin: 6px 0 0
+}
+
+#centerPanel .grid:hover {
+	background-position: -73px -74px
+}
+
+#centerPanel .list:hover {
+	background-position: -36px -74px
+}
+
+#centerPanel .list-selected, #centerPanel .list-selected:hover {
+	background-position: -36px 0
+}
+
+#centerPanel .grid-selected,#centerPanel  .grid-selected:hover {
+	background-position: -73px -37px
+}
+
+/**搜索框**/
+.dc-file-search {
+	margin: 5px 15px 0 5px;
+	position: relative;
+}
+
+.dc-file-search .dc-file-search-entry {
+	width: 199px;
+	padding-right: 35px;
+	position: absolute;
+	top: 0;
+}
+
+.dc-file-search input[type=text] {
+	color: #5e5e5e;
+	font-family: Microsoft yahei;
+	width: 200px;
+	height: 26px;
+	border: 1px solid #d2d2d2;
+	border-radius: 2px;
+	text-indent: 6px;
+	padding-left: 25px;
+}
+
+.dc-file-search .dc-file-search-icon {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background: url(../icons/16/upload_serch.png) no-repeat 50%;
+	background-size: 17px 17px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: pointer
+}
+
+.dc-file-search .dc-file-search-cancel-icon{
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	background: url(../icons/16/search_cancel.png) no-repeat 50%;
+	background-size: 17px 17px;
+	position: absolute;
+	top: 0;
+	right: 30px;
+	cursor: pointer;
+	display: none;
+}
+
+/**导航栏**/
+#navigation {
+	margin: 7px;
+	font-size: 14px;
+}
+#navigation a {
+	font-size: 14px;
+	color: #06c;
+}
+
+/**左树异步ztree搜索**/
+
+#left_search_org_title,#left_search_user_title{
+	height: 30px;
+	line-height: 30px;
+	padding: 0 0 0 15px;
+	background: #f3f3f3;
+	font-size: 15px;
+}
+
+#left_search_org_list ,#left_search_user_list {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+#left_search_org_list li{
+	border-bottom: 1px #ddd solid;
+	padding: 4px 0px 4px 28px;
+}
+
+#left_search_org_list li.org_list_unit{
+	background: url(../icons/16/unit.png) no-repeat 20px center;
+}
+#left_search_org_list li.org_list_department{
+	background: url(../icons/16/department.png) no-repeat 20px center;
+}
+#left_search_org_list li.org_list_group{
+	background: url(../icons/16/group.png) no-repeat 20px center;
+}
+
+#left_search_user_list li{
+	border-bottom: 1px #ddd solid;
+	padding: 4px 0px 4px 28px;
+}
+
+#left_search_user_list li.user_list_man{
+	background: url(../icons/16/user.png) no-repeat 20px center;
+}
+#left_search_user_list li.user_list_woman{
+	background: url(../icons/16/user_female.png) no-repeat 20px center;
+}
+
+#left_search_org_list a, #left_search_user_list a{
+	margin-left: 17px;
+	font-size: 14px;
+	color: #000000;
+}
+
+/**搜索ztree树选中人员所属 组织岗位**/
+
+#select_search_org_title,#select_search_pos_title{
+	height: 30px;
+	line-height: 30px;
+	padding: 0 0 0 15px;
+	background: #f3f3f3;
+	font-size: 15px;
+}
+
+#select_search_org_list ,#select_search_pos_list {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+#select_search_org_list li{
+	border-bottom: 1px #ddd solid;
+	padding: 4px 0px 4px 28px;
+}
+#select_search_org_list li.org_list_unit{
+	background: url(../icons/16/unit.png) no-repeat 20px center;
+}
+#select_search_org_list li.org_list_department{
+	background: url(../icons/16/department.png) no-repeat 20px center;
+}
+#select_search_org_list li.org_list_group{
+	background: url(../icons/16/group.png) no-repeat 20px center;
+}
+
+#select_search_pos_list li{
+	border-bottom: 1px #ddd solid;
+	padding: 4px 0px 4px 28px;
+	background: url(../icons/16/pos.png) no-repeat 20px center;
+}
+
+#select_search_org_list a, #select_search_pos_list a{
+	margin-left: 17px;
+	font-size: 14px;
+	color: #000000;
+}
+
+/**搜索ztree树 选中组织负责人**/
+
+#select_search_orgLeader_user_title,#select_search_orgLeader_pos_title{
+	height: 30px;
+	line-height: 30px;
+	padding: 0 0 0 15px;
+	background: #f3f3f3;
+	font-size: 15px;
+}
+
+#select_search_orgLeader_user_list ,#select_search_orgLeader_pos_list {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+#select_search_orgLeader_user_list li{
+	border-bottom: 1px #ddd solid;
+	padding: 4px 0px 4px 28px;
+}
+#select_search_orgLeader_user_list li.user_list_man{
+	background: url(../icons/16/user.png) no-repeat 20px center;
+}
+#select_search_orgLeader_user_list li.user_list_woman{
+	background: url(../icons/16/user_female.png) no-repeat 20px center;
+}
+
+#select_search_orgLeader_pos_list li{
+	border-bottom: 1px #ddd solid;
+	padding: 4px 0px 4px 28px;
+	background: url(../icons/16/pos.png) no-repeat 20px center;
+}
+
+#select_search_orgLeader_user_list a, #select_search_orgLeader_pos_list a{
+	margin-left: 17px;
+	font-size: 14px;
+	color: #000000;
+}
+
+/**搜索ztree树 选中组织管理员**/
+
+#select_search_orgAdmin_user_title{
+	height: 30px;
+	line-height: 30px;
+	padding: 0 0 0 15px;
+	background: #f3f3f3;
+	font-size: 15px;
+}
+
+#select_search_orgAdmin_user_list {
+	list-style:none;
+	padding:0px;
+	margin:0px;
+}
+
+#select_search_orgAdmin_user_list li{
+	border-bottom: 1px #ddd solid;
+	padding: 4px 0px 4px 28px;
+}
+#select_search_orgAdmin_user_list li.user_list_man{
+	background: url(../icons/16/user.png) no-repeat 20px center;
+}
+#select_search_orgAdmin_user_list li.user_list_woman{
+	background: url(../icons/16/user_female.png) no-repeat 20px center;
+}
+#select_search_orgAdmin_user_list a{
+	margin-left: 17px;
+	font-size: 14px;
+	color: #000000;
+}
+
+/**头像图片剪切样式开始**/
+
+.avatar-view {
+	display: block;
+	margin: 15% auto 5%;
+	height: 220px;
+	width: 220px;
+	border: 3px solid #fff;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0,0,0,.15);
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.avatar-view img {
+	width: 100%;
+}
+
+.avatar-body {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+.avatar-upload {
+	overflow: hidden;
+}
+
+.avatar-upload label {
+	display: block;
+	float: left;
+	clear: left;
+	width: 65px;
+}
+
+.avatar-upload input {
+	display: block;
+	margin-left: 50px;
+}
+
+.avatar-alert {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.avatar-wrapper {
+	height: 364px;
+	width: 100%;
+	margin-top: 15px;
+	box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+	background-color: #fcfcfc;
+	overflow: hidden;
+}
+
+.avatar-wrapper img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+}
+
+.avatar-preview {
+	float: left;
+	margin-top: 15px;
+	margin-right: 15px;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	background-color: #fff;
+	overflow: hidden;
+}
+
+.avatar-preview:hover {
+	border-color: #ccf;
+	box-shadow: 0 0 5px rgba(0,0,0,.15);
+}
+
+.avatar-preview img {
+	width: 100%;
+}
+
+.preview-lg {
+	height: 184px;
+	width: 184px;
+	margin-top: 15px;
+}
+
+.preview-md {
+	height: 100px;
+	width: 100px;
+}
+
+.preview-sm {
+	height: 50px;
+	width: 50px;
+}
+
+@media (min-width: 992px) {
+	.avatar-preview {
+		float: none;
+	}
+}
+
+.avatar-btns {
+	margin-top: 30px;
+	margin-bottom: 15px;
+}
+
+.avatar-btns .btn-group {
+	margin-right: 5px;
+}
+
+.loading {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: #fff url("../icons/16/loading.gif") no-repeat center center;
+	opacity: .75;
+	filter: alpha(opacity=75);
+	z-index: 20140628;
+}
+/**头像图片剪切样式结束**/
+
+/**组织岗位用户右侧滑板样式开始**/
+
+/*面板定位的父级元素*/
+#opus-page-quick-sidebar-parent{
+	position: relative;
+}
+/**右侧面板**/
+.opus-page-quick-sidebar {
+	transition: right .3s;
+	z-index: 100;  /** 拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面 **/
+	position: absolute; /** 相对于浏览器窗口进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定 **/
+	top: 2px;
+	bottom: 2px;
+	width: 32%;
+	right: -32%;
+	overflow: hidden;
+	border: 1px solid #dedede;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	box-shadow:none;
+	background: #fff;
+	height: auto;
+}
+/*右侧面板显示出来样式*/
+.opus-page-quick-sidebar-open  {
+	box-shadow: -4px 0px 11px 0px rgba(0, 0, 0, 0.14);
+	transition: right 0.3s;
+	right: 0;
+
+}
+/**组织岗位用户右侧滑板样式结束**/
+
+/**用户右侧滑板头像样式开始**/
+/**头像样式开始**/
+#user-avatar-view{
+	height: 90px;
+	background-color: #505666;
+	margin-bottom: 8px;
+	position: relative;
+}
+#user-avatar-view img{
+	width: 65px;
+	height: 65px;
+	margin: 5px 0 0 26px;
+}
+#user-avatar-view::after {
+	content: "";
+	position: absolute;
+	top: 64px;
+	left: 45px;
+	border-width: 13px;
+	border-style: solid;
+	border-color: transparent transparent #fff;
+}
+/**用户右侧滑板头像样式结束**/
+
+/**用户右侧滑板 卡片头部用户名字样式开始**/
+#user-name-title-text{
+	display: inline-block;
+	height: 65px;
+	line-height: 65px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bolder;
+	letter-spacing: 3px;
+	font-family: "Open Sans",sans-serif;
+	vertical-align: middle;
+	margin-left: 15px;
+}
+/**用户右侧滑板 卡片头部用户名字样式结束**/
+
+.c_list_item {
+	width: 100%;
+	list-style: none;
+	padding: 5px 5px;
+	font-size: 14px;
+	color: #363636;
+	position: relative;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	cursor: pointer;
+}
+.selected_hover{
+	background-color: silver;
+	opacity: 20;
+}
+
+/*************组织岗位用户排序开始**/
+
+.opusOmSortDiv {
+	color: #464637;
+	font-size: 14px;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+/**标题样式**/
+.opusOmSortDiv .block_list-title {
+	padding: 10px;
+	text-align: center;
+	background: #abcdf1;
+}
+
+.opusOmSortDiv ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: block;
+	/**
+   -webkit-margin-before: 1em;
+   -webkit-margin-after: 1em;
+   -webkit-margin-start: 0px;
+   -webkit-margin-end: 0px;
+   -webkit-padding-start: 40px;
+   **/
+}
+
+.opusOmSortDiv li {
+	background-color: #fff;
+	padding: 6px 0px;
+	display: list-item;
+	text-align: -webkit-match-parent;
+
+	/**边框样式**/
+	border: 1px solid transparent;
+	border-bottom: 1px solid #ebebeb;
+}
+
+/**
+    * 移动到li样式
+*/
+.block_ul_td li:hover {
+	background: #e7e8eb;
+	cursor: move;
+	cursor: -webkit-grabbing;
+}
+
+.opusOmSortDiv .drag-handle_th {
+	text-align: center;
+	display: inline-block;
+	width: 8%;
+}
+
+/**拖拽手把**/
+.opusOmSortDiv .drag-handle_td {
+	text-align: center;
+	font: bold 16px Sans-Serif;
+	color: #5F9EDF;
+	display: inline-block;
+	width: 8%;
+}
+
+/**组织列表（名字、属性）、岗位列表（名字、职责）、 用户列表（名字，岗位） 宽度**/
+.opusOmSortDiv .org_name_th, .opusOmSortDiv .org_property_th, .opusOmSortDiv .pos_name_th, .opusOmSortDiv .pos_duty_th, .opusOmSortDiv .user_name_th, .opusOmSortDiv .user_position_th {
+	display: inline-block;
+	width: 45%;
+	font-weight: 600;
+}
+.opusOmSortDiv .org_name_td, .opusOmSortDiv .org_position_td,  .opusOmSortDiv .pos_name_td, .opusOmSortDiv .pos_duty_td, .opusOmSortDiv .user_name_td, .opusOmSortDiv .user_position_td{
+	display: inline-block;
+	width: 45%;
+}
+
+/*************组织岗位用户排序结束**/
+
+

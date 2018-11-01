@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>责任网格定义</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/page-style.css" rel="stylesheet" type="text/css"/>
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-editable.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrapvalidator/bootstrapValidator.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/animate.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/css/zTreeStyle/metro.css"/>
+    <script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/knockout/knockout-3.2.0.js"></script>
+</head>
+
+<body>
+<div class="metadatatable-container" style="display: inline-block;width:100%;height:94%;margin-top:5px;">
+    <div class="col-xs-12 row" style="height:100%;">
+        <div class="col-xs-4 " style="height:100%;">
+            <div class="panel panel-blue" style="height:100%;width:100%;overflow:auto;border-color: rgb(104,171,234);">
+                <div class="panel-heading" style="width:100%;height: 40px;padding-top: 5px;">
+                    <div class="role-head-logo"></div>
+                    <div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:30px;margin-top:5px;">
+                        责任网格图层
+                    </div>
+                </div>
+                <div class="panel panel-blue">
+                    <div class="panel-body newtree">
+                        <div>
+                            <label>责任网格类型:</label>
+                            <select id="dutyGrid_select" onchange="">
+                                <option selected>市政道桥巡查责任网格</option>
+                            </select>
+                        </div>
+                        <div id="dutyGrid_tree" class="ztree" style="text-align:left;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-8 " style="height:100%;">
+            <!--标签页-->
+            <ul id="metadatatable_nav" class="nav nav-tabs">
+                <li role="presentation" class="active">
+                    <a href="#metadatatable_nav" aria-controls="baseInfo_view" role="tab" data-toggle="tab">绑定养护单元</a>
+                </li>
+                <li role="presentation" class="navbar-right" style="margin-right:5px;">
+                    <button class="btn btn-primary" onclick="saveDutyGrid()">保存</button>
+                </li>
+            </ul>
+            <div id="tab-content-panel" class="tab-content  panel panel-grad"
+                 style="height:94.9%;border-color:rgb(104,171,234);">
+                <div role="tabpanel" class="tab-pane active" id="baseInfo_view" style="overflow-y:auto;height:100%;position: relative">
+                    <div class="panel" style="height: 150px;border-color:rgb(104,171,234);margin: 20px;padding: 20px;text-align: center">
+                        <input type="hidden" id="dutyGridId">
+                        <input type="hidden" id="dutyGridOldName">
+                        <input type="hidden" id="tId">
+                        <table style="width: 100%;height: 100%;">
+                            <tr>
+                                <th style="text-align: right">责任网格编号：</th>
+                                <td colspan="2" style="text-align: left"><input style="width: 70%" id="netCode_input" disabled="disabled"></td>
+                            </tr>
+                            <tr>
+                                <th style="text-align: right">责任网格名称：</th>
+                                <td colspan="2" style="text-align: left"><input style="width: 70%" id="netName_input"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="panel" style="bottom: 0px;top:170px;left:0px;right:0px;border-color:rgb(104,171,234);margin: 20px;position: absolute">
+                        <!-- 地图-->
+                        <div class="panel" style="left:0px;right:40%;bottom: 0px;top:0px;margin: 20px 10px 20px 20px;border-color:rgb(104,171,234);position: absolute">
+                            <iframe id="mapDiv" data-id="mapDiv" class="J_iframe"  target="_self" frameborder="0" style="height: 100%;width: 100%;" src="/psxj/systemInfo/ssxjxt/municipalbuild/zrwgpz/zrwgdy/zrwgdyMap.html"></iframe>
+                        </div>
+                        <!-- 位置-->
+                        <div class="panel" style="left:60%;right:0px;bottom: 0px;top:0px;margin: 20px 20px 20px 10px;border-color:rgb(104,171,234);position: absolute">
+                            <div class="panel panel-blue" style="height:100%;width:100%;overflow:auto;border-color: rgb(104,171,234);">
+                                <div class="panel-heading" style="width:100%;height: 40px;padding-top: 5px;">
+                                    <div class="role-head-logo"></div>
+                                    <div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:30px;margin-top:5px;">
+                                        所在道路
+                                    </div>
+                                </div>
+                                <div id="street_tree" class="ztree" style="left:0;right:0px;bottom: 0px;top:41px;text-align:left;overflow-y: auto;position: absolute;padding-top: 10px;padding-left: 10%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrapvalidator/bootstrapValidator.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+<script type="text/javascript" src="/psxj/js/config/dojoConfig.js"></script>
+<script type="text/javascript" src="/psxj/js/config/mapConfig.js"></script>
+<script type="text/javascript" src="/psxj/lib/arcgis_js_api/init.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/municipalbuild/zrwgpz/zrwgdy/js/zrwgdy.js"></script>
+</html>

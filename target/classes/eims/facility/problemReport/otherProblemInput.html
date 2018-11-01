@@ -1,0 +1,88 @@
+<div id="otherProblemInputDiv" style="height:calc( 100% - 50px );">
+	<form id="problemform" class="form-horizontal" enctype="multipart/form-data" method="post">
+		<div id="form-content" style="padding:12px 20px 0px 0px">
+			<!-- ID -->
+			<input type="hidden" id="id" name="id">
+			<input type="hidden" id="yaId" name="yaId">
+			<!-- 积水点ID -->
+			<input type="hidden" id="jsdId" name="jsdId">
+			<input type="hidden" id="problemStatus" name="problemStatus" value="0">
+			
+			<div class="form-group">
+				<label class="col-sm-2 control-label">问题名称</label>
+				<div class="col-sm-10">
+					<input type="text" id="problemName" name="problemName"  class="form-control" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">地图定位</label>
+				<div class="col-sm-2" style="padding-top: 5px;font-weight: bold;font-size: 16px;">
+					<span id="locationStatus" style="color: red;">未定位</span>
+				</div>
+				<label class="col-sm-1 control-label">经度</label>
+				<div class="col-sm-2">
+					<input type="text" id="longitude" name="longitude" class="form-control" readonly="readonly" />
+				</div>
+				<label class="col-sm-1 control-label">纬度</label>
+				<div class="col-sm-2">
+					<input type="text" id="latitude" name="latitude" class="form-control"  readonly="readonly" />
+				</div>
+				<div class="col-sm-2">
+					<input id="locationPointBtn" class="btn btn-primary" type="button" value="定位" />
+				</div>
+			</div>
+			<div class="form-group" id="upload">
+				<label class="col-sm-2 control-label">上传图片</label>
+				<div class="col-sm-10">
+					<input class="projectfile" multiple="multiple" type="file" id="uploadImage" name="uploadImage" accept="image/*" onchange="imgCompress()"  />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">事件描述</label>
+				<div class="col-sm-10">
+					<textarea id="problemDescription" name="problemDescription" class="form-control" rows="3" style="resize:none;"></textarea>
+				</div>
+			</div>
+			<div class="form-group-new" id="uploadInfo" style="display:none">
+				<label class="col-sm-2 control-label">上报人</label>
+				<div class="col-sm-4">
+					<input class="form-control" type="text" id="problemPerson" name="problemPerson">
+				</div>
+					<label class="col-sm-2 control-label">上报时间</label>
+				<div class="col-sm-4">
+					<input class="form-control" id="problemTime" name="problemTime">
+				</div>
+			</div>
+			<div class="form-group" id="otherProblemView" style="display:none">
+				<label class="col-sm-2 control-label">现场展示</label>
+				<div class="col-sm-10">
+					<table id="otherProblemTable"></table>
+				</div>
+			</div>
+			<div class="form-group" id="otherProblemView2" style="display:none">
+				<label class="col-sm-2 control-label">现场展示</label>
+				<div class="col-sm-10">
+					<table id="otherProblemTable2"></table>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">备注</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="remark" name="remark" style="resize:none;" rows="3" ></textarea>
+				</div>
+			</div>
+			<div class="form-group" id="otherProblemView2" style="display:none">
+				<label class="col-xs-2 control-label">处理后现场展示</label>
+				<div class="col-xs-10">
+					<table id="otherProblemTable2"></table>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+<div style="width:100%;height:50px;padding-top:10px;border-top:1px solid #e7eaec;background-color: #F8F8F8">
+	<div class="col-xs-9 col-xs-offset-9">
+		<input id="otherProblemSubmitBtn" class="btn btn-primary" type="button" value="提交" style="margin-right: 10px;" />
+		<input id="otherProblemCancelBtn" class="btn btn-white" type="button" value="关闭" />
+	</div>
+</div>

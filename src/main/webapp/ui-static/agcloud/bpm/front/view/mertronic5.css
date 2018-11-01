@@ -1,0 +1,59 @@
+
+                      .portlet.light.bordered:hover {
+                          border: 1px solid #00bcf2 !important;
+                          border-radius:5px !important;
+                      }
+
+.portlet.light.bordered {
+    border: 1px solid #e7ecf1 !important;
+    border-radius:5px !important;
+}
+.portlet.light {
+    padding: 3px 5px 3px;
+    background-color: #fff;
+}
+.panel-body {
+    padding: 0px;
+}
+
+.m-portlet .m-portlet__body {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+}
+
+.m--margin-bottom-10 {
+    margin-bottom: 15px !important;
+}
+
+.m--margin-top-10 {
+    margin-top: 15px !important;
+}
+
+.a-img{
+    height: 27px;
+}
+
+.sum-view-header{
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+    background-color: #00beb4;
+}
+
+.m-portlet {
+    box-shadow: 0px 1px 15px 1px #ffffff;
+}
+
+.modal .modal-content .modal-header {
+    padding: 15px;
+}
+
+.modal .modal-content .modal-body {
+    padding: 15px;
+}
+
+.modal .modal-content .modal-footer {
+    padding: 10px;
+}
+/*.m-datatable__head */
+

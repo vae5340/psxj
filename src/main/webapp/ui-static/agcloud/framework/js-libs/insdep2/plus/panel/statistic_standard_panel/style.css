@@ -1,0 +1,27 @@
+/*
+  Easyui Of Insdep Theme 2.x 扩展面板
+  https://www.insdep.com/
+*/
+
+.statistic_standard_panel{ width: 100%; height: auto; overflow:hidden; clear: both; position: relative; background:#fff;}
+.statistic_standard_panel ul{ height: auto; overflow:hidden; clear: both;}
+.statistic_standard_panel ul li{ float:left; width:calc(10% - 1px);margin: 20px 0; overflow: hidden; text-align: center; border-left:1px solid #e8e8e8;  }
+.statistic_standard_panel ul li:first-child{border-left:0 none;}
+
+.statistic_standard_panel ul li i{ width: 42px; height: 42px; line-height:42px; border-radius: 42px; margin: 10px auto; color: #fff; }
+.statistic_standard_panel ul li i.iconfont{ line-height:42px; font-size: 22px;}
+
+.statistic_standard_panel ul li i,.statistic_standard_panel ul li b,.statistic_standard_panel ul li span{display: block;}
+.statistic_standard_panel ul li span{ color: #737373; }
+.statistic_standard_panel ul li b{ font-size: 16px;  margin: 0 0 10px; }
+
+.statistic_standard_broadwise  ul li i{ float: left; margin:0 0 0 10px; }
+.statistic_standard_broadwise  ul li b,.statistic_standard_broadwise  ul li span{text-align: right; }
+.statistic_standard_broadwise  ul li span{ margin: 5px 10px 0 0; }
+.statistic_standard_broadwise  ul li b{margin: 0 10px 0 0;}
+
+.statistic_standard_block ul{ margin: 0 10px 0 20px;}
+.statistic_standard_block ul li{ width:calc(10% - 12px);margin: 20px 10px 20px 0;border:1px solid #e8e8e8; background: #f8f8f8; }
+.statistic_standard_block ul li:first-child{border-left:1px solid #e8e8e8;}
+
+.statistic_standard_block.statistic_standard_broadwise ul li{ padding:10px 0; }

@@ -1,0 +1,105 @@
+.up-down-stream-analysis-result-panel {
+  position: absolute;
+  z-index: 1000;
+  left: 3%;
+  bottom: 0;
+  min-width: 600px;
+  width: 94%;
+  height: 300px;
+  background: #EEEEEE;
+  box-shadow: 0 0 5px #555555;
+  overflow: hidden; }
+  .up-down-stream-analysis-result-panel.result-panel-minimized {
+    width: 30%;
+    height: auto;
+    bottom: 0;
+    left: 35%;
+    min-width: 300px;
+    box-shadow: 0 0 8px #FF0000; }
+    .up-down-stream-analysis-result-panel.result-panel-minimized .result-panel-control-bar {
+      display: none; }
+    .up-down-stream-analysis-result-panel.result-panel-minimized .result-panel-chart-wrapper {
+      display: none; }
+    .up-down-stream-analysis-result-panel.result-panel-minimized .result-panel-table-wrapper {
+      display: none; }
+  .up-down-stream-analysis-result-panel .result-panel-title {
+    width: 100%;
+    background: #F5F5F5;
+    box-shadow: 0 0 3px #555555;
+    overflow: hidden;
+    position: relative; }
+    .up-down-stream-analysis-result-panel .result-panel-title .result-panel-title-text {
+      padding: 6px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold; }
+    .up-down-stream-analysis-result-panel .result-panel-title .result-panel-title-btns {
+      position: absolute;
+      right: 0;
+      top: 0; }
+      .up-down-stream-analysis-result-panel .result-panel-title .result-panel-title-btns .result-panel-title-btn {
+        text-decoration: none;
+        color: #000000;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        padding: 5px 15px 10px 15px; }
+        .up-down-stream-analysis-result-panel .result-panel-title .result-panel-title-btns .result-panel-title-btn:hover {
+          background: #E5E5E5; }
+        .up-down-stream-analysis-result-panel .result-panel-title .result-panel-title-btns .result-panel-title-btn:active {
+          background: #CACACB; }
+        .up-down-stream-analysis-result-panel .result-panel-title .result-panel-title-btns .result-panel-title-btn[data-role=close]:hover {
+          background: #FF0000;
+          color: #FFFFFF; }
+  .up-down-stream-analysis-result-panel .result-panel-control-bar {
+    width: 170px;
+    float: left;
+    box-shadow: 0 0 3px #555555;
+    text-align: center;
+    background: #FCFCFC; }
+    .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler {
+      width: 100%;
+      height: 100%;
+      overflow-y: scroll;
+      text-align: center; }
+      .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler button, .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler label {
+        display: block; }
+      .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler button {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 10px; }
+      .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler input[type=text], .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler input[type=number] {
+        width: 6em;
+        border: none;
+        outline: none;
+        background: none;
+        border-bottom: solid thin black;
+        text-align: center; }
+        .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler input[type=text][disabled], .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler input[type=number][disabled] {
+          text-align: left;
+          border-bottom: solid thin #FCFCFC; }
+      .up-down-stream-analysis-result-panel .result-panel-control-bar .result-panel-control-bar-scaler h5 {
+        margin: 0;
+        margin-bottom: 10px;
+        background: #F9F9F9;
+        padding: 10px 0 5px 0;
+        text-align: left;
+        padding-left: 1em;
+        border-left: solid 4px #555555; }
+  .up-down-stream-analysis-result-panel .result-panel-chart-wrapper {
+    width: auto;
+    float: right;
+    box-shadow: 0 0 3px #555555;
+    background: #FFFFFF;
+    overflow: hidden; }
+    .up-down-stream-analysis-result-panel .result-panel-chart-wrapper.result-panel-chart-scrollable {
+      overflow: scroll; }
+  .up-down-stream-analysis-result-panel .result-panel-table-wrapper {
+    width: 100%;
+    height: 100%;
+    background: #F5F5F5;
+    box-shadow: 0 0 3px #555555; }
+   table td,table th{border:1px solid #bfbaba;padding:4px;text-align:center;background-color:white;font-family: '宋体';} 
+   #upDownLegend{font-weight:bold;position:absolute;left:30px;top:185px;}
+   #upDownLegend img{height:25px}
+
+/*# sourceMappingURL=up-down-stream-analysis-result-panel.css.map */

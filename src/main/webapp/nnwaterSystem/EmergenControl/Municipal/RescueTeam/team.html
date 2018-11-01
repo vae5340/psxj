@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">		
+		<link rel="stylesheet" href="/awater/css/bootstrap.min14ed.css?v=3.3.6" />
+		<link rel="stylesheet" href="/awater/nnwaterSystem/AlertDispatch/PrevWatelogSupplies/css/fluid-layout.css" type="text/css" />
+		<link rel="stylesheet" href="/awater/nnwaterSystem/AlertDispatch/PrevWatelogSupplies/css/fluid-bootstrap.css" type="text/css" />
+		<link rel="stylesheet" href="/awater/lib/zTree/css/zTreeStyle/metro.css" />
+	    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet"/>
+	    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet"/>	    	    
+    
+	    <script src="/awater/lib/jquery.min.js"></script>
+    	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	    <script src="/awater/lib/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+   	    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	    <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	   	<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	   	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script>
+	    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel-3.0.6.min.js"></script>
+		<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>  
+	</head>
+	<body>
+		<form class="form-horizontal">
+	        <div class="form-group">
+	    		<label class="col-sm-1 control-label">用户姓名</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="contact"/>
+				</div>
+				<label class="col-sm-1 control-label">所在部门</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="name" />
+				</div>
+				<div class="col-sm-2"></div>
+	 		</div>
+	 		<div class="form-group">
+	    		<label class="col-sm-1 control-label">在岗情况</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<label class="col-sm-1 control-label">性别</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				
+				<div class="col-sm-2"></div>
+	 		</div>
+	 		<div class="form-group">
+	    		<label class="col-sm-1 control-label">办公电话</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<label class="col-sm-1 control-label">婚姻状况</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<div class="col-sm-2"></div>
+	 		</div>
+	 		<div class="form-group">
+	    		<label class="col-sm-1 control-label">出生年月</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<label class="col-sm-1 control-label">最高学历</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<div class="col-sm-2"></div>
+	 		</div>
+	 		<div class="form-group">
+	    		<label class="col-sm-1 control-label">贯籍</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<label class="col-sm-1 control-label">民族</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<div class="col-sm-2"></div>
+	 		</div>
+	 		<div class="form-group">
+	    		<label class="col-sm-1 control-label">办公电话</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<label class="col-sm-1 control-label">手机号</label>
+	    		<div class="col-sm-4">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+				<div class="col-sm-2"></div>
+	 		</div>
+	 		<div class="form-group">
+	    		<label class="col-sm-1 control-label">地址</label>
+	    		<div class="col-sm-10" style="padding-right: 65px;">
+	      			<input type="text" class="form-control" id="inputEmail" />
+				</div>
+	 		</div>						 		
+ 			<div class="form-group" id="tableTeamDiv" style="display:none">
+	 		   	<label class="col-sm-1 control-label">队伍成员列表</label>
+	 		   	<div class="col-sm-10">
+		             <table id="tableTeam"></table>
+  			    </div>
+	 		</div>
+		</form>
+	     <script>  
+			
+			var OrgFirstClicked=true;
+	        function zTreeOnClick(event, treeId, treeNode) {
+              	 var showTeam=false;
+	               $.each(teamMap,function(key,subList){
+	               if(key==treeNode.orgId){
+	                  showTeam=true;	                  
+	                  $.each(subList,function(index,teamForm){
+	                    $("#name").val(teamForm["name"]);	                  
+	                  });	
+	                  
+	                  if(teamFirstClicked){			
+						 $("#tableTeam").bootstrapTable({
+								toggle:"table",
+							    height:300,
+								data:subList,
+								rowStyle:"rowStyle",
+								cache: false, 						    
+								striped: true,
+								sidePagination: "server",
+								columns: [
+									{field:'id',visible: false},
+									{field:'contact',visible: true,title: '联系人'},
+									{field:'name',visible: true,title: '所属部门'},
+									{field:'phone',visible: true,title: '电话号码'},
+									{field:'address',visible: true,title: '地址'}
+								]
+							});
+							$("#tableTeamDiv").show();
+							teamFirstClicked=false;
+				        }
+						else{
+						   if(subList!=undefined){
+						      $("#tableTeam").bootstrapTable('refreshOptions', {data:subList});
+						      $("#tableTeamDiv").show();
+						   }  
+						   else{
+						      $("#tableTeam").bootstrapTable('refreshOptions', {data:{}});   
+						      $("#tableTeamDiv").hide();
+						   }
+						}                  	                  	                  
+	               }
+	               return true;	              
+	           });
+			};
+	        
+	        var teamMap;
+			$.ajax({
+				method : 'GET',
+				url : location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/om-org!allOrgsJson.action',
+				async : true,
+				dataType : 'json',
+				success : function(data) {
+					$.fn.zTree.init($("#teamtree"), setting,data.formList);
+					teamMap=data.teamMap;
+				},
+				error : function() {
+					alert('error');
+				}
+			})
+			
+			$("#table").on('post-body.bs.table', function (row,obj) {
+				$(".fixed-table-body").mCustomScrollbar({
+					mouseWheelPixels:300
+				});
+			});
+	     </script>
+	</body>
+</html>

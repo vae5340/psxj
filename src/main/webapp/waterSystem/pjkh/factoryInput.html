@@ -1,0 +1,264 @@
+<form class="form-inline" action="/hz-score!ajaxSave.action" method="POST" id="myForm">
+	<input name="form.typeIndex" type="hidden" value="4">
+	<input name="tables[0].id" type="hidden" value=""/>
+	<input name="tables[1].id" type="hidden" value=""/>
+	<input name="tables[2].id" type="hidden" value=""/>
+	<input name="tables[3].id" type="hidden" value=""/>
+	<input name="tables[4].id" type="hidden" value=""/>
+	<input name="tables[5].id" type="hidden" value=""/>
+	<input name="tables[6].id" type="hidden" value=""/>
+	<input name="tables[7].id" type="hidden" value=""/>
+	<input name="tables[8].id" type="hidden" value=""/>
+	<input name="tables[9].id" type="hidden" value=""/>
+	<input name="tables[10].id" type="hidden" value=""/>
+	<input name="tables[11].id" type="hidden" value=""/>
+	<input name="tables[12].id" type="hidden" value=""/>
+	<input name="tables[13].id" type="hidden" value=""/>
+	<input name="tables[14].id" type="hidden" value=""/>
+	<input name="tables[15].id" type="hidden" value=""/>
+	<input name="tables[16].id" type="hidden" value=""/>
+	<input name="tables[17].id" type="hidden" value=""/>
+	<input name="tables[18].id" type="hidden" value=""/>
+	<input name="tables[19].id" type="hidden" value=""/>
+	<input name="tables[20].id" type="hidden" value=""/>
+	<input name="tables[21].id" type="hidden" value=""/>
+	<input name="tables[22].id" type="hidden" value=""/>
+	<input name="tables[23].id" type="hidden" value=""/>
+	<input name="tables[24].id" type="hidden" value=""/>
+	<input name="tables[25].id" type="hidden" value=""/>
+   <!-- 表单标题开始 -->
+    <center>
+		<h2>污水处理厂集中考核检查评分表</h2>   
+	</center>
+   <!-- 表单标题结束 -->
+   	<div class="form-group">
+		<label>考核评分人：</label>
+		<input type="text" name="form.person" value="" class="{required:true} form-control input-sm"></input>
+	</div>
+	<div class="form-group">
+		<label>时间：</label>
+		<input class="text {required:true} form-control input-sm" type="text" name="form.time" onfocus="WdatePicker();" value="" />
+	</div>
+	<div class="form-group">
+		<label>汇总：</label>
+		<select class="form-control input-sm" name="form.hzScoreSummaryId" id="hzSelect" style="height:26px;"></select>
+	</div>
+	<p></p>  
+    <!-- 列表开始 -->
+     <table class="table table-bordered table-hover">
+     	<tr>
+     		<th width="5%">序号</th><th colspan="2" width="15%">考核内容</th><th width="30%">评分标准</th><th width="5%">分值</th><th width="30%">存在问题</th><th width="5%">得分</th>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">1</td>
+     		<td rowspan="2">格栅单元</td>
+     		<td>运行管理</td>
+     		<td>未妥善处理和处置栅渣的，每处扣0.5分；格栅前后水位差大于0.3米的，每处扣1分。</td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[0].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[0].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>栅片松动、变形、缺档或断裂的，每处扣0.5分；产生异常机械振动和噪声的，每处扣0.5分；未做好润滑、保养和防腐工作的，扣1分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[1].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">2</td>
+     		<td rowspan="2">泵房单元</td>
+     		<td>运行管理</td>
+     		<td>污水未全部提升入厂进行处理，发现一次扣3分；正常情况下(集)进水池内水位应控制在规定要求以内，超过设计水位的，发现一次扣1分。</td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[2].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[2].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>电压、电流表等仪表显示异常的，每处扣0.5分；水泵机组有异常振动或噪音的，每处扣1分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[3].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">3</td>
+     		<td rowspan="2">沉砂池单元</td>
+     		<td>运行管理</td>
+     		<td>沉砂池无正当理由停止运行的，每停1只扣1分。</td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[4].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[4].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>沉砂池排出的沉砂未及时外运或沉砂池及贮砂场的环境卫生较差的，每处扣0.5分；未及时除砂，积砂程度使刮砂机无法运行的，每处扣2分。 </td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[5].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">4</td>
+     		<td rowspan="2">初沉池单元</td>
+     		<td>运行管理</td>
+     		<td>各池配水不均匀的，每处扣0.5分（建设遗留问题除外）；积泥高度超过设计高度，排泥管堵塞或污泥厌氧发酵的，每处扣2分；排渣斗或排渣管道堵塞的，每处扣0.5分。</td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[6].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[6].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>刮泥机机械设备运转不正常且未报送维修的，每处扣1分，未及时完成维护的，每次扣1分；刮泥机易磨损件未及时更换的，每处扣1分；润滑油未及时添加或更换的，每处1分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[7].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">5</td>
+     		<td rowspan="2">曝气池单元</td>
+     		<td>运行管理</td>
+     		<td>曝气不均匀、曝气池出口处的溶解氧不符合要求的，每处扣1分；曝气池漂浮物超过5m2的，每处扣0.5分；池面出现大量白色泡沫的，每处扣0.5分。</td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[8].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[8].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>曝气主管渗漏异响的，每处扣0.5分；曝气器排气管内积水2min内不能排除的，每处扣0.5分；曝气器堵塞破损的，每次扣1分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[9].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">6</td>
+     		<td rowspan="2">鼓风机单元</td>
+     		<td>运行管理</td>
+     		<td>鼓风机未按需氧量开启的，每次扣1分。</td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[10].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[10].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>风机及电机的电流、电压、风量等仪表显示异常的，每处扣0.5分；风机有异常、噪音、振动的，每处扣1分；未保持良好润滑的，每处扣1分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[11].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">7</td>
+     		<td rowspan="2">二沉池单元</td>
+     		<td>运行管理</td>
+     		<td>各池配水不均匀的，每处扣0.5分（建设遗留问题除外）；池面有明显漂浮物或藻类的，每池扣0.5分；排渣斗堵塞的，每处扣0.5分；发生污泥膨胀、污泥上浮等现象的，每次扣2分；吸泥管路堵塞的，每处扣2分。 </td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[12].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[12].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>机电设备有异常噪声、温升、振动、漏电等现象的，每处扣1分；各仪表工作不正常、不稳定的，每处扣0.5分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[13].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">8</td>
+     		<td rowspan="2">污泥脱水单元</td>
+     		<td>运行管理</td>
+     		<td>污泥干质含水率大于80%的 ，每次扣1分。</td>
+			<td rowspan="2">10</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[14].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[14].score" value="" class="{required:true,max:10,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>设备存在漏药、漏泥、漏水等现象，每处扣0.5分；脱水机未按需求开启的，每次扣1分；润滑油未及时添加或更换的，每处0.5分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[15].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td>9</td>
+     		<td>紫外线消毒单元</td>
+     		<td>设施设备</td>
+     		<td>消毒设施故障未及时报修的，每次扣1分；未及时完成维护的，每次扣1分。</td>
+			<td>5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[16].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[16].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>10</td>
+     		<td>仪表监控单元</td>
+     		<td>设施设备</td>
+     		<td>仪表未进行周期检定的，每次扣1分；数据准确性差的，每处扣0.5分；未及时完成维护的，每次扣1分。</td>
+			<td>5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[17].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[17].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>11</td>
+     		<td>变配电单元</td>
+     		<td>设施设备</td>
+     		<td>供电合格率100%，设施、设备综合完好率>95%，有备用设备的完好率为100%。未达到要求和未及时完成维护的，每项每处扣1分。</td>
+			<td>5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[18].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[18].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td rowspan="2">12</td>
+     		<td rowspan="2">化验单元</td>
+     		<td>台帐</td>
+     		<td>水质分析台帐不齐全、不准确的，每处扣1分。</td>
+			<td rowspan="2">5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[19].problem" ></textarea></td>
+    		<td rowspan="2"><input type="text" onchange="calScore()" name="tables[19].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>设施设备</td>
+     		<td>化验检测方法、检测项目及周期不符合国家现行的有关标准规定的，每次扣1分；数据准确性差的，每处扣1分。</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[20].problem" ></textarea></td>
+     	</tr>
+     	<tr>
+     		<td>13</td>
+     		<td>运行记录</td>
+     		<td>台账</td>
+     		<td>值班记录、交接班记录、运行记录、维修记录、事故处理记录齐备，缺少记录、记录不真实、不清晰、随意涂改的，每处扣1分。</td>
+			<td>5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[21].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[21].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>14</td>
+     		<td>厂容厂貌</td>
+     		<td>室内外厂容厂貌</td>
+     		<td>厂容厂貌不整洁，厂内照明设施缺损，门、窗、玻璃破损，操作人员着装不整齐、不文明、不礼貌的，每处扣0.5分。</td>
+			<td>5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[22].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[22].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>15</td>
+     		<td>安全运行</td>
+     		<td>应急情况、安全生产</td>
+     		<td>现场无救生圈和禁止翻越等警示牌的，每处扣1分；厂区发生有责污水、污泥满溢的，每次扣3分；发生有责安全事故的，每次扣5分。</td>
+			<td>5</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[23].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[23].score" value="" class="{required:true,max:5,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>16</td>
+     		<td colspan="2">除臭单元</td>
+     		<td>除臭系统运行及操作不符合《杭州市主城区污水处理厂臭气操作规定》的，每处扣1分；情况严重的，每处扣2分。</td>
+			<td>10</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[24].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[24].score" value="" class="{required:true,max:10,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>17</td>
+     		<td colspan="2">其他</td>
+     		<td>擅自调整流量计、水质在线监测仪表数据的，每次扣5分；擅自为第三方处理污水每次扣3分；不符合《城镇污水处理厂运行、维护及安全技术规程》（CJJ60-2011）其它相关规定的，每处扣1分，情况严重的，每处扣2分。</td>
+			<td>10</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[25].problem" ></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[25].score" value="" class="{required:true,max:10,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>18</td>
+     		<td colspan="2">合 计</td>
+     		<td></td>
+			<td>100</td>
+     		<td>/</td>
+    		<td><span id="result"></span></td>
+     	</tr>
+    </table>
+     <!-- 列表结束 -->
+   <!-- 表单按钮开始 -->
+   <center>
+	<a href="javascript:update();" class="btn btn-primary" >确定</a>
+	<a href="javascript:void(0);" onclick="$('#template').empty();slideDiv();" class="btn btn-default" >取消</a>
+   </center>
+   <!-- 表单按钮结束 -->
+</form>

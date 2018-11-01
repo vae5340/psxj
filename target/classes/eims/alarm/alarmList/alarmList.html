@@ -1,0 +1,43 @@
+<div class="col-sm-12 mainwrapper" id="alarmList">
+	<div class="panel panel-default">
+		<div class="panel-body">
+		<!--<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">查询条件</label>
+			<div class="col-sm-2">
+				<input type="text" class="form-control" id="alarmTitle" name="alarmTitle" placeholder="预警标题"/>
+			</div>
+			-->
+			<label class="control-label col-sm-1" style="padding-right:0px;text-align:left;padding-top: 5px;">方案级别</label>
+			<div class="col-sm-2">
+				<select class="form-control" id="alarmList_templateGrade" name="templateGrade">
+					<option value=""></option>
+					<option value="1">一级应急预案</option>
+					<option value="2">二级应急预案</option>
+					<option value="3">三级应急预案</option>
+					<option value="4">四级应急预案</option>
+				</select>	
+			</div>
+			<label class="control-label col-sm-1" style="padding-right:0px;text-align:left;padding-top: 5px;">状态</label>
+			<div class="col-sm-2">
+				<select class="form-control" id="alarmList_recordStatus" name="recordStatus">
+						<option value=""></option>
+						<option value="1">启动中</option>
+						<option value="2">启动结束</option>
+						<option value="3">未启动</option>
+					
+				</select>					
+			</div>
+			<label class="control-label col-sm-1" style="padding-right:0px;text-align:left;padding-top: 5px;">开始时间</label>
+			<div class="col-sm-2">
+				<input id="alarmList_startTime" name="startTime" style="margin-right: 6px;" class="form-control" />
+			</div>
+			<label class="control-label col-sm-1" style="padding-right:0px;text-align:left;padding-top: 5px;">结束时间</label>
+			<div class="col-sm-2">
+				<input id="alarmList_endTime" name="endTime" style="margin-right: 6px;" class="form-control" />
+			</div>
+			<div class="col-sm-12" style="text-align:right;margin-top: 5px;">
+				<button type="button" id="alarmList_btn_query" class="btn btn-primary">查询</button>
+			</div> 
+		</div>
+	</div>
+	<table id="alarmList_table"></table>
+</div>

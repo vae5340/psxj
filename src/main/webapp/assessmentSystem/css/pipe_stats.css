@@ -1,0 +1,20 @@
+
+#firstChart{
+	border-right: 1px black solid;
+	border-bottom: 1px black solid;
+	height: 220px;
+}
+#secondChart{
+	border-left: 1px black solid;
+	border-bottom: 1px black solid;
+	height: 220px;
+}
+#thirdChart{
+	border-top: 1px black solid;
+	height: 300px;
+}
+#ChartsDiv{
+	background-image: url('../img/wholepipe.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+}

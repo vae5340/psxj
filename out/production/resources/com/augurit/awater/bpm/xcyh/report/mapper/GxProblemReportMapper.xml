@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.augurit.awater.bpm.xcyh.report.mapper.GxProblemReportMapper" >
+    <sql id="allColumns" >
+        ID id,
+        FJZD fjzd,
+        SZWZ szwz,
+        X x,
+        Y y,
+        JDMC jdmc,
+        BHLX bhlx,
+        SSLX sslx,
+        JJCD jjcd,
+        WTMS wtms,
+        SBSJ sbsj,
+        SBR sbr,
+        YJGCL yjgcl,
+        BZ bz,
+        LAYER_ID layerId,
+        LAYER_NAME layerName,
+        OBJECT_ID objectId,
+        TEAM_ORG_ID teamOrgId,
+        TEAM_ORG_NAME teamOrgName,
+        DIRECT_ORG_ID directOrgId,
+        DIRECT_ORG_NAME directOrgName,
+        SUPERVISE_ORG_ID superviseOrgId,
+        SUPERVISE_ORG_NAME superviseOrgName,
+        PARENT_ORG_ID parentOrgId,
+        PARENT_ORG_NAME parentOrgName,
+        USID usid,
+        LAYERURL layerurl,
+        REPORTX reportx,
+        REPORTY reporty,
+        REPORTADDR reportaddr,
+        LOGINNAME loginname,
+        SJWCSJ sjwcsj,
+        YJWCSJ yjwcsj,
+        SFJB sfjb,
+        ISBYSELF isbyself
+    </sql>
+
+    <select id="getGxProblemReportById" resultType="GxProblemReport" >
+        select
+        <include refid="allColumns"/>
+        from   DRI_GX_PROBLEM_REPORT
+        where  ID = #{id}
+    </select>
+
+    <select id="listGxProblemReport" resultType="GxProblemReport" >
+        select
+        <include refid="allColumns"/>
+        from DRI_GX_PROBLEM_REPORT
+        <where>1 = 1
+            <if test="id != null" >
+             AND ID = #{id}
+            </if>
+            <if test="fjzd != null" >
+              AND FJZD = #{fjzd}
+            </if>
+            <if test="szwz != null" >
+              AND SZWZ = #{szwz}
+            </if>
+            <if test="x != null" >
+              AND X = #{x}
+            </if>
+            <if test="y != null" >
+             AND Y = #{y}
+            </if>
+            <if test="jdmc != null" >
+             AND JDMC = #{jdmc}
+            </if>
+            <if test="loginname!= null" >
+                AND LOGINNAME = #{loginname}
+            </if>
+            <if test="bhlx!= null" >
+             AND BHLX = #{bhlx}
+            </if>
+            <if test="sslx != null" >
+            AND SSLX = #{sslx}
+            </if>
+            <if test="jjcd != null" >
+             AND JJCD = #{jjcd}
+            </if>
+            <if test="wtms!= null" >
+            AND WTMS = #{wtms}
+            </if>
+            <if test="sbsj != null" >
+            AND SBSJ = #{sbsj}
+            </if>
+            <if test="sbr != null" >
+             AND SBR = #{sbr}
+            </if>
+            <if test="yjgcl!= null" >
+             AND YJGCL = #{yjgcl}
+            </if>
+            <if test="directOrgId != null" >
+            AND DIRECT_ORG_ID = #{directOrgId}
+            </if>
+            <if test="directOrgName!= null" >
+             AND DIRECT_ORG_NAME = #{directOrgName}
+            </if>
+            <if test="sfjb != null" >
+                AND SFJB = #{sfjb}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertGxProblemReport" parameterType="GxProblemReport">
+        insert into DRI_GX_PROBLEM_REPORT (ID,FJZD,SZWZ,X,Y,JDMC,BHLX,SSLX,JJCD,WTMS,SBSJ,SBR,YJGCL,BZ,LAYER_ID,LAYER_NAME,
+       OBJECT_ID,TEAM_ORG_ID,TEAM_ORG_NAME,DIRECT_ORG_ID,DIRECT_ORG_NAME,SUPERVISE_ORG_ID,SUPERVISE_ORG_NAME,PARENT_ORG_ID,
+       PARENT_ORG_NAME,USID,LAYERURL,REPORTX,REPORTY,REPORTADDR,LOGINNAME,SJWCSJ,YJWCSJ,SFJB,ISBYSELF)
+          values  (#{id},#{fjzd,jdbcType=NVARCHAR},#{szwz,jdbcType=NVARCHAR},#{x,jdbcType=NVARCHAR},#{y,jdbcType=NVARCHAR},
+          #{jdmc,jdbcType=NVARCHAR},#{bhlx,jdbcType=NVARCHAR},#{sslx,jdbcType=NVARCHAR},
+          #{jjcd,jdbcType=NVARCHAR},#{wtms,jdbcType=NVARCHAR},#{sbsj,jdbcType=DATE},#{sbr,jdbcType=NVARCHAR},
+          #{yjgcl,jdbcType=NVARCHAR},#{bz,jdbcType=NVARCHAR},#{layerId,jdbcType=NUMERIC},#{layerName,jdbcType=VARCHAR},
+          #{objectId,jdbcType=VARCHAR},#{teamOrgId,jdbcType=VARCHAR},#{teamOrgName,jdbcType=VARCHAR},
+          #{directOrgId,jdbcType=VARCHAR},#{directOrgName,jdbcType=VARCHAR},#{superviseOrgId,jdbcType=VARCHAR},#{superviseOrgName,jdbcType=VARCHAR},
+          #{parentOrgId,jdbcType=VARCHAR},#{parentOrgName,jdbcType=VARCHAR},#{usid,jdbcType=VARCHAR},
+          #{layerurl,jdbcType=VARCHAR},#{reportx,jdbcType=NVARCHAR},#{reporty,jdbcType=NVARCHAR},
+          #{reportaddr,jdbcType=VARCHAR},#{loginname,jdbcType=VARCHAR},#{sjwcsj,jdbcType=DATE},
+          #{yjwcsj,jdbcType=DATE},#{sfjb,jdbcType=VARCHAR},#{isbyself,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="updateGxProblemReport" parameterType="GxProblemReport" >
+        update DRI_GX_PROBLEM_REPORT
+        <set>
+            <if test="id != null" >
+            ID = #{id},
+            </if>
+            <if test="fjzd != null" >
+                FJZD = #{fjzd},
+            </if>
+            <if test="szwz != null" >
+                SZWZ = #{szwz},
+            </if>
+            <if test="x != null" >
+                X = #{x},
+            </if>
+            <if test="y != null" >
+                Y = #{y},
+            </if>
+            <if test="jdmc != null" >
+                JDMC = #{jdmc},
+            </if>
+            <if test="bhlx!= null" >
+                BHLX = #{bhlx},
+            </if>
+            <if test="sslx != null" >
+                SSLX = #{sslx},
+            </if>
+            <if test="jjcd != null" >
+                JJCD = #{jjcd},
+            </if>
+            <if test="wtms!= null" >
+                WTMS = #{wtms},
+            </if>
+            <if test="sbsj != null" >
+                SBSJ = #{sbsj},
+            </if>
+            <if test="sbr != null" >
+                SBR = #{sbr},
+            </if>
+            <if test="yjgcl!= null" >
+                YJGCL = #{yjgcl},
+            </if>
+            <if test="bz != null" >
+                BZ = #{bz},
+            </if>
+            <if test="layerId != null" >
+                LAYER_ID = #{layerId},
+            </if>
+            <if test="layerName != null" >
+                LAYER_NAME = #{layerName},
+            </if>
+            <if test="objectId != null" >
+                OBJECT_ID = #{objectId},
+            </if>
+        </set>
+        where ID = #{id}
+    </update>
+
+    <delete id="deleteGxProblemReport"  >
+        delete from DRI_GX_PROBLEM_REPORT where ID = #{id}
+    </delete>
+ <select id="searchSbPage" resultType="GxProblemReport">
+        select
+        <include refid="allColumns"/>
+        from Dri_Gx_Problem_Report
+        <where>
+            1=1
+            <if test="gx.fjzd != null" >
+                AND FJZD = #{gx.fjzd}
+            </if>
+            <if test="gx.szwz != null" >
+                AND SZWZ like #{gx.szwz}
+            </if>
+            <if test="gx.jdmc != null" >
+                AND JDMC like #{gx.jdmc}
+            </if>
+            <if test="gx.loginname!= null" >
+                AND LOGINNAME = #{gx.loginname}
+            </if>
+            <if test="gx.bhlx!= null" >
+                AND BHLX = #{gx.bhlx}
+            </if>
+            <if test="gx.sslx != null" >
+                AND SSLX = #{gx.sslx}
+            </if>
+            <if test="gx.jjcd != null" >
+                AND JJCD = #{gx.jjcd}
+            </if>
+            <if test="gx.wtms!= null" >
+                AND WTMS = #{gx.wtms}
+            </if>
+            <if test="gx.sbsj != null" >
+                AND SBSJ = #{gx.sbsj}
+            </if>
+            <if test="gx.sbr != null" >
+                AND SBR like #{gx.sbr}
+            </if>
+            <if test="gx.yjgcl!= null" >
+                AND YJGCL = #{gx.yjgcl}
+            </if>
+            <if test="gx.directOrgId != null" >
+                AND DIRECT_ORG_ID = #{gx.directOrgId}
+            </if>
+            <if test="gx.directOrgName!= null" >
+                AND DIRECT_ORG_NAME = #{gx.directOrgName}
+            </if>
+            <if test="gx.sfjb != null" >
+                AND SFJB = #{gx.sfjb}
+            </if>
+            <if test="gx.parentOrgId != null">
+                AND parent_Org_Id = #{gx.parentOrgId}
+            </if>
+            <if test="gx.parentOrgName != null">
+                AND parent_Org_Name = #{gx.parentOrgName}
+            </if>
+            <if test="mp.startTime != null" >
+                AND sbsj &gt;= #{mp.startTime}
+            </if>
+            <if test="mp.endTime != null" >
+                AND sbsj &lt;= #{mp.endTime}
+            </if>
+            <choose>
+                <when test="mp.order !=null and mp.sort !=null">
+                    order by #{mp.sort} #{mp.order}
+                </when>
+                <otherwise>
+                    order by sbsj desc
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <select id="searchPageCount" resultType="Integer">
+        select
+        count(0)
+        from Dri_Gx_Problem_Report
+        <where>
+            1=1
+            <if test="gx.fjzd != null" >
+                AND FJZD = #{gx.fjzd}
+            </if>
+            <if test="gx.szwz != null" >
+                AND SZWZ = #{gx.szwz}
+            </if>
+            <if test="gx.jdmc != null" >
+                AND JDMC = #{gx.jdmc}
+            </if>
+            <if test="gx.loginname!= null" >
+                AND LOGINNAME = #{gx.loginname}
+            </if>
+            <if test="gx.bhlx!= null" >
+                AND BHLX = #{gx.bhlx}
+            </if>
+            <if test="gx.sslx != null" >
+                AND SSLX = #{gx.sslx}
+            </if>
+            <if test="gx.jjcd != null" >
+                AND JJCD = #{gx.jjcd}
+            </if>
+            <if test="gx.wtms!= null" >
+                AND WTMS = #{gx.wtms}
+            </if>
+            <if test="gx.sbsj != null" >
+                AND SBSJ = #{gx.sbsj}
+            </if>
+            <if test="gx.sbr != null" >
+                AND SBR = #{gx.sbr}
+            </if>
+            <if test="gx.yjgcl!= null" >
+                AND YJGCL = #{gx.yjgcl}
+            </if>
+            <if test="gx.directOrgId != null" >
+                AND DIRECT_ORG_ID = #{gx.directOrgId}
+            </if>
+            <if test="gx.directOrgName!= null" >
+                AND DIRECT_ORG_NAME = #{gx.directOrgName}
+            </if>
+            <if test="gx.sfjb != null" >
+                AND SFJB = #{gx.sfjb}
+            </if>
+            <if test="gx.parentOrgId != null">
+                AND parent_Org_Id = #{gx.parentOrgId}
+            </if>
+            <if test="gx.parentOrgName != null">
+                AND parent_Org_Name = #{gx.parentOrgName}
+            </if>
+            <if test="mp.startTime != null" >
+                AND sbsj &gt;= #{mp.startTime}
+            </if>
+            <if test="mp.endTime != null" >
+                AND sbsj &lt;= #{mp.endTime}
+            </if>
+            <choose>
+                <when test="mp.order !=null and mp.sort !=null">
+                    order by #{mp.sort} #{mp.order}
+                </when>
+                <otherwise>
+                    order by sbsj desc
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="searchGroup" resultType="java.util.Map">
+         select PARENT_ORG_NAME as name,count(0) as total from Dri_Gx_Problem_Report
+         <where> 1=1
+            <if test="gx.parentOrgName != null and gx.directOrgName==null">
+                <if test="gx.sslx != null and gx.sslx != ''">
+                    and sslx = #{gx.sslx}
+                </if>
+                <if test="mp.startTime != null and mp.endTime != null">
+                    and sbsj BETWEEN #{mp.startTime} and #{mp.endTime}
+                </if>
+
+            </if>
+             group by parent_Org_Name
+         </where>
+
+    </select>
+
+    <sql id="BSC_ATT_DETAIL_COLUMN" >
+        DETAIL_ID detailId, ATT_CODE attCode, ATT_NAME attName, ATT_SIZE attSize, ATT_TYPE attType, ATT_FORMAT attFormat, SORT_NO sortNo, IS_DB_STORE isDbStore, ATT_PATH attPath,IS_RELATIVE isRelative,
+        IS_ENCRYPT isEncrypt,ENCRYPT_CLASS encryptClass, MESSAGE_DIGEST messageDigest, MEMO1, MEMO2, MEMO3, MEMO4, MEMO5, MEMO6, CREATER, CREATE_TIME createTime,
+        MODIFIER, MODIFY_TIME modifyTime,ATT_DISK_NAME attDiskName,ORG_ID orgId,DIR_ID dir
+    </sql>
+    <sql id="BSC_ATT_DETAIL_COLUMN_PREFIX" >
+        detail.DETAIL_ID detailId, ATT_CODE attCode, ATT_NAME attName, ATT_SIZE attSize, ATT_TYPE attType, ATT_FORMAT attFormat, SORT_NO sortNo, IS_DB_STORE isDbStore, ATT_PATH attPath,IS_RELATIVE isRelative,
+        IS_ENCRYPT isEncrypt,ENCRYPT_CLASS encryptClass, MESSAGE_DIGEST messageDigest, MEMO1, MEMO2, MEMO3, MEMO4, MEMO5, MEMO6, CREATER, CREATE_TIME createTime,
+        MODIFIER, MODIFY_TIME modifyTime,ATT_DISK_NAME attDiskName,ORG_ID orgId,DIR_ID dir
+    </sql>
+    <sql id="BSC_ATT_LINK_COLUMN" >
+        link.LINK_ID linkId, link.TABLE_NAME tableName, link.RECORD_ID recordId,link.PK_NAME pkName
+    </sql>
+    <sql id="allBscAttColumn">
+        <include refid="BSC_ATT_LINK_COLUMN" />,
+        <include refid="BSC_ATT_DETAIL_COLUMN_PREFIX" />
+    </sql>
+    <select id="findBscAttForm" resultType="BscAttForm">
+        select
+          <include refid="allBscAttColumn"/>
+        from
+          BSC_ATT_DETAIL detail,BSC_ATT_LINK link
+        where
+          detail.DETAIL_ID=link.DETAIL_ID
+          AND detail.ORG_ID = #{form.orgId}
+         <if test="form.tableName!=null and form.tableName!=''" >
+            AND link.TABLE_NAME=#{form.tableName}
+         </if>
+         <if test="form.recordId!=null and form.recordId!=''">
+            AND link.RECORD_ID=#{form.recordId}
+         </if>
+         <if test="form.pkName != null  and form.pkName!=''" >
+            AND  link.PK_NAME = #{form.pkName}
+         </if>
+        order by CREATE_TIME DESC
+    </select>
+    <select id="getAppIdByProcDefKey" resultType="java.lang.String">
+        select APP_ID
+        from ACT_TPL_APP_FLOWDEF
+        where PROCDEF_KEY=#{flowdefKey}
+    </select>
+    <sql id="OrgAllColumns" >
+        omorg.ORG_ID  as orgId,
+        omorg.ORG_CODE as orgCode,
+        omorg.ORG_NAME as orgName,
+        omorg.ORG_SHORT_NAME1 as orgShortName1,
+        omorg.ORG_SHORT_NAME2 as orgShortName2,
+        omorg.PARENT_ORG_ID as parentOrgId,
+        omorg.ORG_LEVEL as orgLevel,
+        omorg.ORG_SEQ as orgSeq,
+        omorg.ORG_SORT_NO as orgSortNo,
+        omorg.IS_PUBLIC as isPublic,
+        omorg.ORG_PROPERTY as orgProperty,
+        omorg.IS_INNER_CATEGORY_EXPAND as isInnerCategoryExpand,
+        omorg.IS_ACTIVE as isActive,
+        omorg.IS_LEAF as isLeaf,
+        omorg.SUB_UNIT_COUNT as subUnitCount,
+        omorg.SUB_DEPT_COUNT as subDeptCount,
+        omorg.SUB_GROUP_COUNT as subGroupCount,
+        omorg.SUB_POS_COUNT as subPosCount,
+        omorg.SUB_USER_COUNT as subUserCount,
+        omorg.ORG_TYPE as orgType,
+        omorg.ORG_NATURE as orgNature,
+        omorg.ORG_RANK as orgRank,
+        omorg.UNIT_GB_TYPE as unitGbType,
+        omorg.UNIT_GB_CODE as unitGbCode,
+        omorg.UNIT_GB_SYS_CODE as unitGbSysCode,
+        omorg.ORG_FUNDS_FORM as orgFundsForm,
+        omorg.ORG_FOUND_TIME as orgFoundTime,
+        omorg.ORG_LINK_MAN as orgLinkMan,
+        omorg.ORG_LINK_TEL as orgLinkTel,
+        omorg.ORG_ZIP_CODE as orgZipCode,
+        omorg.ORG_EMAIL as orgEmail,
+        omorg.ORG_TEL as orgTel,
+        omorg.ORG_ADDRESS as orgAddress,
+        omorg.ORG_WEBSITE as orgWebsite,
+        omorg.ORG_WEIBO as orgWeibo,
+        omorg.ORG_APPROVAL_NUMBER as orgApprovalNumber,
+        omorg.ORG_FUNC as orgFunc,
+        omorg.ORG_DELETED as orgDeleted,
+        omorg.CREATER as creater,
+        omorg.CREATE_TIME as createTime,
+        omorg.MODIFIER as modifier,
+        omorg.MODIFY_TIME as modifyTime,
+        omorg.IS_TOP_ORG as isTopOrg
+    </sql>
+    <select id="getOrgsByLoginName" resultType="OpuOmOrg">
+      select <include refid="OrgAllColumns"/>
+      from OPU_OM_USER_ORG omuserorg, OPU_OM_ORG omorg, OPU_OM_USER omuser
+      where omuserorg.ORG_ID = omorg.ORG_ID
+           and omuser.USER_ID = omuserorg.USER_ID
+           and omuser.IS_ACTIVE = '1'
+           and omuser.USER_DELETED = '0'
+           and omuser.LOGIN_NAME = #{loginName}
+      order by omorg.ORG_SORT_NO
+    </select>
+    <select id="getChildOrgByOrgIds" resultType="OpuOmOrg">
+      select <include refid="OrgAllColumns"/>
+      from opu_om_org omorg
+      start with omorg.org_id in
+        <foreach item="item" index="index" collection="orgIds" open="(" separator="," close=")">
+            #{item}
+         </foreach>
+        connect by prior omorg.org_id = omorg.parent_org_id
+    </select>
+    <select id="getChildOrgsByLoginName" resultType="OpuOmOrg">
+      select <include refid="OrgAllColumns"/>
+      from OPU_OM_ORG omorg
+      start with omorg.ORG_ID in
+        (select omorg.org_id
+         from OPU_OM_USER_ORG omuserorg,OPU_OM_ORG omorg,OPU_OM_USER omuser
+         where omuserorg.ORG_ID = omorg.ORG_ID
+               and omuser.USER_ID = omuserorg.USER_ID
+               and omuser.IS_ACTIVE = '1'
+               and omuser.USER_DELETED = '0'
+               and omorg.ORG_PROPERTY != 'g'
+               and omuser.LOGIN_NAME = #{loginName}
+        )
+      connect by prior omorg.org_id = omorg.parent_org_id
+    </select>
+
+    <!-- 根据组织id查询组织下的用户-->
+    <select id="getOpuOmUsersByOrgId" resultType="OpuOmUser" parameterType="string" >
+        select
+        ua.USER_ID as userId,
+        ua.LOGIN_NAME as loginName,
+        ua.LOGIN_PWD as loginPwd,
+        ua.USER_NAME as userName,
+        ua.USER_SEX as userSex,
+        ua.IS_PWD_ENCRYPTED as isPwdEncrypted,
+        ua.IS_ACTIVE as isActive,
+        ua.ACTIVE_BEGIN_TIME as activeBeginTime,
+        ua.ACTIVE_END_TIME as activeEndTime,
+        ua.USER_DELETED as userDeleted,
+        ua.CREATER as creater,
+        ua.CREATE_TIME as createTime,
+        ua.MODIFIER as modifier,
+        ua.MODIFY_TIME as modifyTime,
+        ua.PWD_STRENGTH_GRADE as pwdStrengthGrade,
+        uo.SORT_NO sortNo,
+        uo.ORG_ID orgId
+        from
+        OPU_OM_USER ua,OPU_OM_USER_ORG uo
+        where
+        uo.ORG_ID != #{orgId} AND uo.USER_ID = ua.USER_ID and ua.USER_DELETED = 0
+        and ua.user_id in (select user_id from OPU_OM_USER_ORG where org_id=#{orgId})
+        order by uo.SORT_NO
+    </select>
+</mapper>

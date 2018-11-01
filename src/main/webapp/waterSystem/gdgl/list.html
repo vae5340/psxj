@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+	<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="../../js/gdgl/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../../js/gdgl/dingwei.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			//var tableStr = $.cookie("tableStr");
+			var tableStr = window.localStorage.getItem("tableStrb");
+			$("#table").empty();
+			$("#table").append(tableStr);
+		});
+		function getParamByUrl(url){
+			var params = url.split("&");
+			var tempUrl= location.protocol+"//"+location.hostname+":6080/arcgis/rest/services/HangZhouPipe/MapServer/1/query?1=1";
+			for(var i=1;i<params.length;i++){
+				tempUrl = tempUrl+"&"+params[i];
+			}
+			return tempUrl;
+		}
+	</script>
+	</head>
+	<body style="background-color:white;height:380px;">
+ 		<div class="animated fadeInRight">
+			<div class="col-sm-12">
+				<table id="table" data-toggle="table"
+					   data-click-to-select="true"
+					   data-row-style="rowStyle"
+					   data-query-params="queryParams"
+					   data-pagination="false"
+					   data-height="380">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>路名</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+		</div>	
+	</body>
+</html>

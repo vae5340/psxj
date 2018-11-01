@@ -1,0 +1,15 @@
+﻿[
+  {
+    "id":"101",
+    "monitor_target": "泵站",
+    "num": 5
+ , "icon":"<img src=\"img/ico3_h.png\"></img>" }, {
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3, "icon":"<img src=\"img/ico3_h.png\"></img>"
+  }, {
+    "id":"103",
+    "monitor_target": "积水点",
+    "num": 6, "icon":"<img src=\"img/ico3_h.png\"></img>"
+}
+]

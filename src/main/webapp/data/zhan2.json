@@ -1,0 +1,47 @@
+﻿[
+  {
+    "id":"101",
+    "monitor_target": "泵站",
+    "num": 5
+  }, {
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  },{
+    "id":"102",
+    "monitor_target": "泵闸",
+    "num": 3
+  }, {
+    "id":"103",
+    "monitor_target": "积水点",
+    "num": 6
+}
+]

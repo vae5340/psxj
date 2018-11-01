@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+    <title>动态页面</title>
+    <meta charset="utf-8">
+		
+	<link rel="stylesheet" type="text/css" href="js/easyui.css">
+	<link rel="stylesheet" href="/awater/css/bootstrap.min.css" type="text/css"></link>
+	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script src="js/highcharts.js"></script>		
+	<script src="js/highcharts-more.js"></script>		
+	
+	<style>
+		ul{ float:left; margin:30px 0 0px; height:auto; }
+		ul li{ border:#fff 1px solid; background-color:#fff; float:left; display:inline; margin:0 0px 5px; }
+	</style>		
+</head>
+<body>
+<div style="text-align:center">
+	<H2>历史回放</H2>
+	<button class="btn btn-w-m btn-primary" type="button" onclick="playbackBtnOnClick()">开始回放</button>
+	<button class="btn btn-w-m btn-warning" type="button" onclick="stopbackBtnOnClick()">停止回放</button>
+</div>
+<div id="containerYQ" style="min-width: 310px; height: 250px; margin: 0 auto"></div>
+
+<div>
+	<input id="ss" class="easyui-slider" value="0" style="width:auto" data-options="
+				showTip: true,
+				rule: [0,'|',100],
+				tipFormatter: function(value){
+					return '2014-06-19 '+'16:23:10';
+				},
+				converter:{
+					toPosition:function(value, size){
+						var opts = $(this).slider('options');
+						return (value-opts.min)/(opts.max-opts.min)*size;
+					},
+					toValue:function(pos, size){
+						var opts = $(this).slider('options');
+						return opts.min + (opts.max-opts.min)*(pos/size);
+					}
+				},
+				onChange: function(value){
+					sliderOnChange(value);
+				}">
+	</div>
+<div class="easyui-tabs" style="width:auto;height:auto">
+		<div title="防洪泵站" style="padding:10px">
+			<div style="width: 100%;text-align:center;"><span>防洪泵站水位监测</span></div>
+			<ul>
+				<li>
+					<div id="containerZZ1" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerZZ2" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerZZ3" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+			</ul>
+		</div>
+		<div title="管道出水口" style="padding:10px">
+			<div style="width: 100%;text-align:center;"><span>管道出水口水位监测</span></div>
+			<ul>
+				<li>
+					<div id="containerCSK1" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerCSK2" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerCSK3" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+
+			</ul>
+		</div>
+		
+		<div title="积水深度" style="padding:10px">
+			<div style="width: 100%;text-align:center;"><span>积水点水位监测</span></div>
+			<ul>
+				<li>
+					<div id="containerJSD1" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerJSD2" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerJSD3" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+
+			</ul>
+		</div>
+		
+		<div title="井下水深" style="padding:10px">
+			<div style="width: 100%;text-align:center;"><span>井下水位监测</span></div>
+			<ul>
+				<li>
+					<div id="containerJXSS1" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerJXSS2" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+				<li>
+					<div id="containerJXSS3" style="width: 310px; height: 400px; margin: 0 auto"></div>
+				<li>
+			</ul>
+		</div>
+	</div>
+</body>
+	<script src="js/highcharts.jk.zz.js"></script>
+	<script src="js/jquery.easyui.slider.jk.js"></script>
+	<script src="js/highcharts.jk.jyq.js"></script>
+	<script src="js/highcharts.jk.csk.js"></script>
+	<script src="js/highcharts.jk.jxss.js"></script>
+	<script src="js/highcharts.jk.jsd.js"></script>
+
+</html>

@@ -1,0 +1,25 @@
+<div id="dutyPerson" style="height:220px;padding-top:30px;padding-left:30px">
+	<div class="form-group">
+		<label class="control-label col-sm-1" style="float:left;line-height:32px;width: 86px">人员姓名</label>
+		<div class="col-sm-2" style="width:200px;float:left">
+			<select class="form-control" id="personList">
+				<option></option>
+			</select>
+			<input id="personName" name="personName" class="form-control" style="width:170px;display:none"/>
+		</div>
+		<button id="addDutyPerson" class="btn btn-primary" style="margin-left:10px">添加人员</button>
+	</div>
+	<div class="form-group" style="padding-top:15px;padding-bottom:60px">
+		<label class="control-label col-sm-1" style="float:left;line-height:32px;width: 86px">联系方式</label>
+		<div class="col-sm-2" style="width:200px;float:left">
+			<input type="text" class="form-control" id="phoneNumber">
+		</div>
+	</div>
+	<div style="padding-left:130px;margin-bottom:10px;">
+		<button class="btn btn-primary" type="button" style="margin-right:15px" id="dutyPersonSaveBtn">保存</button><!-- onclick="save()" -->
+		<button class="btn btn-primary" type="button" style="margin-right:15px" id="dutyPersonCancelBtn">取消</button><!-- onclick="cancel()" -->
+		<button class="btn btn-primary" type="button" style="margin-right:10px;display:none" id="dutyPersonDeleteBtn">删除</button><!-- onclick="deletePerson()" -->
+	</div>
+</div>
+
+

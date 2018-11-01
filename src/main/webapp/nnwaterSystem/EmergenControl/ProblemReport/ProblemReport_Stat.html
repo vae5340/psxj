@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+	    <title>积水点统计</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+	    
+		<link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet">
+		<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" />
+	    <link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>	
+	    <link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+		
+		<style>
+			body{
+				width:100%;
+				height:100%;
+				padding:0 20px;
+				margin:0;
+			}
+		</style>
+  	</head>
+  	<body>
+	    <div class="container-fluid" style="height:100%">
+			<div class="panel panel-default">
+	  	        <div class="panel-heading" style="padding:5px 10px">统计图</div>
+		    	<div class="panel-body">
+					<div id="problemReportChart" class="col-xs-12" style="padding:10px 0;height:300px"></div>
+				</div> 
+			</div>
+			
+			<div class="panel panel-default">
+	  	        <div class="panel-heading" style="padding:5px 10px">统计列表</div>
+		    	<div class="panel-body">
+					<table class="table table-striped table-hover table-bordered" id="problemReportTable" style="text-align:center">
+						<thead>
+							<tr>
+								<td>积水点名称</td>
+								<td>积水次数</td>
+							</tr>
+						</thead>
+						<tbody id="tbody"></tbody>
+					</table>
+					<div id="getMore" onclick="getMore()" style="width:100%;height:30px;line-height:30px;text-align:center;background:#286090;color:white;border-radius:5px;cursor:pointer">点击查看更多</div>
+				</div> 
+			</div>
+		</div> 
+  	</body>
+	<script src="/awater/lib/jquery.min.js?v=1.0.0"></script>
+	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+	<script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>	
+	<script src="/awater/js/util_date.js" type="text/javascript"></script> 	
+	<script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="/awater/lib/plugins/echarts/echarts-all.js"></script>
+	<script src="js/ProblemReport_Stat.js"></script>
+	<script src="/awater/js/common.js"></script>
+</html>

@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title>统计列表</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<link href="/psxj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/psxj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:1px;background-color:#F5F5F5;}
+			div ul li{
+				width:10%;
+			}
+		</style>
+  	</head>
+  	<body>
+	 	<div id="mapInfo_content"></div>
+  		<div class="col-sm-12">
+			<div class="panel-body">
+			<div class="panel panel-default">
+			<div class="panel-body" style="height: 70px;">
+				<form class="form-horizontal" role="form" id="myform">
+					<div class="form-group">	
+						<label class="col-sm-1 control-label col-sm-cous">开始时间</label>
+						<div class="col-sm-3">
+							<input type="text" class="form_datetime form-control" id="startTime" name="startTime" readOnly />
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >结束时间</label>
+						<div class="col-sm-3">
+							<input type="text" class="form_datetime form-control" id="endTime" name="endTime" readOnly />
+						</div>
+						<div class="col-sm-3" style="text-align:left;">
+							<button type="button" id="btn_query" class="btn btn-primary" onclick="refreshTable();">查询</button>
+							<button type="button" id="btn_query" class="btn btn-default" onclick="resets();">重置</button>
+	        			</div>	
+			     	</div>
+			     	<!--<div id="chartContainer" style="height:200px;top:-30px"></div>-->
+			     </form>
+			     	</div>	
+			     	</div>
+					<button type="add" id="btn_add" class="btn btn-add" onclick="add();">新增</button>
+			 <!--  <div id="chartContainer" style="height:200px;"></div> -->
+				<div class="tabbable" id="tabs-falic">
+					<ul class="nav nav-tabs">
+						<li id="panel_all_"  class="active"><a href="#panel_all" data-toggle="tab">全部</a></li>
+						<li id="panel_yj_"><a href="#panel-yj" data-toggle="tab">窨井</a></li>
+						<li id="panel_ysk_"><a href="#panel-ysk" data-toggle="tab">雨水口</a></li>
+						<li id="panel_pfk_"><a href="#panel-pfk" data-toggle="tab">排放口</a></li>
+						<li id="panel_yly"_><a href="#panel-yly" data-toggle="tab">溢流堰</a></li>
+						<li id="panel_pm_"><a href="#panel-pm" data-toggle="tab">拍门</a></li>
+						<li id="panel_fm_"><a href="#panel-fm" data-toggle="tab">阀门</a></li>
+						<li id="panel_psgd"><a href="#panel-psgd" data-toggle="tab">排水管道</a></li>
+						<li id="panel_psgq"><a href="#panel-psgq" data-toggle="tab">排水沟渠</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="panel_all">
+							<table id="table_all"></table>
+						</div>
+						<div class="tab-pane" id="panel-yj">
+							<table id="table_yj"></table>
+						</div>
+						<div class="tab-pane" id="panel-ysk">
+							<table id="table_ysk"></table>
+						</div>
+						<div class="tab-pane" id="panel-pfk">
+							<table id="table_pfk"></table>
+						</div>
+						<div class="tab-pane" id="panel-bz">
+							<table id="table_bz"></table>
+						</div>
+						<div class="tab-pane" id="panel-pm">
+							<table id="table_pm"></table>
+						</div>
+						<div class="tab-pane" id="panel-fm">
+							<table id="table_fm"></table>
+						</div>
+						<div class="tab-pane" id="panel-yly">
+							<table id="table_yly"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  	</body>
+	 <script src="/psxj/lib/jquery.min.js?v=1.0.0"></script>
+	  <script src="/psxj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	  <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+	  <script src="/psxj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="js/echarts.js"></script>
+	<script src="../../../ssxjxt/problem_report/js/echart_options.js"></script>
+<!-- <script src="../js/initMap.js"></script> -->
+	  <script src="js/repairList.js"></script>
+</html>

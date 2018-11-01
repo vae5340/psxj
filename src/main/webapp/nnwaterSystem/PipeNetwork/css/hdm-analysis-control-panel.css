@@ -1,0 +1,123 @@
+.hdm-analysis-control-panel {
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  width: 220px;
+  background: #FEFEFE;
+  border: solid thin #EEEEEE;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #CCCCCC;
+  overflow: hidden; }
+  .hdm-analysis-control-panel.minimized {
+    box-shadow: 0 0 5px #FF0000; }
+    .hdm-analysis-control-panel.minimized .control-panel-content {
+      display: none; }
+    .hdm-analysis-control-panel.minimized .control-panel-control-btns {
+      display: none; }
+  .hdm-analysis-control-panel .analysis-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    color: #FFFFFF;
+    opacity: 0.8;
+    z-index: 99999999;
+    text-align: center;
+    padding: 2em; }
+    .hdm-analysis-control-panel .analysis-loading .loading-img {
+      height: 50%;
+      margin-bottom: 15%; }
+    .hdm-analysis-control-panel .analysis-loading .loading-text {
+      font-size: 1.2em; }
+    .hdm-analysis-control-panel .analysis-loading.analysis-loading-hidden {
+      display: none; }
+  .hdm-analysis-control-panel .control-panel-title {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    line-height: 20px;
+    background: #FAFAFA;
+    box-shadow: 0 0 4px #CCCCCC;
+    overflow: hidden; }
+    .hdm-analysis-control-panel .control-panel-title .control-panel-title-text {
+      padding-left: 15px; }
+    .hdm-analysis-control-panel .control-panel-title .control-panel-title-btns {
+      position: absolute;
+      right: 15px;
+      top: 0;
+      height: 20px;
+      overflow: hidden; }
+      .hdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn {
+        text-decoration: none;
+        padding: 5px 10px 5px 10px;
+        color: #000000; }
+        .hdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn:hover {
+          background: #E5E5E5; }
+        .hdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn:active {
+          background: #CACACB; }
+        .hdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn[data-role=close]:hover {
+          background: #FF0000;
+          color: #FFFFFF; }
+        .hdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn[data-role=close]:active {
+          background: #F1707A; }
+  .hdm-analysis-control-panel .control-panel-control-btns {
+    background: #FAFAFA;
+    box-shadow: 0 0 4px #CCCCCC;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 5px; }
+    .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn {
+      text-decoration: none;
+      margin-right: 10px;
+      border: none;
+      outline: none;
+      padding: 5px 10px 5px 10px;
+      border-radius: 5px; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn span {
+        color: #FFFFFF;
+        font-size: 12px; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:hover {
+        cursor: pointer; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:last-child {
+        margin-right: 0; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:active {
+        box-shadow: 0 0 5px #888888; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=pause] {
+        background: #FCAF3E; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=pause]:hover {
+          background: #B9761A; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=pause]:active {
+          background: #71460A; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=resume] {
+        background: #6FBC1F; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=resume]:hover {
+          background: #4D8B0F; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=resume]:active {
+          background: #315F03; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear] {
+        background: #FF0000; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear]:hover {
+          background: #C90000; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear]:active {
+          background: #890000; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm] {
+        background: #0000FF; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm]:hover {
+          background: #0000AF; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm]:active {
+          background: #000083; }
+      .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled {
+        background: #CDCDCD;
+        color: #000000; }
+        .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled:hover, .hdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled:active {
+          box-shadow: none;
+          background: #CDCDCD;
+          color: #000000; }
+  .hdm-analysis-control-panel .control-panel-content {
+    width: 100%;
+    font-size: 12px;
+    padding: 0.5em;
+    overflow-y: scroll; }
+
+/*# sourceMappingURL=hdm-analysis-control-panel.css.map */

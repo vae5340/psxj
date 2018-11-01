@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+	    <title>应急联络网</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+	    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	    
+		<link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+		<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+		<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css">
+        <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+	    <link href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" rel="stylesheet" type="text/css"/>
+	    
+	    <script src="/awater/lib/jquery.min.js?v=1.0.0"></script>   
+		<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+		<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+		<script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+	    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script >
+		<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>
+		<script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>
+	    <script src="/awater/js/common.js"></script>
+	    <script src="js/Emergency_Contact.js"></script>
+	    <style>
+	    	.panel-heading:a {margin-bottom: 18px;}
+			a:link { text-decoration: none;}
+			a:active { text-decoration:none;}
+			a:hover { text-decoration:none;} 
+			a:visited { text-decoration: none;}
+	    </style>
+	</head>
+  
+	<body style="margin-top: 20px;padding:0 20px;">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+					<div class="panel-heading" style="background-color: #E5E5E5" onmouseover="this.style.backgroundColor='#D9EDF7'" onmouseout="this.style.backgroundColor='#E5E5E5'">
+						<h4 class="panel-title">
+							市区防内涝抢险指挥部组织机构网络图
+						</h4>
+					</div>
+				</a>
+				<div id="collapseOne" class="accordion-body collapse in">
+					<div class="panel-body">
+						<img id="jgt" src="img/jgt3.png" style="margin-left: -50px;"></img>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+					<div class="panel-heading" style="background-color: #E5E5E5" onmouseover="this.style.backgroundColor='#D9EDF7'" onmouseout="this.style.backgroundColor='#E5E5E5'">
+						<h4 class="panel-title">
+							各城区责任人通讯录
+						</h4>
+					</div>
+				</a>
+				<div id="collapseTwo" class="panel-collapse collapse">
+					<div class="panel-body">
+						<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;padding-bottom:10px;">单位</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="unit" name="unit">
+						</div>
+						<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;">名称</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="name"  name="name">
+						</div>
+						<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;">职务</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="post"  name="post">
+						</div>
+						<div class="col-sm-3" style="text-align:left;">
+							<button type="button" id="btn_query" class="btn btn-primary" onclick="reloadDataLC()" >查询</button>
+							<button type="button" id="btn_add" class="btn btn-primary" onclick="addLC()" >新增</button>
+							<button type="button" id="btn_del" class="btn btn-danger" onclick="delLC()" >删除选中</button>
+						</div>
+						<table id="leader_contact" ></table>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+					<div class="panel-heading" style="background-color: #E5E5E5" onmouseover="this.style.backgroundColor='#D9EDF7'" onmouseout="this.style.backgroundColor='#E5E5E5'">
+						<h4 class="panel-title">
+							防内涝指挥部通讯录
+						</h4>
+					</div>
+				</a>
+				<div id="collapseThree" class="panel-collapse collapse">
+					<div class="panel-body">
+						<label class="control-label col-sm-1" style="width:50px;padding-right:0px;padding-top:8px;text-align:left;padding-bottom:10px;">单位</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="CCname"  name="CCname">
+						</div>
+						<div class="col-sm-3" style="text-align:left;">
+							<button type="button" id="btn_query" class="btn btn-primary" onclick="reloadDataCC()" >查询</button>
+							<button type="button" id="btn_add" class="btn btn-primary" onclick="addCC()" >新增</button>
+							<button type="button" id="btn_del" class="btn btn-danger" onclick="delCC()" >删除选中</button>
+						</div>
+						<table id="controldept_contact"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+

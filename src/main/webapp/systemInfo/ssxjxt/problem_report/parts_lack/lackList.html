@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/psxj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/psxj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+			.layui-layer-btn{
+				background: #eee;
+			}
+		</style>
+  	</head>
+  	<body>
+	 <div id="mapInfo_content"></div>
+  	<div class="col-sm-12 mainwrapper">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-sm-1 control-label col-sm-cous">设施类型</label>
+					<div class="col-sm-2">
+						<select class="form-control" id="componentType">
+							<option value="">全部</option>
+						</select>
+					</div>	
+					<div>
+						<button type="button" class="btn btn-primary" id="all-table">全部</button>
+						<button type="button" class="btn btn-default" id="thisDayBtn">今日</button>
+						<button type="button" class="btn btn-default" id="thiWeek" style="">本周</button>
+						<button type="button" class="btn btn-default" id="thisMonthBtn" style="">本月</button>
+						<button type="button" class="btn btn-default" id="thisYearBtn" style="">本年</button>
+						<button type="button" class="btn btn-default" id="last30DaysBtn" style="">最近30天</button>
+		       		</div>
+		     	</div>
+				<div id="chartContainer" style="height:200px;"></div>
+				<!--<div class="form-group">
+					 <label class="col-sm-1 control-label col-sm-cous">巡查人</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="markPerson" name="markPerson" />
+					</div>
+					<label class="col-sm-1 control-label col-sm-cous">直属单位</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="directOrgName" name="directOrgName" />
+					</div>
+					<label class="col-sm-1 control-label col-sm-cous">业主单位</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="parentOrgName" name="parentOrgName" />
+					</div> 
+					<div class="col-sm-1" style="text-align:right;">
+						<button type="button" id="btn_query" class="btn btn-primary" onclick="search();">查询</button>
+					 </div>
+				</div> -->
+				<input type="hidden" class="form-control" id="parentOrgName" />
+				<input type="hidden" class="form-control" id="startTime" />
+				<input type="hidden" class="form-control" id="endTime" />
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<!-- <div class="form-group">
+				<div class="col-sm-12" style="padding : 5px">
+					<div class="wellQueryBar">
+						<button type="button" class="btn btn-primary" id="thisDayBtn">今日</button>
+						<button type="button" class="btn btn-default" id="thiWeek" style="">本周</button>
+						<button type="button" class="btn btn-default" id="thisMonthBtn" style="">本月</button>
+						<button type="button" class="btn btn-default" id="thisYearBtn" style="">本年</button>
+						<button type="button" class="btn btn-default" id="last30DaysBtn" style="">最近30天</button>
+						<input type="hidden" id="startTime"/>
+					</div>
+	       		</div>
+	     	</div> -->
+     		<table id="table"></table>
+		</div>
+	</div>
+  	</body>
+	 <script src="/psxj/lib/jquery.min.js?v=1.0.0"></script>
+	  <script src="/psxj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	  <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+	  <script src="/psxj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="../../../ssxjxt/problem_report/js/echart_options.js"></script>
+	<script src="../../../ssxjxt/lib/echarts/echarts.js"></script>
+	<script src="js/lackList.js"></script>
+</html>

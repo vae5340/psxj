@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+.agcloud-navbar{
+  border: 0;
+  border-radius: 3px;
+  padding: .5rem 0;
+  color: #555;
+  background-color: #fff !important;
+  border-bottom: 1px dashed #ccc;
+}
+.agcloud-navbar>.agcloud-navbar-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.agcloud-navbar-collapse {
+  display: flex !important;
+  flex-basis: auto;
+}
+.agcloud-navbar-tabs {
+  flex-direction: row;
+}
+.agcloud-navbar-tabs {
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.agcloud-navbar-tabs li{
+  float: left;
+  padding: 0 5px;
+}
+.agcloud-navbar .agcloud-navbar-brand {
+  display: inline-block;
+  position: relative;
+  color: inherit;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 24px;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  white-space: nowrap;
+  height: 24px;
+  padding-left: 32px;
+}
+.agcloud-nav-icon{
+  position: relative;
+  color: inherit;
+  padding:.25rem .9375rem;
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  line-height: 20px;
+  margin-right: 5px;
+}
+.agcloud-nav-icon:hover{
+  color: #ff9800;
+}
+.agcloud-nav-icon{
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+.agcloud-navbar-icon-question{
+  background:url(images/icon-questions.png) no-repeat 0 0;
+
+}
+.agcloud-navbar-icon-question:hover,.agcloud-navbar-icon-question.agcloud-icon-active{
+  background: url(images/icon-questions-hover.png) no-repeat 0 0;
+}
+.agcloud-navbar-icon-setting{
+  background: url(images/agcloud-navbar-icon-setting.png) no-repeat 0 0;
+}
+.agcloud-navbar-icon-setting:hover,.agcloud-navbar-icon-setting.agcloud-icon-active{
+  background: url(images/agcloud-navbar-icon-setting-hover.png) no-repeat 0 0;
+}
+.agcloud-icon-organization{
+  background:url(images/agcloud-icon-organization.png) no-repeat 0 0;
+}
+.agcloud-icon-data-dictionary{
+  background:url(images/agcloud-icon-data-dictionary.png) no-repeat 0 0;
+}
+.agcloud-icon-workflow{
+  background: url(images/agcloud-icon-workflow.png) no-repeat 0 0;
+}
+/* ztree extend */
+.ztree * {
+  font-family: microsoft yahei,Verdana, Arial, Helvetica, AppleGothic, sans-serif;
+}
+
+.inputPageTable {
+  width:100%;
+}
+
+.inputPageTable td{
+  padding:5px 10px;
+}

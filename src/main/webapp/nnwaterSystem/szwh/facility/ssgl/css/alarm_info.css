@@ -1,0 +1,99 @@
+
+
+#alarm_title{
+	margin:10px 0px;
+}
+
+#alarm_title img{
+	width: 45px;
+	height:45px;
+}
+
+#alarm_title span{
+	font-size: 20px;
+	font-weight: 600;
+}
+
+.headDiv {
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #333333;
+	padding:5px;
+	height:auto;
+	overflow:hidden;
+	/* border: 1px black solid; */
+}
+
+.f-Left {
+	float: left;
+}
+
+.chart {
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px #333333;
+	height: 293px;
+	/* border: 1px black solid; */
+}
+#tableDiv{
+	border-radius: 5px;
+	margin-top:20px;
+	box-shadow: 0px 0px 10px #333333;
+}
+
+.class_name{
+	font-weight:bolder;
+	font-family:'宋体';
+	font-size:16px;
+	line-height:30px;
+}
+
+#pipeDiv,#facDiv{
+	height:90px;
+	float:left;
+	padding:5px 5px;
+	overflow:visible
+}
+
+.facCount{
+	float:left;
+	width:25%;
+}
+.facCount div{
+	float:left;
+	display:inline;
+}
+.pipeCount div{
+	float:left;
+}
+
+.numfont{
+	font-family: 'Quartz';
+	font-size: 24px;
+	padding-left: 5px;
+	line-height:30px;
+}
+.a_title{
+	font-size: 14px;
+	font-family: '宋体';
+	font-weight: bold;
+}
+.header{
+	border-radius: 5px;
+	background-image: url("../img/header.png");
+	background-repeat: repeat-x;
+}
+#tableDiv table td{
+	border-bottom: 1px #D3D3D3 solid;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	text-align: center;
+}
+
+#tableDiv img{
+	width:25px;
+	height:25px;
+	background-size: auto;
+}
+#tipDiv{
+	color:#A9A9A9;
+	padding-left:10px;
+}

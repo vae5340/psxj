@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+    <title>设施管理</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="cache-control" content="no-cache">
+
+	<link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="/awater/css/augur.expand.css" rel="stylesheet"type="text/css" />
+    <link href="../../lib/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    
+
+</head>
+
+<body class="gray-bg">
+    <div class="animated fadeInRight">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content"style="padding:0 40px;">
+            	<div class="panel panel-default">
+					<!--<div class="panel-heading">查询条件</div>-->
+					<div class="panel-body">
+						<input type="hidden" id="deleteId" value="" /> 
+						<form id="formSearch" class="form-horizontal">
+							<div class="form-group" style="margin-top:15px">
+								<label class="control-label col-sm-1" style="width:90px;" for="txt_search_device_name_1" >设施地址</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control"  id="txt_search_comb_name">
+								</div>
+								<label class="control-label col-sm-1" style="width:90px;" for="txt_search_statu">设施类型</label>
+								<div class="col-sm-2">
+									<!--
+										<input type="text" class="form-control" id="txt_search_est_type">
+									-->
+									<select class="form-control" id="txt_search_est_type" name="txt_search_est_type"> 
+									  <option value="">--请选择--</option>
+								      <!--  <option value="1">雨水口</option> 
+								      <option value="2">检查井</option>
+								      <option value="3">排水管</option>
+								      <option value="4">排水渠</option>
+								      <option value="5">排放口</option>
+								      <option value="6">排水泵站</option>
+								      <option value="7">截流设施</option>
+								      <option value="8">调储设施</option>
+								      <option value="9">溢流堰</option>
+								      <option value="10">闸门</option>
+								      <option value="11">易涝区域</option>
+								      <option value="12">基站</option>
+								      <option value="14">井盖</option>
+								      <option value="15">湿度</option>
+								      <option value="16">树木</option>
+								      <option value="17">视频点</option>
+								      <option value="18">内河站点</option>
+								      <option value="19">雨量站</option>
+								      <option value="20">水文站</option>
+								      <option value="21">窨井</option> -->
+								      <option value="13">易涝隐患点点</option>
+								      <option value="22">仓库</option>
+								      <option value="23">安置点</option>
+								      <option value="24">撤离点</option>
+								      <option value="25">地面视频</option>
+								      <option value="26">交警视频</option>
+								      <option value="27">排水泵站视频</option>
+								      <option value="28">内河泵站视频</option>
+								      <option value="29">内河站降雨量</option>
+								      <option value="30">水文雨量站</option>
+								      <option value="31">自建雨量站</option>
+								      <option value="33">路面(管渠)水位</option>
+								      <option value="34">河道水位</option>
+								      <option value="35">管渠流量</option>
+								      <option value="36">河道流量</option>
+								      <option value="37">泵站水位</option>
+								    </select>
+								</div>
+								<div class="col-sm-4" style="text-align:left;">
+									<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example">
+                                
+								<div class="btn-group hidden-xs" id="combTableToolbar" role="group">
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toAdd()">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>新增
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toUpdate('')" >
+                                        <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>编辑
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" onclick="isDelete()"> 
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>删除
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toRoleAuth()"> 
+                                        <i class="glyphicon glyphicon-link" aria-hidden="true"></i>数据授权
+                                    </button>
+                                    <!--
+                                    
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toAddDevice('')"> 
+                                        <i class="glyphicon glyphicon-wrench" aria-hidden="true"></i>添加设备
+                                    </button>
+                                
+                                	-->
+                                	</div>
+								
+                                <table id="combTable" >
+                                </table>
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Basic -->
+    </div>
+	
+	<!-- 添加、修改 模态框 -->
+	<div class="modal fade" id="combModal" tabindex="-1" role="dialog" 
+	   aria-labelledby="itemDimModalLabel" aria-hidden="true">
+		   <div class="modal-dialog" style="width:900px;">
+			  <div class="modal-content">
+				 <div class="modal-header">
+					<button type="button" class="close" 
+					   data-dismiss="modal" aria-hidden="true">
+						  &times;
+					</button>
+					<h4 class="modal-title" id="combModalLabel">
+					   新增
+					</h4>
+				 </div>
+				<form method="post" id="combForm" class="form-horizontal">
+				 <div class="modal-body">
+						<input type="hidden" id="id" name="id"/>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">设施地址<font color="red">*</font></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="combName" name="combName" required="" aria-required="true">
+							</div>
+							<label class="col-sm-2 control-label">设施类型<font color="red">*</font></label>
+							<div class="col-sm-4">
+								<!--
+									<input type="text" class="form-control" id="estType" name="estType" >
+								-->
+								<select class="form-control" id="estType" name="estType" required="" aria-required="true"> 
+								  <option value="">--请选择--</option>	
+								      <!--  <option value="1">雨水口</option> 
+								      <option value="2">检查井</option>
+								      <option value="3">排水管</option>
+								      <option value="4">排水渠</option>
+								      <option value="5">排放口</option>
+								      <option value="6">排水泵站</option>
+								      <option value="7">截流设施</option>
+								      <option value="8">调储设施</option>
+								      <option value="9">溢流堰</option>
+								      <option value="10">闸门</option>
+								      <option value="11">易涝区域</option>
+								      <option value="12">基站</option>
+								      <option value="14">井盖</option>
+								      <option value="15">湿度</option>
+								      <option value="16">树木</option>
+								      <option value="17">视频点</option>
+								      <option value="18">内河站点</option>
+								      <option value="19">雨量站</option>
+								      <option value="20">水文站</option>
+								      <option value="21">窨井</option> -->
+								      <option value="13">易涝隐患点</option>
+								      <option value="22">仓库</option>
+								      <option value="23">安置点</option>
+								      <option value="24">撤离点</option>
+								      <option value="25">地面视频</option>
+								      <option value="26">交警视频</option>
+								      <option value="27">排水泵站视频</option>
+								      <option value="28">内河泵站视频</option>
+								      <option value="29">内河站降雨量</option>
+								      <option value="30">水文雨量站</option>
+								      <option value="31">自建雨量站</option>
+								      <option value="32">自建雨量站</option>
+								      <option value="33">路面(管渠)水位</option>
+								      <option value="34">河道水位</option>
+								      <option value="35">管渠流量</option>
+								      <option value="36">河道流量</option>
+								      <option value="37">泵站水位</option>
+							    </select>
+							</div>
+						</div>
+						<!-- <div class="hr-line-dashed"></div> -->
+						<div class="form-group">
+							<label class="col-sm-2 control-label">经度<font color="red">*</font></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="xcoor" name="xcoor" required="" aria-required="true">
+							</div>
+							<label class="col-sm-2 control-label">纬度<font color="red">*</font></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="ycoor" name="ycoor" required="" aria-required="true">
+							</div>
+						</div>
+						<!-- <div class="hr-line-dashed"></div> -->
+						<div class="form-group">
+							<label class="col-sm-2 control-label">所属区域</label>
+							<div class="col-sm-4">
+								<select class="form-control" id="area" name="area" required="" aria-required="true"></select>
+							</div>
+							<label class="col-sm-2 control-label">状态</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="status" name="status">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">设施所在道路</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="laneWay" name="laneWay">
+							</div>
+						</div>
+						<!-- <div class="hr-line-dashed"></div> -->
+						<div class="form-group">
+							<label class="col-sm-2 control-label">建立单位</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="estDept" name="estDept">
+							</div>
+							<label class="col-sm-2 control-label">维护单位</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="orgDept" name="orgDept">
+							</div>
+						</div>
+						<!-- <div class="hr-line-dashed"></div> -->
+						<div class="form-group">
+							<label class="col-sm-2 control-label">坐标系统</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="coorSys" name="coorSys">
+							</div>
+							<label class="col-sm-2 control-label">高程系统</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="eleSys" name="eleSys">
+							</div>
+						</div>
+						<!-- <div class="hr-line-dashed"></div> -->
+						<div class="form-group">
+							<label class="col-sm-2 control-label">建立日期</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control form_date" data-date-format="yyyy-mm-dd hh:ii" id="estDate" name="estDate" readonly>
+							</div>
+							<label class="col-sm-2 control-label">修改日期</label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control form_date" data-date-format="yyyy-mm-dd hh:ii" id="updateDate" name="updateDate" readonly>
+							</div>
+						</div>
+						<!-- <div class="hr-line-dashed"></div> -->
+						<div class="form-group">
+							<label class="col-sm-2 control-label">备注</label>
+							<div class="col-sm-10">
+								 <textarea id="ccomment" name="drainSys" id="drainSys" class="form-control" style="max-width: 100%;"></textarea>
+							</div>
+						</div>					
+				 </div>			 
+				 <div class="modal-footer">
+					<button type="submit" id="submitBtn" class="btn btn-primary">
+					   提交
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+				 </div>
+				 </form>
+			  </div>
+		</div>
+	</div>
+	
+	<!-- 添加设备 模态框 -->
+	<div class="modal fade" id="combModal2" tabindex="-1" role="dialog" 
+	   aria-labelledby="itemDimModalLabel" aria-hidden="true">
+		   <div class="modal-dialog" style="width:100%;">
+			  <div class="modal-content" id="combModal3">
+				
+			  </div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="delcfmModel">  
+	  <div class="modal-dialog">  
+		<div class="modal-content message_align">  
+		  <div class="modal-header">  
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+			<h4 class="modal-title">提示信息</h4>  
+		  </div>  
+		  <div class="modal-body">  
+			<p>您确认要删除吗？</p>  
+		  </div>  
+		  <div class="modal-footer">  
+			 <input type="hidden" id="url"/>  
+			 <a  onclick="doDelete()" class="btn btn-success" data-dismiss="modal">确定</a>  
+			 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+		  </div>  
+		</div><!-- /.modal-content -->  
+	  </div><!-- /.modal-dialog -->  
+	</div>
+	
+	<script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript" src="../../lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../../lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script src="../../lib/plugins/toastr/toastr.min.js"></script>
+	<script src="../../lib/plugins/layer-v2.3/layer/layer.js"></script>
+	<script src="/awater/js/util_date.js" type="text/javascript"></script>
+	<script src="../../lib/plugins/validate/jquery.validate.min.js"></script>
+	<script src="../../lib/plugins/validate/messages_zh.min.js"></script>
+	<script src="../ssjk/js/ssjk-global.js"></script> 
+	<script src="js/nnArea.js"></script> 
+	<script src="js/comb.js"></script> 
+	<script src="/awater/js/common.js"></script> 
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

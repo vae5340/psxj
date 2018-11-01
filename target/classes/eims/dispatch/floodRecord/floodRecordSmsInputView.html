@@ -1,0 +1,31 @@
+<div id="floodRecordSmsInputView">
+	<div style="padding:12px 20px 0px 0px">
+		<form id="form" class="form-horizontal">    
+			<input type="hidden" id="id" name="id" />
+			<div class="form-group" >
+				<label class="col-sm-2 control-label">发布标题</label>
+				<div class="col-sm-10">
+					<input id="recordTitle" name="recordTitle" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group" >
+				<label class="col-sm-2 control-label">发布内容</label>
+				<div class="col-sm-10">
+					<textarea id="recordContent" name="recordContent" class="form-control" rows="7" style="max-width: 100%;"></textarea>
+				</div>
+			</div>								
+			<div class="form-group">
+				<label class="col-sm-2 control-label">通知人员</label>
+				<div class="col-sm-10">
+					<input id="recordSmsReceiverName" name="recordSmsReceiverName" class="form-control" disabled="disabled" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<div style="position:absolute;width:100%;height:50px;bottom:5px;padding-top:10px;border-top:1px solid #e7eaec">
+		<div class="col-sm-12 col-sm-offset-9">
+			<button class="btn btn-primary" type="button" id="floodRecordSmsInputSaveBtn">发起通知</button>
+			<button class="btn btn-white" type="button" id="floodRecordSmsInputCancelBtn">取消</button>
+		</div>
+	</div>
+</div>

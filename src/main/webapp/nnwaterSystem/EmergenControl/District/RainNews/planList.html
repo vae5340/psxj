@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+	    <title>区级响应-一雨一报</title>
+		<meta charset="UTF-8">	   
+		<link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet">
+		<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" rel="stylesheet" type="text/css" />
+		<link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>		
+	    <script src="/awater/lib/jquery.min.js?v=1.0.0"></script> 
+	    <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	    <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script> 
+	    <script src="/awater/js/util_date.js" type="text/javascript"></script>
+	    <script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>
+	    <script src="/awater/js/common.js"></script> 
+  	</head>
+  
+  	<body>			
+		<div class="col-sm-12" style="padding:0 40px;">
+  			<div style="padding-bottom: 10px;">
+				<button class="btn btn-primary" type="button"  onclick="addData()">新增成员单位一雨一报</button>
+				<button class="btn btn-danger" type="button"  onclick="delData()">删除成员单位一雨一报</button>
+			</div>
+	    	<table id="table"></table>		
+		</div>
+  	</body>
+  	<script>
+		function getQueryStr(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = decodeURI(window.location.search).substr(1).match(reg);
+			if (r != null) 
+				return unescape(r[2]);
+			return "";
+		 }
+	 
+     	var districtUnitId=getQueryStr("districtUnitId");     
+	    
+		function format_time(value, row, index){
+			if(value)
+				return getLocalTime(value.time);
+			return '';
+		}
+	
+		function formatter_district(value, row, index){
+				return districtName;
+		}
+	
+		function formatter_detail(value, row, index){   	
+			return "<button class='btn btn-primary' type=\"button\"  onclick=openyyyb('"+row.id+"')>详情</button>";
+		}
+		
+		function closeLayer(index){
+			layer.close(index);
+		   	reloadData();
+	    }
+	    
+	    function queryParams(params) {
+	       	return {
+		        pageSize:params.limit,
+		        pageNo: params.offset/params.limit+1
+	        };
+	    }
+			    
+		var districtName;
+		$(function(){ 
+	    	$.ajax({
+				method : 'GET',
+				url : '/agsupport/om-org!getOrganizationName.action',
+				async : false,
+				success : function(data) {
+					districtName=data;		
+					$("#title").html(districtName+"一雨一报");
+				},
+				error : function(e) {
+					alert('error');
+				}
+			});
+			
+			var url;
+			if(districtUnitId=="")
+			   url=location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/ya-rain-report!getDistrictRainReport.action";
+			 else
+			   url=location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/ya-rain-report!getDistrictRainReport.action?districtUnitId="+districtUnitId;     
+			$("#table").bootstrapTable({
+				toggle:"table",
+				height:parent.$("#content-main").height()-150,			
+				url:url,
+				rowStyle:"rowStyle",
+				cache: false,
+				striped: true,
+				sidePagination: "server",
+				columns: [{visible:true,checkbox:true},
+				  {field: 'reportName',title: '雨报名称',align:'center'}, 
+		          {title: '成员单位',formatter:formatter_district,align:'center'},
+		          {field: 'rescuePeopleNumber',title: '出动救援人员',align:'center'}, 
+		          {field: 'rescueCarNumber',title: '出动救援车辆',align:'center'},
+		          {field: 'reportCreateTime',title: '报告时间',align:'center',formatter:format_time},
+		          {field: 'reportCreater',title: '报告人',align:'center'}, 
+		          {title: '详情', formatter:formatter_detail,align:'center'}]
+			});					
+		});	  
+		$(window).resize(function () {
+			$('#table').bootstrapTable('resetView');
+		});
+		function openyyyb(id){
+			var taburl="/awater/nnwaterSystem/EmergenControl/District/RainNews/list.html?id="+id;
+			parent.createNewtab(taburl,"防汛应急响应一雨一报");
+		}
+		
+		function addData(){
+			layer.open({
+				type: 2,
+				title: '选择市级一雨一报',
+				shadeClose: true,
+				shade: 0.5,
+				area: ['800px', '400px'],
+				content: '/awater/nnwaterSystem/EmergenControl/Municipal/RainNews/rainNew_list.html' //iframe的url
+			});
+		}
+	</script>
+</html>

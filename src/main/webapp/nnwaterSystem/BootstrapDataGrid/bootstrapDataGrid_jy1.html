@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+    
+	<script type="text/javascript">
+		function showPoint(){
+			var frames=window.parent.window.document.getElementById("main"); 
+			frames.contentWindow.getInfo(); 
+		}
+	</script>
+</head>
+
+<body style="background: rgba(194,233,255,0.8);">
+    <div class="animated fadeInRight">
+		<div class="col-sm-12">
+			<!-- Example Events -->
+			<div class="tabletitle"></div>
+			<table id="table" data-toggle="table"
+				   data-click-to-select="true"
+				   data-row-style="rowStyle"
+				   data-pagination="false"
+				   >
+				<thead>
+					<tr>
+						<th data-field="fid" class="hidden" >编号</th>
+						<th data-field="station_name">行政区</th>
+						<th data-field="jyl">平均雨量(mm)</th>
+						<th data-field="x" class="hidden" >x</th>
+						<th data-field="y" class="hidden" >y</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>江南区</td>
+						<td><span style="color:rgb(0,0,255);">122.44</span></td>
+						<td>108.27</td>
+						<td>22.78</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>兴宁区</td>
+						<td><span style="color:rgb(0,0,255);">112.78</span></td>
+						<td>108.36</td>
+						<td>22.867</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>青秀区</td>
+						<td><span style="color: rgb(0,0,255);">102.3</span></td>
+						<td>108.27</td>
+						<td>22.78</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>邕宁区</td>
+						<td><span style="color: rgb(0,100,255);">92.12</span></td>
+						<td>108.27</td>
+						<td>22.78</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>良庆区</td>
+						<td><span style="color: rgb(0,100,255);">82.26</span></td>
+						<td>108.34</td>
+						<td>22.74</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>西乡塘区</td>
+						<td><span style="color: rgb(0,255,255);">12</span></td>
+						<td>108.31</td>
+						<td>22.84</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- End Example Events -->
+		</div>
+    </div>
+    <script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script >
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/awater/js/common.js"></script>
+    	<script type="text/javascript">
+	
+		$(function () {           
+			window.parent.map.setZoom(1);
+			window.parent.hideAllLayer();
+			window.parent.map.getLayer("dis").show();
+			$("#table").on('post-body.bs.table', function (row,obj) {
+				$(".fixed-table-body").mCustomScrollbar({
+					mouseWheelPixels:300
+				});				
+			});
+			$("#table").on('click-row.bs.table', function (row,obj) {
+		        window.parent.locationPoint2(obj);
+	        });
+	        var options = {
+				id: 'rflegpopup',
+				content: "<iframe width='100%' height='100%' scrolling='no' frameborder='0' src='/awater/nnwaterSystem/legend/rainfallLegend.html'></iframe>",
+		        parentSelector: '#mapDiv',
+		        title: "降雨格点图例",
+				opacity: 1,
+				width: '50',
+				height: '250',
+				position: {my: "right bottom", at: "right bottom", of: "#mapDiv"}
+			}
+			new window.parent.NewPopup.NewPopupWin(options);
+		});
+	</script>
+</body>
+</html>

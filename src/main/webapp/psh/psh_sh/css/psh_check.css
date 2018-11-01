@@ -1,0 +1,94 @@
+
+/**农污地图样式*/
+.nweumul li:hover {
+    background: #87ceeb;
+}
+.col-sm-cous{
+    padding-right:0px;text-align:right;padding-top: 5px;margin-bottom:5px
+}
+/**滚动狂样式*/
+::-webkit-scrollbar-thumb{background-color:#999;}
+::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+.layui-layer-btn{
+    background: #eee;
+}
+.container_left {
+    width: 26%;
+    height: 100%;
+    float: left;
+
+}
+.container_left .map {
+    height: 100%;
+    border: 1px solid #ccc;
+}
+.list_container {
+    width: 100%;
+    height: 100%;
+}
+.report_left{
+    width: 30%;height:100%;float:left;
+}
+.report_right{
+    width:70%;float:right;height:100%;
+}
+.tables{
+    width: 100%;height:60%;overflow-y:auto;
+}
+/**bootstrap样式调整*/
+div .pagination-detail{
+    position: fixed;
+    bottom: 0;
+}
+div .pull-right .pagination{
+    position: fixed;
+    bottom: 0;
+    right:15px;
+}
+/**标签颜色*/
+.nav-tabs li a{
+    background-color: #eee;
+    color: #333;
+    border-radius: 5px 5px 0 0;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #efefef;
+    cursor: default;
+    background-color: #049fef;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+.nav-tabs li.active {
+    color: #efefef;
+    font-weight: bold;
+    z-index: 1000;
+}
+.active{
+    color: #777;
+    font-weight: 500;
+}
+/*.btn_l:hover {
+    background: url(/psxj/systemInfo/ssxjxt/style/blue/images/b_l_hover.png) no-repeat 0 0;
+}*/
+.a_btn_l_left {
+    background: url(/psxj/systemInfo/ssxjxt/style/blue/images/b_r.png) no-repeat 0 0;
+    width: 16px;
+    height: 67px;
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    z-index: 2000;
+}
+.a_btn_l_right {
+    background: url(/psxj/systemInfo/ssxjxt/style/blue/images/b_l_hover.png) no-repeat 0 0;
+    width: 16px;
+    height: 67px;
+    position: absolute;
+    top: 50%;
+    right: 30%;
+    z-index: 2000;
+}

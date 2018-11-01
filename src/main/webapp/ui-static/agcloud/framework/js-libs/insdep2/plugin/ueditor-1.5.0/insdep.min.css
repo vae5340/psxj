@@ -1,0 +1,65 @@
+/*insdep 2.0.x for 百度编辑器 1.5.0 兼容样式*/
+
+.edui-default{ line-height:normal !important;}
+.edui-default .edui-editor{
+	border: 1px solid #cccccc !important;
+	margin:1px 0 0;
+	-webkit-border-radius:0 !important;
+    -moz-border-radius:0 !important;
+    border-radius:0 !important;
+}
+.edui-default .edui-editor-bottomContainer td{    
+	font-family:"Microsoft YaHei","微软雅黑" !important; 
+}
+.edui-editor-bottomContainer{ background:#f2f2f2;}
+.edui-default .edui-editor-breadcrumb{ margin:0 !important;}
+.edui-editor-bottombar,.edui-editor-wordcount{ padding:5px 10px;}
+.edui-default .edui-editor-toolbarboxouter{    
+	background-color: #fafafa !important;
+    background-image: -moz-linear-gradient(top, #fafafa, #fafafa) !important;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#fafafa)) !important;
+    background-image: -webkit-linear-gradient(top, #fafafa, #fafafa) !important;
+    background-image: -o-linear-gradient(top, #fafafa, #fafafa) !important;
+    background-image: linear-gradient(to bottom, #fafafa, #fafafa) !important;}
+.edui-default .edui-popup-content{
+	-webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    border-radius: 0 !important;
+	webkit-box-shadow:1px 15px 35px 0 rgba(0,0,0,.2) !important;
+    -moz-box-shadow:1px 15px 35px 0 rgba(0,0,0,.2) !important;
+    box-shadow:1px 15px 35px 0 rgba(0,0,0,.2) !important;
+	}
+.edui-default .edui-for-fontfamily .edui-listitem-label{ line-height:22px !important;}
+.edui-default .edui-dialog-modalmask{ background-color:#000 !important;}
+.edui-default .edui-dialog-shadow{  
+  -moz-box-shadow: 1px 1px 50px rgba(0,0,0,.3) !important;
+  -webkit-box-shadow: 1px 1px 50px rgba(0,0,0,.3) !important;
+  box-shadow: 1px 1px 50px rgba(0,0,0,.3) !important;
+  filter: progid:DXImageTransform.Microsoft.Blur(pixelRadius=2,MakeShadow=false,ShadowOpacity=0.2) !important;
+  -moz-border-radius: 3px !important;
+  -webkit-border-radius: 3px !important;
+  border-radius: 3px !important;
+  border:none !important;
+}
+.edui-default .edui-dialog-body{padding:0 !important;}
+.edui-default .edui-dialog-titlebar{ 
+-moz-border-radius: 3px 3px 0 0 !important;
+-webkit-border-radius: 3px 3px 0 0 !important;
+border-radius: 3px 3px 0 0 !important;
+background:none !important;
+background-color:#f7f7f7 !important;
+border-bottom: 1px solid #e1e1e1 !important;
+}
+.edui-default .edui-dialog-titlebar,.edui-default .edui-dialog-draghandle{height:41px !important; line-height:41px !important;}
+.edui-default .edui-dialog-caption{ padding:0 0 0 15px !important;}
+.edui-default .edui-dialog-foot{
+-moz-border-radius:0 0 3px 3px !important;
+-webkit-border-radius:0 0 3px 3px !important;
+border-radius:0 0 3px 3px !important;
+	}
+.edui-default .edui-dialog-closebutton{right:5px;top:12px !important;}
+.edui-default .edui-dialog-buttons .edui-label{ line-height:24px !important;}
+.edui-default .edui-dialog-buttons .edui-okbutton .edui-button-body{ background-position: 0 -270px !important; color:#fff;}
+.edui-default .edui-dialog-buttons .edui-okbutton .edui-state-hover .edui-button-body{ background-position: 0 -300px !important;}
+
+.edui-default .edui-toolbar .edui-combox-body .edui-button-body{line-height: 20px !important;}

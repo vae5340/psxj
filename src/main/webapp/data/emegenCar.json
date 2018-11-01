@@ -1,0 +1,99 @@
+[
+  {
+    "id":"1",
+    "name": "管道疏通车",
+    "driver": "小明",
+    "company": "XYZ",
+    "x":108.272,
+    "y":22.823,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"2",
+     "name": "卡车",
+    "driver": "小文",
+     "company": "ZZZ",
+     "x":108.313,
+     "y":22.810,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "挖掘机",
+    "driver":  "小飞",
+    "company": "WES",
+    "x":108.264,
+    "y":22.794,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "管道开挖车",
+    "driver": "小青",
+    "company": "WWS",
+     "x":108.277,
+    "y":22.820,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}
+,{
+    "id":"1",
+    "name": "管道疏通车",
+    "driver": "小明",
+    "company": "XYZ",
+    "x":108.272,
+    "y":22.823,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"2",
+     "name": "卡车",
+    "driver": "小文",
+     "company": "ZZZ",
+     "x":108.313,
+     "y":22.810,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "挖掘机",
+    "driver":  "小飞",
+    "company": "WES",
+    "x":108.264,
+    "y":22.794,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "管道开挖车",
+    "driver": "小青",
+    "company": "WWS",
+     "x":108.277,
+    "y":22.820,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+},{
+    "id":"1",
+    "name": "管道疏通车",
+    "driver": "小明",
+    "company": "XYZ",
+    "x":108.272,
+    "y":22.823,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"2",
+     "name": "卡车",
+    "driver": "小文",
+     "company": "ZZZ",
+     "x":108.313,
+     "y":22.810,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "挖掘机",
+    "driver":  "小飞",
+    "company": "WES",
+    "x":108.264,
+    "y":22.794,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "管道开挖车",
+    "driver": "小青",
+    "company": "WWS",
+     "x":108.277,
+    "y":22.820,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}]

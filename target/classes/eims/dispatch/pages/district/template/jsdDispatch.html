@@ -1,0 +1,29 @@
+<div id="recordJsdDispatch" style="height:100%;">
+	<div style="height:calc( 100% - 45px );width:100%">
+		<form id="form" class="form-horizontal" style="height:100%">    			
+			<ul id="myTab" class="nav nav-tabs nav-justified" style="height:10%">
+				<li class="active"><a href="#comb" data-toggle="tab">人员调度</a></li>
+				<li><a href="#video" data-toggle="tab">物资调度</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content" style="height:90%">
+				<div class="tab-pane fade in active" id="comb" style="height:100%">
+					<div class="form-group" style="margin:0px;height:100%;">
+						<table id="table_team"></table>
+					</div>				     
+				</div>
+				<div class="tab-pane fade" id="video" style="height:100%">
+					<div class="form-group" style="margin:0px;height:100%;">
+						<table id="table_good"></table>
+					</div>
+				</div>
+			</div>			
+		</form>    
+	</div>	  
+    <div style="width:100%;height:45px;padding-top:5px;border-top:1px solid #e7eaec;bottom:2px;position:absolute">
+		<div class="col-sm-4 col-sm-offset-10">
+			<button class="btn btn-primary" type="button" id="save" style="margin-left:20px">保存</button>
+			<button class="btn btn-primary" type="button" id="close" style="display:none;margin-left:20px">关闭</button>
+		</div>
+	</div>
+</div>
+

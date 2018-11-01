@@ -1,0 +1,1947 @@
+<link href="/psxj/systemInfo/js/viewer/build.css" rel="stylesheet"/>
+ <!-- 图片预览插件 -->
+ <link href="/psxj/systemInfo/js/viewer/viewer.min.css" rel="stylesheet"/>
+ <script type="text/javascript" src="/psxj/systemInfo/js/viewer/viewer.min.js"></script>
+<style>
+	.layui-layer-setwin .layui-layer-min {
+	    position: relative;
+	    width: 16px;
+	    height: 16px;
+	    margin-left: 10px;
+	    font-size: 12px;
+	    _overflow: hidden;
+	    display:none;
+	}
+	.seperatorClose_map {
+		font-weight: 600;
+	    position: absolute;
+	    width: 25px;
+	    height: 40px;
+	    top:3px;
+	    background-color: #ffffff;
+	    border-radius: 5px 0 0 5px;
+	   /*  background-image: url(/psxj/img/left_btn_open.png); */
+	    /**background-image: url(../img/left_btn_close.png);*/
+	    background-position: center !important;
+	    background-repeat: no-repeat;
+	    border-color: #a0a1a3;
+	    border-image: none;
+	    border-style: solid none solid solid;
+	    border-width: 1px 0px 1px 1px;
+	    cursor: pointer;
+	    z-index: 10000000;
+	   /*  background: #fff url(/psxj/img/left_btn_close.png) no-repeat 2 26; */
+	}
+	.query_cx{
+		width: 2px;
+	    height: 100%;
+	    margin-top: -44px;
+	    margin-left: 7px;
+	}
+	.query_img{
+		width: 2px;
+	    height: 100%;
+	    margin-top: 10px;
+	}
+	.query_btn{
+		    top: 3px;
+		    right: 25px;
+		    background: #eee;
+		    width: 360px;
+		    height: 400px;
+		    position: absolute;
+		    display: block;
+		    z-index: 9999;
+		    opacity: 0.9;
+		    display:none;
+	}
+	.selected_map{background: #f7d791;}
+	.query{width: 80px;}
+	.dropdown-menu {
+	    border: medium none;
+	    display: none; 
+	    float: left; 
+	    font-size: 14px; 
+	    font-weight: 700;
+	    left: 0;
+	    list-style: none outside none;
+	    padding: 0;
+	    position: absolute;
+	    text-shadow: none;
+	    top: 100%;
+	    z-index: 1000;
+	    border-radius: 0;
+	    box-shadow: 0 0 3px rgba(86,96,117,.3);
+	}
+	.layui-layer-btn0{
+	border-color:#55f955;
+	background-color: #55f955;
+	color:#fff
+	}
+	.layui-layer-btn1{
+	border-color:#fdfd4f;
+	background-color: #fdfd4f;
+	color:#fff
+	}
+</style>
+<div class="container" style="width: 105%;margin-left: -10px;height:100%">
+	<div class="row clearfix" style="height:100%">
+		<div class="col-md-12 column" style="padding: 10px;height:46px;left: 10px;">
+			<botton type="button" class="btn btn-success" id="btn_mapRefsush">刷新地图</botton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<div class="checkbox checkbox-primary checkbox-inline">
+				<input type="checkbox" class="styled" id="check_map"/>
+				<label for="check_map">
+					管网数据
+				</label>
+			</div>
+			<div class="checkbox checkbox-primary checkbox-inline">
+				<input type="checkbox" class="styled" id="check_wtsb"/>
+				<label for="check_wtsb">
+					问题上报
+				</label>
+			</div>
+			<div class="checkbox checkbox-primary checkbox-inline">
+				<input type="checkbox" class="styled" id="check_check" checked/>
+				<label for="check_check">
+					上报数据
+				</label>
+			</div>
+			<div style="width: 100%;height: 80%;">
+				<div id="seperator_map" class="seperatorClose_map" style="right: 25px;">
+					<div class="query_img">
+						<img id="query_img" src="img/left_btn_open.png"></img>
+					</div>
+					<div class="query_cx">
+						<span>筛选</span>
+					</div>
+				</div>
+				<div class="query_btn" id="query_search_map">
+					<div class="col-md-12 column" >
+						<form class="form-horizontal">
+						<div class="form-group area" style="margin-left: 5px;">
+							<button type="button" class="btn btn-default query selected_map" id="allArea" value="">全部</button>
+							<button type="button" class="btn btn-default query" value="天河">天河区</button>
+							<button type="button" class="btn btn-default query" value="番禺">番禺区</button>
+							<button type="button" class="btn btn-default query" value="黄埔">黄埔区</button>
+							<button type="button" class="btn btn-default query" value="白云">白云区</button>
+							<button type="button" class="btn btn-default query" value="南沙">南沙区</button>
+							<button type="button" class="btn btn-default query" value="海珠">海珠区</button>
+							<button type="button" class="btn btn-default query" value="荔湾">荔湾区</button>
+							<button type="button" class="btn btn-default query" value="花都">花都区</button>
+							<button type="button" class="btn btn-default query" value="越秀">越秀区</button>
+							<button type="button" class="btn btn-default query" value="增城">增城区</button>
+							<button type="button" class="btn btn-default query" value="从化">从化区</button>
+							<button type="button" class="btn btn-default query" value="净水">净水公司</button>
+						</div>
+						<div class="form-group type" style="margin-left: 5px;">
+							<button type="button" class="btn btn-default query selected_map" id="allType" value="">全部</button>
+							<button type="button" class="btn btn-default query" value="窨井">窨井</button>
+							<button type="button" class="btn btn-default query" value="雨水口">雨水口</button>
+							<button type="button" class="btn btn-default query" value="排放口">排放口</button>
+						</div>
+						<div class="form-group" style="height: 25px;">
+							<label class="col-sm-3 control-label">上报编号:</label>
+							<div class="col-sm-9">
+								<input  id="objectId" name="objectId" class="form-control" ></input>
+							</div>
+						</div>
+						<div class="form-group" style="height: 25px;">
+							<label class="col-sm-3 control-label">所在道路:</label>
+							<div class="col-sm-9">
+								<input  id="road" name="road" class="form-control" ></input>
+							</div>
+						</div>
+						<div class="form-group" style="height: 25px;">
+							<label class="col-sm-3 control-label">上报人:</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="markPersonTo" name="markPersonTo" />
+							</div>
+						</div>
+						<div class="form-group" style="height: 25px;">
+							<label class="col-sm-3 control-label">开始时间:</label>
+							<div class="col-sm-9">
+								<input type="text" class="controls input-append date form_date form-control"  style="background-color: white;cursor: pointer;" id="startTime" name="startTime" data-date-format="yyyy-mm-dd hh:ii" readonly/>
+							</div>
+						</div>
+						<div class="form-group" style="height: 25px;">
+							<label class="col-sm-3 control-label">结束时间:</label>
+							<div class="col-sm-9">
+								<input type="text" class="controls input-append date form_date form-control"  style="background-color: white;cursor: pointer;" id="endTime" name="endTime" data-date-format="yyyy-mm-dd hh:ii:ss" readonly/>
+							</div>
+						</div>
+						<div class="form-group" style="text-align: center;font-weight:600;">
+							<button type="button" class="btn btn-default" id="resfush_query" style="width:35%;">重置</button>
+							<button type="button" class="btn btn-default" id="resfush_search" style="width:35%;background: #0672a7;">查询</button>
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-md-12 column" style="height:calc( 100% - 46px );">
+			<div class="panel-group" id="panel-top" style="height:100%">
+				<div class="panel panel-default" id="mainTable" style="overflow-y:scroll;height:100%">
+					<div class="panel panel-default" >
+						<div class="panel-heading"  style="background:#fb4a4a;">
+							 <a class="panel-title" data-toggle="collapse" data-parent="#panel-top" href="#panel-element-one">未审核<span id="oneNum">(0)</span></a>
+						</div>
+						<div id="panel-element-one" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="wrapper wrapper-content" style="padding:0">
+									<div class="col-sm-12 column" style="padding:0">
+									    <!--tab标题-->
+										<ul id="myTab1" class="nav nav-tabs nav-justified">
+											 <li class="active" id="lack_one_li"><a href="#lack_one_Tab" data-toggle="tab">数据新增</a></li>
+											 <li id="lackQr_one_li"><a href="#lackQr_one_Tab" data-toggle="tab">数据确认</a></li>
+								             <li id="correct_one_li"><a href="#correct_one_Tab" data-toggle="tab">数据纠错</a></li>
+								         </ul>
+										<!--tab内容-->
+								        <div id="myTabContent" class="tab-content" style="margin-top:0px;overflow-x: hidden; overflow-y: auto; height: 100% width:auto;">
+								            <div class="tab-pane fade in active" style="margin-top:5px" id="lack_one_Tab">
+								                <table id="table-one-lack"  class="table table-hover table-condensed"></table>
+								            </div>
+								            <div class="tab-pane" style="margin-top:5px" id="lackQr_one_Tab">
+								                <table id="table-one-lackQr"  class="table table-hover table-condensed"></table>
+								            </div>
+								            <div  class="tab-pane" style="margin-top:5px" id="correct_one_Tab">
+								                <table id="table-one-correct"  class="table table-hover table-condensed"></table>
+								            </div>
+								        </div>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" style="background:#55f955;">
+							 <a class="panel-title" data-toggle="collapse" data-parent="#panel-top" href="#panel-element-two">审核通过<span id="twoNum">(0)</span></a>
+						</div>
+						<div id="panel-element-two" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="wrapper wrapper-content" style="padding:0">
+									<div class="col-sm-12 column" style="padding:0">
+									    <!--tab标题-->
+										<ul id="myTab2" class="nav nav-tabs nav-justified">
+											<li class="active" id="lack_two_li"><a href="#lack_two_Tab" data-toggle="tab">数据新增</a></li>
+											<li id="lackQr_two_li"><a href="#lackQr_two_Tab" data-toggle="tab">数据确认</a></li>
+								            <li id="correct_two_li"><a href="#correct_two_Tab" data-toggle="tab">数据纠错</a></li>
+								         </ul>
+										<!--tab内容-->
+								        <div id="myTabContent2" class="tab-content" style="margin-top:0px;overflow-x: hidden; overflow-y: auto; height: 100% width:auto;">
+								            <div class="tab-pane fade in active" style="margin-top:5px" id="lack_two_Tab">
+								                <table id="table-two-lack" class="table table-hover table-condensed"></table>
+								            </div>
+								            <div class="tab-pane" style="margin-top:5px" id="lackQr_two_Tab">
+								                <table id="table-two-lackQr"  class="table table-hover table-condensed"></table>
+								            </div>
+								            <div  class="tab-pane" style="margin-top:5px" id="correct_two_Tab">
+								                <table id="table-two-correct" class="table table-hover table-condensed"></table>
+								            </div>
+								         </div>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" style="background:#fdfd4f;">
+							 <a class="panel-title" data-toggle="collapse" data-parent="#panel-top" href="#panel-element-three">存在疑问<span id="threeNum">(0)</span></a>
+						</div>
+						<div id="panel-element-three" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="wrapper wrapper-content" style="padding:0">
+									<div class="col-sm-12 column" style="padding:0">
+									    <!--tab标题-->
+										<ul id="myTab3" class="nav nav-tabs nav-justified">
+											<li class="active" id="lack_three_li"><a href="#lack_three_Tab" data-toggle="tab">数据新增</a></li>
+											<li id="lackQr_three_li"><a href="#lackQr_three_Tab" data-toggle="tab">数据确认</a></li>
+								            <li id="correct_three_li"><a href="#correct_three_Tab" data-toggle="tab">数据纠错</a></li>
+								        </ul>
+										<!--tab内容-->
+								        <div id="myTabContent3" class="tab-content" style="margin-top:0px;overflow-x: hidden; overflow-y: auto; height: 100% width:auto;">
+								            <div class="tab-pane fade in active" style="margin-top:5px" id="lack_three_Tab">
+								                <table id="table-three-lack" class="table table-hover table-condensed"></table>
+								            </div>
+								            <div class="tab-pane" style="margin-top:5px" id="lackQr_three_Tab">
+								                <table id="table-three-lackQr"  class="table table-hover table-condensed"></table>
+								            </div>
+								            <div  class="tab-pane" style="margin-top:5px" id="correct_three_Tab">
+								                <table id="table-three-correct" class="table table-hover table-condensed"></table>
+								            </div>
+								        </div>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default" id="notSync_all" style="display:none;">
+						<div class="panel-heading" style="background:#D94600;">
+							 <a class="panel-title" data-toggle="collapse" data-parent="#panel-top" href="#panel-element-four">未同步<span id="fourNum">(0)</span></a>
+						</div>
+						<div id="panel-element-four" class="panel-collapse collapse">
+							<div class="panel-body">
+								<div class="wrapper wrapper-content" style="padding:0;">
+									<div class="col-sm-12 column" style="padding:0;margin-top:-10px;">
+										<botton type="button" class="btn btn-success" id="btn_formSync" style="margin-left:80%;">一键同步</botton>
+									    <!--tab标题-->
+								        <table id="table-four-correctAndLack" class="table table-hover table-condensed" style="color:#3385ff;font-weight:bold;margin-top:-5px;"></table>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+var table_arr_lack = ["#table-one-lack","#table-two-lack","#table-three-lack"];
+var height = document.getElementById("mapDiv").offsetHeight - 260;
+//数据新增列表	
+
+/* var height = document.getElementById("mapDiv").offsetHeight - 230;
+console.log(height); */
+/**
+ * 隐藏同步列表（未启用）
+ * */
+var Table_correctAndLack= function(){
+	Table_correctAndLack = new Object();
+	Table_correctAndLack.init = function(){
+		$("#table-four-correctAndLack").bootstrapTable({
+			method: 'get',
+			//toggle:"tableCell",
+			url:'/psxj/correctMark/getCorrectAndLackMarks',
+			method: 'get',
+			//rowStyle:"rowStyle",
+			cache:false,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination: 'client',
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [10, 50, 100],
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'isAddFeature',title:'是否同步',visible: false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{title:'设施类型',visible:true,align:'center',formatter: format_comb_type},
+				{field:'source',title:'上报类型',visible:true,align:'center',formatter: format_source},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date}
+				],
+			onDblClickRow: function(row){
+				var openUrl="",titleName="";
+				if(row.source == 'lack'){
+				 	openUrl ='/psxj/systemInfo/ssxjxt/problem_report/parts_lack/lackInput.html?id='+row.id;
+					titleName="新增";
+				}
+				if(row.source == 'correct'){
+					openUrl ='/psxj/systemInfo/ssxjxt/problem_report/parts_correct/correctInput.html?id='+row.id;
+	             	titleName="校核";
+				} 
+				  //iframe窗
+                  layer.open({
+               	   type: 2,
+              			area: ['1050px', '550px'],
+              			maxmin: true,
+              			zIndex:20000,
+              			title : "查看"+titleName+"信息",	
+              			btn:['修改','取消'],
+              			content: [openUrl, 'yes'],
+						btn1: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			updateThis($(form).serializeArray(),row.source,index);
+                   		}
+                  });
+	         }
+		});
+	}
+	return Table_correctAndLack;
+}
+//数据确认列表1	
+var Table_layer_lackQr_one=function(tableId){
+	Table_layer_lackQr_one = new Object();
+    Table_layer_lackQr_one.total = 0,
+	Table_layer_lackQr_one.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			//url:'/psxj/lack-mark!getLackMarks.action?sblx=1',
+			url:'/psxj/correctMark/getCorrectMarks?sblx=1',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_lackQr_one.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'上报人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date},
+				{title:'操作',visible:true,align:'center',width:150,formatter: format_oper_correct_one}],
+            /*onLoadSuccess:function (data) {
+                if(data && typeof data =='object'){
+                    Table_layer_lackQr_one.total =  data.rows.length;
+                    refreshTableTotal("#oneNum","one");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	    type: 2,
+               			area: ['1050px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			title : "查看确认信息",	
+               			btn:['通过','疑问','删除','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_correct/correctInput.html?id='+row.id+'&title=qr', 'yes'],
+                   		btn1: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updatePass($(form).serializeArray(),"correct",index);
+                   		},
+                   		btn2: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDoubt($(form).serializeArray(),"correct",index);
+                   		},
+                   		btn3: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDel($(form).serializeArray(),"correct",index);
+                   		},success: function(layero){
+						    layero.find('.layui-layer-min').hide();
+						    layero.find('.layui-layer-btn0')[0].style.borderColor="#55f955";
+						    layero.find('.layui-layer-btn0')[0].style.color="black";
+						    layero.find('.layui-layer-btn0')[0].style.backgroundColor ="#55f955";
+						    layero.find('.layui-layer-btn1')[0].style.color="black";
+						    layero.find('.layui-layer-btn1')[0].style.backgroundColor ="#fdfd4f";
+						    layero.find('.layui-layer-btn2')[0].style.color="black";
+						    layero.find('.layui-layer-btn2')[0].style.backgroundColor ="#fb4a4a";
+						}
+                   });
+               }
+		});
+	},
+	Table_layer_lackQr_one.queryParms=function(params){
+		var temp = {
+			pageSize : params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'1',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        componentType:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_lackQr_one;
+}
+//数据新增列表1	
+var Table_layer_lack_one=function(tableId){
+	Table_layer_lack_one = new Object();
+    Table_layer_lack_one.total = 0,
+	Table_layer_lack_one.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			url:'/psxj/lackMark/getLackMarks',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_lack_one.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date},
+				{title:'操作',visible:true,align:'center',width:150,formatter: format_oper_lack_one}],
+            /*onLoadSuccess:function (data) {
+                if(data && typeof data =='object'){
+                    Table_layer_lack_one.total =  data.rows.length;
+                    refreshTableTotal("#oneNum","one");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	    type: 2,
+               			area: ['650px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			title : "查看新增信息",	
+               			btn:['通过','疑问','删除','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_lack/lackInput.html?id='+row.id, 'yes'],
+                   		btn1: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updatePass($(form).serializeArray(),"lack",index);
+                   		},
+                   		btn2: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDoubt($(form).serializeArray(),"lack",index);
+                   		},
+                   		btn3: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDel($(form).serializeArray(),"lack",index);
+                   		},success: function(layero){
+						    layero.find('.layui-layer-min').hide();
+						    layero.find('.layui-layer-btn0')[0].style.borderColor="#55f955";
+						    layero.find('.layui-layer-btn0')[0].style.color="black";
+						    layero.find('.layui-layer-btn0')[0].style.backgroundColor ="#55f955";
+						    layero.find('.layui-layer-btn1')[0].style.color="black";
+						    layero.find('.layui-layer-btn1')[0].style.backgroundColor ="#fdfd4f";
+						    layero.find('.layui-layer-btn2')[0].style.color="black";
+						    layero.find('.layui-layer-btn2')[0].style.backgroundColor ="#fb4a4a";
+						}
+                   });
+               }
+		});
+	},
+	Table_layer_lack_one.queryParms=function(params){
+		var temp = {
+			pageSize : params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'1',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        componentType:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_lack_one;
+}
+//数据纠错列表1
+var Table_layer_correct_one=function(tableId){
+	Table_layer_correct_one = new Object();
+    Table_layer_correct_one.total = 0,
+	Table_layer_correct_one.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			url:'/psxj/correctMark/getCorrectMarks',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			//height: height,
+			clickToSelect: true,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5, 10, 50, 100],
+			queryParams: Table_layer_correct_one.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'usid',title:'设施编号',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date},
+				{title:'操作',visible:true,align:'center',width:150,formatter: format_oper_correct_one}],
+            /*onLoadSuccess:function (data) {
+                if(data && typeof data =='object'){
+                    Table_layer_correct_one.total =  data.rows.length;
+                    refreshTableTotal("#oneNum","one");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	   type: 2,
+               			area: ['1050px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			fixed: true,
+               			shade: 0,
+               			zIndex:2000,
+               			title : "查看纠错信息",	
+               			btn:['通过','疑问','删除','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_correct/correctInput.html?id='+row.id, 'yes'],
+						btn1: function(index,layero){
+							var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+							updatePass($(form).serializeArray(),"correct",index);
+                   			//updateThis($(form).serializeArray(),"correct",index);
+                   		},
+                   		btn2: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDoubt($(form).serializeArray(),"correct",index);
+                   			//doubt(form.id,form.checkState,"lack");
+                   		},
+                   		btn3: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDel($(form).serializeArray(),"correct",index);
+                   			//doubt(form.id,form.checkState,"lack");
+                   		},success: function(layero){
+						    layero.find('.layui-layer-min').hide();
+						    layero.find('.layui-layer-btn0')[0].style.borderColor="#55f955";
+						    layero.find('.layui-layer-btn0')[0].style.color="black";
+						    layero.find('.layui-layer-btn0')[0].style.backgroundColor ="#55f955";
+						    layero.find('.layui-layer-btn1')[0].style.color="black";
+						    layero.find('.layui-layer-btn1')[0].style.backgroundColor ="#fdfd4f";
+						    layero.find('.layui-layer-btn2')[0].style.color="black";
+						    layero.find('.layui-layer-btn2')[0].style.backgroundColor ="#fb4a4a";
+						    $(".layui-layer-max").click(function(){
+						    	layero.find('.layui-layer-min').hide();
+						    });
+						}
+                   });
+             }
+		});
+	},
+	Table_layer_correct_one.queryParms=function(params){
+		var temp = {
+			pageSize: params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'1',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        layerName:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_correct_one;
+}
+//数据确认列表2	
+var Table_layer_lackQr_two=function(tableId){
+	Table_layer_lackQr_two = new Object();
+    Table_layer_lackQr_two.total = 0,
+	Table_layer_lackQr_two.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			//url:'/psxj/lack-mark!getLackMarks.action?sblx=1',
+			url:'/psxj/correctMark/getCorrectMarks?sblx=1',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_lackQr_two.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date}],
+            /*onLoadSuccess:function (data) {
+                if(data && typeof data =='object'){
+                    Table_layer_lackQr_two.total =  data.rows.length;
+                    refreshTableTotal("#twoNum","two");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	   type: 2,
+               			area: ['1050px', '550px'],
+               			zIndex:20000,
+               			maxmin: true,
+               			title : "查看确认信息",	
+               			btn:['确定','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_correct/correctInput.html?id='+row.id+'&title=qr', 'yes']
+                   });
+               }
+		});
+	},
+	Table_layer_lackQr_two.queryParms=function(params){
+		var temp = {
+			pageSize:params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'2',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        componentType:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_lackQr_two;
+}
+//数据新增列表2	
+var Table_layer_lack_two=function(tableId){
+	Table_layer_lack_two = new Object();
+    Table_layer_lack_two.total = 0,
+	Table_layer_lack_two.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			url:'/psxj/lackMark/getLackMarks',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_lack_two.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date}],
+            /*onLoadSuccess:function (data) {
+                 if(data.rows && typeof data.rows =='object'){
+                    Table_layer_lack_two.total =  data.rows.length;
+                    refreshTableTotal("#twoNum","two");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	   type: 2,
+               			area: ['650px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			title : "查看新增信息",	
+               			btn:['确定','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_lack/lackInput.html?id='+row.id, 'yes']
+                   });
+               }
+		});
+	},
+	Table_layer_lack_two.queryParms=function(params){
+		var temp = {
+			pageSize:params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'2',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        componentType:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_lack_two;
+}
+//数据纠错列表2
+var Table_layer_correct_two=function(tableId){
+	Table_layer_correct_two = new Object();
+    Table_layer_correct_two.total = 0,
+	Table_layer_correct_two.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			url:'/psxj/correctMark/getCorrectMarks',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_correct_two.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'usid',title:'设施编号',visible:false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date}],
+           /* onLoadSuccess:function (data) {
+                if(data.rows && typeof data.rows =='object'){
+                    Table_layer_correct_two.total =  data.rows.length;
+                    refreshTableTotal("#twoNum","two");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	   type: 2,
+               			area: ['1050px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			title : "查看纠错信息",	
+               			btn:['确定','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_correct/correctInput.html?id='+row.id, 'yes']
+
+                   });
+             }
+		});
+	},
+	Table_layer_correct_two.queryParms=function(params){
+		var temp = {
+			pageSize:params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'2',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        layerName:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_correct_two;
+}
+//数据确认列表3	
+var Table_layer_lackQr_three=function(tableId){
+	Table_layer_lackQr_three = new Object();
+    Table_layer_lackQr_three.total = 0,
+	Table_layer_lackQr_three.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			//url:'/psxj/lack-mark!getLackMarks.action?sblx=1',
+			url:'/psxj/correctMark/getCorrectMarks?sblx=1',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			//height: height,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_lackQr_three.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date},
+				{title:'操作',visible:true,align:'center',formatter: format_oper_correct_three}],
+            /*onLoadSuccess:function (data) {
+                if(data && typeof data =='object'){
+                    Table_layer_lackQr_three.total =  data.rows.length;
+                    refreshTableTotal("#threeNum","three");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	   type: 2,
+               			area: ['1050px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			title : "查看确认信息",	
+               			btn:['通过','删除','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_correct/correctInput.html?id='+row.id+'&title=qr', 'yes'],
+                   		btn1: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updatePass($(form).serializeArray(),"correct",index);
+                   			//pass(form.id,form.checkState,"lack");
+                   		},btn2: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDel($(form).serializeArray(),"correct",index);
+                   			//pass(form.id,form.checkState,"lack");
+                   		},success: function(layero){
+						    layero.find('.layui-layer-min').hide();
+						    layero.find('.layui-layer-btn0')[0].style.borderColor="#55f955";
+						    layero.find('.layui-layer-btn0')[0].style.color="black";
+						    layero.find('.layui-layer-btn0')[0].style.backgroundColor ="#55f955";
+						    layero.find('.layui-layer-btn1')[0].style.color="black";
+						    layero.find('.layui-layer-btn1')[0].style.backgroundColor ="#fb4a4a";
+						}
+                   });
+               }
+		});
+	},
+	Table_layer_lackQr_three.queryParms=function(params){
+		var temp = {
+			pageSize:params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'3',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        componentType:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_lackQr_three;
+}
+//数据新增列表3	
+var Table_layer_lack_three=function(tableId){
+	Table_layer_lack_three = new Object();
+    Table_layer_lack_three.total = 0,
+	Table_layer_lack_three.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			url:'/psxj/lackMark/getLackMarks',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			//height: height,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_lack_three.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date},
+				{title:'操作',visible:true,align:'center',formatter: format_oper_lack_three}],
+           /* onLoadSuccess:function (data) {
+                if(data && typeof data =='object'){
+                    Table_layer_lack_three.total =  data.rows.length;
+                    refreshTableTotal("#threeNum","three");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	   type: 2,
+               			area: ['650px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			title : "查看新增信息",	
+               			btn:['通过','删除','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_lack/lackInput.html?id='+row.id, 'yes'],
+                   		btn1: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updatePass($(form).serializeArray(),"lack",index);
+                   			//pass(form.id,form.checkState,"lack");
+                   		},btn2: function(index,layero){
+                   			var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+                   			//updateThis($(form).serializeArray(),"lack",index);
+                   			updateDel($(form).serializeArray(),"lack",index);
+                   			//pass(form.id,form.checkState,"lack");
+                   		},success: function(layero){
+						    layero.find('.layui-layer-min').hide();
+						    layero.find('.layui-layer-btn0')[0].style.borderColor="#55f955";
+						    layero.find('.layui-layer-btn0')[0].style.color="black";
+						    layero.find('.layui-layer-btn0')[0].style.backgroundColor ="#55f955";
+						    layero.find('.layui-layer-btn1')[0].style.color="black";
+						    layero.find('.layui-layer-btn1')[0].style.backgroundColor ="#fb4a4a";
+						}
+                   });
+               }
+		});
+	},
+	Table_layer_lack_three.queryParms=function(params){
+		var temp = {
+			pageSize:params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'3',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        componentType:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_lack_three;
+}
+//数据纠错列表3
+var Table_layer_correct_three=function(tableId){
+	Table_layer_correct_three = new Object();
+    Table_layer_correct_three.total = 0,
+	Table_layer_correct_three.Init=function(){
+		$(tableId).bootstrapTable({
+			method: 'get',
+			toggle:"tableCell",
+			url:'/psxj/correctMark/getCorrectMarks',
+			method: 'get',
+			rowStyle:"rowStyle",
+			cache:false,
+			//height: height,
+			pagination:true,
+			dataType:'json',
+			striped:true,
+			sidePagination:"server",
+			pageNumber: 1,
+		    pageSize: 5,                       
+		    pageList: [5,10, 50, 100],
+			queryParams: Table_layer_correct_three.queryParms,
+			clickToSelect:true,
+			columns:[
+				{field:'id',title:'编号',visible:false,algin:'center'},
+				{field:'markPersonId',title:'标识人编号',visible:false,align:'center'},
+				{field:'checkState',title:'审批状态',visible:false,align:'center'},
+				{field:'usid',title:'设施编号',visible:false,align:'center'},
+				{field:'x',visible:false,align:'center'},
+				{field:'y',visible:false,align:'center'},
+				{field:'markPerson',title:'上报人',visible:true,align:'center'},
+				{field:'layerName',title:'设施类型',visible:true,align:'center'},
+				{field:'markTime',title:'上报时间',visible:true,align:'center',formatter: format_date},
+				{title:'操作',visible:true,align:'center',formatter: format_oper_correct_three}],
+           /* onLoadSuccess:function (data) {
+                if(data && typeof data =='object'){
+                    Table_layer_correct_three.total =  data.rows.length;
+                    refreshTableTotal("#threeNum","three");
+                }
+            },*/
+			onDblClickRow: function(row){
+                   //iframe窗
+                   layer.open({
+                	   type: 2,
+               			area: ['1050px', '550px'],
+               			maxmin: true,
+               			zIndex:20000,
+               			title : "查看校核信息",	
+               			btn:['通过','删除','取消'],
+               			content: ['/psxj/systemInfo/ssxjxt/problem_report/parts_correct/correctInput.html?id='+row.id, 'yes'],
+						btn1: function(index,layero){
+							var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+							updatePass($(form).serializeArray(),"correct",index);
+                   			//updateThis($(form).serializeArray(),"correct",index);
+                   		},btn2: function(index,layero){
+							var form = $(layero).find("iframe")[0].contentWindow.document.getElementById("corrack");
+							updateDel($(form).serializeArray(),"correct",index);
+                   			//updateThis($(form).serializeArray(),"correct",index);
+                   		},success: function(layero){
+						    layero.find('.layui-layer-min').hide();
+						    layero.find('.layui-layer-btn0')[0].style.borderColor="#55f955";
+						    layero.find('.layui-layer-btn0')[0].style.color="black";
+						    layero.find('.layui-layer-btn0')[0].style.backgroundColor ="#55f955";
+						    layero.find('.layui-layer-btn1')[0].style.color="black";
+						    layero.find('.layui-layer-btn1')[0].style.backgroundColor ="#fb4a4a";
+						    $(".layui-layer-max").click(function(){
+						    	layero.find('.layui-layer-min').hide();
+						    });
+						}
+                   });
+             }
+		});
+	},
+	Table_layer_correct_three.queryParms=function(params){
+		var temp = {
+			pageSize:params.limit,
+	        pageNo: params.offset/params.limit+1,
+	        checkState:'3',
+	        parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        layerName:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+		};
+		return temp;
+	}
+	return Table_layer_correct_three;
+}
+//数据纠错操作1
+function format_oper_correct_one(val,row,index){
+	var b ='<button type="button" class="btn btn-primary btn-xs" onclick="pass('+row.id+','+row.checkState+',\'correct\'' +')">通过</button>';
+	var	a='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="doubt('+row.id+','+row.checkState+',\'correct\''+')">疑问</button>';
+	var	c='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="del('+row.id+',\'modify\',\'correct\''+')">删除</button>';
+	return b+a+c; 
+}
+//数据新增操作1
+function format_oper_lack_one(val,row,index){
+	var b ='<button type="button" class="btn btn-primary btn-xs" onclick="pass('+row.id+','+row.checkState+',\'lack\'' +')">通过</button>';
+	var	a='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="doubt('+row.id+','+row.checkState+',\'lack\''+')">疑问</button>';
+	var	c='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="del('+row.id+',\'add\',\'lack\''+')">删除</button>';
+	return b+a+c; 
+}
+//数据确认操作1
+function format_oper_lackQr_one(val,row,index){
+	var b ='<button type="button" class="btn btn-primary btn-xs" onclick="pass('+row.id+','+row.checkState+',\'correct\'' +')">通过</button>';
+	var	a='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="doubt('+row.id+','+row.checkState+',\'correct\''+')">疑问</button>';
+	var	c='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="del('+row.id+',\'confirm\',\'correct\''+')">删除</button>';
+	return b+a+c; 
+}
+//数据纠错操作3
+function format_oper_correct_three(val,row,index){
+	var b ='<button type="button" class="btn btn-primary btn-xs" onclick="pass('+row.id+','+row.checkState+',\'correct\'' +')">通过</button>';
+	var c='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="del('+row.id+',\'confirm\',\'correct\''+')">删除</button>';
+	return b+c; 
+}
+//数据新增操作3
+function format_oper_lack_three(val,row,index){
+	var b ='<button type="button" class="btn btn-primary btn-xs" onclick="pass('+row.id+','+row.checkState+',\'lack\'' +')">通过</button>';
+	var c='&nbsp;<button type="button" class="btn btn-primary btn-xs" onclick="del('+row.id+',\'add\',\'lack\''+')">删除</button>';
+	return b+c; 
+}
+//格式化数据源
+function format_source(val,row,index){
+	if(val){
+		if(val=='correct') return '校核';
+		if(val=='lack') return '上报';
+	}else{
+		return '';
+	}
+}
+//同步按钮操作
+function format_comb_type(val,row,index){
+	if(row.source == 'correct' && row.layerName){
+		return row.layerName;
+	}else if(row.source == 'lack' && row.componentType){
+		return row.componentType;
+	}
+}
+//格式化时间
+function format_date(val,rows,index){
+	if(val.time && val.time)
+		return getLocalTime(val.time);
+	else if(typeof(val)=="number" )
+		return getLocalTime(val);
+	else
+		return "";
+}
+function pass(thisId,checkState,thisType){
+	layer.open({
+	  type: 1,
+	  area: ['420px', '220px'], //宽高
+	  content: '<form  role="form"><div class="form-group"><label class="col-sm-2 control-label" for="reasion">原因:</label>'+
+			   '<div class="col-sm-10"><textarea class="form-control" id="reasion" rows="3"></textarea></div></div></form>',
+	  btn:['提交', '取消'],
+	  yes:function(index,layero){
+		  var reasion=$("#reasion").val();
+	        $.ajax({
+	            type: 'post',
+	            url: "/" + serverName + "/correctMark/checkForm",
+	            data:{
+	            	'id': thisId,
+	            	isCheck:thisType,
+	            	checkState:'2',
+	            	checkDesription:reasion
+	           	},
+	            dataType: 'json',
+	            success: function (result) {
+	                if(result.success){
+	                    layer.alert("审核成功!");
+	                    layer.close(index);
+	                    initNum();
+	                    if(thisType=="correct"){
+	                    	if(checkState==1){
+	                    		$("#table-one-correct").bootstrapTable('refresh');
+	                    		$("#table-one-lackQr").bootstrapTable('refresh');
+	                    	}else{
+	                    		$("#table-three-correct").bootstrapTable('refresh');
+	                    		$("#table-three-lackQr").bootstrapTable('refresh');
+	                    	}
+	                    	$("#table-two-correct").bootstrapTable('refresh');
+	                    	$("#table-two-lackQr").bootstrapTable('refresh');
+	                    }else if(thisType=="lack"){
+	                    	if(checkState==1){
+	                    		$("#table-one-lack").bootstrapTable('refresh');
+	                    	}else{
+	                    		$("#table-three-lack").bootstrapTable('refresh');
+	                    	}
+	                    	$("#table-two-lack").bootstrapTable('refresh');
+	                    }
+	                }else{
+	                	layer.alert(result.message);
+	                }
+	            }
+	        });
+    	},
+		btn1: function () { return ; }
+    });
+}
+//审核
+function doubt(thisId,checkState,thisType){
+	layer.open({
+		  type: 1,
+		  area: ['420px', '220px'], //宽高
+		  content: '<form  role="form"><div class="form-group"><label class="col-sm-2 control-label" for="reasion">原因:</label>'+
+				   '<div class="col-sm-10"><textarea class="form-control" id="reasion" rows="3"></textarea></div></div></form>',
+		  btn:['提交', '取消'],
+		  yes:function(index,layero){
+			  var reasion=$("#reasion").val();
+			  $.ajax({
+		            type: 'post',
+		            url: "/" + serverName + "/correctMark/checkForm",
+		            data:{
+		            	'id': thisId,
+		            	isCheck:thisType,
+		            	checkState:'3',
+		            	checkDesription:reasion
+		           	},
+		            dataType: 'json',
+		            success: function (result) {
+		                if(result.success){
+		                    layer.alert("审核成功!");
+		                    layer.close(index);
+		                    initNum();
+		                    if(thisType=="correct"){
+		                    	$("#table-one-correct").bootstrapTable('refresh');
+		                    	$("#table-three-correct").bootstrapTable('refresh');
+		                    	$("#table-one-lackQr").bootstrapTable('refresh');
+		                    	$("#table-three-lackQr").bootstrapTable('refresh');
+		                    }else if(thisType=="lack"){
+		                    	$("#table-one-lack").bootstrapTable('refresh');
+		                    	$("#table-three-lack").bootstrapTable('refresh');
+		                    }
+		                }else{
+		                	layer.alert(result.message);
+		                }
+
+		            }
+		        });
+			  
+		  },
+		  btn2:function(){
+		  }
+		});
+}
+//删除
+function del(thisId,reportType,thisType){
+	layer.confirm('您确定要删除这条记录吗？', {
+        btn: ['确定', '取消'] //按钮
+    }, function (index,layero) {
+	  $.ajax({
+            type: 'post',
+            url: "/" + serverName + "/correctMark/deleteRecord",
+            data:{
+            	'reportId': thisId,
+            	reportType:reportType
+           	},
+            dataType: 'json',
+            success: function (result) {
+                if(result.code == 200){
+                    layer.alert("删除成功!");
+                    layer.close(index);
+                    initNum();
+                    flashMapDiv();
+                    if(thisType=="correct"){
+                    	$("#table-one-correct").bootstrapTable('refresh');
+                    	$("#table-three-correct").bootstrapTable('refresh');
+                    	$("#table-one-lackQr").bootstrapTable('refresh');
+                    	$("#table-three-lackQr").bootstrapTable('refresh');
+                    }else if(thisType=="lack"){
+                    	$("#table-one-lack").bootstrapTable('refresh');
+                    	$("#table-three-lack").bootstrapTable('refresh');
+                    }
+                }else{
+                	layer.alert(result.message);
+                }
+
+            }
+        });
+    });
+/* 	layer.alert('',{
+		icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index){
+		    //business logic
+			  $.ajax({
+		            type: 'post',
+		            url: "/" + serverName + "/correct-mark!deleteRecord.action",
+		            data:{
+		            	'reportId': thisId,
+		            	reportType:reportType
+		           	},
+		            dataType: 'json',
+		            success: function (result) {
+		                if(result.code == 200){
+		                    layer.alert("删除成功!");
+		                    layer.close(index);
+		                    initNum();
+		                    flashMapDiv();
+		                    if(thisType=="correct"){
+		                    	$("#table-one-correct").bootstrapTable('refresh');
+		                    	$("#table-three-correct").bootstrapTable('refresh');
+		                    	$("#table-one-lackQr").bootstrapTable('refresh');
+		                    	$("#table-three-lackQr").bootstrapTable('refresh');
+		                    }else if(thisType=="lack"){
+		                    	$("#table-one-lack").bootstrapTable('refresh');
+		                    	$("#table-three-lack").bootstrapTable('refresh');
+		                    }
+		                }else{
+		                	layer.alert("删除失败");
+		                }
+
+		            }
+		        });
+		}); */
+
+}
+var lackQrOneTables,lackOneTables,correctOneTables;
+var lackQrTwoTables,lackTwoTables,correctTwoTables;
+var lackQrThreeTables,lackThreeTables,correctThreeTables;
+$(function(){
+    initNum();
+	startLoad();
+	creatDatetimepicker();
+
+});
+
+function creatDatetimepicker(){
+	$('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 1,
+		forceParse: 0,
+		pickerPosition:'top-right',
+		format:'yyyy-mm-dd hh:00:00'
+		//minuteStep:60
+		//showMeridian:true,
+		//viewSelect:'hour'
+    });
+}
+
+function refreshTableTotal(eve,index){
+    var total = 0;
+    if(index=='one'){
+        total = lackQrOneTables.total + lackOneTables.total + correctOneTables.total;
+	}else if(index=='two'){
+        total = lackQrTwoTables.total + lackTwoTables.total + correctTwoTables.total;
+	}else if(index == 'three'){
+        total = lackQrThreeTables.total + lackThreeTables.total + correctThreeTables.total;
+	}
+    $(eve).text('('+total+')');
+}
+//所有数据加载的入口
+function startLoad(){
+	lackQrOneTables = new Table_layer_lackQr_one("#table-one-lackQr");//数据确认
+	lackQrOneTables.Init();
+	lackOneTables = new Table_layer_lack_one("#table-one-lack");
+	lackOneTables.Init();
+	correctOneTables = new Table_layer_correct_one("#table-one-correct");
+	correctOneTables.Init();
+	
+	lackQrTwoTables = new Table_layer_lackQr_two("#table-two-lackQr");
+	lackQrTwoTables.Init();
+	lackTwoTables = new Table_layer_lack_two("#table-two-lack");
+	lackTwoTables.Init();
+	correctTwoTables = new Table_layer_correct_two("#table-two-correct");
+	correctTwoTables.Init();
+	
+	lackQrThreeTables = new Table_layer_lackQr_three("#table-three-lackQr");
+	lackQrThreeTables.Init();
+	lackThreeTables = new Table_layer_lack_three("#table-three-lack");
+	lackThreeTables.Init();
+	correctThreeTables = new Table_layer_correct_three("#table-three-correct");
+	correctThreeTables.Init();
+	/*var correctAndLackTables = new Table_correctAndLack();
+	correctAndLackTables.init();*/
+	//初始化点击事件
+	initClick();
+	
+};
+function initClick(){
+	$("#table-one-lackQr").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	$("#table-one-lack").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	$("#table-one-correct").on("click-row.bs.table",function(ele,row,ele){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	
+	$("#table-two-lackQr").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	$("#table-two-lack").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	$("#table-two-correct").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	
+	$("#table-three-lackQr").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	$("#table-three-lack").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	$("#table-three-correct").on("click-row.bs.table",function(ele,row){
+		if(row.x && row.y)
+			positPoint(row.x,row.y);
+	});
+	/**
+	if(row.coox && row.cooy && Number(row.coox)>0 && Number(row.cooy)>0)
+			positPoint(row.coox,row.cooy);
+		else if(row.x && row.y)
+			positPoint(row.x,row.y);
+	*/
+	//显示与隐藏的点击时间
+	$("#check_map").click(function(){
+		if(!map)
+			return;
+		var layerMap = map.getLayer("gw_1");
+		if($("#check_map").is(':checked')) {
+			layerMap.show();
+			$("#checkbox_gw_1").prop('checked', true);
+		}else{
+			layerMap.hide();
+			$("#checkbox_gw_1").attr('checked', false);//和主界面同步
+		}
+	});
+	$("#check_check").click(function(){
+		var layerReport = map.getLayer(awater.url.url_report[1]);
+		if($("#check_check").is(':checked')) {
+			layerReport.show();
+			$("#check_sb").prop("checked",true);//和主界面同步
+		}else{
+			layerReport.hide();
+			$("#check_sb").attr("checked",false);//和主界面同步
+		}
+	});
+	$("#check_wtsb").click(function(){
+		var layerReport = map.getLayer("wtsbXx");
+		if($("#check_wtsb").is(':checked')) {
+			layerReport.show();
+			$("#checkbox_wtsbXx").prop("checked",true);
+		}else{
+			layerReport.hide();
+			$("#checkbox_wtsbXx").attr('checked', false);//和主界面同步
+		}
+	});
+	
+	//刷新按钮
+	$("#btn_mapRefsush").click(function(){
+		if(!map)
+			return;
+		map.graphics.clear();
+		refreshMap();
+		initNum();
+		$("#mainTable #myTabContent table").each(function(index,item){
+			var tableId = $(item).attr("id");
+			if(tableId && tableId.indexOf("table") != -1){
+				refreshTable("#"+tableId);
+			} 
+		});
+		refreshTable("#table-four-correctAndLack");
+	});
+	//同步按钮
+	$("#btn_formSync").click(function(){
+		layer.confirm('确定同步？', {
+	        btn: ['确定', '取消'] //按钮
+	    }, function (index,layero) {
+	    	//未同步同步数据功能
+			$.ajax({
+				type: 'get',
+				url: '/psxj/correctMark/synNotAddFeature',
+				dataType: 'json',
+				success: function(data){
+					if(data.message){
+						layer.msg(data.message);
+						initNum();
+					}
+					layer.close(index);
+				},error: function(){
+					layer.msg("系统错误!");
+					//layer.close(index);
+				}
+			});
+	    });
+		
+	});
+}
+function initNum(){
+	$.ajax({
+        type: 'post',
+        url: "/psxj/correctMark/getNum",
+        data:{ 
+        	parentOrgName:$(".form-group.area button.selected_map").attr('value'),
+	        correctType:$(".form-group.type button.selected_map").attr('value'),
+	        startTime:$("#startTime").val(),
+	        endTime:$("#endTime").val(),
+	        markPerson:$("#markPersonTo").val(),
+	        objectId:$("#objectId").val(),
+	        road:$("#road").val()
+	        },
+        dataType: 'json',
+        success: function (result) {
+        	$("#oneNum").text('('+result.one+')');
+        	$("#twoNum").text('('+result.two+')');
+        	$("#threeNum").text('('+result.three+')');
+        	if(result.four && result.four>0){
+        		$("#fourNum").text('('+result.four+')');
+        		//$("#notSync_all").show();
+        	}else{
+        		//$("#notSync_all").hide();
+        	}
+        	
+        }
+	});
+}
+
+//刷新地图图层
+function flashMapDiv(){
+	if(!map)
+		return;
+	map.graphics.clear();
+	refreshMap();
+}
+/**
+* 本页的修改方法
+* @param Json 
+* @param type 
+*/
+function updateThis(data,type,index){
+	 for(i in data){
+		if(!data[i] || !data[i].value) {
+			delete data[i];
+		}else{
+			if(data[i].name=='markTime' ||
+				data[i].name=='updateTime' || 
+					data[i].name=='checkTime') {
+				//data[i].value = new Date(data[i].value);
+				delete data[i];
+			}
+		}
+	} 
+	var url="";
+	if(type=='correct')
+		url="/psxj/correctMark/updateForm";
+	if(type=='lack')
+		url="/psxj/lackMark/updateForm";
+	if(url!=""){
+		$.ajax({
+			type : 'post',
+			url : url,
+			data : data,
+			dataType: 'json',
+			success: function(result){
+				console.log(result);
+				if(result.success){
+					layer.msg("修改成功!",{icon: 1});
+				}else{
+				 	layer.msg("修改失败!",{icon: 2});
+				}
+				layer.close(index);
+			},error: function(){
+				layer.msg("请求失败!",{icon: 7});
+				layer.close(index);
+			}
+		});
+	}
+}
+
+/**
+* 本页的通过方法
+* @param Json 
+* @param type 
+*/
+function updatePass(data,thisType,index){
+	var thisId="";
+	var checkState="";
+	 for(i in data){
+		if(data[i].name == "id"){
+			thisId=data[i].value;
+		}if(data[i].name == "checkState"){
+			checkState=data[i].value;
+		}
+		if(!data[i] || !data[i].value) {
+			delete data[i];
+		}else{
+			if(data[i].name=='markTime' ||
+				data[i].name=='updateTime' || 
+					data[i].name=='checkTime') {
+				//data[i].value = new Date(data[i].value);
+				delete data[i];
+			}
+		}
+	} 
+	var url="";
+	if(thisType=='correct')
+		url="/psxj/correctMark/updateForm";
+	if(thisType=='lack')
+		url="/psxj/lackMark/updateForm";
+if(url!=""){
+		$.ajax({
+			type : 'post',
+			url : url,
+			data : data,
+			dataType: 'json',
+			success: function(result){
+				console.log(result);
+				if(result.success){
+					pass(thisId,checkState,thisType);
+				}else{
+				 	layer.msg("审核失败!",{icon: 2});
+				}
+				layer.close(index);
+			},error: function(){
+				layer.msg("请求失败!",{icon: 7});
+				layer.close(index);
+			}
+		});
+	}
+}
+/**
+* 本页的疑问方法
+* @param Json 
+* @param type 
+*/
+function updateDoubt(data,thisType,index){
+	var thisId="";
+	var checkState="";
+	 for(i in data){
+		if(data[i].name == "id"){
+			thisId=data[i].value;
+		}if(data[i].name == "checkState"){
+			checkState=data[i].value;
+		}
+		if(!data[i] || !data[i].value) {
+			delete data[i];
+		}else{
+			if(data[i].name=='markTime' ||
+				data[i].name=='updateTime' || 
+					data[i].name=='checkTime') {
+				//data[i].value = new Date(data[i].value);
+				delete data[i];
+			}
+		}
+	} 
+	var url="";
+	if(thisType=='correct')
+		url="/psxj/correctMark/updateForm";
+	if(thisType=='lack')
+		url="/psxj/lackMark/updateForm";
+	if(url!=""){
+		$.ajax({
+		type : 'post',
+			url : url,
+			data : data,
+			dataType: 'json',
+			success: function(result){
+				console.log(result);
+				if(result.success){
+					doubt(thisId,checkState,thisType);
+				}else{
+				 	layer.msg("审核失败!",{icon: 2});
+				}
+				layer.close(index);
+			},error: function(){
+				layer.msg("请求失败!",{icon: 7});
+				layer.close(index);
+			}
+		});
+	}
+}
+
+/**
+* 本页的删除方法
+* @param Json 
+* @param type 
+*/
+function updateDel(data,thisType,index){
+	var thisId="";
+	var reportType="";
+	 for(i in data){
+		if(data[i].name == "id"){
+			thisId=data[i].value;
+		}
+	} 
+	if(thisType=='correct')
+		reportType="modify";
+	if(thisType=='lack')
+		reportType="add";
+	layer.confirm('您确定要删除这条记录吗？', {
+        btn: ['确定', '取消'] //按钮
+    }, function (index1,layero) {
+	  $.ajax({
+            type: 'post',
+            url: "/" + serverName + "/correctMark/deleteRecord",
+            data:{
+            	'reportId': thisId,
+            	reportType:reportType
+           	},
+            dataType: 'json',
+            success: function (result) {
+                if(result.code == 200){
+                    layer.alert("删除成功!");
+                    parent.layer.close(index1);
+                    layer.close(index);
+                    initNum();
+                    flashMapDiv();
+                    if(thisType=="correct"){
+                    	$("#table-one-correct").bootstrapTable('refresh');
+                    	$("#table-three-correct").bootstrapTable('refresh');
+                    	$("#table-one-lackQr").bootstrapTable('refresh');
+                    	$("#table-three-lackQr").bootstrapTable('refresh');
+                    }else if(thisType=="lack"){
+                    	$("#table-one-lack").bootstrapTable('refresh');
+                    	$("#table-three-lack").bootstrapTable('refresh');
+                    }
+                }else{
+                	layer.alert(result.message);
+                }
+            }
+        });
+    });
+/* 	    parent.layer.alert('',{
+		icon:2,title:'删除确认',content:'您确定要删除这条记录吗？',closeBtn:1},function(index1){
+		    //business logic
+			  $.ajax({
+		            type: 'post',
+		            url: "/" + serverName + "/correct-mark!deleteRecord.action",
+		            data:{
+		            	'reportId': thisId,
+		            	reportType:reportType
+		           	},
+		            dataType: 'json',
+		            success: function (result) {
+		                if(result.code == 200){
+		                    layer.alert("删除成功!");
+		                    parent.layer.close(index1);
+		                    layer.close(index);
+		                    initNum();
+		                    flashMapDiv();
+		                    if(thisType=="correct"){
+		                    	$("#table-one-correct").bootstrapTable('refresh');
+		                    	$("#table-three-correct").bootstrapTable('refresh');
+		                    	$("#table-one-lackQr").bootstrapTable('refresh');
+		                    	$("#table-three-lackQr").bootstrapTable('refresh');
+		                    }else if(thisType=="lack"){
+		                    	$("#table-one-lack").bootstrapTable('refresh');
+		                    	$("#table-three-lack").bootstrapTable('refresh');
+		                    }
+		                }else{
+		                	layer.alert("删除失败");
+		                }
+		            }
+		        });
+		}); */
+}
+
+//刷新表格
+function refreshTable(tableId){
+	$(tableId).bootstrapTable('refresh');
+}
+//刷新图层
+function refreshMap(){
+	map.getLayer("gw_1").refresh();
+	map.getLayer(awater.url.url_report[1]).refresh();
+}
+var changeListMenu=function(type){
+	 var queryMap = $("#query_search_map");
+	if(type==1){
+		$("#query_search_map").height(document.body.clientHeight-168);
+		$("#query_search_map").show();
+		$("#query_img").attr('src',"/psxj/img/left_btn_close.png");
+	 	$("#seperator_map").animate({ right: "385" }, 100);
+		queryMap.show();
+	}else if(type==0){
+		queryMap.hide();
+		$("#query_img").attr('src',"/psxj/img/left_btn_open.png");
+		$("#seperator_map").animate({ right: "20" }, 100);
+	}else{
+		if(queryMap.css("display") == "none"){
+			$("#query_search_map").height(document.body.clientHeight-168);
+			$("#query_search_map").show();
+			$("#query_img").attr('src',"/psxj/img/left_btn_close.png");
+		 	$("#seperator_map").animate({ right: "385" }, 100);
+			queryMap.show();
+		}else{
+			queryMap.hide();
+			$("#query_img").attr('src',"/psxj/img/left_btn_open.png");
+			$("#seperator_map").animate({ right: "20" }, 100);
+		}
+	}
+}
+//初始化查询条件的点击事件
+$(function(){
+	//点击区域外隐藏菜单
+	$("#seperator_map").click(function(event){
+		changeListMenu();
+		$(document).one('click',function(){
+			changeListMenu(0);
+		});
+		event.stopPropagation();
+	});
+	$("#query_search_map").click(function(event){
+		 event.stopPropagation(); //阻止事件向上冒泡
+	});
+	$(".form-group.area button").click(function(){
+		if($(this).hasClass("selected_map")){
+			//if($(this)!=$(item))
+			$(this).removeClass("selected_map");
+		}else{
+			$(".form-group.area button").each(function(index,item){
+				$(item).removeClass("selected_map");
+			});
+			$(this).addClass("selected_map");
+		}
+	});
+	$(".form-group.type button").click(function(){
+		if($(this).hasClass("selected_map")){
+			//if($(this)!=$(item))
+			$(this).removeClass("selected_map");
+		}else{
+			$(".form-group.type button").each(function(index,item){
+				$(item).removeClass("selected_map");
+			});
+			$(this).addClass("selected_map");
+		}
+	});
+	$("#startTime").datetimepicker({
+		language:  'zh-CN',
+		weekStart: 1,
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		pickerPosition:'top-right',
+		format:'yyyy-mm-dd'
+	});
+	$("#endTime").datetimepicker({
+		language:  'zh-CN',
+		weekStart: 1,
+		todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0,
+		pickerPosition:'top-right',
+		format:'yyyy-mm-dd'
+	});
+	//查询
+	$("#resfush_search").click(function(){
+		//var content = $(".form-group.area button.selected_map").attr('value');
+		//console.log(content);
+		//var contents = $(".form-group.type button.selected_map").attr('value');
+		//console.log(contents);
+		refreshParam();
+	});
+	//重置
+	$("#resfush_query").click(function(){
+		$(".form-group.area button").each(function(index,item){
+			$(item).removeClass("selected_map");
+			$("#allArea").addClass("selected_map");//选中全部,如果直接移除，获取条件为undefied会有问题
+		});
+		$(".form-group.type button").each(function(index,item){
+			$(item).removeClass("selected_map");
+			$("#allType").addClass("selected_map");//选中全部,如果直接移除，获取条件为undefied会有问题
+		});
+		$("#startTime").val("");
+		$("#endTime").val("");
+		$("#markPersonTo").val("");
+		$("#objectId").val("");
+		$("#road").val("");
+		refreshParam();
+	});
+	
+});
+//将所有的table都刷新一下
+function refreshParam(){
+	$("#table-one-lackQr").bootstrapTable('refresh');
+	$("#table-two-lackQr").bootstrapTable('refresh');
+	$("#table-three-lackQr").bootstrapTable('refresh');
+	
+	$("#table-one-lack").bootstrapTable('refresh');
+	$("#table-two-lack").bootstrapTable('refresh');
+	$("#table-three-lack").bootstrapTable('refresh');
+	
+	$("#table-one-correct").bootstrapTable('refresh');
+	$("#table-three-correct").bootstrapTable('refresh');
+	$("#table-two-correct").bootstrapTable('refresh');
+	
+	//初始化点击事件
+	initClick();
+	
+	initNum();
+}
+
+</script>

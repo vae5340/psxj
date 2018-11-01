@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>主页面</title>
+	<meta charset="utf-8">
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+	<link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+  <link rel="stylesheet" href="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/skin/layer.css">
+  <link href="/psxj/systemInfo/ssxjxt/style/blue/css/validate.css" rel="stylesheet">
+    <style>
+        .nav > li > a{display:block;padding:5px;outline:none;}
+        .dimIframe{width:100%;min-height:420px;frameborder:no; border:0;marginwidth:0; marginheight:0; allowtransparency:"yes"}
+    </style>
+  </head>
+  
+  <body>
+  <div class="wrapper wrapper-content" style="padding:0">
+	<div class="col-sm-12" style="padding:0">
+	    <!--tab标题-->
+		<ul id="myTab" class="nav nav-tabs nav-justified">
+            <li class="active" id="base_li"><a href="#base_Tab" data-toggle="tab" aria-expanded="false">基本信息</a></li>
+            <li id="file_li" class=""><a href="#file_Tab" data-toggle="tab" aria-expanded="true">现场照片</a></li>
+		</ul>
+		<!--tab内容-->
+        <div id="myTabContent" class="tab-content" style="margin-top:0px;height: 320px; width:auto;">
+            <div class="tab-pane" id="file_Tab">
+                <form id="uploadform" class="form-horizontal" role="form"  style="margin-top:15px;width:95%;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">附件：</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" id="uploadfile" multiple class="file-loading form-control" />
+                        </div>
+                    </div>
+                </form>
+                <table id="filetable" class="table table-bordered" ></table>
+            </div>
+            <div class="tab-pane fade in active" id="base_Tab">
+                <form id="myform" class="form-horizontal" role="form" style="margin-top:15px;width:95%;">
+                    <div class="col-sm-2">
+                        <input type="button" value="获取位置" onclick="locationByPoint('point')">
+                    </div>
+                    <br><br>
+                    <input id="X" type="hidden" name="x" required="" maxlength="20" class="form-control" value="">
+                    <input id="Y" type="hidden" name="y" required="" maxlength="20" class="form-control" value="">
+                    <input id="primarykeyfieldflag" class="form-control" name="id" value="" type="hidden">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="szwz">问题地点<font color="red" style="vertical-align:middle">&nbsp;*</font>:</label>
+                        <div class="col-sm-4">
+                            <input id="szwz" name="szwz" value="" class="form-control" required="" maxlength="100">
+                        </div>
+                        <label class="control-label col-sm-2" for="jdmc">所在道路<font color="red" style="vertical-align:middle">&nbsp;*</font>:</label>
+                        <div class="col-sm-4"><input id="jdmc" name="jdmc" value="" class="form-control" required="" maxlength="100"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="sslx">设施类型<font color="red" style="vertical-align:middle">&nbsp;*</font>:</label>
+                        <div class="col-sm-4"><!--getRelatedDic('wtlx3',this.value)-->
+                            <select id="sslx" name="sslx" class="form-control" onchange="getRelatedDic(this.value)" required="" maxlength="20">
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="jjcd">紧急程度<font color="red" style="vertical-align:middle">&nbsp;*</font>:</label>
+                        <div class="col-sm-4">
+                            <select id="jjcd" name="jjcd" class="form-control" required="" maxlength="10">
+                                <option value=""></option>
+                                <option value="1">一般</option>
+                                <option value="3">紧急</option>
+                                <option value="2">较紧急</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="bhlx">问题类型<font color="red" style="vertical-align:middle" id="isNullbhlx">&nbsp;*</font>:</label>
+                        <div class="col-sm-10">
+                            <div id="sblxChecks" style="font-size: 15px;"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="wtms">问题描述<font color="red" style="vertical-align:middle" id="isNullwtms">&nbsp;*</font>:</label>
+                        <div class="col-sm-10">
+                            <textarea id="wtms" name="wtms" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+    </div>
+        <div class="modal-footer" style="bottom:10px;right:50px;position:absolute;">
+            <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">
+                <span class="glypicon glypicon-remove" aria-hidden="true"></span>取消
+            </button>
+            <button id="save" type="btn" class="btn btn-primary" data-dismiss="modal">
+                <span class="glyphicon glyphicon-floppy-disk" ariahidden="true"></span>提交
+            </button>
+        </div>
+    </div>
+</div>
+  <script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/datapicker/bootstrap-datepicker.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput_locale_zh.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-export.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/tableExport.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-editable.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-editable.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+  <script src="js/xcyh_public.js"></script>
+   <script src="js/tabs.js"></script>
+  <script>
+      /* $(document).ready(function () {
+           var $input = $('input.file[type=file]'), count = $input.attr('type') ? $input.length : 0;
+           if (count > 0) {
+               $input.fileinput();
+           }
+       });*/
+  </script>
+
+</body>
+</html>

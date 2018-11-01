@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+	    <title>短信模块</title>
+	    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	    <link href="/awater/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	    <link href="/awater/css/animate.min.css" rel="stylesheet">
+	    <link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+	    <link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+	</head>
+  	<body>
+	    <div id="content" style="height:calc( 100% - 50px );">
+		    <form method="post" id="smsMessageForm" class="form-horizontal">
+				 <div class="modal-body">
+						<input type="hidden" id="id" name="id"/>
+						<input type="hidden" id="template_create_person" name="template_create_person"/>
+						<input type="hidden" id="template_grade" name="template_grade"/>
+						<input type="hidden" id="template_unit_code" name="template_unit_code"/>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">模板名称<font color="red">*</font></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="templateName" name="templateName" required="" aria-required="true"/>
+							</div>
+							<label class="col-sm-2 control-label">模板编号<font color="red">*</font></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="templateCode" name="templateCode" required="" aria-required="true"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">短信类型<font color="red">*</font></label>
+							<div class="col-sm-10">
+								<select class="form-control" id="alarmType" name="alarmType" required="" aria-required="true">
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">短信内容<font color="red">*</font></label>
+							<div class="col-sm-10">
+								<textarea id="templateContet" name="templateContet" style="height: 130px;" class="form-control" style="max-width: 100%;"></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<!-- 
+							<label class="col-sm-2 control-label">创建时间<font color="red">*</font></label>
+							<div class="col-sm-4">
+								<input type="text" class="form-control" id="templateCreateTime" name="templateCreateTime" />
+							</div>
+							 -->
+							 <label class="col-sm-2 control-label">所属区域<font color="red">*</font></label>
+							 <div class="col-sm-4">
+							 	<select class="form-control" id="templateUnitCode" name="templateUnitCode" required="" aria-required="true">
+							 	</select>
+							 </div>
+							<label class="col-sm-2 control-label">状态</label>
+							<div class="col-sm-4">
+								<select class="form-control" id="state" name="state" required="" aria-required="true">
+									<option value="1">启用</option>
+									<option value="0">停用</option>
+								</select>
+							</div>
+						</div>
+				 </div>			 
+			 </form>
+		</div>
+		<div style="width:100%;height:50px;padding-top:5px;border-top:1px solid #e7eaec;background-color: #F8F8F8;">
+			<div class="col-sm-12 col-sm-offset-9">
+				<button class="btn btn-success"  type="button" onclick="saveAjaxSmsSame();">保存</button>
+				<button class="btn btn-white" type="button" onclick="cancel();">取消</button>
+	       	</div>
+		</div>
+		<script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+	    <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	    <script src="/awater/lib/content.min.js?v=1.0.0"></script>
+	    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+		<script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+		<script type="text/javascript" src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+		<script type="text/javascript" src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+		<script src="js/smsInput.js"></script>
+		<script src="/awater/js/util_date.js"></script>
+		<script src="/awater/waterSystem/ssjk/js/ssjk-global.js"></script>
+	</body>
+</html>

@@ -1,0 +1,162 @@
+.zdm-analysis-control-panel {
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  width: 230px;
+  background: #FEFEFE;
+  border: solid thin #EEEEEE;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #CCCCCC;
+  overflow: hidden; }
+  .zdm-analysis-control-panel.minimized {
+    box-shadow: 0 0 5px #FF0000; }
+    .zdm-analysis-control-panel.minimized .control-panel-content {
+      display: none; }
+    .zdm-analysis-control-panel.minimized .control-panel-control-btns {
+      display: none; }
+  .zdm-analysis-control-panel .analysis-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    color: #FFFFFF;
+    opacity: 0.8;
+    z-index: 99999999;
+    text-align: center;
+    padding: 2em; }
+    .zdm-analysis-control-panel .analysis-loading .loading-img {
+      height: 50%;
+      margin-bottom: 15%; }
+    .zdm-analysis-control-panel .analysis-loading .loading-text {
+      font-size: 1.2em; }
+    .zdm-analysis-control-panel .analysis-loading.analysis-loading-hidden {
+      display: none; }
+  .zdm-analysis-control-panel .control-panel-title {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    line-height: 20px;
+    background: #FAFAFA;
+    box-shadow: 0 0 4px #CCCCCC;
+    overflow: hidden; }
+    .zdm-analysis-control-panel .control-panel-title .control-panel-title-text {
+      padding-left: 15px; }
+    .zdm-analysis-control-panel .control-panel-title .control-panel-title-btns {
+      position: absolute;
+      right: 15px;
+      top: 0;
+      height: 20px;
+      overflow: hidden; }
+      .zdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn {
+        text-decoration: none;
+        padding: 5px 10px 5px 10px;
+        color: #000000; }
+        .zdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn:hover {
+          background: #E5E5E5; }
+        .zdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn:active {
+          background: #CACACB; }
+        .zdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn[data-role=close]:hover {
+          background: #FF0000;
+          color: #FFFFFF; }
+        .zdm-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn[data-role=close]:active {
+          background: #F1707A; }
+  .zdm-analysis-control-panel .control-panel-control-btns {
+    width: 100%;
+    background: #FAFAFA;
+    box-shadow: 0 0 4px #CCCCCC;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 5px; }
+    .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn {
+      text-decoration: none;
+      margin-right: 10px;
+      border: none;
+      outline: none;
+      padding: 5px 10px 5px 10px;
+      border-radius: 5px; }
+      .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn span {
+        color: #FFFFFF;
+        font-size: 12px; }
+      .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:hover {
+        cursor: pointer; }
+      .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:last-child {
+        margin-right: 0; }
+      .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:active {
+        box-shadow: 0 0 5px #888888; }
+      .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear] {
+        background: #FF0000; }
+        .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear]:hover {
+          background: #C90000; }
+        .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear]:active {
+          background: #890000; }
+      .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm] {
+        background: #0000FF; }
+        .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm]:hover {
+          background: #0000AF; }
+        .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm]:active {
+          background: #000083; }
+      .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled {
+        background: #CDCDCD;
+        color: #000000; }
+        .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled:hover, .zdm-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled:active {
+          box-shadow: none;
+          background: #CDCDCD;
+          color: #000000; }
+  .zdm-analysis-control-panel .control-panel-content {
+    width: 100%;
+    min-height: 100px;
+    max-height: 200px;
+    font-size: 12px;
+    overflow-y: scroll; }
+    .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-title {
+      border-left: solid 4px #EEEEEE;
+      padding: 5px 5px 5px 5px;
+      border-bottom: solid thin #EEEEEE; }
+    .zdm-analysis-control-panel .control-panel-content .pipe-info .operation-tip {
+      padding: 0.5em; }
+      .zdm-analysis-control-panel .control-panel-content .pipe-info .operation-tip.operation-tip-hidden {
+        display: none; }
+    .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0; }
+      .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li {
+        width: 100%;
+        border-bottom: solid thin #EEEEEE;
+        padding: 5px 0 5px 0; }
+        .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li li:nth-child(even) {
+          background: #FAFAFA;
+          margin-bottom: 5px; }
+        .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li span {
+          margin-left: 10px; }
+        .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li:hover {
+          background: #EEEEEE; }
+          .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li:hover .pipe-info-list-item-remove-btn {
+            visibility: visible; }
+            .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li:hover .pipe-info-list-item-remove-btn:hover {
+              color: #FC7E7E; }
+          .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li:hover .pipe-info-list-item-locate-btn {
+            visibility: visible; }
+            .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li:hover .pipe-info-list-item-locate-btn:hover {
+              color: #8989FF; }
+        .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li .pipe-info-list-item-remove-btn {
+          text-decoration: none;
+          color: red;
+          float: right;
+          margin-right: 10px;
+          visibility: hidden; }
+          .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li .pipe-info-list-item-remove-btn::after {
+            content: " ";
+            clear: both; }
+        .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li .pipe-info-list-item-locate-btn {
+          text-decoration: none;
+          color: blue;
+          float: right;
+          margin-right: 10px;
+          visibility: hidden; }
+          .zdm-analysis-control-panel .control-panel-content .pipe-info .pipe-info-list li .pipe-info-list-item-locate-btn::after {
+            content: " ";
+            clear: both; }
+
+/*# sourceMappingURL=zdm-analysis-control-panel.css.map */

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.augurit.awater.awaterMobile.monitoring.station.mapper.StationMapper">
+    <sql id="stationTable">
+        select STCD,STNM,COOX x,COOY y,RVNM,HNNM,BSNM,LGTD,LTTD,STLC,ADDVCD,USFL,STSYS,COMMENTS,STTP,ALARM_ONE,ALARM_TWO,ALARM_THREE
+        from ST_STBPRP_B where usfl=1 and COOX is not null and COOY is not null
+        <if test="stnm!= null and stnm != ''"> and (stnm like '%' || #{stnm} || '%' or stcd like '%' || #{stnm} || '%')</if>
+        <if test="addvcd!=null and addvcd !=''"> and addvcd = #{addvcd}</if>
+        <if test="sttp!= null and sttp !=''"> and sttp =#{sttp} </if>
+        <if test="stsys!= null and stsys !=''"> and stsys =#{stsys} </if>
+        <if test="null !=stcds and stcds.length gt 0">
+            <foreach collection="stcds" item="item" open=" and (" close=")" separator="or">
+                stcd = #{item}
+            </foreach>
+        </if>
+        <if test="minx != null and maxx !=null ">
+            and COOX&gt;=#{minx} and COOX&lt;=#{maxx}
+        </if>
+        <if test="miny != null and maxy !=null ">
+            and COOY&gt;=#{miny} and COOY&lt;=#{maxy}
+        </if>
+    </sql>
+
+    <sql id="typeTable">
+        select mnit,stcd from ST_STITEM_B where 1=1
+        <if test="mnit!= null and mnit !='' ">
+            and MNIT in (${mnit})
+        </if>
+    </sql>
+
+    <!-- 查询所有测站信息 -->
+    <select id="getAllStation" resultType="map" parameterType="map">
+        select s.*,t.MNIT , CONCAT(CONCAT(STTP,'-'),mnit)  LAYERTYPE from
+        (<include refid="stationTable"/>) s
+        join
+        (<include refid="typeTable"/>) t
+        on s.stcd=t.stcd
+    </select>
+
+    <!-- 根据地图上所选点击的点，获取全部的监控信息 -->
+    <select id="getStationByMap" resultType="map" parameterType="map">
+        select * from
+        (select s.*,t.MNIT,CONCAT(CONCAT(STTP,'-'),mnit) LAYERTYPE
+        from
+        (<include refid="stationTable"/>) s
+        join
+        (<include refid="typeTable"/>) t
+        on s.stcd=t.stcd
+        )
+        where 1=1
+        <if test="null !=sttps">
+            <foreach collection="sttps" item="item" open=" and (" close=")" separator="or">
+                LAYERTYPE = #{item}
+            </foreach>
+        </if>
+        <if test="layertype != null and layertype !='' ">
+            and LAYERTYPE =#{layertype}
+        </if>
+    </select>
+
+</mapper>

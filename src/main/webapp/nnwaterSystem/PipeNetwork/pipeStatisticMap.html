@@ -1,0 +1,766 @@
+<!doctype html>
+<html>
+<head>
+	<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	<script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script type="text/javascript" src="/awater/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="/awater/lib/highchart/js/highcharts.js"></script>
+	<script type="text/javascript" src="/awater/lib/highchart/js/modules/exporting.js"></script>
+	<script type="text/javascript" src="/awater/lib/highchart/js/highcharts-zh_cn.js"></script>
+	<style>
+	   #datatable{width:680px}
+	   table td,th{
+	     text-align:center;
+	   }
+	</style>
+</head>
+<body style="background-color:#F1F1F3">  	
+    <div style="height:100%;width:100%">
+			<ul id="myTab" class="nav nav-tabs nav-justified">
+				  <li class="active"><a href="#column" data-toggle="tab">柱状图</a></li>
+				  <li><a href="#pie" data-toggle="tab">饼状图</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div class="tab-pane fade in active" id="column" style="padding-top:20px">
+				   <div id="container" style="height:370px"></div>	
+				   <div style="width:100%;padding-left:60px;padding-bottom:10px">
+				  	     <table id="datatable" border="1px"></table>
+				   </div>	     
+				</div>
+				<div class="tab-pane fade" id="pie">
+				   <div id="containerPie" style="height:260px;width:50%;float:left"></div>
+				   <div id="containerPie2" style="height:260px;width:50%;float:left"></div>
+				   <div id="tableDiv" style="height:40px;width:50%;float:left;padding-left:45px;margin-bottom:5px">
+				      <table id="pieTable" border="1px" style="width:320px"></table>
+				   </div> 
+				   <div id="tableDiv2" style="height:40px;width:50%;float:left;padding-left:25px;margin-bottom:5px">
+				      <table id="pieTable2" border="1px" style="width:320px"></table>
+				   </div> 
+				   <div id="containerPie3" style="height:260px;width:50%;float:left"></div>
+				   <div id="containerPie4" style="height:260px;width:50%;float:left"></div>
+				   <div id="tableDiv3" style="height:40px;width:50%;float:left;padding-left:45px;margin-bottom:10px">
+				      <table id="pieTable3" border="1px" style="width:320px"></table>
+				   </div> 
+				   <div id="tableDiv4" style="height:40px;width:50%;float:left;padding-left:25px;margin-bottom:10px">
+				      <table id="pieTable4" border="1px" style="width:320px"></table>
+				   </div> 
+				</div>
+			</div>	
+	    </div>
+	<script type="text/javascript">
+	$(function () {
+	    $("#datatable").html(parent.tableHtml);
+	});
+	
+	function changeLayout(count){
+	   if(count==1){
+	        $("#containerPie2").hide();
+	        $("#containerPie3").hide();
+	        $("#containerPie4").hide();
+	        $("#tableDiv2").hide();
+	        $("#tableDiv3").hide();
+	        $("#tableDiv4").hide();
+	        $('#containerPie').css("height","400px");
+	        $('#containerPie').css("width","100%");
+	        $('#tableDiv').css("width","100%");
+	        $('#pieTable').css("width","680px");
+	        		    
+		    $("#pieTable").html(parent.pieTableHtml);
+	   }else if(count==2){
+	        $("#containerPie3").hide();
+	        $("#containerPie4").hide();
+	        $("#tableDiv3").hide();
+	        $("#tableDiv4").hide();
+	        $('#containerPie').css("height","400px");
+	        $('#containerPie2').css("height","400px");
+	        		    
+		    $("#pieTable").html(parent.pieTableHtml);
+            $("#pieTable2").html(parent.pieTableHtml2);
+	   }else if(count==4){
+	        $("#container").css("height","490px");
+	   		$("#datatable").css("width","1080px");
+	   	    $("#pieTable").css("width","500px");
+	   	    $("#pieTable2").css("width","500px");
+	   	    $("#pieTable3").css("width","500px");
+	   	    $("#pieTable4").css("width","500px");
+	        $("#pieTable").html(parent.pieTableHtml);
+            $("#pieTable2").html(parent.pieTableHtml2);
+            $("#pieTable3").html(parent.pieTableHtml3);
+            $("#pieTable4").html(parent.pieTableHtml4);
+	   
+	   }
+	}
+	
+    $(window).load(function(){
+          if(parent.seriesData.type==1||parent.seriesData.type==2){
+             changeLayout(2);
+	   	    $('#container').highcharts({
+		        chart: {
+		            type: 'column',
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: ''
+		        },
+		        xAxis: {
+		            categories: ['雨水', '污水', '雨污合流'],
+		        },
+		        yAxis: [{
+		            min: 0,
+		            title: {
+		                text: '长度（米）'
+		            }
+		        }, {
+		            title: {
+		                text: '数量（条）'
+		            },
+			        opposite: true
+		        }],
+		        legend: {
+		            enabled: false
+		        },
+		        plotOptions: {
+		            column: {
+		                grouping: true,
+		                shadow: false,
+		                borderWidth: 0,
+		                dataLabels: {
+		                    enabled: true,
+		                    formatter: function () {
+			                   if(this.series.name=="长度")
+				                  return this.y + '米';
+				               else
+				                  return this.y + '条';    
+				            }
+		                }
+		            }
+		        },
+		        series: [{
+		            name: '长度',
+		            tooltip: {
+		                valueSuffix: '米'
+		            },
+		            data: [{y:parent.seriesData.rainArr[0],color:"rgba(0,255,197,1)"},{y:parent.seriesData.sewageArr[0],color:"rgba(230,0,169,1)"},{y:parent.seriesData.mixArr[0],color:"rgba(230,152,0,1)"}],
+		            pointPadding: 0.2,
+		        }, {
+		            name: '数量',
+		            data: [{y:parent.seriesData.rainArr[1],color:"rgba(0,255,197,1)"},{y:parent.seriesData.sewageArr[1],color:"rgba(230,0,169,1)"},{y:parent.seriesData.mixArr[1],color:"rgba(230,152,0,1)"}],
+		            tooltip: {
+		                valueSuffix: '条'
+		            },
+		            pointPadding: 0.2,
+		            yAxis: 1
+		        }],
+		        tooltip: {
+		          shared: false,
+		          hideDelay:500
+		        }
+		    });
+		    
+		    $('#containerPie').highcharts({
+			     chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '长度饼状图'
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [
+		                {
+		                    name: '雨水',
+		                    y: parent.seriesData.rainArr[0],
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(0,255,197,1)"
+		                },
+		                {
+		                    name:'污水',
+		                    y: parent.seriesData.sewageArr[0],
+		                    color:"rgba(230,0,169,1)"
+		                },
+		                {
+ 						    name:'雨污合流',
+		                    y: parent.seriesData.mixArr[0],
+		                    color:"rgba(230,152,0,1)"		                
+		                }
+		            ]
+		        }]
+		    });
+		    
+		    $('#containerPie2').highcharts({
+			        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '数量饼状图'
+		        },
+		        tooltip: {
+		            hideDelay:500,
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [
+		                {
+		                    name: '雨水',
+		                    y: parent.seriesData.rainArr[1],
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(0,255,197,1)"
+		                },
+		                {
+		                    name:'污水',
+		                    y: parent.seriesData.sewageArr[1],
+		                    color:"rgba(230,0,169,1)"
+		                },
+		                {
+ 						    name:'雨污合流',
+		                    y: parent.seriesData.mixArr[1],
+		                    color:"rgba(230,152,0,1)"		                
+		                }
+		            ]
+		        }]
+		    });
+    }else if(parent.seriesData.type==3){
+        changeLayout(1);
+        $('#container').highcharts({
+	        chart: {
+	            type: 'column',
+		        backgroundColor:'#F1F1F3'
+	        },
+	        title: {
+	            text: ''
+	        },
+	        xAxis: {
+	            categories: [
+	                '排放口',
+	                '检查井',
+	                '雨水口',
+	                '阀门'
+	            ],
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            title: {
+	                text: '数量（个）'
+	            }
+	        },
+	        legend: {
+		         enabled: false
+		    },
+	        tooltip: {
+		          shared: false,
+		          hideDelay:500
+		    },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0,
+	                dataLabels: {
+	                    enabled: true,
+	                    formatter: function () {
+			                return this.y + '个';   
+			            }
+	                }
+	            }
+	        }, 
+	        series: [{
+	        	name:'数量',
+	            data: [{y:parent.seriesData.pData,color:"rgba(145,0,63,1)"},{y:parent.seriesData.jData,color:"rgba(197,0,255,1)"},
+	                 {y:parent.seriesData.yData,color:"rgba(0,92,230,1)"},{y:parent.seriesData.fData,color:"rgba(255,0,0,1)"}],
+	            
+	        }]
+	    });
+	    
+	    $('#containerPie').highcharts({
+			    chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '管点数量饼状图'
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+		            hideDelay:500
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [
+		            	{
+ 						    name:'排放口',
+		                    y: parent.seriesData.pData,
+		                    color:"rgba(145,0,63,1)"		                
+		                },
+		                {
+ 						    name:'检查井',
+		                    y: parent.seriesData.jData,
+		                    color:"rgba(197,0,255,1)"		                
+		                },
+		                {
+		                    name: '雨水口',
+		                    y: parent.seriesData.yData,
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(0,92,230,1)"
+		                },
+		                {
+		                    name: '阀门',
+		                    y: parent.seriesData.fData,
+		                    color:"rgba(255,0,0,1)"		
+		                }
+		            ]
+		        }]
+		    });
+    }
+    else if(parent.seriesData.type==4){
+       changeLayout(1);
+       $('#container').highcharts({
+	        chart: {
+	            type: 'column',
+		        backgroundColor:'#F1F1F3'
+	        },
+	        title: {
+	            text: ''
+	        },
+	        xAxis: {
+	            categories: [
+	                '闸门',
+	                '溢流堰',
+	                '排水泵站',
+	            ],
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            title: {
+	                text: '数量（个）'
+	            }
+	        },
+	        tooltip: {
+		         shared: false,
+		         hideDelay:500
+		    },
+	        legend: {
+		         enabled: false
+		    },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0,
+	                dataLabels: {
+	                    enabled: true,
+	                    formatter: function () {
+			                return this.y + '个';   
+			            }
+	                }
+	            }
+	        },
+	        series: [{
+	            name:'数量',
+	            data: [{y:parent.seriesData.fData,color:"rgba(230,0,0,1)"},{y:parent.seriesData.yData,color:"rgba(197,0,255,1)"},
+	                 {y:parent.seriesData.pData,color:"rgba(0,112,255,1)"}],
+	        }]
+	    });
+
+	    $('#containerPie').highcharts({
+			    chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '排水设施数量饼状图'
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [		                
+		                {
+ 						    name:'闸门',
+		                    y: parent.seriesData.fData,
+		                    color:"rgba(230,0,0,1)"		                
+		                },
+		                {
+		                    name: '溢流堰',
+		                    y: parent.seriesData.yData,
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(197,0,255,1)"
+		                },
+		                {
+		                    name: '排水泵站',
+		                    y: parent.seriesData.pData,
+		                    color:"rgba(0,112,255,1)"		
+		                }
+		            ]
+		        }]
+		    });
+        }else{
+            changeLayout(4);
+	   	    $('#container').highcharts({
+		        chart: {
+		            type: 'column',
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: ''
+		        },
+		        xAxis: {
+		            categories: ['雨水管线','污水管线','雨污合流管线', '雨水沟渠','污水沟渠','雨污合流沟渠', '排放口',
+		            '检查井','雨水口','阀门','闸门','溢流堰','排水泵站'],
+		        },
+		        yAxis: [{
+		            min: 0,
+		            title: {
+		                text: '长度（米）'
+		            }
+		        }, {
+		            title: {
+		                text: '数量（条）'
+		            },
+			        opposite: true
+		        }],
+		        legend: {
+		            enabled: false
+		        },
+		        plotOptions: {
+		            column: {
+		                grouping: true,
+		                shadow: false,
+		                borderWidth: 0,
+		                dataLabels: {
+		                    enabled: true,
+		                    formatter: function () {
+			                   if(this.series.name=="长度")
+				                  return this.y + '米';
+				               else{
+				                  if(this.key.indexOf("管线")>-1||this.key.indexOf("沟渠")>-1)
+				                      return this.y + '条';    
+				                  else   
+				                      return this.y + '个';    
+				               }
+				            }
+		                }
+		            }
+		        },
+		        series: [{
+		            name: '长度',
+		            tooltip: {
+		                valueSuffix: '米'
+		            },
+		            data: [{y:parent.seriesData.pipeArr[0][0],color:"rgba(0,255,197,1)"},{y:parent.seriesData.pipeArr[1][0],color:"rgba(230,0,169,1)"},
+		            {y:parent.seriesData.pipeArr[2][0],color:"rgba(230,152,0,1)"},
+		            {y:parent.seriesData.conduitArr[0][0],color:"rgba(0,255,197,1)"},{y:parent.seriesData.conduitArr[1][0],color:"rgba(230,0,169,1)"},
+		            {y:parent.seriesData.conduitArr[2][0],color:"rgba(230,152,0,1)"},{},{},{},{},{},{},{}],
+		            pointPadding: 0.2,
+		        }, {
+		            name: '数量',
+		            data: [{y:parent.seriesData.pipeArr[0][1],color:"rgba(0,255,197,1)"},{y:parent.seriesData.pipeArr[1][1],color:"rgba(230,0,169,1)"},
+		            {y:parent.seriesData.pipeArr[2][1],color:"rgba(230,152,0,1)"},
+		            {y:parent.seriesData.conduitArr[0][1],color:"rgba(0,255,197,1)"},{y:parent.seriesData.conduitArr[1][1],color:"rgba(230,0,169,1)"},
+		            {y:parent.seriesData.conduitArr[2][1],color:"rgba(230,152,0,1)"},
+		            {y:parent.seriesData.pointArr[0][1],color:"rgba(145,0,63,1)"},{y:parent.seriesData.pointArr[1][1],color:"rgba(197,0,255,1)"},
+		            {y:parent.seriesData.pointArr[2][1],color:"rgba(0,92,230,1)"},{y:parent.seriesData.pointArr[3][1],color:"rgba(255,0,0,1)"},
+		            {y:parent.seriesData.facilityArr[0][1],color:"rgba(230,0,0,1)"},{y:parent.seriesData.facilityArr[1][1],color:"rgba(197,0,255,1)"},
+		            {y:parent.seriesData.facilityArr[2][1],color:"rgba(0,112,255,1)"}],
+		            pointPadding: 0.2,
+		            yAxis: 1
+		        }],
+		        tooltip: {
+		          shared: false,
+		          hideDelay:500,
+		          formatter: function () {
+	               		   if(this.key.indexOf("管线")>-1||this.key.indexOf("沟渠")>-1){
+	               		         if(this.series.name=="长度")
+			                        return this.key+"："+this.y + '米';
+			                      else
+			                        return this.key+"："+this.y + '条';     
+			                  }else   
+			                      return this.key+"："+this.y + '个';   
+			            }  
+		          }
+		    });
+		    
+            
+		    $('#containerPie').highcharts({
+			     chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '管线长度饼状图'
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [
+		                {
+		                    name: '雨水管线',
+		                    y: parent.seriesData.pipeArr[0][0],
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(0,255,197,1)"
+		                },{
+		                    name:'污水管线',
+		                    y: parent.seriesData.pipeArr[1][0],
+		                    color:"rgba(230,0,169,1)"
+		                },{
+		                    name:'雨污合流管线',
+		                    y: parent.seriesData.pipeArr[2][0],
+		                    color:"rgba(230,152,0,1)"		   
+		                }
+		            ]
+		        }]
+		    });
+		    
+		    $('#containerPie2').highcharts({
+			        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '沟渠长度饼状图'
+		        },
+		        tooltip: {
+		            hideDelay:500,
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [{
+		                    name: '雨水沟渠',
+		                    y: parent.seriesData.conduitArr[0][0],
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(0,255,197,1)"
+		                },{
+		                    name:'污水沟渠',
+		                    y: parent.seriesData.conduitArr[1][0],
+		                    color:"rgba(230,0,169,1)"
+		                },{
+		                    name:'雨污合流沟渠',
+		                    y: parent.seriesData.conduitArr[2][0],
+		                    color:"rgba(230,152,0,1)"		   
+		                }
+		            ]
+		        }]
+		    });
+		    
+		    $('#containerPie3').highcharts({
+			     chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '管点数量饼状图'
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [{
+ 						    name:'排放口',
+		                    y: parent.seriesData.pointArr[0][1],
+		                    color:"rgba(145,0,63,1)"		                
+		                },
+		                {
+ 						    name:'检查井',
+		                    y: parent.seriesData.pointArr[1][1],
+		                    color:"rgba(197,0,255,1)"		                
+		                },
+		                {
+		                    name: '雨水口',
+		                    y: parent.seriesData.pointArr[2][1],
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(0,92,230,1)"
+		                },
+		                {
+		                    name: '阀门',
+		                    y: parent.seriesData.pointArr[3][1],
+		                    color:"rgba(255,0,0,1)"		
+		                }
+		            ]
+		        }]
+		    });
+		            
+		    $('#containerPie4').highcharts({
+			        chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '排水设施数量饼状图'
+		        },
+		        tooltip: {
+		            hideDelay:500,
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [{
+ 						    name:'闸门',
+		                    y: parent.seriesData.facilityArr[0][1],
+		                    color:"rgba(230,0,0,1)"		                
+		                },
+		                {
+		                    name: '溢流堰',
+		                    y: parent.seriesData.facilityArr[1][1],
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(197,0,255,1)"
+		                },
+		                {
+		                    name: '排水泵站',
+		                    y: parent.seriesData.facilityArr[2][1],
+		                    color:"rgba(0,112,255,1)"		
+		                }
+		            ]
+		        }]
+		    });
+        }
+    });
+    </script>
+</body>
+</html>

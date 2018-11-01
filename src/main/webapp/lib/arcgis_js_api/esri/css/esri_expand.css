@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+.esriPopup .titlePane {background-color: #444444; color: #FFFFFF; line-height: 30px; padding-left: 6px; border-radius: 5px 5px 0px 0px; -webkit-border-radius: 5px 5px 0px 0px; cursor: default;font-size: 18px;text-align: center;}
+.esriPopup .outerPointer.left {
+    display: block;
+    left: 28px;
+    margin-top: -8px;
+    top: 50%;
+}
+
+.esriPopup .outerPointer.right {
+    display: block;
+    right: 28px;
+    top: 50%;
+    margin-top: -8px;
+}

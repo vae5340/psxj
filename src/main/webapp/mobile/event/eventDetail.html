@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- 指定页面编码utf-8 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no" />
+    <script src="js/jquery-1.11.1.min.js"></script>
+	<link href="css/common.css" rel="stylesheet" type="text/css" />
+  </head> 
+ </head>
+  <body>
+	<div>
+		<div class="title"><img src="img/img_p.png"><label>问题来源</label></div>
+		<div class="detail">
+
+		</div>
+	</div>
+	<div class="incon">
+		<div>
+			<p>问题描述</p>
+			<div class="textarea"></div>
+		</div>
+		<div class="model clearfix">
+			<p>现场图片</p>
+			<div class="imgbox clearfix">
+				
+			</div>
+		</div>
+	</div>
+	<div class="qusbox">
+		<div class="title"><img src="img/ic_process.png"><label><label>处理情况</label></div>
+
+	</div>
+	<div class="advicebox">
+		<div class="title"><label><label>管理层意见：</label></div>
+		<div class="advicecontent">
+		</div>
+		
+	</div>
+	<div class="desk"></div>
+<script>
+function GetQueryString(name){
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+
+function loadEventDetailSuccess(json){
+
+
+	var html='';
+	var event=json.data.event;
+	var urgency;
+	if((event.urgency-1)==0){
+		urgency="一般"
+	}else if((event.urgency-1)==1){
+		urgency="较紧急"
+	}else{
+		urgency="紧急"
+	}
+	var time=new Date(event.time);  
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报人</div>'+
+			'<div class="listright">'+event.userName+'</div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报单位</div>'+
+			'<div class="listright">'+event.parentOrgName+'</div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报时间</div>'+
+			'<div class="listright">'+formatDate(time)+'</div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报位置</div>'+
+			'<div class="listright">'+event.reportaddr+'</div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">问题地点</div>'+
+			'<div class="listright">'+event.addr +'</div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">设施类型</div>'+
+			'<div class="listright componentType"> </div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">问题类型</div>'+
+			'<div class="listright eventType"> </div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">紧急程度</div>'+
+			'<div class="listright">'+urgency +'</div>'+
+			'</div>';
+	$(".detail").append(html);
+	$(".textarea").html(event.description);
+	agdicByTypeCodeItem(event.componentType,".componentType");
+	agdicByTypeCodeItem(event.eventType,".eventType");
+	var imghtml='';
+	for(var i=0;i<event.files.length;i++){
+		imghtml+='<div class="img" onclick="imgplay(this)"><img src="'+event.files[i].path +'"></div>';
+	}
+	$(".imgbox").html(imghtml);
+}
+
+function loadEventDetail(){
+	var url="/psxj/rest/report/getReportDetail";
+	$.ajax({
+      type:'post',
+      url:url,
+      data:{
+		loginName:GetQueryString("loginName"),
+		taskInstDbid:GetQueryString("taskInstDbid"),
+		procInstDbId:GetQueryString("procInstDbId"),
+		masterEntityKey:GetQueryString("masterEntityKey")
+	  },
+      dataType:'json',
+      success:function(result){
+			loadEventDetailSuccess(result);
+      }
+    });
+}
+
+var eventDetailObject;
+
+
+function loadEventDetailSuccess2(json){
+	var html='';
+	var data = json.data;
+	eventDetailObject = data;
+    var event = data.event;
+	var urgency;
+	if((event.urgency-1)==0){
+		urgency="一般"
+	}else if((event.urgency-1)==1){
+		urgency="较紧急"
+	}else{
+		urgency="紧急"
+	}
+	var time=new Date(event.time);
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报人</div>'+
+			'<div class="listright">'+event.time+'</div>'+
+			'</div>';
+			html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报单位</div>'+
+			'<div class="listright">'+event.parentOrgName+'</div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报时间</div>'+
+			'<div class="listright">'+formatDate(time)+'</div>'+
+			'</div>';
+		/*html+='<div class="linelist clearfix">'+
+			'<div class="listleft">上报地点</div>'+
+			'<div class="listright">'+data.reportaddr+'</div>'+
+			'</div>';*/
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">问题地点</div>'+
+			'<div class="listright">'+event.addr +'</div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">设施类型</div>'+
+			'<div class="listright componentType"> </div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">问题类型</div>'+
+			'<div class="listright eventType"> </div>'+
+			'</div>';
+		html+='<div class="linelist clearfix">'+
+			'<div class="listleft">紧急程度</div>'+
+			'<div class="listright">'+urgency +'</div>'+
+			'</div>';
+	$(".detail").append(html);
+	$(".textarea").html(event.description);
+	agdicByTypeCodeItem(event.eventType,event.componentType,".eventType");
+	agdicByTypeCodeItem2(event.componentType,'.componentType');
+
+	var imghtml='';
+	for(var i=0;i<data.event.files.length;i++){
+		imghtml+='<div class="img" onclick="imgplay(this)"><img src="'+data.event.files[i].path +'"></div>';
+	}
+	$(".imgbox").html(imghtml);
+	
+}
+
+function loadEventDetail2(){
+    var url="/psxj/rest/report/getReportDetail";
+	$.ajax({
+      type:'get',
+      url:url,
+      data:{
+	    masterEntityKey:GetQueryString("sjid"),
+		isNeedDecode:"1"
+	  },
+      dataType:'json',
+      success:function(result){
+		loadEventDetailSuccess2(result);
+      	loadHandleInfo();
+      }
+    });
+}
+
+loadEventDetail2();
+
+//查看图片
+function imgplay(op){
+	$(op).toggleClass("current");
+	$(".desk").toggle();
+}
+
+function loadHandleInfoAndAvcicesSuccess(json){
+	var handleInfos = new Array();
+	var advices = new Array();
+	for(var j=0;j<json.data.length;j++){
+		if(json.data[j].lx == "1"){
+			advices.push(json.data[j]);
+		} else {
+			handleInfos.push(json.data[j]);
+		}
+	}
+	// if(eventDetailObject.isbyself == "true"){
+		// $(".qusbox").append("<span>已自行处理</span");
+	// } else {
+		showHandleInfo(handleInfos);
+	// }
+	showAdvices(advices);
+}
+
+function showHandleInfo(data){
+	var html='';
+	for(var i=0;i<data.length;i++){
+		if((i == data.length-1)
+			&& eventDetailObject.state != ""
+			&& eventDetailObject.state != "ended"){
+			continue;
+		}
+		var time=new Date(data[i].time);
+		var linkName;
+		var opUserTitle;
+		var contentTitle;
+		if(i==0 && data[i].linkName != "自行处理（已结束）"){
+			linkName = (i+1) + "." + data[i].linkName+"";
+			opUserTitle = "上报人";
+		}else if(!data[i].linkName){
+			linkName = (i+1) + "." + "日志";
+			opUserTitle = "填写人";
+			contentTitle = "日志内容";
+		} else {
+			linkName = (i+1) + "." + data[i].linkName;
+			opUserTitle = "经办人";
+			contentTitle = "处理意见";
+		}
+		var content = "";
+		if(data[i].content){
+			content += data[i].content;
+		}
+		if(data[i].reassignComments){
+			content += data[i].reassignComments;
+		}
+		html+='<div class="qusmodel">'+
+			'<div class="qustitle"><span></span>'+linkName+'</div>'+
+			'<div class="qusin">'+
+				'<div class="linelist clearfix">'+
+					'<span>' + opUserTitle + '：</span>'+
+					'<label>'+data[i].opUser+'</label>'+
+				'</div>';
+
+		if(!(data[i].linkName)
+			|| data[i].linkName == "自行处理（已结束）"){
+		
+		} else {
+			html += 
+				'<div class="linelist clearfix">'+
+					'<span>电话：</span>'+
+					'<label class="phone"><img src="img/img_phone.png">'+data[i].opUserPhone+'</label>'+
+				'</div>';
+		}
+
+		html +=
+				'<div class="linelist clearfix">'+
+					'<span>时间：</span>'+
+					'<label>'+formatDate(time)+'</label>'+
+				'</div>';
+ 
+		if((i != 0
+			&& data[i].linkName != "撤回"
+			&& data[i].linkName != "问题上报")
+			|| data[i].linkName == "自行处理（已结束）"){
+		html += '<div class="linelist clearfix">'+
+					'<span>' + contentTitle + '：</span>'+
+					'<label>' + content + '</label>'+
+				'</div>';
+		}
+
+		if(!(data[i].linkName)
+			|| (i == data.length-1 && eventDetailObject.state == "ended")
+			|| data[i].linkName == "撤回"
+			|| data[i].linkName == "自行处理（已结束）"){
+		
+		} else if(data[i].nextOpUser){
+			html +=	'<div class="linelist clearfix">'+
+					'<span>下一环节处理人：</span>'+
+					'<label>'+data[i].nextOpUser+'</label>'+
+				'</div>'+
+				'<div class="linelist clearfix">'+
+					'<span>电话：</span>'+
+					'<label class="phone"><img src="img/img_phone.png">'+data[i].nextOpUserPhone+'</label>'+
+				'</div>';
+		}
+
+		if(data[i].attFiles && data[i].attFiles.length > 0){
+			var imgdiv = '<div class="model clearfix">'+
+			'<div class="clearfix">';
+	
+			for(var j=0;j<data[i].attFiles.length;j++){
+				imgdiv+='<div class="img" onclick="imgplay(this)"><img src="'+data[i].attFiles[j].path +'"></div>';
+			}
+
+			imgdiv += '</div></div>';
+			html += imgdiv;
+		}
+
+		
+
+		html +=
+			'</div>'+
+		'</div>';
+	
+	}
+	$(".qusbox").append(html);
+
+}
+
+function showAdvices(data){
+	var html2='';
+	for(var m=0; m<data.length; m++){
+		var time2=new Date(data[m].time);
+		html2 += '<div class="adviceitem">'
+				+ '<div class=" clearfix">'
+				+	'<span>' + data[m].opUser + '</span>'
+				+ '</div>'
+				+ '<div class=" clearfix">'
+				+	'<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + data[m].content + '</span>'
+				+ '</div>'
+				+'<div class="clearfix" style="text-align:right">'
+				+	'<span> ' + formatDate(time2) + ' </span>'
+				+'</div></div>';
+	}
+	$(".advicecontent").append(html2);
+}
+
+function loadHandleInfo(){
+	var url="/psxj/rest/report/getTraceRecordAndSggcLogList"
+	// ?sjid="+GetQueryString("sjid")+"&isNeedDecode=1&pageNo=1&pageSize=100";
+	$.ajax({
+      type:'get',
+      url:url,
+      data:{
+      	sjid:GetQueryString("sjid"),
+      	isNeedDecode:1,
+      	pageNo:1,
+      	pageSize:100
+      },
+      dataType:'json',
+      success:function(result){
+      	loadHandleInfoAndAvcicesSuccess(result);
+      }
+    });
+}
+
+
+//数据字典获取类型
+function agdicByTypeCodeItem(sslx,codeid,classname){
+	// var url="../../agweb_ha/rest/agdic/agdicByTypeCodeItem/"+codeid;
+	//var url="http://139.159.243.230:8081/agweb_ha/rest/agdic/agdicByTypeCodeItem/"+codeid;
+	var html="";
+	$.ajax({
+      type:'get',
+      url:'/psxj/rest/report/queryProblemTree?orgIds=406',
+      dataType:'json',
+      success:function(result){
+          if(result.data && typeof result.data == 'object'){
+              for(var i in result.data){
+                  var item = result.data[i];
+                  var sslxArr = sslx.split(',');
+                  if(sslx && sslxArr.length>1){
+					  if(item.code == codeid){
+                          for(var j in sslxArr){
+                              for(var s in item.data){
+                                  if(sslxArr[j] == item.data[s].code){
+                                      if(html!=""){
+                                          html+=","+item.data[s].name;
+                                      }else{
+                                          html+=item.data[s].name;
+                                      }
+                                  }
+                              }
+                          }
+                      }
+				  }
+			  }
+		  }
+          $(classname).html(html);
+      }
+    });
+}
+
+//数据字典获取类型
+function agdicByTypeCodeItem2(codeids,className){
+    debugger;
+	//var url2="http://139.159.243.230:8081/agweb_ha/rest/agdic/allDics";
+	$.get('/psxj/rest/report/queryProblemTree?orgIds=406',function(result){
+        var codeidsArray = codeids.split(",");
+        var eventTypeStr = "";
+        for(var cc=0; cc<result.data.length; cc++){
+            for(var bb=0; bb<codeidsArray.length; bb++){
+                if(result.data[cc].code == codeidsArray[bb]){
+                    eventTypeStr += "      " + result.data[cc].name;
+                    break;
+                }
+            }
+        }
+        $(className).html(eventTypeStr);
+	},'json');
+	/*$.ajax({
+      type:'get',
+      url:'event.json',
+      dataType:'json',
+      success:function(result){
+          debugger;
+      	var codeidsArray = codeids.split(",");
+      	var eventTypeStr = "";
+      	for(var cc=0; cc<result.length; cc++){
+			for(var bb=0; bb<codeidsArray.length; bb++){
+				if(result[cc].code == codeidsArray[bb]){
+					eventTypeStr += "      " + result[cc].name;
+					break;
+				}
+			}
+		}
+
+		$(".eventType").html(eventTypeStr);
+      }
+    });*/
+}
+
+
+//时间戳转换
+function   formatDate(now)   {     
+	var   year=now.getFullYear(); 
+	var   month=now.getMonth()+1;     
+	var   date=now.getDate();     
+	var   hour=now.getHours();     
+	var   minute=now.getMinutes();     
+	var   second=now.getSeconds();     
+	return   year+"-"+month+"-"+date+"   "+hour+":"+minute+":"+second;     
+}     
+         
+</script>
+  </body>
+</html>

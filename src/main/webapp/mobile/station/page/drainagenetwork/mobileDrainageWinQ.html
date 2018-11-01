@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../../../../lib/jquery.min.js"></script>
+    <link href="../../css/mobilerStationWin.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/css/jqx.base.css" type="text/css" />
+    <title>窨井流量</title>
+    <script>
+        (function () {
+            document.documentElement.style.fontSize = document.documentElement.clientWidth * 31.25 / 750 + 'px';
+            window.addEventListener('resize', function () {
+                document.documentElement.style.fontSize = document.documentElement.clientWidth * 31.25 / 750 + 'px';
+            });
+        })();
+    </script>
+</head>
+
+<body>
+<div class="app-panal-head app-panal-head-spe" style="height: 32px; opacity: 1;">
+    <span id="titleContent" class="app-panal-head-title" style="line-height: 32px;"></span>
+</div>
+<div class="header">
+    <ul class="nav">
+        <li>过程线</li>
+        <li></li>
+        <li>
+            <div class="form-inline time-group" style="display: none">
+                <div class="form-group">
+                    <label for="date">时间范围: </label>
+                    <input type="text" value="" id="drainageWinQFromDate">
+                    <label for="date">-</label>
+                    <input type="text" value="" id="drainageWinQToDate">
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="contentBox">
+    <div class="subnav-wrap">
+        <ul class="subnav">
+            <li class="active">当日</li>
+            <li>近一月</li>
+            <li>近三月</li>
+            <li>近六月</li>
+            <li>近一年</li>
+            <li>近两年</li>
+            <li>近三年</li>
+            <li>近五年</li>
+            <li id="custombtn">自定义</li>
+        </ul>
+        <div class="subnav-main">
+            <div class="subpage active" style="overflow-x: scroll;">
+                <div id="hisChart" class="hisChart sub-echart"></div>
+                <div class="hisTable">
+                    <div id="historyList"></div>
+                </div>
+                <div id="changeChartTable" title="查看数据" class="chart2table_btn table-icon" onclick="changeChartTable(this)"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $($('.nav li')[0]).addClass('select');
+    $($('.nav li')[0]).addClass('select');
+    $('.contentBox>div').eq(0).show().siblings().hide();
+    $('.nav li').click(function () {
+        var i = $(this).index();
+        if (i < 2) {
+            $(this).addClass('select').siblings().removeClass('select');
+            $('.contentBox>div').eq(i).show().siblings().hide();
+        }
+    });
+</script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/slickgrid/jquery.event.drag-2.2.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/slickgrid/slick.core.js"></script>
+<script type="text/javascript" src="../../../../lib/plugins/echarts/echarts3.8.4.js"></script>
+<script type="text/javascript" src="../../../../mobile/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../../../../lib/custom/utils/animate_load.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/slickgrid/slick.grid-2.1.0.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxcore.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxdata.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxbuttons.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxscrollbar.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxmenu.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.filter.js"></script>
+<script type="text/javascript" src="../../../../systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.grouping.js"></script>
+<script src="./js/mobileDrainageWinQ.js"></script>
+
+</body>
+</html>

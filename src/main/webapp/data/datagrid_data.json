@@ -1,0 +1,15 @@
+{
+    "total":10,
+    "rows":[
+        {"recorde_time":"2016-07-18 7:58","jk_level":1.1},
+        {"recorde_time":"2016-07-18 8:58","jk_level":2.4},
+        {"recorde_time":"2016-07-18 9:58","jk_level":2.3},
+        {"recorde_time":"2016-07-18 10:58","jk_level":2.4},
+        {"recorde_time":"2016-07-18 11:58","jk_level":2.4},
+        {"recorde_time":"2016-07-18 12:58","jk_level":2.1},
+        {"recorde_time":"2016-07-18 13:58","jk_level":2.0},
+        {"recorde_time":"2016-07-18 14:58","jk_level":1.9},
+        {"recorde_time":"2016-07-18 15:58","jk_level":1.1},
+        {"recorde_time":"2016-07-18 16:58","jk_level":1.0}
+    ]
+}

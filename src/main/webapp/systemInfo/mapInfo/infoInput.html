@@ -1,0 +1,138 @@
+<style>
+	.modal-backdrop {
+	  opacity: 0 !important;
+	  filter: alpha(opacity=0) !important;
+	}
+</style>
+<div class="modal fade" id="mapInfo_list" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:750px;z-index:999;">
+        <div class="modal-content" style="top:140px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel_title"></h4>
+            </div>
+			<div class="modal-body" style="height:300px;overflow:auto;">
+	           <form class="form-horizontal" id="mapInfo" >
+	               <!-- 
+	                <div class="form-group ">
+	                    <label class="col-sm-2 control-label">地址</label>
+	                    <div class="col-sm-3">
+	                        <input type="text" class="form-control input-sm" id="ADDR" name="seconds" />
+	                    </div>
+	                    <label class="col-sm-2 control-label">所属系统</label>
+	                    <div class="col-sm-3">
+	                        <input type="text" class="form-control input-sm" id="SEWAGESYST" name="SEWAGESYST"/>
+	                    </div>
+	                </div>
+	                <div class="form-group ">
+	                    <label class="col-sm-2 control-label">数据来源</label>
+	                    <div class="col-sm-3">
+	                        <input type="text" class="form-control input-sm" id="DATA_PROVI" name="DATA_PROVI"/>
+	                    </div>
+	                    <label class="col-sm-2 control-label">区域</label>
+	                    <div class="col-sm-4">
+	                        <input type="text" class="form-control input-sm" id="DISTRICT" name="DISTRICT"/>
+	                    </div>
+                    </div>
+                    <div class="form-group ">
+                     	<label class="col-sm-2 control-label">运行类型</label>
+	                    <div class="col-sm-4">
+	                        <input type="text" class="form-control input-sm" id="SORT" name="SORT"/>
+	                    </div>
+	                    <label class="col-sm-2 control-label">设施类型</label>
+	                    <div class="col-sm-4">
+	                        <input type="text" class="form-control input-sm" id="SUBTYPE" name="SUBTYPE"/>
+	                    </div>
+	                </div>
+                    <div class="form-group ">
+                     	<label class="col-sm-2 control-label">标识码</label>
+	                    <div class="col-sm-4">
+	                        <input type="text" class="form-control input-sm" id="USID" name="USID"/>
+	                    </div>
+	                    <label class="col-sm-2 control-label">权属单位</label>
+	                    <div class="col-sm-4">
+	                        <input type="text" class="form-control input-sm" id="OWNERDEPT" name="OWNERDEPT"/>
+	                    </div>
+	                </div>
+	                -->
+             </form>
+             </div>
+            <div class="modal-footer">
+             	<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	//异步请求
+	$(function(){
+		//显示图片方法-在模板里面
+		//ajaxImage();
+	});
+	//外部调用接口加载图片
+	function ajaxImage(){
+		var id = $("#OBJECTID").val();
+		var layerId = $("#layerId").val(),tableLayerName;
+		switch(layerId){
+			case "2" :
+			tableLayerName="A162";
+			break;
+			case "3" :
+			tableLayerName="A130";
+			break;
+			case "4" :
+			tableLayerName="A163";
+			break;
+			case "5" :
+			tableLayerName="A161";
+			break;
+			case "6" :
+			tableLayerName="A164";
+			break;
+			case "7" :
+			tableLayerName="A159";
+			break;
+			case "8" :
+			tableLayerName="A157";
+			break;
+			case "9" :
+			tableLayerName="A158";
+			break;
+			case "10" :
+			tableLayerName="A156";
+			break;
+			default:
+				break;
+		}
+		if(id && layerId ){
+			 $.ajax({
+				method: 'post',
+				url: '/agsupport_swj/ps-jk-data-his!testGetAlls.action',
+				data: {tableName: tableLayerName,objId: id},
+				dataType: 'json',
+				success : function(data){
+					var html="";
+					if(data.form.length){
+						for(var i=1;i<data.form.length;i++){
+							for(var j=0;i<data.form.length-i;j++){
+								if(parseInt(data.form[j].createTime) < parseInt(data.form[j+1].createTime)){
+									var temp;
+									temp=data.form[j].createTime;
+									data.form[j].createTime=data.form[j+1].createTime
+									data.form[j+1].createTime=temp;
+								}
+							}
+						}
+						html = "<label class=\"col-sm-2 control-label\">现场图片</label><div class=\"col-md-4 column\" style=\"margin-top: 10px;padding-left: 95px;\">";
+						for(var k=0;k<data.form.length;k++){
+							html+= "<img width=400 height=250 style=\"margin-bottom: 10px\" alt=\"140x140\" src=\"data:image/jpg;base64,"+data.form[k].DATA+"\"/>"+"&nbsp;";
+						}
+						html += "</div>";
+						$(html).appendTo("#mapInfo");
+					}
+				},error: function(){}
+			});
+		}
+	}
+</script>

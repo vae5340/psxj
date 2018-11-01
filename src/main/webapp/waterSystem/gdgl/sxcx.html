@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/jquery/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="../../lib/My97DatePicker/WdatePicker.js"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/jquery.validate.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/jquery.metadata.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/messages_cn.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../../js/gdgl/drawtool.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/themes/bootstrap/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<title> </title>
+	</head>
+	<body style="width:650px">
+	
+		<hr>
+		<div class="form-horizontal" id="div1">
+			<div class="form-group">
+				<label class="col-xs-2">起点管底埋深</label>
+				<input  class="col-xs-4 form-control" id="StartDeep" style="width:180px" placeholder="起点管底埋深">
+				<label class="col-xs-2">终点管底埋深</label>
+				<input  class="col-xs-4 form-control" id="EndDeep" style="width:180px" placeholder="终点管底埋深">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2">起点管内底高程</label>
+				<input  class="col-xs-4 form-control" id="StartH" style="width:180px" placeholder="起点管内底高程">
+				<label class="col-xs-2">终点管内底高程</label>
+				<input  class="col-xs-4 form-control" id="EndH" style="width:180px" placeholder="终点管内底高程">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2">&nbsp;建 设 年 代</label>
+				<input  onClick="WdatePicker()"  class="col-xs-4 form-control" id="Mdate" style="width:180px" placeholder="选择日期">
+				<label class="col-xs-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;线 型</label>
+				<input  class="col-xs-4 form-control" id="LineStyle" style="width:180px" placeholder="线型">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2">&nbsp;电 缆 条 数</label>
+				<input  class="col-xs-4 form-control" id="CabCount" style="width:180px" placeholder="电缆条数">
+				<label class="col-xs-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;孔 数</label>
+				<input  class="col-xs-4 form-control" id="HoleCount" style="width:180px" placeholder="孔数">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2">&nbsp;探 测 单 位</label>
+				<input  class="col-xs-4 form-control" id="Surunit" style="width:180px" placeholder="探测单位">
+				<label class="col-xs-2">&nbsp;探 测 时 间</label>
+				<input  onClick="WdatePicker()" class="col-xs-4 form-control" id="SurDate" style="width:180px" placeholder="选择日期">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2">&nbsp;所 在 路 名</label>
+				<input  class="col-xs-4 form-control" id="RoadName" style="width:180px" placeholder="所在路名">
+				<label class="col-xs-2">受纳水体名称</label>
+				<input  class="col-xs-4 form-control" id="ReceiveWater" style="width:180px" placeholder="受纳水体名称">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2">保护材料起点埋深</label>
+				<input  class="col-xs-4 form-control" id="PSdeep" style="width:180px" placeholder="保护材料起点埋深">
+				<label class="col-xs-2">保护材料终点埋深</label>
+				<input  class="col-xs-4 form-control" id="ESdeep" style="width:180px" placeholder="保护材料终点埋深">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-2">保护材料材质</label>
+				<input  class="col-xs-4 form-control" id="PMaterial" style="width:180px" placeholder="保护材料材质">
+				<label class="col-xs-2">保护材料管径</label>
+				<select class="col-xs-4 form-control" id="pdsysf" style="width:80px">
+					<option value="&gt;">大于</option>
+					<option value="&lt;">小于</option>
+					<option value="=">等于</option>
+				</select>
+				<input class="col-xs-4 form-control" id="PDS" placeholder="保护材料管径长度(毫米)"  style="width:100px">
+			</div>
+				<div class="form-group">
+				<label class="col-xs-2">计算长度</label>
+				<input  class="col-xs-4 form-control" id="LEN" style="width:180px" placeholder="计算长度">
+			</div>
+			<p>
+				<a href="javascript:void(0)" onclick="drawTool.search();" class="btn btn-primary">查询</a>
+			</p>
+		</div>
+		<div id="div2" style="display:none">
+		</div> 	
+	</body>
+</html>

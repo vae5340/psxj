@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../lib/jquery/jquery.easyui.min.js"></script>
+		<script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/jquery.validate.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/jquery.metadata.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/messages_cn.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../../js/gdgl/drawtool.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/themes/bootstrap/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<title> </title>
+	</head>
+	<body style="width:250px">
+		<hr>
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label for="Status" class="col-xs-3 control-label">管 径</label>
+				<select class="col-xs-4 form-control" id="ysf" style="width:80px">
+					<option value="&gt;">大于</option>
+					<option value="&lt;">小于</option>
+					<option value="=">等于</option>
+				</select>
+				<input class="col-xs-5 form-control" id="gj" placeholder="长度(毫米)"  style="width:100px">
+			</div>
+			<a href="javascript:void(0)" onclick="drawTool.search();" class="btn btn-primary">查询</a>
+		</div>
+	</body>
+</html>

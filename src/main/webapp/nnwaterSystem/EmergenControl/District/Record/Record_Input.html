@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>预案管理</title>
+    <meta charset="utf-8">
+	<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+	<link href="/awater/lib/zTree/css/zTreeStyle/metro.css" type="text/css" rel="stylesheet" >
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+	
+    <script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+    <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/awater/js/util_date.js" type="text/javascript"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script >
+	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>
+	<script src="/awater/lib/zTree/js/jquery.ztree.all.js" type="text/javascript"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>  	
+	
+	<style>
+	   html{
+	      height:100%;
+	   }
+	   input{
+	       background-color:#FFFFFF;
+	   }
+	</style>
+    <script type="text/javascript">
+    	(function($){
+	        $(window).load(function(){
+    			$("#content").mCustomScrollbar({
+    			   mouseWheelPixels:300
+    			});
+				$("#templateCreateTime").datetimepicker({
+	              	language: 'zh-CN',
+    			  	format: 'yyyy-mm-dd hh:ii:ss',
+    			  	autoclose:true,
+    			  	pickerPosition:'top-right'
+    			});
+    			
+    			$("#tableGood").on('post-body.bs.table', function (row,obj) {
+				    $(".fixed-table-body").mCustomScrollbar({
+						mouseWheelPixels:300
+					});	
+				});
+				
+				$("#tableTeam").on('post-body.bs.table', function (row,obj) {
+				    $(".fixed-table-body").mCustomScrollbar({
+						mouseWheelPixels:300
+					});	
+				});
+				
+				$("#tableReport").on('post-body.bs.table', function (row,obj) {
+				    $(".fixed-table-body").mCustomScrollbar({
+						mouseWheelPixels:300
+					});	
+				});
+    		});
+    	})(jQuery);
+    </script>
+  </head>
+  
+  <body style="width: 100%;height:100%;overflow-x:hidden">
+	<div id="content" style="height:calc( 100% - 50px );">
+	    <form id="form" class="form-horizontal" >
+	        <div style="padding:12px 30px 0px 0px">
+	        	<input type="hidden" id="id" name="id" >
+		        <input type="hidden" id="templateId" name="templateId" >
+		        <input type="hidden" id="templateCreatePerson" name="templateCreatePerson" >
+				<div class="form-group" >
+					<label class="col-sm-2 control-label">预案编号</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text" id="templateNo" name="templateNo">
+					</div>
+					<label class="col-sm-2 control-label">预案名称</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text" id="templateName" name="templateName">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">预案等级</label>
+					<div class="col-sm-4">
+						<select class="form-control" id="templateGrade" name="templateGrade">
+						    <option selected="selected"></option>
+						</select>
+					</div>
+					<label class="col-sm-2 control-label">预案类型</label>
+					<div class="col-sm-4">
+						<select class="form-control" id="templateType" name="templateType">
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">预案内容</label>
+					<div class="col-sm-10">
+						<!--<input class="form-control" type="text" id="templateContent" name="templateContent">  -->
+						<textarea id="templateContent" name="templateContent" class="form-control" rows="4" style="max-width: 100%;"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">短信内容</label>
+					<div class="col-sm-10">
+						<textarea id="templateSms" name="templateSms" class="form-control" rows="4" style="max-width: 100%;"></textarea>
+						<!-- <select class="form-control" id="templateSms" name="templateSms">
+						</select> -->
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">短信接收方</label>
+					<div class="col-sm-10">
+						<!-- <input class="form-control" type="text" id="templateSmsReceiver" name="templateSmsReceiver"> -->
+						<ul id="templateSmsReceiver" name="templateSmsReceiver" class="ztree"></ul>
+					</div>
+				 </div>	  			  				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">物资装备</label>
+					<div class="col-sm-10">
+						<table id="tableGood"></table>
+					</div>
+				</div>							
+           	   <div class="form-group">
+					<label class="col-sm-2 control-label">人力资源</label>
+					<div class="col-sm-10">
+						<table id="tableTeam"></table>
+					</div>
+				</div>		
+				<!-- <div class="form-group">
+					<label class="col-sm-2 control-label">编制时间</label>
+					<div class="col-sm-10">
+						<input class="form-control" type="text" id="templateCreateTime" name="templateCreateTime">
+					</div>
+				</div>  -->
+				<div class="form-group">
+					<label class="col-sm-2 control-label">备注</label>
+					<div class="col-sm-10">
+						<textarea id="remark" name="remark" class="form-control" rows="4" style="max-width: 100%;"></textarea>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div style="width:100%;height:50px;padding-top:10px;border-top:1px solid #e7eaec;background-color: #F8F8F8;">
+		<div class="col-sm-9 col-sm-offset-10">
+			<button id="startBtn" class="btn btn-primary" type="button" onclick="save()">启动预案</button>
+			<button id="cancelBtn" class="btn btn-white" type="button" onclick="cancel()">取消</button>
+	</div>
+	<script type="text/javascript">
+		//加载短信
+		function ajaxSms(value){
+			var dataparms={
+				alarmType : value,
+			};
+			$.ajax({
+				type: 'post',
+				url : '/agsupport/ya-temlate-sms!listSmsMessageAjax.action',
+				data : dataparms,
+				dataType : 'json',
+				success : function(data){
+					$.each(eval(data.rows), function(){
+						//$("#templateSms").val(this.TEMPLATE_CONTET);
+						this.TEMPLATE_CONTET? $("#templateSms").val(this.TEMPLATE_CONTET) : $("#templateSms").val("");
+					});
+				},
+				error : function(){
+					parent.layer.msg('获取短信失败');
+				}
+			});
+		}
+	
+		function getQueryStr(name) {
+			var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+			var r = decodeURI(window.location.search).substr(1).match(reg);
+			if (r != null) 
+				return unescape(r[2]);
+			return "";
+		}
+	    var template_id=getQueryStr("template_id");
+	    var id=getQueryStr("id");
+	    
+	    var districtUnitId=getQueryStr("districtUnitId");
+	    var yaCityId=getQueryStr("yaCityId");
+	    var setting = {
+			check: {
+				enable: true,
+				chkStyle : "checkbox",
+				chkboxType: { "Y": "s", "N": "s" }
+			},
+			data: {
+				key: {
+					name: "orgName"
+				},
+				simpleData: {
+					enable: true,
+					idKey: "orgId",
+					pIdKey: "parentOrgId",
+					rootPId: 0
+				}
+			}
+		};
+		
+	    function getInputNum(value, row, index){
+	        if(value!=null)
+	             return "<input type='text' name='numbervalue"+row["id"]+"' class='form-control'  max='"+row["amount"]+"' min='0' value="+value+" style='text-align:center;width:80px;margin-left:30px'></input>";
+	        else
+			     return "<input type='text' name='numbervalue"+row["id"]+"' class='form-control'  max='"+row["amount"]+"' min='0' style='text-align:center;width:80px;margin-left:30px'></input>";
+		}
+		
+		function format_date(value, row, index){
+			if(value)
+				return getLocalTime(value.time);
+			return '';
+		}
+		 
+	    $(function(){
+	    	
+	        var url;
+	        if(template_id!=""){
+	            url='/agsupport/ya-template-district!inputJson.action?id='+template_id;
+	         }else{
+	            url='/agsupport/ya-record-district!inputJson.action?id='+id;	           
+	            $("#startBtn").hide();
+	            $("#cancelBtn").removeClass("btn-white").addClass("btn-primary"); 
+	         }  
+	         
+			 $.ajax({
+				method : 'GET',
+				url :url,
+				async : true,
+				dataType : 'json',
+				success : function(data) {
+					var dictionary=data.Dict;
+					for (itemname in dictionary){
+						for (num in dictionary[itemname]){
+							var selText="";
+							if(dictionary[itemname][num].itemCode==data.form[itemname])
+								selText="selected='true'";
+							$("#"+itemname).append("<option value='"+dictionary[itemname][num].itemCode+"' "+selText+">"+dictionary[itemname][num].itemName+"</option>");
+						}
+					}
+					
+					var orgTree = data.Tbmap["orgTable"];
+					$.fn.zTree.init($("#templateSmsReceiver"), setting,orgTree);					
+					
+					$("#templateId").val(template_id);
+					for (var key in data.form){
+						if(key=="id")
+						  continue;
+						//if(key=="templateCreateTime")
+						//	$("#templateCreateTime").val(getLocalTime(data.form[key].time));
+                        else if(key=="templateSmsReceiver"){
+							var strArray=data.form[key].split(",");
+							var zTree = $.fn.zTree.getZTreeObj("templateSmsReceiver");
+							for(var i=0;i<strArray.length;i++){
+								var node = zTree.getNodeByParam("orgId",strArray[i]);
+								if(node!=null){
+									node.checked = true;
+									zTree.updateNode(node);
+								}
+							}
+						}
+						else if(key=="templateRemark")
+						   	$("#remark").val(data.form[key]);
+					   else
+						   	$("#"+key).val(data.form[key]);
+					}
+					
+					var goodTableRows=JSON.parse(data.Goodmap["goodTable"]).rows;
+					$("#tableGood").bootstrapTable({
+				   		toggle:"table",
+					    data:goodTableRows,
+						rowStyle:"rowStyle",
+						height:320,
+						cache: false, 
+						checkboxHeader:false,
+						singleSelect:false,
+						clickToSelect:true,
+					    sidePagination: "server",
+						columns: [
+						    {visible:true,title: '',checkbox:true},
+						    {field:'id',visible: false,title: '编号'},
+							{field:'name',visible: true,title: '物资名称',align:'center'},
+							{field:'code',visible: true,title: '物资代码',align:'center'},
+							{field:'model',visible: true,title: '型号',align:'center'},
+							{field:'dispAmount',visible: true,title: '调度数量',formatter:getInputNum,align:'center'},
+							{field:'amount',visible: true,title: '数量',align:'center'},
+							{field:'unit',visible: true,title: '单位',align:'center'}
+						]
+				  	});
+				  	
+				  	$.each(goodTableRows,function(index,item){
+				  	     if(item["goodChecked"]==1)
+				  	       $("#tableGood").bootstrapTable("check",index);
+				  	});
+				  	
+			  		var teamTableRows=JSON.parse(data.Teammap["teamTable"]).rows;
+				  	$("#tableTeam").bootstrapTable({
+				   		toggle:"table",
+					    data:teamTableRows,
+						rowStyle:"rowStyle",
+						height:200,
+						cache: false, 
+						checkboxHeader:false,
+						singleSelect:false,
+						clickToSelect:true,
+					    sidePagination: "server",
+						columns: [
+						    {visible:true,title: '',checkbox:true},
+						    {field:'id',visible: false,title: '编号'},
+							{field:'name',visible: true,title: '名称',align:'center'},
+							{field:'contact',visible: true,title: '联系人',align:'center'},
+							{field:'phone',visible: true,title: '电话',align:'center'},
+							{field:'address',visible: true,title: '地址',align:'center'}
+						]
+				  	});
+				  	
+			  		$.each(teamTableRows,function(index,item){
+				  	     if(item["teamChecked"]==1)
+				  	       $("#tableTeam").bootstrapTable("check",index);
+				  	});	   	  
+				},
+				error : function() {
+					alert('error');
+				}
+			});
+		});
+	    
+		function save(){
+		    var goodSelections=$("#tableGood").bootstrapTable("getSelections");
+            var goodIds=[];
+            var dispAmounts=[];
+            for(index in goodSelections)
+            {
+                goodIds.push(goodSelections[index]["id"]);
+                dispAmounts.push($("input[name='numbervalue"+goodSelections[index]["id"]+"']").val());
+            }
+            var goodIdsStr=goodIds.join(",");
+            var dispAmountsStr=dispAmounts.join(",");
+            
+            var teamSelections=$("#tableTeam").bootstrapTable("getSelections");
+            var teamIds=[];
+            for(index in teamSelections)
+            {
+                teamIds.push(teamSelections[index]["id"]);
+            }
+            var teamIdsStr=teamIds.join(",");
+            
+			var dataparam=getStrParamByArray($("#form").serializeArray())+"&goodIdsStr="+encodeURIComponent(goodIdsStr)+"&teamIdsStr="+encodeURIComponent(teamIdsStr)+"&dispAmountsStr="+encodeURIComponent(dispAmountsStr);
+			$.ajax({
+				type: 'post',
+				url : '/agsupport/ya-record-district!saveJson.action',
+				data:dataparam,
+				dataType : 'json',  
+				success : function(data) {
+					parent.layer.msg(data.result);
+                    showTabWindow("/awater/nnwaterSystem/EmergenControl/District/main.html?districtUnitId="+districtUnitId+"&id="+data.record_id);					
+				},
+				error : function(e) {
+					alert('error');
+				}
+			});
+		}
+		function getStrParamByArray(array){
+			//var param=$("#form").serialize();
+			var param="";
+			for (pitem in array){
+				if(param!=""){
+					if(array[pitem].name.toLowerCase().indexOf("time")!=-1){
+						param+="&"+array[pitem].name+"="+encodeURIComponent(getTimeLong(array[pitem].value));
+					} else
+						param+="&"+array[pitem].name+"="+encodeURIComponent(array[pitem].value);
+				} else {
+					if(array[pitem].name.toLowerCase().indexOf("time")!=-1){
+						param=array[pitem].name+"="+encodeURIComponent(getTimeLong(array[pitem].value));
+					} else
+						param=array[pitem].name+"="+encodeURIComponent(array[pitem].value);
+				}
+			}		
+			
+			//添加机构树状参数
+			var treeObj=$.fn.zTree.getZTreeObj("templateSmsReceiver"),
+            nodes=treeObj.getCheckedNodes(true),
+            checkIds="";
+            for(var i=0;i<nodes.length;i++){
+            	if(checkIds=="")
+            		checkIds=nodes[i].orgId;
+            	else
+            		checkIds+= ","+nodes[i].orgId;
+            }
+            param+="&templateSmsReceiver="+encodeURIComponent(checkIds);
+            
+            param+="&districtUnitId="+encodeURIComponent(districtUnitId)+"&yaCityId="+encodeURIComponent(yaCityId)+"&status=1";
+            
+			return param;
+		}	
+		
+	    function showTabWindow(url){
+			parent.createNewtab(url,"成员单位调度室");	
+		}
+		
+		function cancel(){
+		   parent.layer.close(parent.layer.getFrameIndex(window.name));
+		}
+	</script>  
+  </body>
+</html>

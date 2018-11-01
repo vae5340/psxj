@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>系统管理</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <!-- 警报页面样式 -->
+    <link rel="stylesheet" type="text/css" href="css/alarm_info.css" />
+    <!-- 管线管点样式 -->
+    <link rel="stylesheet" type="text/css" href="css/pipe_stats.css" />
+    <!-- 智能设备管理样式 -->
+    <link rel="stylesheet" type="text/css" href="css/fac_stats.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <!--[if IE 8]>
+        <link rel="stylesheet" type="text/css" href="css/index-ie8.css" />
+    <![endif]-->
+</head>
+<body style="margin:0;padding: 20px; background-color:#F5F5F5">
+
+<!-- 实时事件信息 -->
+<div class="container">   
+    <div class="row">
+      <h2 class="nav-title">管线、设备总览</h2>
+      <div style="height: 90%">
+        <!-- 左侧Div -->
+        <div class="col-md-10" style="width: 68%;">
+            <div class="headDiv" style="height:100px">
+			  <div id="pipeDiv" style="width:25%;height:100%">
+				<div class="pipeCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t1.png');background-size:cover;"></div>
+					<div class="class_name">管点数量</div>
+					<div id="gdsl" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="pipeCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t2.png');background-size:cover;"></div>
+					<div class="class_name">管线长度</div>
+					<div><div id="gscd" class="numfont" style="color: #FFA07A"></div><div style="float:left;font-size:16px;color:#FFA07A;line-height:35px">km</div></div>
+				</div>
+			  </div>
+			  <div id="facDiv" style="width:75%;height:100%">
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t2.png');background-size:cover;"></div>
+					<div class="class_name">截流井</div>
+					<div id="jlj" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t4.png');background-size:cover;"></div>
+					<div class="class_name">警示牌</div>
+					<div id="jsp" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t3.png');background-size:cover;"></div>
+					<div class="class_name">视频数量</div>
+					<div id="sp" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t9.png');background-size:cover;"></div>
+					<div class="class_name">闸站</div>
+					<div id="zz" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t6.png');background-size:cover;"></div>
+					<div class="class_name">排出口</div>
+					<div id="pck" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t8.png');background-size:cover;"></div>
+					<div class="class_name">流速仪</div>
+					<div id="lsy" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t5.png');background-size:cover;"></div>
+					<div class="class_name">电子水尺</div>
+					<div id="dzsc" class="numfont" style="color: #FFA07A"></div>
+				</div>
+				<div class="facCount" style="height:50%">
+					<div style="height:25px;width:25px;background-image:url('img/t7.png');background-size:cover;"></div>
+					<div class="class_name">泵站</div>
+					<div id="bz" class="numfont" style="color: #FFA07A"></div>
+				</div>
+			  </div>
+            </div>
+          <div id="tableDiv" class="table-responsive" >
+            <table class="table">
+              <tr class="headTr" style="font-size:12px" >
+                <td width="5%"></td>
+                <td width="">城区</td>
+                <td width=""><a href="">管线长度</a></td>
+                <td width=""><a href="">管点数量</a></td>
+                <td width=""><a href="">截流井</a></td>
+                <td width=""><a href="">排出口</a></td>
+                <td width=""><a href="">流速仪</a></td>
+                <td width=""><a href="">电子水尺</a></td>
+                <td width=""><a href="">警示牌</a></td>
+                <td width=""><a href="">视频</a></td>
+                <td width=""><a href="">闸站</a></td>
+                <td width=""><a href="">泵站</a></td>
+                <td width=""><a href="">水泵</a></td>
+                <td width="">详细</td>
+              </tr>
+              <tr style="font-size: 12px">
+                <td><img src="img/t6.png"></img></td>
+                <td>西湖区</td>
+                <td><span>1.1</span>km</td>
+                <td><span>234</span></td>
+                <td><span>122</span></td>
+                <td><span>98</span></td>
+                <td><span>32</span></td>
+                <td><span>22</span></td>
+                <td><span>31</span></td>
+                <td><span>317</span></td>
+                <td><span>8</span></td>
+                <td><span>11</span></td>
+                <td><span>7</span></td>
+                <td><a href=""><img width="20px" height="20px" src="img/bj.png"/></a></td>
+              </tr>
+              <tr style="font-size: 12px">
+                <td><img src="img/t2.png"></img></td>
+                <td>下城区</td>
+                <td><span>1.6</span>km</td>
+                <td><span>421</span></td>
+                <td><span>198</span></td>
+                <td><span>100</span></td>
+                <td><span>20</span></td>
+                <td><span>21</span></td>
+                <td><span>41</span></td>
+                <td><span>131</span></td>
+                <td><span>3</span></td>
+                <td><span>2</span></td>
+                <td><span>5</span></td>
+                <td><a href=""><img width="20px" height="20px" src="img/bj.png"/></a></td>
+              </tr>
+              <tr style="font-size: 12px">
+                <td><img src="img/t9.png"></img></td>
+                <td>上城区</td>
+                <td><span>2.3</span>km</td>
+                <td><span>255</span></td>
+                <td><span>156</span></td>
+                <td><span>89</span></td>
+                <td><span>32</span></td>
+                <td><span>33</span></td>
+                <td><span>41</span></td>
+                <td><span>244</span></td>
+                <td><span>7</span></td>
+                <td><span>11</span></td>
+                <td><span>9</span></td>
+                <td><a href=""><img width="20px" height="20px" src="img/bj.png"/></a></td>
+              </tr>
+              <tr style="font-size: 12px">
+                <td><img src="img/t3.png" width=""></img></td>
+                <td>滨江区</td>
+                <td><span>0.8</span>km</td>
+                <td><span>342</span></td>
+                <td><span>175</span></td>
+                <td><span>101</span></td>
+                <td><span>23</span></td>
+                <td><span>33</span></td>
+                <td><span>42</span></td>
+                <td><span>213</span></td>
+                <td><span>12</span></td>
+                <td><span>8</span></td>
+                <td><span>8</span></td>
+                <td><a href=""><img width="20px" height="20px" src="img/bj.png"/></a></td>
+              </tr>
+              <tr style="font-size: 12px">
+                <td><img src="img/t8.png"></img></td>
+                <td>拱墅区</td>
+                <td><span>1.1</span>km</td>
+                <td><span>234</span></td>
+                <td><span>155</span></td>
+                <td><span>99</span></td>
+                <td><span>42</span></td>
+                <td><span>24</span></td>
+                <td><span>35</span></td>
+                <td><span>355</span></td>
+                <td><span>8</span></td>
+                <td><span>7</span></td>
+                <td><span>7</span></td>
+                <td><a href=""><img width="20px" height="20px" src="img/bj.png"/></a></td>
+              </tr>
+			  <tr style="font-size: 12px">
+                <td><img src="img/t4.png"></img></td>
+                <td>江干区</td>
+                <td><span>1.0</span>km</td>
+                <td><span>224</span></td>
+                <td><span>145</span></td>
+                <td><span>87</span></td>
+                <td><span>35</span></td>
+                <td><span>20</span></td>
+                <td><span>42</span></td>
+                <td><span>311</span></td>
+                <td><span>10</span></td>
+                <td><span>10</span></td>
+                <td><span>10</span></td>
+                <td><a href=""><img width="20px" height="20px" src="img/bj.png"/></a></td>
+              </tr>
+            </table>
+			<div id="tipDiv">提示：点击管线、设备类型可查看详细信息</div>
+          </div>
+        </div>
+        <!-- 左侧Div结束 -->
+
+        <!-- 右侧Div -->
+        <div class="f-Left" style="width: 20%; margin-left: 20px;">
+          <!-- 饼图 -->
+          <div class="chart" style="">
+            <div class="header" style="height: 24px;font-size: 15px;border-bottom: 1px black solid; line-height: 24px;padding-left: 10px">管点类型</div>
+            <div id="pie-chart" style="height: 90%"></div>
+          </div>
+          <!-- 雷达图 -->
+          <div class="chart" style="margin-top: 20px">
+            <div class="header" style="height: 24px;font-size: 15px;border-bottom: 1px black solid; line-height: 24px;padding-left: 10px">沟渠类型</div>
+            <div id="pie-chart2" style="height: 90%"></div>
+          </div>
+        </div>
+        <!-- 右侧Div结束 -->
+      </div>
+    
+
+    </div>
+</div>
+
+<!-- 管线管点统计 -->
+<div class="container">   
+    <div class="row">
+      <h2 clss="nav-title">管线管点统计</h2>
+      <div id="ChartsDiv" class="col-md-12" style="width: 90%; height: 90%;">
+        <!-- 第一个图表 -->
+        <div id="firstChart" class="col-md-6"></div>
+        <div id="secondChart" class="col-md-6"></div>
+        <div id="thirdChart" class="col-md-12"></div>
+      </div>
+    </div>
+</div>
+
+<!-- 智能设备管理 -->
+<div class="container">   
+    <div class="row">
+      <h2 clss="nav-title">智能设备管理</h2>
+      <div id="znsb_chartDiv" class="col-md-12" style="width: 90%;">
+        <div id="znsb_chartDiv1"></div>
+        <div id="znsb_chartDiv2"></div>
+      </div>
+    </div>
+</div>
+
+<script src="../lib/jquery/jquery.min.js"></script>
+<script src="../lib/jquery/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="../lib/echarts/echarts.js"></script>
+<script type="text/javascript" src="js/countUp.js"></script>
+<script src="js/alarm_info.js"></script>
+<script src="js/pipe_stats.js"></script>
+<script src="js/fac_stats.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

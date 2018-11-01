@@ -1,0 +1,73 @@
+.zdm-pipe-chart-mini-icon-wrapper{
+  position: absolute;
+  left: 200px;
+  top: 0;
+  height: 30px;
+  font-size: 18px;
+  line-height: 30px;
+  background: #FFFC00;
+  color: #FF0000;
+  border: solid 2px #FF0000;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.zdm-pipe-chart-mini-icon-wrapper:hover{
+  background: #FF0000;
+  color: #FFFC00;
+  border: solid 2px #FFFC00;
+}
+
+.zdm-pipe-chart-maximized .zdm-pipe-chart-mini-icon-wrapper{
+  
+}
+
+.zdm-pipe-chart-minimized .zdm-pipe-chart-mini-icon-wrapper{
+  
+} 
+
+.zdm-pipe-chart-minimized .zdm-pipe-chart-chart{
+  display:none;
+}
+
+.zdm-pipe-chart-minimized .zdm-pipe-chart-table{
+  display:none;
+}
+
+.hdm-tool-pipe-chart-mini-icon-wrapper{
+  position: absolute;
+  left: 200px;
+  top: 0;
+  height: 30px;
+  font-size: 18px;
+  line-height: 30px;
+  background: #FFFC00;
+  color: #FF0000;
+  border: solid 2px #FF0000;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.hdm-tool-pipe-chart-mini-icon-wrapper:hover{
+  background: #FF0000;
+  color: #FFFC00;
+  border: solid 2px #FFFC00;
+}
+
+.hdm-tool-pipe-chart-maximized .hdm-tool-pipe-chart-mini-icon-wrapper{
+  
+}
+
+.hdm-tool-pipe-chart-minimized .hdm-tool-pipe-chart-mini-icon-wrapper{
+  
+} 
+
+.hdm-tool-pipe-chart-minimized .hdm-tool-pipe-chart-chart{
+  display:none;
+}
+
+.hdm-tool-pipe-chart-minimized .hdm-tool-pipe-chart-table{
+  display:none;
+}

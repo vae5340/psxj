@@ -1,0 +1,295 @@
+﻿﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <HEAD>
+        <TITLE>打印地图</TITLE>
+		<link href="printMap/css/infoTip/infoTip.css" rel="stylesheet" type="text/css" charset="UTF-8"/>
+		<link rel="shortcut icon" href="/awater_swj/img/awater.png">
+	    <link href="/awater_swj/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+	    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	    <link href="css/animate.min.css" rel="stylesheet">
+		<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+		<link href="css/augur.min.css" rel="stylesheet">
+		<link href="css/augur.expand.css" rel="stylesheet">
+		<link href="css/arcgis/claro.css" rel="stylesheet" >
+	    <link href="lib/arcgis_js_api/dijit/themes/tundra/tundra.css" rel="stylesheet" type="text/css" />
+	    <link href="lib/arcgis_js_api/esri/css/esri.css" rel="stylesheet" type="text/css" />
+	    <link href="lib/arcgis_js_api/esri/css/esri_expand.css" rel="stylesheet" type="text/css" />
+	    <link href="css/map.css" rel="stylesheet" type="text/css"/>
+	    <link href="lib/nifty/nifty.css" rel="stylesheet" type="text/css" />
+	    <link rel="stylesheet" href="/awater_swj/css/plugins/jsPanel/jquery-ui.min.css">
+	    <link rel="stylesheet" href="/awater_swj/css/plugins/jsPanel/jquery.jspanel.css">
+		<link rel="stylesheet" href="/awater_swj/css/plugins/bootstrap-table/bootstrap-table.min.css">
+	    <link rel="stylesheet" href="lib/plugins/layer-v2.4/layer/skin/layer.css">
+		<link rel="stylesheet" href="lib/zTree/css/zTreeStyle/metro.css">
+		<!--<link rel="stylesheet" href="lib/plugins/layer-v2.4/layer/skin/layer-expand.css">-->   
+		<!-- map样式 --> 
+		<link href="plugins/hplus/css/augur.min.css" rel="stylesheet">
+		<link href="plugins/hplus/css/tuli.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/frame.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/global.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/style.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/tool.css"  rel="stylesheet" type="text/css">
+		<link href="/awater_swj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<link href="/awater_swj/systemInfo/ssxjxt/style/blue/css/validate.css" rel="stylesheet">
+        <style>
+            @import "printMap/css/style.css";
+			.page_size_cu{
+				border-top-width: 0px;
+				border-right-width: 0px;
+				border-bottom-width: 0px;
+				border-left-width: 0px;
+				border-top-style: none;
+				border-right-style: none;
+				border-bottom-style: none;
+				border-left-style: none;
+			}
+			.scrollStyle{
+				scrollbar-face-color: #FFFFFF;
+				scrollbar-shadow-color: #D2E5F4;
+				scrollbar-highlight-color: #D2E5F4;
+				scrollbar-3dlight-color: #FFFFFF;
+				scrollbar-darkshadow-color: #FFFFFF;
+				scrollbar-track-color: #FFFFFF;
+				scrollbar-arrow-color: #D2E5F4;
+			}
+			.esriSimpleSliderTL {
+				bottom: 50px;
+			    right: 25px;
+			}
+			.tool_bar{
+				width: 98px;
+				height: auto;
+				box-shadow: 2px 0 20px #ddd;
+				top: 13px;
+				left: 1%;
+				z-index:7;
+				background-color: white;
+				position: absolute;
+			}
+	    	a:hover{color:#F5841D;}
+	    	#exitA{color:#ffffff;}
+	    	.btn-default {
+			    color: #333;
+			    background-color: #fff;
+			    border-color: #ccc;
+			}
+			.btn-primary {
+			    color: #fff;
+			    background-color: #337ab7;
+			    border-color: #2e6da4;
+			}
+			.esriPopup .titlePane {background-color: #337ab7;}
+		    .esriPopup .pointer.top {background: #337ab7;}
+			.clearInput{display: none;position: absolute;width: 24px;height: 24px;margin: 4px 0 0 -22px;background:url(/awater_swj/img/close.png) no-repeat;outline: none;}		
+		    @keyframes blink{
+				0%{opacity: 1;}
+			  	50%{opacity: 1;}
+			  	50.01%{opacity: 0;} /* 注意这里定义50.01%立刻透明度为０，可以设置闪烁效果 */
+			  	100%{opacity: 0;} 
+			}
+			/* 添加兼容性前缀 */
+			@-webkit-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			@-moz-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			@-ms-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			@-o-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			/* 定义blink类*/
+			.blink{
+			    animation: blink 2s linear infinite;  
+			    /* 其它浏览器兼容性前缀 */
+			    -webkit-animation: blink 2s linear infinite;
+			    -moz-animation: blink 2s linear infinite;
+			    -ms-animation: blink 2s linear infinite;
+			    -o-animation: blink 2s linear infinite;
+			    color: #dd4814;
+			}			
+			#search_location {
+			    width: 100%;
+			    margin: 10px auto;
+			    text-indent: 10px;
+			    border: 1px solid #d0d0d0;
+			    box-shadow: 3px 2px 6px 0px #B0B0B0;
+			    border-radius: 5px;
+			    height: 30px; 
+			    font-size: 14px;
+			}
+			.form-control {
+			    overflow-x: hidden;
+			}
+			::-webkit-scrollbar  
+			{  
+			    width: 10px;  
+			    height: 10px;  
+			}
+        </style>
+        <script type="text/javascript">
+			var serverName="agsupport_swj";
+			var sde_user="sde";
+			var userCode="";
+			var agcom_url="agcom";
+			var xMin=0,xMax=0,yMin=0,yMax=0,areaValue=0;
+			function changeSize(w, h){
+				//window.parent.document.getElementById("printareaDiv").style.width = (w+10) + "px";
+				document.getElementById("mapTd").style.width = w + "px";
+                document.getElementById("mapTd").style.height = h + "px";
+				document.getElementById("mapDiv").style.width = w + "px";
+                document.getElementById("mapDiv").style.height = h + "px";
+			};
+			function mapPrint(){
+				if(areaValue>6){
+					layer.confirm('地图打印范围超过6平方公里，超出保密范围，是否继续打印？', {
+				        btn: ['确定', '取消'] //按钮
+				    }, function () {
+				    	doPrint();
+						layer.closeAll();
+				    }, function () {
+				        return;
+				    });
+				}else{
+					doPrint();
+				}
+				
+			};
+			function doPrint(){
+				var data={"xMin":xMin,"xMax":xMax,"yMin":yMin,"yMax":yMax,"area":areaValue};
+				$.ajax({
+		            type: 'post',
+		            url: "/agsupport_swj/map-print-mark!save.action",
+		            data: data,
+		            dataType: 'json',
+		            success: function (result) {
+		            	
+		            }
+				});
+				$("#areaDiv").hide();
+				$("#coorDiv").hide();
+				$("#checked_isShowData").hide();
+				$("#mapType").hide();
+				 window.print();
+				 $("#areaDiv").show();
+				 $("#coorDiv").show();
+				$("#checked_isShowData").show();
+				$("#mapType").show();
+			}
+			function changeTitle(value){
+				document.getElementById("page_title").innerHTML = value;
+			};
+			
+			function changeMemo(value){
+				document.getElementById("page_memo").innerHTML = value == "" ? "" : ("备注:" + value);
+			};
+		</script>              
+    </HEAD>
+    <body  oncontextmenu="return false" class="scrollStyle" style="overflow-x:auto ; overflow-y:auto;">
+		<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="center">
+					<H1 style="FONT-SIZE: 15px; FONT-WEIGHT: bold;">
+						<span id="page_title"></span>
+					</H1>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" id="mapTd" style="width: 970px; height: 630px;">
+					<input type="hidden" id="parentOrgArea"/>
+					<input type="hidden" id="parentOrgAreaId"/>
+					<div id="mapDiv" style="left:0;bottom:0;width: 970px; height: 630px;z-index: 10">
+        			</div>
+        			<div id="mapType-wrapper">
+						<div id="mapType">
+							<div class="mapTypeCard normal active" data-name="normalMap">
+								<span>地图</span>
+							</div>
+							<div class="mapTypeCard earth" data-name="earth">
+								<span>卫星影像</span>
+							</div>
+							<!-- <div class="mapTypeCard dem" data-name="dem">
+								<span>DEM</span>
+							</div>  -->	
+						</div> 
+					</div>
+        			<!-- 鼠标在地图上移动时xy变化效果 -->
+					<div id="coorDiv" style="position: absolute; bottom: 10px; z-index: 1000; margin-left: 20px;"></div>
+					<!-- 地图范围变化时，获取地图显示面积与范围 -->
+					<div id="areaDiv" style="position: absolute; bottom: 30px; z-index: 1000; margin-left: 20px;"></div>
+        			<!-- 是否显示管线 上报数据  问题上报 -->
+					<div id="checked_isShowData" align="left" style="position: absolute; top: 23px; z-index: 1000; right: 25px;">
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+					<span id="page_memo" style="FONT-SIZE: 12px; FONT-WEIGHT: normal"></span>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript" src="lib/jquery.min.js?v=1.0.0"></script>
+    <script src="/awater_swj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+    <script src="/awater_swj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.min.js?v=3.3.6"></script>
+    <!-- 图片预览插件 -->
+    <link href="/awater_swj/systemInfo/js/viewer/js/viewer.min.css" rel="stylesheet"/>
+    <script src="/awater_swj/systemInfo/js/viewer/js/viewer.min.js"></script>
+    <script type="text/javascript" src="lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<!-- <script type="text/javascript" src="lib/plugins/bootstrap-table/bootstrap-table.min.js"></script> -->
+	<!-- 图片预览插件加载 -->
+	<script type="text/javascript" src="lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="/awater_swj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="/awater_swj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+   
+    <script type="text/javascript" src="lib/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script type="text/javascript" src="lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="lib/plugins/layer-v2.4/layer/layer.js"></script>
+    <script type="text/javascript" src="lib/hplus.min.js?v=4.1.0"></script>
+    <script type="text/javascript" src="lib/plugins/pace/pace.min.js"></script>
+	<script type="text/javascript" src="lib/highchart/js/highcharts.js"></script>
+	<script type="text/javascript" src="lib/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="js/uiWidgets.js"></script>
+    <script type="text/javascript" src="lib/contabs.min.js"></script>
+    <script type="text/javascript" src="js/config/dojoConfig.js"></script>
+    <script type="text/javascript" src="js/config/mapConfig.js"></script>
+    <script type="text/javascript" src="lib/arcgis_js_api/init.js"></script>
+    <script type="text/javascript" src="js/common.js"></script> 
+    <script type="text/javascript" src="lib/augur.min.js?v=1.0.0"></script>
+    <!-- 地图服务(路径)加载路径配置 -->
+    <script type="text/javascript" src="systemInfo/js/map-config.js"></script> 
+    <script type="text/javascript" src="printMap/js/initPrintMap.js"></script>
+    <script type="text/javascript" src="js/esri.symbol.MultiLineTextSymbol.js"></script>
+    <script type="text/javascript" src="lib/augur.map.js"></script>
+    <script type="text/javascript" src="js/bj-map.js"></script>
+    <script type="text/javascript" src="lib/nifty/nifty.js" ></script>
+    <script src="/awater_swj/js/util_date.js" type="text/javascript"></script>	
+	<script type="text/javascript" src="js/util_addMarker.js"></script>
+    <!-- <script src="/awater_swj/lib/plugins/jsPanel/jquery.ui.touch-punch.min.js"></script> -->
+    <script src="/awater_swj/lib/plugins/jsPanel/jquery.jspanel-compiled.js"></script> 
+    <script type="text/javascript" src="lib/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/awater_swj/nnwaterSystem/PipeNetwork/js/pipeGis.js"></script>
+    <script type="text/javascript" src="/awater_swj/nnwaterSystem/szwh/js/locator.js"></script>
+    <script type="text/javascript" src="/awater_swj/nnwaterSystem/szwh/js/infoQuery.js"></script>
+    <script type="text/javascript" src="systemInfo/js/map-openLayer.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lxukz8Kzlady8a0HqUboegq1Rt2DRSDG"></script>
+    </body>
+</html>

@@ -1,0 +1,214 @@
+﻿@charset "UTF-8";
+/*左侧伸缩面板样式开始*/
+.leftDiv{
+	position:absolute;
+	width:330px;
+	height:100%;
+	background-color:#fff;
+	left:70px;
+	border: 1px solid #ccc;
+}
+
+.seperator{
+	position:absolute;
+	left:400px;	
+	top:42%;		
+	width:15px;
+	height:60px;
+	background-color:#fff;	
+	background-image:url("../img/left_btn_open.png");
+	background-position: center !important;
+	background-repeat: no-repeat;
+	border-color:#a0a1a3;
+	border-image: none;
+	border-style: solid solid solid none;
+	border-width: 1px 1px 1px 0;			
+	cursor:pointer;
+	z-index:10000000;
+	background:#fff url("../img/left_btn_open.png") no-repeat 2 26;
+}
+.seperatorOpen:hover{
+	background:#fff url("../img/left_btn_open_on.png") no-repeat 2 26;
+}
+
+.seperatorClose{
+	position:absolute;
+	left:400px;	
+	top:42%;		
+	width:15px;
+	height:60px;
+	background-color:#ffffff;	
+	background-image:url("../img/left_btn_close.png");
+	background-position: center !important;
+	background-repeat: no-repeat;
+	border-color:#a0a1a3;
+	border-image: none;
+	border-style: solid solid solid none;
+	border-width: 1px 1px 1px 0;			
+	cursor:pointer;
+	z-index:10000000;
+	background:#fff url("../img/left_btn_close.png") no-repeat 2 26;
+}
+.seperatorClose:hover{
+	background:#fff url("../img/left_btn_close_on.png") no-repeat 2 26;
+}
+/*左侧伸缩面板样式结束*/
+
+/*底部文字样式开始*/
+.pull-center {
+	text-align:center !important
+}
+/*底部文字样式结束*/
+
+.nav.navbar-right>li>a {
+	color:#FFFFFF /*#999c9e*/
+}
+
+/*三级菜单面板样式开始*/
+.navbar-default2 {
+	background-color:transparent;
+	border-color:#2f4050;
+	position:relative
+}
+body.mini-navbar .navbar-default2 .nav>li>.nav-second-level li a {
+	font-size:12px;
+	border-radius:0 2px 2px 0
+}
+body.mini-navbar .navbar-static-side2 {
+	width:70px
+}
+body.mini-navbar .nav-label,body.mini-navbar .navbar-default2 .nav li a span,body.mini-navbar .profile-element {
+	display:none
+}
+body.mini-navbar .navbar-default2 .nav>li>a {
+	font-size:16px
+}
+body.canvas-menu .navbar-static-side2,body.fixed-sidebar .navbar-static-side2 {
+	position:fixed;
+	width:220px;
+	z-index:2001;
+	height:100%
+}
+body.fixed-sidebar.mini-navbar .navbar-static-side2 {
+	width:330px
+}
+body.body-small.fixed-sidebar.mini-navbar .navbar-static-side2{
+	width:70px
+}
+body.fixed-sidebar.mini-navbar .navbar-default2 .nav>li>.nav-second-level li a {
+	font-size:12px;
+	border-radius:3px
+}
+body.canvas-menu.mini-navbar .navbar-default2 .nav>li>.nav-second-level li a {
+	font-size:13px;
+	border-radius:3px
+}
+body.canvas-menu nav.navbar-static-side2 {
+	z-index:2001;
+	background:red;
+	height:100%;
+	position:fixed;
+	display:none
+}
+.bs-glyphicons {
+	margin:0 -10px 20px;
+}
+.bs-glyphicons li {
+margin: 0 3px 20px;
+/*background-color:none !important;*/
+}
+.bs-glyphicons li:hover {
+	/*
+	color:null !important;
+	background-color:null !important; 
+	*/
+	
+}	
+@media (min-width:768px) {
+	.bs-glyphicons {
+	/**
+	margin-right:0;
+	margin-left:0
+	**/
+	}
+	.bs-glyphicons li {
+		width:60px;
+		height:80px;
+		cursor:pointer;
+		font-size:12px;
+		list-style:none
+	}
+}
+
+/*
+//伸缩二、三级菜单时放开注释，设置该样式为：margin:0 0 0 0px;
+//伸缩三级菜单：以下注释掉的2个class样式给注释起来，引用系统样式表;
+body.body-small.fixed-sidebar.mini-navbar #page-wrapper,body.fixed-sidebar.mini-navbar #page-wrapper {
+	margin:0 0 0 0px
+}
+body.mini-navbar #page-wrapper {
+	margin:0 0 0 0px
+}
+*/
+body.mini-navbar .navbar-default .nav>li>a {
+	font-size:12px
+}
+.funPannelOff{
+border-bottom: 1px solid #d2d2d2;margin-top: 15px;height: 0px;z-index: -1;
+}
+.funPannelOn{
+border-bottom: 1px solid #d2d2d2;margin-top: 15px;z-index: -1;
+}
+.funIco{
+padding-right:7px;
+display: block;
+width:45px;
+height:45px;
+border-radius:45px;
+overflow:hidden;
+margin:0 auto;
+}
+/*三级菜单面板样式结束*/
+
+/*一级菜单和二级菜单开始*/
+.fixed-nav #wrapper { padding-top:74px;}
+#wrapper { background:#f8f8f8;}
+.navbar-static-side { background:#f8f8f8 url(../img/smenubg.jpg) right repeat-y;}
+.skin-1 .nav>li>a { font-weight:normal; text-align:center; color:#666;}
+body.mini-navbar .navbar-default .nav>li>a { font-size:13px;}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover { background:none;}
+.fa-user:before { background:url(../img/ico3.png) center center no-repeat; display:block; width:35px; height:35px; content:no-close-quote;}
+.fa-jgou:before { background:url(../img/ico4.png) center center no-repeat; display:block; width:35px; height:35px; content:no-close-quote;}
+.fa-gdgl:before { background:url(../img/icon/left/gdgl.png) center center no-repeat; display:block; width:35px; height:35px; content:no-close-quote;}
+.fa-ssxc:before { background:url(../img/icon/left/ssxc.png) center center no-repeat; display:block; width:35px; height:35px; content:no-close-quote;}
+.fa-khpj:before { background:url(../img/icon/left/ssxc.png) center center no-repeat; display:block; width:35px; height:35px; content:no-close-quote;}
+.tnav { float:right; margin-right:20px; padding-right:20px;border-right: 1px dotted #8dd6fb;}
+.tnav li { float:left;list-style: none;}
+.tnav li a { display:block; float:left; margin:0 15px; height:20px; padding-top:54px; color:#fff; font-size:12px;}
+.tnav li a:hover, .tnav .hover a  { color:#ff0;}
+.tnav .sssbgl { background:url(../img/icon/sssbglxt.png) center 5px no-repeat;}
+.tnav .sssbgl:hover, .tnav .hover .sssbgl { background:url(../img/icon/sssbglxt-hover.png) center 5px no-repeat;}
+.tnav .ywgl { background:url(../img/ico01.png) center 5px no-repeat;}
+.tnav .ywgl:hover, .tnav .hover .ywgl { background:url(../img/ico01_h.png) center 5px no-repeat;}
+.tnav .xtgl { background:url(../img/ico02.png) center 5px no-repeat;}
+.tnav .xtgl:hover, .tnav .hover .xtgl { background:url(../img/ico02_h.png) center 5px no-repeat;}
+.tnav .zhplxt { background:url(../img/icon/zhpjxt.png) center 5px no-repeat;}
+.tnav .zhplxt:hover, .tnav .hover .zhplxt { background:url(../img/icon/zhpjxt-hover.png) center 5px no-repeat;}
+.tnav .zhyxglxt { background:url(../img/icon/zhyxglxt.png) center 5px no-repeat;}
+.tnav .zhyxglxt:hover, .tnav .hover .zhyxglxt { background:url(../img/icon/zhyxglxt-hover.png) center 5px no-repeat;}
+.tnav .ssxc { background:url(../img/icon/ssxc.png) center 5px no-repeat;}
+.tnav .ssxc:hover, .tnav .hover .ssxc { background:url(../img/icon/ssxc-hover.png) center 5px no-repeat;}
+.user { float:right; height:60px; margin-top:7px;}
+.exit { float:right; padding:15px;}
+.uimg { float:right;}
+.uimg img { width:60px; height:60px; border-radius:50%;}
+.umsg { margin-right:135px; padding:10px 0; text-align:right;}
+.umsg b { display:block; font-size:15px; color:#fff; font-weight:normal;}
+.umsg em { padding:2px 5px; background:#0585d6; color:#b8f5fc; font-style:normal; font-size:12px; border-radius:3px;}
+/*一级菜单和二级菜单结束*/
+.roll-right.btn-group{
+right: 0px;
+}
+.roll-right.J_tabRight{
+right: 80px;
+}

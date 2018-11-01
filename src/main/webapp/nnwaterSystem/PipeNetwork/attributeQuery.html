@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>	
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+	<style>
+      .control-label{font-size:15px;font-weight:500}
+      .borderCss{border:1px solid #ccc;border-radius:4px;height:30px;text-align:center;font-size:14px}
+   </style>
+  </head>
+  <body>
+      <div id="panelContent" style="padding:20px 0px 0px 15px">
+      	<label class="control-label">管网图层</label>&nbsp;&nbsp;&nbsp;
+		<select class="borderCss" style="width:200px;height:30px" id="pipeLayerName">
+			<option></option>
+		  	<option value="PS_PIPE">管线</option>
+		  	<option value="PS_CONDUIT">沟渠</option>
+		    <option value="PS_OUTFALL">排放口</option>
+		  	<option value="PS_MANHOLE">检查井</option>
+		  	<option value="PS_COMB">雨水口</option>
+		  	<option value="PS_VALUE">阀门</option>
+		    <option value="PS_GATE">闸门</option>
+		  	<option value="PS_WEIR">溢流堰 </option>
+		    <option value="PS_PUMPSTATION">排水泵站</option>
+		 </select>
+		 <br>
+	     <br>
+		 <label class="control-label">查询条件</label>&nbsp;&nbsp;&nbsp;
+		 <select class="borderCss" style="width:150px" id="attributeName">
+	     </select>&nbsp;&nbsp;&nbsp;
+		 <select class="borderCss" style="width:80px" id="operator">
+		 </select>&nbsp;&nbsp;&nbsp;
+		 <input type="text" class="borderCss" style="width:130px"  id="attributeValue">
+         <div align="right" style="padding-top:20px;padding-right:20px">
+             <button type="button" class="btn btn-primary" id="queryBtn" onclick="attributeQuery()">查询</button>&nbsp;&nbsp;&nbsp;	            
+             <button type="button" class="btn btn-default" id="closeBtn" onclick="closeJsPanel()">关闭</button>
+         </div>
+     </div>    
+	<script>      
+	  var stringAttr;
+      $(function(){
+	      $("#pipeLayerName").change(function(){
+	           $("#attributeName").empty();
+	           $("#operator").empty();
+	           $("#attributeName").append("<option></option>")
+	           var stringAttrArr=[];
+	           switch($("#pipeLayerName").find("option:selected").text()){
+	               case "管线":
+				      for(var i=0;i<pipeAttributes.pipeAttr.name.length;i++){
+				     	 $("#attributeName").append("<option value="+pipeAttributes.pipeAttr.name[i]+">"+pipeAttributes.pipeAttr.alias[i]+"</option>");
+				     	 if(pipeAttributes.pipeAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.pipeAttr.name[i]);       			  
+				      } 
+	                  break;
+	               case "沟渠":
+				      for(var i=0;i<pipeAttributes.conduitAttr.name.length;i++){
+			     	     $("#attributeName").append("<option value="+pipeAttributes.conduitAttr.name[i]+">"+pipeAttributes.conduitAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.conduitAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.conduitAttr.name[i]);     
+			          } 
+	                  break;
+	               case "排放口":
+				      for(var i=0;i<pipeAttributes.outfallAttr.name.length;i++){
+			     	     $("#attributeName").append("<option value="+pipeAttributes.outfallAttr.name[i]+">"+pipeAttributes.outfallAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.outfallAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.outfallAttr.name[i]);
+			          } 
+	                  break;
+				   case "检查井":
+				      for(var i=0;i<pipeAttributes.juncAttr.name.length;i++){				   
+			     	     $("#attributeName").append("<option value="+pipeAttributes.juncAttr.name[i]+">"+pipeAttributes.juncAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.juncAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.juncAttr.name[i]);
+			          } 
+	                  break;
+	               case "雨水口":
+				      for(var i=0;i<pipeAttributes.inletAttr.name.length;i++){
+			     	     $("#attributeName").append("<option value="+pipeAttributes.inletAttr.name[i]+">"+pipeAttributes.inletAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.inletAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.inletAttr.name[i]);
+			          } 
+	                  break;
+	               case "阀门":
+				      for(var i=0;i<pipeAttributes.valveAttr.name.length;i++){
+			     	     $("#attributeName").append("<option value="+pipeAttributes.valveAttr.name[i]+">"+pipeAttributes.valveAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.valveAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.valveAttr.name[i]);
+			          } 
+	                  break;	           
+	               case "闸门":
+				      for(var i=0;i<pipeAttributes.gateAttr.name.length;i++){
+			     	     $("#attributeName").append("<option value="+pipeAttributes.gateAttr.name[i]+">"+pipeAttributes.gateAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.gateAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.gateAttr.name[i]);
+			          } 
+	                  break;
+	               case "溢流堰":
+				      for(var i=0;i<pipeAttributes.weirAttr.name.length;i++){
+			     	     $("#attributeName").append("<option value="+pipeAttributes.weirAttr.name[i]+">"+pipeAttributes.weirAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.weirAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.weirAttr.name[i]);
+			          } 
+	                  break;
+	               case "排水泵站":
+				      for(var i=0;i<pipeAttributes.pumpAttr.name.length;i++){
+			     	     $("#attributeName").append("<option value="+pipeAttributes.pumpAttr.name[i]+">"+pipeAttributes.pumpAttr.alias[i]+"</option>");	        			  
+			             if(pipeAttributes.pumpAttr.type[i]==0)	 
+				     	    stringAttrArr.push(pipeAttributes.pumpAttr.name[i]);
+			          } 
+	                  break;   
+	           }
+	           stringAttr=stringAttrArr.join(",");
+	       });
+	       
+	       $("#attributeName").change(function(){
+	          $("#operator").empty();
+	          if(stringAttr.indexOf($("#attributeName").val())!=-1){
+	            $("#operator").append("<option value='='>等于</option>");
+	            $("#operator").append("<option value='like'>包含</option>");	    
+	          }else{
+	            $("#operator").append("<option value='='>等于</option>");
+	            $("#operator").append("<option value='>'>大于</option>");	       
+	            $("#operator").append("<option value='<'>小于</option>");
+	          }            
+	      });
+       });
+       
+       var pipeMapService=arcgisBaseUrl+"/arcgis/rest/services/nnpsfacility/MapServer"; 
+       
+       function attributeQuery(){ 
+           var sql;
+           switch($("#pipeLayerName").find("option:selected").text()){
+               case "管线":
+                  sql="select rownum as RN,OBJECTID,PIPEID,PIPE_CATEGORY,PIPE_LEN from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+			   case "沟渠":
+                  sql="select rownum as RN,OBJECTID,CONDUITID,CONDUIT_CATEGORY,CONDUIT_LEN from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+               case "排放口":
+                  sql="select rownum as RN,OBJECTID,OUTFALLID from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+			   case "检查井":
+                  sql="select rownum as RN,OBJECTID,NODEID from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+               case "雨水口":
+                  sql="select rownum as RN,OBJECTID,COMBID from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+               case "阀门":
+                  sql="select rownum as RN,OBJECTID,VALVEID from sde."+$("#pipeLayerName").val()+" where ";
+			      break;           
+               case "闸门":
+                  sql="select rownum as RN,OBJECTID,GATEID from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+               case "溢流堰":
+                  sql="select rownum as RN,OBJECTID,WEIRID from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+               case "排水泵站":
+                  sql="select rownum as RN,OBJECTID,PUMPSTATIONID from sde."+$("#pipeLayerName").val()+" where ";
+			      break;
+           } 
+          
+	       if(stringAttr.indexOf($("#attributeName").val())!=-1){
+		 		   if($("#operator").val()=="=")
+			        sql += $("#attributeName").val()+" "+$("#operator").val()+" '"+$("#attributeValue").val()+"'";
+			       else
+			         sql += $("#attributeName").val()+" "+$("#operator").val()+" '%"+$("#attributeValue").val()+"%'";  
+			    }else{
+			       sql += $("#attributeName").val()+$("#operator").val()+$("#attributeValue").val();	
+		    }
+		    makeWait();
+		    debugger;
+		    setTimeout(function(){
+	            /*$.ajax({ url: "/agsupport/rest/pscomb/GetAttrQueryData",  
+				data:{"sql":sql},
+				dataType:'json',
+				success: function(results){
+						if(results.list.length==0){
+				           layer.msg("无数据");
+				           makeDefault();
+						   return;
+				        }
+				        showResultWindow(results.list);
+					},
+					error:function(e){
+					    makeDefault();
+						alert("error");
+					}
+				});*/
+				showResultWindow(location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/rest/pscomb/GetAttrQueryData?sql="+encodeURIComponent(sql));   
+            },500);     
+		}	
+	   
+	   function showResultWindow(url){
+	        document.getElementById("leftMenuTable").src="/awater/nnwaterSystem/PipeNetwork/queryResult.html";		
+	        var fm1=parent.window.frames["leftMenuTable"]; 
+	        var fmState=function(){ 
+		          var state=null;   
+		          if(document.readyState){     	              
+		                 state=fm1.document.readyState;   
+			               if(state=="complete" || !state){
+			               		 if($("#pipeLayerName").find("option:selected").text()=="管线"){
+							         $("#leftMenuTable")[0].contentWindow.$("#table").bootstrapTable({
+										toggle:"table",
+										height:400,
+										url: url,
+										ajaxOptions:{async:false},
+										rowStyle:"rowStyle",
+										cache: false, 
+										pagination:true,
+										striped: true,
+										pageNumber:1,
+									    pageSize: 10,
+										pageList: [10, 25, 50, 100],
+										queryParams: queryParams,
+										sidePagination: "server",
+										columns: [
+										    {field:'PIPEID',visible: true,title: '排水管标识码',align:'center'},
+											{field:'PIPE_CATEGORY',visible: true,title: '管道类别',formatter:categoryFormat,align:'center'},
+											{field:'PIPE_LEN',visible: true,title: '管道长度',formatter:lengthFormat,align:'center'}]
+							         });		
+					              }else if($("#pipeLayerName").find("option:selected").text()=="沟渠"){
+						             $("#leftMenuTable")[0].contentWindow.$("#table").bootstrapTable({
+										toggle:"table",
+										height:400,
+										url: url,
+										ajaxOptions:{async:false},
+										rowStyle:"rowStyle",
+										cache: false, 
+										pagination:true,
+										striped: true,
+										pageNumber:1,
+									    pageSize: 10,
+										pageList: [10, 25, 50, 100],
+										queryParams: queryParams,
+										sidePagination: "server",
+										columns: [
+										    {field:'CONDUITID',visible: true,title: '排水渠标识码',align:'center'},
+											{field:'CONDUIT_CATEGORY',visible: true,title: '渠道类别',formatter:categoryFormat,align:'center'},
+											{field:'CONDUIT_LEN',visible: true,title: '渠道长度',formatter:lengthFormat,align:'center'}]
+								   });		
+						         }else{
+						             $("#leftMenuTable")[0].contentWindow.$("#table").bootstrapTable({
+										 toggle:"table",
+										 height:400,
+										 url: url,
+										 ajaxOptions:{async:false},
+										 rowStyle:"rowStyle",
+										 cache: false, 
+										 pagination:true,
+										 striped: true,
+										 pageNumber:1,
+									     pageSize: 10,
+										 pageList: [10, 25, 50, 100],
+										 queryParams: queryParams,
+										 sidePagination: "server",
+										 columns: [
+										      {visible: true,title: '数据种类',formatter:typeFormat,align:'center'},
+										      {visible: true,title: '标志码',formatter:codeFormat,align:'center'}]
+						             });
+						         }
+					       
+							   $("#leftMenuTable")[0].contentWindow.$table.on('click-row.bs.table', function (row,obj) {
+							       findGeometry(obj.OBJECTID);
+						       });
+						       
+						       makeDefault();
+						       
+						       if(fmState.timeoutInt){ 
+							          window.clearTimeout(fmState.timeoutInt);
+							          return;	
+							   }
+		                 }   
+		                 window.setTimeout(fmState,10); 
+		          } 
+	        }; 
+	        fmState.timeoutInt = window.setTimeout(fmState,400); 
+	   }
+	   
+   		function queryParams(params){
+	        return {
+		        limit:params.limit,
+		        offset:params.offset
+	        };
+	    }
+		    
+	   function typeFormat(value, row, index){
+	          return $("#pipeLayerName").find("option:selected").text();
+	   }
+	   
+	   function findGeometry(objId){
+	        var layerId;
+           	switch($("#pipeLayerName").find("option:selected").text()){
+               case "管线":
+	              layerId=pipeLayers.pipeLayer.layerId;
+                  break;
+               case "沟渠":
+                  layerId=pipeLayers.conduitLayer.layerId;
+                  break;
+               case "排放口":
+                  layerId=pipeLayers.pipePointLayer.subLayers.outfallLayer.layerId;
+                  break;
+			   case "检查井":
+                  layerId=pipeLayers.pipePointLayer.subLayers.juncLayer.layerId;
+                  break;
+               case "雨水口":
+                  layerId=pipeLayers.pipePointLayer.subLayers.inletLayer.layerId;
+                  break;
+               case "阀门":
+                  layerId=pipeLayers.pipePointLayer.subLayers.valveLayer.layerId;
+                  break;	           
+               case "闸门":
+                  layerId=pipeLayers.drainageLayer.subLayers.gateLayer.layerId;
+                  break;
+               case "溢流堰":
+                  layerId=pipeLayers.drainageLayer.subLayers.weirLayer.layerId;
+                  break;
+               case "排水泵站":
+                  layerId=pipeLayers.drainageLayer.subLayers.pumpLayer.layerId;
+                  break;   
+           }
+
+	        var queryTask = new esri.tasks.QueryTask(pipeMapService+"/"+ layerId);
+		    var query = new esri.tasks.Query();
+		    query.where = "OBJECTID="+objId;	
+			query.outFields = ["*"];
+			query.returnGeometry = true;
+			queryTask.execute(query,function(result){
+			        centerAtGeometry(result.features[0].geometry);
+					},function(e){
+			   alert("error")}
+			);
+	   }
+	   
+	   
+	   function codeFormat(value, row, index){
+	     switch($("#pipeLayerName").find("option:selected").text()){
+               case "排放口":
+                  return row.OUTFALLID;
+			   case "检查井":
+                  return row.NODEID;
+               case "雨水口":
+                  return row.COMBID;
+               case "阀门":
+                  return row.VALVEID;	           
+               case "闸门":
+                  return row.GATEID;
+               case "溢流堰":
+                  return row.WEIRID;
+               case "排水泵站":
+                  return row.PUMPSTATIONID;  
+           }
+	   }
+	   
+	   function categoryFormat(value, row, index){
+		  switch(parseInt(value)){
+	             case 1:   	              
+	                return "雨水";
+	             case 2:   	              
+	                return "污水";
+	             case 3:   	              
+	                return "合流";
+	             case 4:   	              
+	                return "其它";
+	        }	  
+		    return "";
+	   } 
+	   
+	   function lengthFormat(value, row, index){  
+	      return parseFloat(value).toFixed(2)+"米&nbsp;";
+       } 
+       
+       function makeWait(){
+	      $("#panelContent").css("cursor","wait");
+	      $("#queryBtn").css("cursor","wait");
+	      $("#closeBtn").css("cursor","wait");
+	   }
+	 
+	   function makeDefault(){
+	      $("#panelContent").css("cursor","default");
+	      $("#queryBtn").css("cursor","default");
+	      $("#closeBtn").css("cursor","default");
+	   }
+	</script>
+  </body>
+</html>

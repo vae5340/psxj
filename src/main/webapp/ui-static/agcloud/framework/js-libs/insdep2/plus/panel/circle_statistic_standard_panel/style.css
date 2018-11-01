@@ -1,0 +1,10 @@
+/*
+  Easyui Of Insdep Theme 2.x 扩展面板
+  https://www.insdep.com/
+*/
+
+.circle_statistic_standard_panel{ width: 100%; height:170px; clear: both; background:#fff;}
+
+.circle_statistic_standard_panel ul{ width: auto; height:120px; clear: both;}
+.circle_statistic_standard_panel ul li{ float:left; width:150px; height:110px;  padding:10px 0 0; margin: 20px 0; text-align: center; border-left:1px solid #e8e8e8;  }
+.circle_statistic_standard_panel ul li:first-child{border-left:0 none;}

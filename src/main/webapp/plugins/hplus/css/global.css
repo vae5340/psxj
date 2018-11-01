@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+/*样式初始化*/
+html,body,div,ol,ul,li,p,h1,h2,h3,input{
+	margin:0;
+	padding:0;
+	  	font-family: Arial,'Microsoft YaHei';
+}
+body{
+
+	font-size:14px;
+}
+ol, ul ,li{
+	list-style:none;
+}
+a {
+	color:#337ab7;
+	text-decoration:none;
+	outline:none;
+	border:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+.hidden{
+	display:none;
+}
+.clear{
+	clear:both;
+}
+.bold{
+	font-weight:700;
+}

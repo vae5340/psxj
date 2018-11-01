@@ -1,0 +1,97 @@
+
+.infoTip {
+	position: absolute;
+	z-index: 1;
+	padding: 0px;
+	font-size: 9pt;
+	left: -100px;
+	top: -100px;
+	height: auto;
+	width: auto;
+	overflow: hidden;
+}
+
+.roundcorner {
+	-o-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-sizing: border-box;
+	-opera-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.black {
+	background-color: #fff;
+	color: #000;
+	border: 1px solid #000000;
+	text-align: center;
+	font-weight: bold;
+	font-family: ËÎÌו
+}
+
+.white {
+	border: 2px solid #000;
+	background-color: #fff;
+	color: #000;
+	font-weight: bold;
+}
+
+.bluegray {
+	border: 1px solid orange;
+	background-color: #EBF2EE;
+	color: #000;
+	font-weight: thin;
+}
+
+.bluegrayi {
+	border: 1px solid #8ba4d8;
+	background-color: #fff;
+	color: #000;
+	font-weight: thin;
+}
+
+.green {
+	background-color: #0f0;
+	color: #000;
+	border: 2px solid #0a0;
+}
+
+.red {
+	background-color: #f00;
+	color: #fff;
+	font-weight: bold;
+	border: 2px solid #000;
+}
+
+.op {
+	opacity: .60;
+	filter: alpha(opacity =   60);
+	-moz-opacity: .6;
+}
+
+.bgimage {
+	color: #fff;
+	background: transparent url("tip2.gif") no-repeat;
+	width: 218px;
+	font-weight: bold;
+	font-size: 10pt;
+	text-align: center;
+	margin: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+hr {
+	margin: auto;
+	width: 90%;
+	background-color: #444;
+	height: 2px;
+	color: white;
+	border: 0;
+}
+
+.infoTipNone {
+}

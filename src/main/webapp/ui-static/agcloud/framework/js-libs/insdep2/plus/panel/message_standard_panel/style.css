@@ -1,0 +1,38 @@
+/*
+  Easyui Of Insdep Theme 2.x 扩展面板
+  https://www.insdep.com/
+*/
+.clear{ clear:both} 
+.message_standard_panel,.message_standard_panel .message_standard_operation{width:auto; height:auto; clear: both;}
+.message_standard_panel{ 
+	background:#fff; border-radius:3px; border-width: 1px;border-style: solid;border-color: #c5c5c5 #c4c4c4 #b6b6b6 #c4c4c4;
+}
+.message_standard_panel .message_standard_content{padding:15px; }
+.message_standard_panel .message_standard_content dl{ margin:0 0 10px; }
+.message_standard_panel .message_standard_content dl dt{ font-weight: bold; }
+.message_standard_panel .message_standard_content dl dd{ color: #8e8e8e; }
+
+.message_standard_panel .message_standard_operation{ border-top:1px solid #e6e6e6; background: #fbfbfb; overflow:auto; padding:0 5px; }
+.message_standard_panel .message_standard_operation .left{ float: left; }
+.message_standard_panel .message_standard_operation .right{ float: right; }
+.message_standard_panel .message_standard_operation .l-btn{background:transparent; border:0 none;}
+.message_standard_panel .message_standard_operation .l-btn .l-btn-text{ color: #717171; height:22px; line-height: 22px;}
+.message_standard_panel .message_standard_operation .l-btn .l-btn-text .iconfont{ margin:0; line-height: 16px;}
+.message_standard_panel .message_standard_operation .l-btn .m-btn-downarrow,.message_standard_panel .message_standard_operation .l-btn .s-btn-downarrow {
+    background: url(images/menu_arrows.png) no-repeat 0 center;
+}
+
+.message_standard_panel_preset_content{ line-height: 22px; }
+.message_standard_panel_preset_content img{ width:100%; border-radius: 5px; margin:5px 0;}
+
+.message_standard_panel_preset_userlist{ margin:20px 0 10px; }
+.message_standard_panel_preset_userlist,.message_standard_panel_preset_userlist ul,.message_standard_panel_preset_userlist ul li{width:auto; height:auto; clear: both;}
+.message_standard_panel_preset_userlist ul{ text-align: left;}
+.message_standard_panel_preset_userlist ul li img{ width:43px; border-radius:50px; float: left; margin: 0 10px 0 0; }
+.message_standard_panel_preset_userlist ul li b,.message_standard_panel_preset_userlist ul li span{ display: block; }
+.message_standard_panel_preset_userlist ul li b{ margin:5px 0 0; }
+.message_standard_panel_preset_userlist ul li span{color: #8e8e8e; }
+.message_standard_panel_preset_userlist ul li{ overflow: auto; margin:4px 0; padding:4px 10px; cursor: pointer;border-radius:5px;}
+.message_standard_panel_preset_userlist ul li:hover{ background: #efefef; }
+
+.message_standard_panel_preset_userlist_operation{text-align:center; margin:10px 0 0 0; padding:10px 0 0;}

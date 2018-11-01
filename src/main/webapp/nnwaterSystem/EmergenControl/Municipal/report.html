@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title></title>
+    <link href="/awater/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="/awater/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="/awater/css/animate.css" rel="stylesheet">
+    <link href="/awater/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="/awater/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="/awater/css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <script src="/awater/lib/jquery.min.js"></script>
+    <script src="/awater/lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.js"></script>
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet"> 
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css" rel="stylesheet">    
+
+    <style>
+        .table-striped > tbody > tr:nth-of-type(2n+1){
+			background-color:#FFFFFF;
+		}
+		.table-striped > tbody > tr:hover{
+			background-color:#F9F9F9;
+		}
+		.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td{
+			padding:2px;
+		}
+		.bootstrap-table .table, .bootstrap-table .table > tbody > tr > td, .bootstrap-table .table > tbody > tr > th, .bootstrap-table .table > tfoot > tr > td, .bootstrap-table .table > tfoot > tr > th, .bootstrap-table .table > thead > tr > td{
+			padding:0px !important;
+		}
+		.fixed-table-container tbody td .th-inner, .fixed-table-container thead th .th-inner{
+			padding:0px;
+		}
+		table{
+		    border-right:1px solid #E0DBDB;border-bottom:1px solid #E0DBDB
+		} 
+        table td{
+            border-left:1px solid #E0DBDB;border-top:1px solid #E0DBDB
+        } 
+        .tools a {
+            cursor: pointer;
+            font-size: 80%;
+        }
+    </style>
+    <script type='text/javascript'>
+        $(window).load(function(){
+            $("#tableDiv").mCustomScrollbar();
+        });
+    </script>
+</head>
+
+<body style="background-color:#FFFFFF">
+       <div class="ibox-content" >
+           <form role="form">        
+                   <label class="control-label">问题描述：</label>
+                   <textarea id="textQ" name="" class="form-control" style="height:80px;max-width: 100%;"></textarea>         
+                    <br/>
+                    <div id="tableDiv" style="width:100%;height:200px;overflow:auto;border-top:1px solid #23C6C8;">
+	                    <table  class="table table-striped table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" style="margin-top:0px !important;margin-bottom:0px;">
+							<thead>
+								<tr role="row">
+								    <th style="width: 3%;background:transparent;"></th>
+									<th style="width: 59%;background:transparent;">事件名称</th>
+									<th style="width: 20%;background:transparent;">上报时间</th>
+									<th style="width: 10%;background:transparent;">上报人</th>
+									<th style="width: 8%;background:transparent;">状态</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">涪城区临园路东段62号附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+								<tr class="gradeA">
+							    	<td><input type="checkbox"></td>
+									<td><a href="">涪城区涪城路115号附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>上报</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>上报</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+								<tr class="gradeA">
+								    <td><input type="checkbox"></td>
+									<td><a href="">天河区高普路附近排水问题</a></td>
+									<td>2016-01-20</td>
+									<td>卢轶群</td>
+									<td>核查</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+                    <br/>
+                   <label class=" control-label">问题接收方：</label>
+                    <select class="form-control">
+                        <option>选项 1</option>
+                        <option>选项 2</option>
+                        <option>选项 3</option>
+                        <option>选项 4</option>
+                    </select>                                                         
+                   <br/>
+                    <label class=" control-label">调度指令：</label>
+                    <select class="form-control">
+                        <option>选项 1</option>
+                        <option>选项 2</option>
+                        <option>选项 3</option>
+                        <option>选项 4</option>
+                    </select>                                                         
+                   <br/>
+                   <label class=" control-label">备注：
+                   </label>
+                       <input type="text" name="" class="form-control" placeholder="请输入文本">
+                    <br/>
+                   <div  align="center">
+                       <button class="btn btn-primary" type="submit">上报问题</button>&nbsp;&nbsp;
+                         <button class="btn btn-primary" type="submit">请求增援</button>&nbsp;&nbsp;
+                           <button class="btn btn-primary" type="submit">撤销布防</button>&nbsp;&nbsp;
+                        <button class="btn btn-white" type="submit">取消</button>
+                   </div>                                
+           </form>
+       </div>                                  
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+/*
+  Easyui Of Insdep Theme 2.x 评论
+  版本：2.0.0
+  手册：https://www.insdep.com/2.x
+*/
+
+.comment,.comment .comment_rows,
+.comment .comment_rows .comment_topic,.comment .comment_rows .comment_topic .right ul,
+.comment .comment_rows .comment_images ul,
+.comment .comment_rows .comment_publisher,.comment .comment_rows .comment_publisher .right ul
+{position: relative; clear: both; height: auto;}
+
+.comment .comment_rows{ border-width: 1px;border-style: solid;border-color: #c5c5c5 #c4c4c4 #b6b6b6 #c4c4c4; background: #fff; margin:20px 0; }
+
+.comment .comment_rows .comment_topic{ height: 60px; }
+.comment .comment_rows .comment_topic .left,.comment .comment_rows .comment_topic .right{ margin:9px 0;}
+.comment .comment_rows .comment_topic .left,.comment .comment_rows .comment_topic .left i,.comment .comment_rows .comment_topic .right ul li{ float: left; }
+.comment .comment_rows .comment_topic .right{ float: right; }
+.comment .comment_rows .comment_topic .right ul li{ border-left:1px solid #e8e8e8; line-height:42px; height: 42px; padding:0 10px;}
+.comment .comment_rows .comment_topic .right ul li:first-child{border-left:0 none;}
+
+.comment .comment_rows .comment_topic .left i{ display: block; width: 42px; height: 42px; line-height: 42px; font-size: 20px; text-align: center; border-radius:10px; margin: 0 10px 0 9px; }
+.comment .comment_rows .comment_topic .left b{ display: block; margin:5px 0 0; }
+.comment .comment_rows .comment_topic .left span{ color: #787878; }
+.comment .comment_rows .comment_content{ border-top: 1px solid #c5c5c5; background: #fcfcfc; padding:15px; line-height: 22px; }
+
+.comment .comment_rows .comment_images{ border-top: 1px solid #c5c5c5;padding:15px; }
+.comment .comment_rows .comment_images ul li{ float: left; margin:0 10px 0 0; }
+.comment .comment_rows .comment_images ul li img{ border-radius: 5px; width: 82px; }
+
+.comment .comment_rows .comment_publisher{ padding:15px; overflow: hidden; border-top: 1px solid #c5c5c5;}
+.comment .comment_rows .comment_publisher .left,.comment .comment_rows .comment_publisher .right{ height: 32px; }
+.comment .comment_rows .comment_publisher .left,.comment .comment_rows .comment_publisher .left img,.comment .comment_rows .comment_publisher .left dl{ float: left; }
+.comment .comment_rows .comment_publisher .right{ float: right; }
+
+.comment .comment_rows .comment_publisher .left img{ width: 32px; height: 32px;  border-radius: 32px;}
+.comment .comment_rows .comment_publisher .left dl{ margin: 0 0 0 10px; }
+
+.comment .comment_rows .comment_publisher .right ul li{ float: left; line-height: 32px; margin: 0 5px 0 0; }
+.comment .comment_rows .comment_publisher .right ul li .badge{ margin: 10px 0; }

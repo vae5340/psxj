@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="lib/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    
+	<script type="text/javascript">
+	function showPoint(){
+		var frames=window.parent.window.document.getElementById("main"); 
+		frames.contentWindow.getInfo(); 
+	}	
+	</script>
+</head>
+
+<body style="background-color:white;height:300px;">
+    <div class="animated fadeInRight">
+		<div class="col-sm-12">
+			<!-- Example Events -->
+			<table id="table" data-toggle="table"
+				   data-click-to-select="true"
+				   data-row-style="rowStyle"
+				   data-pagination="false"
+				   data-search="true"
+				   data-height="380">
+				<thead>
+					<tr>
+						<th class="hidden" data-field="OBJECTID">OBJECTID</th>
+						<th class="hidden" data-field="station_code">站码</th>
+						<th data-field="sx_name">视频点</th>
+						<th class="hidden" data-field="jsarea">集水面积</th>
+						<th class="hidden" data-field="x">经度</th>
+						<th class="hidden" data-field="y">纬度</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>OBJECTID</td>
+						<td>站码</td>
+						<td>植物园</td>
+						<td>集水面积</td>
+						<td>经度</td>
+						<td>纬度</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- End Example Events -->
+		</div>
+    </div>
+    <script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript">
+	
+	function queryParams() {
+        return {
+            type: 'owner',
+            sort: 'updated',
+            direction: 'desc',
+            per_page: 100,
+            page: 1
+        };
+    }
+	
+	var $table = $('#table'), $remove = $('#re_send_selected');
+
+    $(function () {
+		/*
+        $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function () {
+            $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+        });
+		*/
+		$table.on('click-row.bs.table', function (row,obj) {
+	        window.parent.showInfoWindowByPoint('sx',obj);
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+
+    <title></title>
+    <link href="/awater/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+    <link href="/awater/font-awesome/css/font-awesome.css?v=4.3.0" rel="stylesheet">
+    <link href="/awater/css/animate.css" rel="stylesheet">
+    <link href="/awater/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="/awater/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="/awater/css/style.css?v=2.2.0" rel="stylesheet">
+    <link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <script src="/awater/lib/jquery.min.js"></script >
+    <script src="/awater/lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.js"></script>
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet"> 
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.min.css" rel="stylesheet">    
+
+    <script type='text/javascript'>
+        $(window).load(function(){
+            $("#tableDiv").mCustomScrollbar();
+        });
+    </script>
+</head>
+
+<body>
+       <div class="content" style="width:100%;height:90%;padding:15px 20px 0px 20px;">
+           <form id="form" class="form-horizontal" >
+		    	<div class="form-group" >
+		    		<label class="col-sm-2 control-label">问题描述</label>
+                   	<div class="col-sm-8">
+                   		<textarea id="textQ" name="textQ" class="form-control" rows="5" style="max-width: 100%;">各下级防汛应急调度中心请启动相应响应预案。根据目前的预计，“妮妲”在广东登陆后，将继续向西偏北方向移动，并深入广东境内，市区将出现大雨，局部暴雨到大暴雨天气。预计明天下午到晚上，台风前锋开始影响市区，降雨天气将持续到4日白天。</textarea>         
+                    </div>
+				</div>            
+          	</form>
+		</div>
+       <div style="height: 10%;">
+			<div  align="center">
+        		<button class="btn btn-primary" type="submit" onclick="sendMessage()">平台通知</button>&nbsp;&nbsp;
+				<button class="btn btn-primary" type="submit" onclick="sendMessage()">短信通知</button>&nbsp;&nbsp;
+				<button class="btn btn-primary" type="submit" onclick="sendMessage()">紧急通知</button>&nbsp;&nbsp;
+				<button class="btn btn-white" type="submit" onclick="closeWindow()">取消</button>
+			</div> 
+       </div>
+       <script>
+			function sendMessage(){
+       		 	parent.layer.msg("发送成功");
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+       		
+       		}
+       		function closeWindow(){
+       			var index = parent.layer.getFrameIndex(window.name);
+				parent.layer.close(index);
+       		}
+       </script>
+</body>
+
+</html>

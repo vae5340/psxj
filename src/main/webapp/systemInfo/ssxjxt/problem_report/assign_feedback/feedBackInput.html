@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>主页面</title>
+	<meta charset="utf-8">
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+	<link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+      <link rel="stylesheet" href="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/skin/layer.css">
+      <link href="/psxj/systemInfo/ssxjxt/style/blue/css/validate.css" rel="stylesheet">
+    <style>
+		.nav > li > a{display:block;padding:5px;outline:none;}
+		.dimIframe{width:100%;min-height:420px;frameborder:no; border:0;marginwidth:0; marginheight:0; allowtransparency:"yes"}
+	</style>
+  </head>
+  
+  <body>
+  <div class="wrapper wrapper-content" style="padding:0">
+	<div class="col-sm-12" style="padding:0">
+	    <!--tab标题-->
+		<ul id="myTab" class="nav nav-tabs nav-justified">
+			<li class="active" id="base_li"><a href="#base_Tab" data-toggle="tab">新增反馈</a></li>
+			<li id="file_li"><a href="#file_Tab" data-toggle="tab">历史反馈</a></li>
+		</ul>
+		<!--tab内容-->
+        <div id="myTabContent" class="tab-content" style="margin-top:0px;overflow-x: hidden; overflow-y: auto; height: 400px; width:auto;">
+            <div class="tab-pane fade in active" id="base_Tab">
+	            <form id="myform" class="form-horizontal" role="form" style="margin-top:15px;width:95%;">
+	            	 <div class="form-group">
+                        <label class="control-label col-sm-2">现场照片：</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="file" id="uploadfile" multiple class="file-loading form-control" />
+                        </div>
+                    </div>
+                     <table id="filetable" class="table table-bordered" ></table>
+	            	 <div class="form-group area" style="margin-top: 2px;">
+							<label class="col-sm-2 control-label">描述</label>
+							<div class="col-sm-9">
+								<textarea rows="2" id="describe" name="describe" class="form-control"></textarea>
+							</div>
+					</div>
+					<div class="form-group area" style="margin-top: 5px;">
+						<label class="col-sm-2 control-label">整改完成情况</label>
+						<div class="col-sm-9">
+							<select id="situation" name="situation"  class="form-control" >
+                          		<option value="正在整改">正在整改</option>
+                          		<option value="已完成整改">已完成整改</option>
+                          		<option value="无需整改">无需整改</option>
+                          	 </select>	
+						</div>
+					</div>
+	            </form>
+	            
+            </div>
+            <div class="tab-pane" id="file_Tab">
+              	<div class="container">
+					<div class="main">
+						<ul class="cbp_tmtimeline" id="sggsLog">
+						</ul>
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" style="bottom:1px;right:5px;position:absolute;padding: 0px;">
+	      <button id= "cancel" type="button" class="btn btn-default" data-dismiss="modal"><span
+	              class="glypicon glypicon-remove" aria-hidden="true"></span>取消
+	      </button>
+	      <button id="save" type="btn" class="btn btn-primary" data-dismiss="modal">
+	          <span class="glyphicon glyphicon-floppy-disk" ariahidden="true"></span>保存
+	      </button>
+    </div>	  
+</div>
+   
+  <script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/datapicker/bootstrap-datepicker.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+   <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput_locale_zh.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-export.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/tableExport.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-editable.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-editable.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+  <script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+  <script src="js/feedBackInput.js"></script>
+  <script>
+      /* $(document).ready(function () {
+           var $input = $('input.file[type=file]'), count = $input.attr('type') ? $input.length : 0;
+           if (count > 0) {
+               $input.fileinput();
+           }
+       });*/
+  </script>
+
+</body>
+</html>

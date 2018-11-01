@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+    <title>模板结构管理</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/page-style.css" rel="stylesheet" type="text/css"/>
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-editable.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrapvalidator/bootstrapValidator.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/animate.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/css/zTreeStyle/metro.css"/>
+    <script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+    <script src="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/angular/app/lib/angular/angular.min.js"></script>
+</head>
+
+<body ng-controller ='formController'>
+<div class="formpageconfiguration-container" style="display: inline-block;width:100%;height:94%;margin-top:5px;">
+    <div class="col-xs-12 row" style="height:100%;">
+        <div class="col-xs-3 " style="height:100%;">
+            <div class="panel panel-blue" style="height:100%;width:100%;overflow:auto;border-color: rgb(104,171,234);">
+                <div class="panel-heading" style="width:100%;">
+                    <div class="role-head-logo"></div>
+                    <div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:35px;margin-top:5px;">
+                        任务视图字段定义
+                    </div>
+                </div>
+                <div class="panel-body" style="height:90%;">
+                    <div id="Bus_template">
+                        <label>流程业务模板:</label>
+                        <select id="wfbustemplate" onchange="loadtreeData()">
+                        </select>
+                    </div>
+                    <ul tree  id="formpageconfiguration_tree" class="ztree" ng-model="selectNode" style="text-align:left;"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-9 " style="height:100%;">
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a role="tab" class="active" data-toggle="tab">任务视图字段配置</a></li>
+                <li class="navbar-right" style="margin-right:5px;">
+                    <button class="btn btn-primary" ng-click='saveBtnClick()'>保存</button>
+                </li>
+            </ul>
+            <div class="panel" style="height:93%;width:100%;overflow:auto;border-color: rgb(104,171,234);line-height:33px;">
+                <div style="height:92%;">
+                    <div class='yui3-app-field-setting' style="margin: 5px;height: 95%">
+                        <div class=" col-sm-3" style="height:100%;">
+                            <div class="panel panel-blue"
+                                 style="height:100%;width:100%;overflow:auto;border-color: rgb(104,171,234);">
+                                <div class="panel-heading">
+                                    <div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:35px;margin-top:0px;"> 所有字段
+                                    </div>
+                                </div>
+                                <div class="panel-body" style="height:90%;">
+                                    <div  style="height:98%">
+                                        <table class="fields-table" style="height:90%;width:92%;">
+                                            <tr>
+                                                <td class='leftPane' >
+                                                    <div   style="overflow:auto;margin:auto;height:100%;" >
+                                                        <div ng-model='leftFields' ng-repeat="item in leftFields" ng-dblclick="leftToMiddleClick()" ng-click="selectLeftField($index)"  ng-class='{fieldDIVclickedBlur:$index==leftFieldIndex}'  class="fieldDIV">
+                                                            <span>{{item.elementName}}</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 btnPane">
+                            <div class='chooseBtn rightBtn' ng-click='leftToMiddleClick()'>&nbsp;</div>
+                            <div class='chooseBtn leftBtn' ng-click='middleToLeftMoveClick()'>&nbsp;</div>
+                            <div class='chooseBtn rightAllBtn' ng-click='allLeftToMiddleMoveClick()'>&nbsp;</div>
+                            <div class='chooseBtn leftAllBtn' ng-click='allMiddleToLeftMoveClick()'>&nbsp;</div>
+                        </div>
+                        <div class=" col-sm-3" style="height:100%;">
+                            <div class="panel panel-blue"
+                                 style="height:100%;width:100%;overflow:auto;border-color: rgb(104,171,234);">
+                                <div class="panel-heading">
+                                    <div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:35px;margin-top:0px;">环节所配字段
+                                    </div>
+                                </div>
+                                <div class="panel-body" style="height:90%;">
+                                    <div style="height:98%">
+                                        <table class="fields-table" style="height:90%;width:92%;">
+                                            <tr>
+                                                <td class='leftPane' >
+                                                    <div   style="overflow:auto;margin:auto;height:100%;" >
+                                                        <div ng-model='middleFields' ng-repeat="item in middleFields" ng-dblclick="middleToLeftMoveClick()" ng-click="selectMiddleField($index)" ng-class='{fieldDIVclickedBlur:$index==middleFieldIndex}' class="fieldDIV">
+                                                            <span>{{item.elementName}}</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 btnPane">
+                            <div class='chooseBtn rightBtn' ng-click='middleToRightClick()'>&nbsp;</div>
+                            <div class='chooseBtn leftBtn' ng-click='rightToMiddleClick()'>&nbsp;</div>
+                            <div class='chooseBtn rightAllBtn' ng-click='allMiddleToRightMoveClick()'>&nbsp;</div>
+                            <div class='chooseBtn leftAllBtn' ng-click='allRightToMiddleMoveClick()'>&nbsp;</div>
+                        </div>
+                        <div class=" col-sm-3" style="height:100%;">
+                            <div class="panel panel-blue"
+                                 style="height:100%;width:100%;overflow:auto;border-color: rgb(104,171,234);">
+                                <div class="panel-heading">
+                                    <div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:35px;margin-top:0px;">环节显示字段
+                                    </div>
+                                </div>
+                                <div class="panel-body" style="height:90%;">
+                                    <div style="height:98%">
+                                        <table class="fields-table" style="height:90%;width:92%;">
+                                            <tr>
+                                                <td class='leftPane' >
+                                                    <div   style="overflow:auto;margin:auto;height:100%;" >
+                                                        <div ng-model='rightFields' ng-repeat="item in rightFields" ng-dblclick="rightToMiddleClick()" ng-click="selectRightField($index)" ng-class='{fieldDIVclickedBlur:$index==rightFieldIndex}' class="fieldDIV">
+                                                            <span>{{item.elementName}}</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br><br><br><br><br>
+                        <div class="rightPane col-sm-1" style="width: 25px">
+                            <td class='btnPane'>
+                                <div class="yui3-field-button yui3-field-button-bottom" ng-click='bottomMoveClick()'>
+                                </div>
+                                <div class="yui3-field-button yui3-field-button-top" ng-click='topMoveClick()'>
+                                </div>
+                                <div class="yui3-field-button yui3-field-button-down " ng-click='downMoveClick()'>
+                                </div>
+                                <div class="yui3-field-button yui3-field-button-up"  ng-click='upMoveClick()'>
+                                </div>
+                            </td>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrapvalidator/bootstrapValidator.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+<script src="js/taskviewfield.js"></script>
+</html>

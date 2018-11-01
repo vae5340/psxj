@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>	
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <style>
+      .control-label{font-size:15px;font-weight:500}
+      .borderCss{border:1px solid #ccc;border-radius:4px;height:30px;font-size:15px;}
+   </style>
+  </head>
+  
+  <body>
+       <div id="panelContent" style="padding:20px 0px 15px 15px">
+	        <label class="control-label">行政区列表</label>&nbsp;&nbsp;&nbsp;
+			<select class="borderCss" style="width:100px" id="districtList">
+			  	<option></option>
+			  	<option value=1>良庆区</option>
+			  	<option value=2>西乡塘区</option>
+			  	<option value=3>青秀区</option>
+			  	<option value=4>江南区</option>
+			  	<option value=5>邕宁区</option>
+			  	<option value=6>兴宁区</option>
+			  	<option value=7>全市</option>
+			</select>&nbsp;&nbsp;&nbsp;
+			<label class="control-label">统计图层类型</label>&nbsp;&nbsp;&nbsp;
+			<select class="borderCss" style="width:100px" id="layerType">
+			  	<option></option>
+			  	<option value=1>管线</option>
+			  	<option value=2>沟渠</option>
+			  	<option value=3>管点</option>
+			  	<option value=4>排水设施</option>
+			  	<option value=5>全部</option>
+			</select>
+		    <div align="right" style="padding-top:30px">      
+		    	<button type="button" class="btn btn-primary" id="statisticBtn" onclick="statistic()">统计</button>	            
+		    	<button type="button" class="btn btn-default" id="closeBtn" onclick="closeJsPanel()" style="margin:0px 10px">关闭</button>
+		   </div>
+     </div>   
+	<script>	 
+       var seriesData,tableHtml,pieTableHtml,pieTableHtml2,pieTableHtm3,pieTableHtml4;
+      
+       function statistic(){
+            seriesData={};
+			$.ajax({ url: "/agsupport/rest/pscomb/GetReadyStatictic",  
+				data:{"district":$("#districtList").val()},
+				dataType:'json',
+				success: function(result){
+			        var statData= result.stat[0];
+				    switch($("#layerType").val()){
+				      case "1":
+				         seriesData.type=1;
+				         seriesData.rainArr=[statData.ypipe_length,statData.ypipe_count];
+			             seriesData.sewageArr=[statData.wpipe_length,statData.wpipe_count];
+			             seriesData.mixArr=[statData.mpipe_length,statData.mpipe_count];
+			             tableHtml="<thead><tr><th></th><th>雨水</th><th>污水</th><th>雨污合流</th></tr></thead>"+
+				         "<tbody><tr><th>长度</th><td>"+seriesData.rainArr[0]+"米</td><td>"+seriesData.sewageArr[0]+"米</td><td>"+seriesData.mixArr[0]+"米</td></tr>"+
+				         "<tr><th>数量</th><td>"+seriesData.rainArr[1]+"条</td><td>"+seriesData.sewageArr[1]+"条</td><td>"+seriesData.mixArr[1]+"条</td></tr></tbody>"
+				         var rPortion=((seriesData.rainArr[0]/(seriesData.rainArr[0]+seriesData.sewageArr[0]+seriesData.mixArr[0]))*100).toFixed(1)+"%";
+				         var sPortion=((seriesData.sewageArr[0]/(seriesData.rainArr[0]+seriesData.sewageArr[0]+seriesData.mixArr[0]))*100).toFixed(1)+"%";
+				         var mPortion=((seriesData.mixArr[0]/(seriesData.rainArr[0]+seriesData.sewageArr[0]+seriesData.mixArr[0]))*100).toFixed(1)+"%";
+				         pieTableHtml="<thead><tr><th></th><th>雨水</th><th>污水</th><th>雨污合流</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+rPortion+"</td><td>"+sPortion+"</td><td>"+mPortion+"</td></tr></tbody>"
+				         var rPortion2=((seriesData.rainArr[1]/(seriesData.rainArr[1]+seriesData.sewageArr[1]+seriesData.mixArr[1]))*100).toFixed(1)+"%";
+				         var sPortion2=((seriesData.sewageArr[1]/(seriesData.rainArr[1]+seriesData.sewageArr[0]+seriesData.mixArr[1]))*100).toFixed(1)+"%";
+				         var mPortion2=((seriesData.mixArr[1]/(seriesData.rainArr[1]+seriesData.sewageArr[1]+seriesData.mixArr[1]))*100).toFixed(1)+"%";
+				         pieTableHtml2="<thead><tr><th></th><th>雨水</th><th>污水</th><th>雨污合流</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+rPortion2+"</td><td>"+sPortion2+"</td><td>"+mPortion2+"</td></tr></tbody>"
+			              layer.open({
+							type: 2,
+							title: '管线统计图表',
+							maxmin: true, 
+							area: ['800px', '550px'],
+						    content: '/awater/nnwaterSystem/PipeNetwork/pipeStatisticMap.html'
+					      });
+				         break;
+				      case "2":
+				         seriesData.type=2;
+				         seriesData.rainArr=[statData.yconduit_length,statData.yconduit_count];
+			             seriesData.sewageArr=[statData.wconduit_length,statData.wconduit_count];
+			             seriesData.mixArr=[statData.mconduit_length,statData.mconduit_count];
+			             tableHtml="<thead><tr><th></th><th>雨水</th><th>污水</th><th>雨污合流</th></tr></thead>"+
+				         "<tbody><tr><th>长度</th><td>"+seriesData.rainArr[0]+"米</td><td>"+seriesData.sewageArr[0]+"米</td><td>"+seriesData.mixArr[0]+"米</td></tr>"+
+				         "<tr><th>数量</th><td>"+seriesData.rainArr[1]+"条</td><td>"+seriesData.sewageArr[1]+"条</td><td>"+seriesData.mixArr[1]+"条</td></tr></tbody>"
+			             var rPortion=((seriesData.rainArr[0]/(seriesData.rainArr[0]+seriesData.sewageArr[0]+seriesData.mixArr[0]))*100).toFixed(1)+"%";
+				         var sPortion=((seriesData.sewageArr[0]/(seriesData.rainArr[0]+seriesData.sewageArr[0]+seriesData.mixArr[0]))*100).toFixed(1)+"%";
+				         var mPortion=((seriesData.mixArr[0]/(seriesData.rainArr[0]+seriesData.sewageArr[0]+seriesData.mixArr[0]))*100).toFixed(1)+"%";
+				         pieTableHtml="<thead><tr><th></th><th>雨水</th><th>污水</th><th>雨污合流</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+rPortion+"</td><td>"+sPortion+"</td><td>"+mPortion+"</td></tr></tbody>"
+				         var rPortion2=((seriesData.rainArr[1]/(seriesData.rainArr[1]+seriesData.sewageArr[1]+seriesData.mixArr[1]))*100).toFixed(1)+"%";
+				         var sPortion2=((seriesData.sewageArr[1]/(seriesData.rainArr[1]+seriesData.sewageArr[0]+seriesData.mixArr[1]))*100).toFixed(1)+"%";
+				         var mPortion2=((seriesData.mixArr[1]/(seriesData.rainArr[1]+seriesData.sewageArr[1]+seriesData.mixArr[1]))*100).toFixed(1)+"%";
+				         pieTableHtml2="<thead><tr><th></th><th>雨水</th><th>污水</th><th>雨污合流</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+rPortion2+"</td><td>"+sPortion2+"</td><td>"+mPortion2+"</td></tr></tbody>"
+			              layer.open({
+							type: 2,
+							title: '沟渠统计图表',
+							maxmin: true, 
+							area: ['800px', '550px'],
+						    content: '/awater/nnwaterSystem/PipeNetwork/pipeStatisticMap.html'
+					      });
+				         break;
+				      case "3":
+				         seriesData.type=3;
+				         seriesData.pData=statData.ppoint_count;
+			             seriesData.jData=statData.jpoint_count;
+			             seriesData.yData=statData.ypoint_count;
+			             seriesData.fData=statData.fpoint_count;
+			             tableHtml="<thead><tr><th></th><th>排放口</th><th>检查井</th><th>雨水口</th><th>阀门</th></tr></thead>"+
+				         "<tbody><tr><th>数量</th><td>"+seriesData.pData+"个</td><td>"+seriesData.jData+"个</td><td>"+seriesData.yData+"个</td><td>"+seriesData.fData+"个</td></tr></tbody>";
+			             var pPortion=((seriesData.pData/(seriesData.pData+seriesData.jData+seriesData.yData+seriesData.fData))*100).toFixed(1)+"%";
+				         var jPortion=((seriesData.jData/(seriesData.pData+seriesData.jData+seriesData.yData+seriesData.fData))*100).toFixed(1)+"%";
+				         var yPortion=((seriesData.yData/(seriesData.pData+seriesData.jData+seriesData.yData+seriesData.fData))*100).toFixed(1)+"%";
+				       	 var fPortion=((seriesData.fData/(seriesData.pData+seriesData.jData+seriesData.yData+seriesData.fData))*100).toFixed(1)+"%";
+				         pieTableHtml="<thead><tr><th></th><th>排放口</th><th>检查井</th><th>雨水口</th><th>阀门</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+pPortion+"</td><td>"+jPortion+"</td><td>"+yPortion+"</td><td>"+fPortion+"</td></tr></tbody>"
+			              layer.open({
+							type: 2,
+							title: '管点统计图表',
+							maxmin: true, 
+							area: ['800px', '550px'],
+						    content: '/awater/nnwaterSystem/PipeNetwork/pipeStatisticMap.html'
+					      });
+				         break;
+				      case "4":
+				         seriesData.type=4;
+				         seriesData.fData=statData.zfacility_count;
+			             seriesData.yData=statData.yfacility_count;
+			             seriesData.pData=statData.pfacility_count;
+			             tableHtml="<thead><tr><th></th><th>闸门</th><th>溢流堰</th><th>排水泵站</th></tr></thead>"+
+			             "<tbody><tr><th>数量</th><td>"+seriesData.fData+"个</td><td>"+seriesData.yData+"个</td><td>"+seriesData.pData+"个</td></tr></tbody>";
+				         var fPortion=((seriesData.fData/(seriesData.fData+seriesData.yData+seriesData.pData))*100).toFixed(1)+"%";
+				         var yPortion=((seriesData.yData/(seriesData.fData+seriesData.yData+seriesData.pData))*100).toFixed(1)+"%";
+				       	 var pPortion=((seriesData.pData/(seriesData.fData+seriesData.yData+seriesData.pData))*100).toFixed(1)+"%";
+				         pieTableHtml="<thead><tr><th></th><th>闸门</th><th>溢流堰</th><th>排水泵站</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+fPortion+"</td><td>"+yPortion+"</td><td>"+pPortion+"</td></tr></tbody>"
+			              layer.open({
+							type: 2,
+							title: '排水设施统计图表',
+							maxmin: true, 
+							area: ['800px', '550px'],
+						    content: '/awater/nnwaterSystem/PipeNetwork/pipeStatisticMap.html'
+					      });
+				         break;
+				      case "5":
+				         seriesData.type=5;
+				         seriesData.pipeArr=[[statData.ypipe_length,statData.ypipe_count],[statData.wpipe_length,statData.wpipe_count],[statData.mpipe_length,statData.mpipe_count]];
+				         seriesData.conduitArr=[[statData.yconduit_length,statData.yconduit_count],[statData.wconduit_length,statData.wconduit_count],[statData.mconduit_length,statData.mconduit_count]];
+				         seriesData.pointArr=[[0,statData.ppoint_count],[0,statData.jpoint_count],[0,statData.ypoint_count],[0,statData.fpoint_count]];
+				         seriesData.facilityArr=[[0,statData.zfacility_count],[0,statData.yfacility_count],[0,statData.pfacility_count]];
+				         /*tableHtml="<thead><tr><th></th><th>管线</th><th>沟渠</th><th>管点</th><th>排水设施</th></tr></thead>"+
+				         "<tbody><tr><th>长度</th><td>"+seriesData.pipeArr[0]+"米</td><td>"+seriesData.conduitArr[0]+"米</td><td></td><td></td></tr>"+
+				         "<tr><th>数量</th><td>"+seriesData.pipeArr[1]+"条</td><td>"+seriesData.conduitArr[1]+"条</td><td>"+seriesData.pointArr[1]+"个</td><td>"+seriesData.facilityArr[1]+"个</td></tr></tbody>";
+				         var pPortion=((seriesData.pipeArr[0]/(seriesData.pipeArr[0]+seriesData.conduitArr[0]))*100).toFixed(1)+"%";
+				         var gPortion=((seriesData.conduitArr[0]/(seriesData.pipeArr[0]+seriesData.conduitArr[0]))*100).toFixed(1)+"%";
+				         pieTableHtml="<thead><tr><th></th><th>管线</th><th>沟渠</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+pPortion+"</td><td>"+gPortion+"</td></tr></tbody>"
+				         var pPortion2=((seriesData.pipeArr[1]/(seriesData.pipeArr[1]+seriesData.conduitArr[1]+seriesData.pointArr[1]+seriesData.facilityArr[1]))*100).toFixed(1)+"%";
+				         var gPortion2=((seriesData.conduitArr[1]/(seriesData.pipeArr[1]+seriesData.conduitArr[1]+seriesData.pointArr[1]+seriesData.facilityArr[1]))*100).toFixed(1)+"%";
+				         var oPortion2=((seriesData.pointArr[1]/(seriesData.pipeArr[1]+seriesData.conduitArr[1]+seriesData.pointArr[1]+seriesData.facilityArr[1]))*100).toFixed(1)+"%";
+				         var fPortion2=((seriesData.facilityArr[1]/(seriesData.pipeArr[1]+seriesData.conduitArr[1]+seriesData.pointArr[1]+seriesData.facilityArr[1]))*100).toFixed(1)+"%";
+				         pieTableHtml2="<thead><tr><th></th><th>管线</th><th>沟渠</th><th>管点</th><th>排水设施</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+pPortion2+"</td><td>"+gPortion2+"</td><td>"+oPortion2+"</td><td>"+fPortion2+"</td></tr></tbody>";*/
+				         
+				         tableHtml="<thead><tr><th></th><th colspan='3'>管线</th><th colspan='3'>沟渠</th><th colspan='4'>管点</th><th colspan='3'>排水设施</th></tr></thead>"+
+				         "<tbody><tr><th></th><td>雨水管线</td><td>污水管线</td><td>雨污合流管线</td><td>雨水沟渠</td><td>污水沟渠</td><td>雨污合流沟渠</td>"+
+				         "<td>排放口</td><td>检查井</td><td>雨水口</td><td>阀门</td><td>闸门</td><td>溢流堰</td><td>排水泵站</td></tr>"+
+				         "<tr><th>长度</th><td>"+seriesData.pipeArr[0][0]+"米</td><td>"+seriesData.pipeArr[1][0]+"米</td><td>"+seriesData.pipeArr[2][0]+"米</td><td>"+
+				         seriesData.conduitArr[0][0]+"米</td><td>"+seriesData.conduitArr[1][0]+"米</td><td>"+seriesData.conduitArr[2][0]+"米</td><td colspan='4'></td><td colspan='3'></td></tr>"+
+				         "<tr><th>数量</th><td>"+seriesData.pipeArr[0][1]+"条</td><td>"+seriesData.pipeArr[1][1]+"条</td><td>"+seriesData.pipeArr[2][1]+
+				         "条</td><td>"+seriesData.conduitArr[0][1]+"条</td><td>"+seriesData.conduitArr[1][1]+"条</td><td>"+seriesData.conduitArr[2][1]+
+				         "条</td><td>"+seriesData.pointArr[0][1]+"个</td><td>"+seriesData.pointArr[1][1]+"个</td><td>"+seriesData.pointArr[2][1]+"个</td><td>"+seriesData.pointArr[3][1]+
+				         "个</td><td>"+seriesData.facilityArr[0][1]+"个</td><td>"+seriesData.facilityArr[1][1]+"个</td><td>"+seriesData.facilityArr[2][1]+"个</td></tr></tbody>";
+				         
+				          
+				         if(seriesData.pipeArr[0][1]+seriesData.pipeArr[1][1]+seriesData.pipeArr[2][1]==0)
+				            pieTableHtml="<thead><tr><th></th><th>雨水管线</th><th>污水管线</th><th>雨污合流管线</th></tr></thead>"+
+				           "<tbody><tr><th>所占比例</th><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr></tbody>"
+				         else
+					           pieTableHtml="<thead><tr><th></th><th>雨水管线</th><th>污水管线</th><th>雨污合流管线</th></tr></thead>"+
+					          "<tbody><tr><th>所占比例</th><td>"+((seriesData.pipeArr[0][1]/(seriesData.pipeArr[0][1]+seriesData.pipeArr[1][1]+seriesData.pipeArr[2][1]))*100).toFixed(1)+"%</td>"+
+					         "<td>"+((seriesData.pipeArr[1][1]/(seriesData.pipeArr[0][1]+seriesData.pipeArr[1][1]+seriesData.pipeArr[2][1]))*100).toFixed(1)+"%</td>"+
+					         "<td>"+((seriesData.pipeArr[2][1]/(seriesData.pipeArr[0][1]+seriesData.pipeArr[1][1]+seriesData.pipeArr[2][1]))*100).toFixed(1)+"%</td></tr></tbody>"
+				        
+				         if(seriesData.conduitArr[0][1]+seriesData.conduitArr[1][1]+seriesData.conduitArr[2][1]==0)
+				           pieTableHtml2="<thead><tr><th></th><th>雨水沟渠</th><th>污水沟渠</th><th>雨污合流沟渠</th></tr></thead>"+
+				           "<tbody><tr><th>所占比例</th><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr></tbody>"
+				         else
+					         pieTableHtml2="<thead><tr><th></th><th>雨水沟渠</th><th>污水沟渠</th><th>雨污合流沟渠</th></tr></thead>"+
+					         "<tbody><tr><th>所占比例</th><td>"+((seriesData.conduitArr[0][1]/(seriesData.conduitArr[0][1]+seriesData.conduitArr[1][1]+seriesData.conduitArr[2][1]))*100).toFixed(1)+"%</td>"+
+					         "<td>"+((seriesData.conduitArr[1][1]/(seriesData.conduitArr[0][1]+seriesData.conduitArr[1][1]+seriesData.conduitArr[2][1]))*100).toFixed(1)+"%</td>"+
+					         "<td>"+((seriesData.conduitArr[2][1]/(seriesData.conduitArr[0][1]+seriesData.conduitArr[1][1]+seriesData.conduitArr[2][1]))*100).toFixed(1)+"%</td></tr></tbody>"
+				        
+				         if(seriesData.pointArr[0][1]+seriesData.pointArr[1][1]+seriesData.pointArr[2][1]+seriesData.pointArr[3][1]==0)
+					           pieTableHtml3="<thead><tr><th></th><th>排放口</th><th>检查井</th><th>雨水口</th><th>阀门</th></tr></thead>"+
+					           "<tbody><tr><th>所占比例</th><td>0.0%</td><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr></tbody>"
+				         else
+					          pieTableHtml3="<thead><tr><th></th><th>排放口</th><th>检查井</th><th>雨水口</th><th>阀门</th></tr></thead>"+
+					          "<tbody><tr><th>所占比例</th><td>"+((seriesData.pointArr[0][1]/(seriesData.pointArr[0][1]+seriesData.pointArr[1][1]+seriesData.pointArr[2][1]+seriesData.pointArr[3][1]))*100).toFixed(1)+"%</td>"+
+					         "<td>"+((seriesData.pointArr[1][1]/(seriesData.pointArr[0][1]+seriesData.pointArr[1][1]+seriesData.pointArr[2][1]+seriesData.pointArr[3][1]))*100).toFixed(1)+"%</td>"+
+					         "<td>"+((seriesData.pointArr[2][1]/(seriesData.pointArr[0][1]+seriesData.pointArr[1][1]+seriesData.pointArr[2][1]+seriesData.pointArr[3][1]))*100).toFixed(1)+"%</td>"+
+					         "<td>"+((seriesData.pointArr[3][1]/(seriesData.pointArr[0][1]+seriesData.pointArr[1][1]+seriesData.pointArr[2][1]+seriesData.pointArr[3][1]))*100).toFixed(1)+"%</td></tr></tbody>"
+				        
+				        if(seriesData.facilityArr[0][1]+seriesData.facilityArr[1][1]+seriesData.facilityArr[2][1]==0)
+				           pieTableHtml4="<thead><tr><th></th><th>闸门</th><th>溢流堰</th><th>排水泵站</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>0.0%</td><td>0.0%</td><td>0.0%</td></tr></tbody>"
+				         else
+				           pieTableHtml4="<thead><tr><th></th><th>闸门</th><th>溢流堰</th><th>排水泵站</th></tr></thead>"+
+				         "<tbody><tr><th>所占比例</th><td>"+((seriesData.facilityArr[0][1]/(seriesData.facilityArr[0][1]+seriesData.facilityArr[1][1]+seriesData.facilityArr[2][1]))*100).toFixed(1)+"%</td>"+
+				         "<td>"+((seriesData.facilityArr[1][1]/(seriesData.facilityArr[0][1]+seriesData.facilityArr[1][1]+seriesData.facilityArr[2][1]))*100).toFixed(1)+"%</td>"+
+				         "<td>"+((seriesData.facilityArr[2][1]/(seriesData.facilityArr[0][1]+seriesData.facilityArr[1][1]+seriesData.facilityArr[2][1]))*100).toFixed(1)+"%</td></tr></tbody>"
+			              layer.open({
+							type: 2,
+							title: '管线统计图表',
+							maxmin: true, 
+							area: ['1200px', '700px'],
+						    content: '/awater/nnwaterSystem/PipeNetwork/pipeStatisticMap.html'
+					      });
+				         break;
+				    }
+				},
+				error:function(e){
+				  	makeDefault();   
+					alert("error");
+				}
+			});	
+     }
+	</script>
+  </body>
+</html>

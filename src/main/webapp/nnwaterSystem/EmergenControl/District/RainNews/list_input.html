@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>应急响应-一雨一报</title>
+	<meta charset="UTF-8">	
+	
+    <link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">	
+	<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" rel="stylesheet" type="text/css" />
+    <link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>	
+	
+	<script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/awater/js/util_date.js" type="text/javascript"></script>
+    <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+    <script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>
+  
+	<style>
+		.report{
+		    width:60px;
+		    text-align:center;
+		}
+	</style>
+  </head>
+  
+  <body style="padding:2.7cm 2.2cm 0.5cm 2.5cm;">
+  		<p class="text-center"  style="font-family: '宋体';font-size: 29px;">2014年6月4日防汛Ⅲ级应急响应</p>
+  	    <!-- <p style="font:1.8em KaiTi;text-align:center;padding-left:25%">——桂(2014)A001</p> -->
+  		<p class="p_content">2014年6月4日，气象台于10时11分发布暴雨蓝色预警。经统计，6月4日10时至6日15时，市区共出现暴雨站点6个，其中：宾阳站84.5毫米、思陇站124.8毫米、大桥站107.5毫米、和吉146.1毫米、陈平97.1毫米、黎塘77.6毫米。</p>
+     	<p class="p_content">经统计，<font id="districtName"></font>出动抢险人员<input id="peopleNum" type="text" class="report" value="0"  onchange="changeNum()"/>人、
+     	车辆<input id="carNum" type="text" value="0" class="report"/>辆。巡查发现，此次降雨过程本区出现较为明显积水点<input id="jsdNum" type="text" value="2" class="report"/>个。</p>
+  	    <!--  <div class="col-sm-12">
+			<div class="panel panel-default">
+			<div class="panel-heading" style="padding:5px 10px">查询条件</div>
+		   	<div class="panel-body">
+				<label class="control-label col-sm-1" style="width:100px;padding-right:0px;text-align:left;">积水点编号</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="jsdId">
+				</div>
+				<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;">积水原因</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" id="reportReson">
+				</div>
+				<div class="col-sm-4" style="text-align:left;">
+					<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary" onclick="reloadData()" >查询</button>
+				</div> 
+		   	</div>
+		</div>-->
+  	<div id="toolbar" class="btn-group" style="padding-bottom:20px;">
+		<button id="btn_add" type="button" class="btn btn-primary" onclick="addData()">
+	    	<span class="glyphicon glyphicon-plus" aria-hidden="true" ></span>新增积水点报告
+	   	</button>
+	   	<button id="btn_delete" type="button" class="btn btn-primary" onclick="delData()" >
+	    	<span class="glyphicon glyphicon-remove" aria-hidden="true" ></span>删除积水点报告
+	   	</button>
+   </div>
+   <table id="table"></table>
+  <script>	
+    function getQueryStr(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+		var r = decodeURI(window.location.search).substr(1).match(reg);
+		if (r != null) return unescape(r[2]); return "";
+	}
+	
+	var yaId=getQueryStr("yaId");
+	
+	function showJsdReport(id){
+		//iframe层
+		layer.open({
+		  type: 2,
+		  title: '修改积水点报告',
+		  shadeClose: true,
+		  shade: 0.5,
+		  area: ['900px', '550px'],
+		  content: 'jsdReportInput.html?id='+id
+		}); 	
+	}
+		
+	function format_date(value, row, index){
+		if(value)
+			return getLocalTime(value.time);
+		return '';
+	}
+			
+	function changeNum(){
+    	$.ajax({
+			type: 'post',
+			url : location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-rain-report!saveJson.action?id='+repId+'&rescuePeopleNumber='+$("#peopleNum").val()+'&rescueCarNumber='+$("#carNum").val(),
+			dataType : 'json',  
+			success : function(data) {
+			},
+			error : function() {
+				alert('error');
+			}
+		});
+    }
+    
+     function addData(){
+    	layer.open({
+			type: 2,
+			title: '新增积水点报告',
+			maxmin: true, //开启最大化最小化按钮
+			area: ['900px', '550px'],
+		    content: 'jsdReportInput.html?yaId='+yaId
+		});
+    }
+    
+    function closeLayer(index)
+    {
+		layer.close(index);
+	   	reloadData();
+    }
+    function delData(){
+    	var selList=$("#table").bootstrapTable('getSelections');
+    	if(selList.length==0)
+    		layer.msg('请选中删除项');
+    	else {
+	    	var checkedIds= new Array();
+	    	for (var i=0;i<selList.length;i++){
+	    		checkedIds.push(selList[i].id);
+	    	}
+    	    $.ajax({  
+			    url: location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-jsd-report!deleteMoreJson.action',  
+			    traditional: true,
+			    data: {"checkedIds" : checkedIds},
+			    type: "POST",
+			    dataType: "json",
+			    success: function(data) {
+			        layer.msg(data.result);
+			    }
+			});
+    		reloadData();
+    	}
+    }
+    
+    function queryParams(params) {
+       	return {
+	        pageSize:params.limit,
+	        pageNo: params.offset/params.limit+1
+        };
+	}
+    
+	function reloadData(){
+		var query=new Object();
+		query.yaId=yaId;	
+		if($("#jsdId").val()!="")
+			query.jsdId=$("#jsdId").val();
+		$("#table").bootstrapTable('refresh', {url: location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-jsd-report!listJson.action',query:query});
+	}
+	
+	function addBtnCol(value, row, index){
+	    return "<button id=\"btn_edit\" type=\"button\" class=\"btn btn-primary\" style=\"border:1px solid transparent;\" onclick=\"showJsdReport("+row.id+")\"><span class=\"glyphicon\" aria-hidden=\"true\"></span>详细</button>";
+	}
+	
+    function format_date(value, row, index){
+			if(value)
+				return getLocalTime(value.time);
+			return '';
+	}
+	
+	$(function(){    	          
+	    $("#table").bootstrapTable({
+			toggle:"table",
+			url:location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/ya-jsd-report!listJson.action?yaId="+yaId,
+			rowStyle:"rowStyle",
+			toolbar: '#toolbar',
+			pagination:true,
+			sortable: false,
+			striped: true,
+			pageNumber:1,
+			pageSize: 10,
+			pageList: [10, 25, 50, 100],
+			cache: false,
+			queryParams: queryParams,
+			sidePagination: "server",
+			columns: [
+				{visible:true,checkbox:true},
+				{field:'jsdName',visible: true,title: '积水点名称',align:"center"},
+				{field:'jsReason',visible: true,title: '积水原因',align:"center"},
+				{field:'dutyUnit',visible: true,title: '责任单位',align:"center"},
+				{field:'dutyPerson',visible: true,title: '责任人',align:"center"},
+				{field:'reportCreater',visible: true,title: '创建人',align:"center"},
+				{field:'reportCreateTime',visible: true,title: '创建时间',formatter:format_date,align:"center"},
+				{visible: true,title: '操作',formatter:addBtnCol,width:100,align:"center"}
+			]
+		});
+	});  
+	</script>	
+ </body>
+</html>

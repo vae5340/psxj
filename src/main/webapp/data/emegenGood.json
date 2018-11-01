@@ -1,0 +1,94 @@
+[
+  {
+    "id":"1",
+    "name": "编织袋",
+    "num": "400袋",
+    "x":108.072,
+    "y":22.623,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+  }, {
+    "id":"2",
+     "name": "装载机",
+     "num": "2台",
+     "x":108.113,
+     "y":22.610,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+  }, {
+    "id":"3",
+    "name": "发电机",
+    "num": "3台",
+    "x":108.064,
+    "y":22.594,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}, {
+    "id":"4",
+    "name": "石子",
+    "num": "300吨",
+     "x":108.077,
+    "y":22.620,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}, {
+    "id":"2",
+     "name": "装载机",
+     "num": "2台",
+     "x":108.113,
+     "y":22.610,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+  }, {
+    "id":"3",
+    "name": "发电机",
+    "num": "3台",
+    "x":108.064,
+    "y":22.594,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}, {
+    "id":"4",
+    "name": "石子",
+    "num": "300吨",
+     "x":108.077,
+    "y":22.620,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}, {
+    "id":"2",
+     "name": "装载机",
+     "num": "2台",
+     "x":108.113,
+     "y":22.610,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+  }, {
+    "id":"3",
+    "name": "发电机",
+    "num": "3台",
+    "x":108.064,
+    "y":22.594,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}, {
+    "id":"4",
+    "name": "石子",
+    "num": "300吨",
+     "x":108.077,
+    "y":22.620,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}, {
+    "id":"2",
+     "name": "装载机",
+     "num": "2台",
+     "x":108.113,
+     "y":22.610,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+  }, {
+    "id":"3",
+    "name": "发电机",
+    "num": "3台",
+    "x":108.064,
+    "y":22.594,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}, {
+    "id":"4",
+    "name": "石子",
+    "num": "300吨",
+     "x":108.077,
+    "y":22.620,
+    "icon":"<img src='/awater_nn/img/blue-gislocate.png'></img>"
+}
+]

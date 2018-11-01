@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>新增监理单位考核</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet">		
+		<link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet">
+		<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">				
+		<link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css" />
+		<link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+		<link href="/awater/css/plugins/bootstrapvalidator/bootstrapValidator.min.css" type="text/css" rel="stylesheet" ></link>
+		<style>
+		   input.form-control{
+		      text-align:center;
+		   }
+		</style>
+	</head>
+
+	<body style="width: 100%">
+		<div id="content"  style="height:calc( 100% - 50px );padding-top:10px">
+			<form id="hiddenPointForm" class="col-sm-12 form-horizontal"
+				method="post" action="/agsupport/sf-facilities!saveFac.action">
+				<input type="hidden" name="assessmentControlUnitId"
+					id="assessmentControlUnitId" />
+				<input type="hidden" name="districtUnitId" id="districtUnitId" />
+				<table class="col-sm-12">
+					<tr>
+						<td>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" title="该项为必填项">受检单位<font color="red">*</font></label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="subjectUnit" name="subjectUnit" required="" aria-required="true" />
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" id="scorerLabel" title="该项为必填项">考评人<font color="red">*</font></label>
+								<div class="col-sm-8"  id="scorerDiv">
+									<input type="text" class="form-control" id="assessmentor" name="assessmentor" required="" aria-required="true" />
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" title="该项为必填项">检查开始时间<font color="red">*</font></label>
+								<div class="col-sm-8">
+									<input class="form-control" type="text" id="assessmentStart" name="assessmentStart"  required="" aria-required="true" />
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" title="该项为必填项">检查结束时间<font color="red">*</font></label>
+								<div class="col-sm-8">
+									<input class="form-control" type="text" id="assessmentEnd" name="assessmentEnd"  required="" aria-required="true" />
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>
+				<table class="table">
+					<thead>
+						<tr>
+							<th width="60" style='text-align: center;'>
+								序号
+							</th>
+							<th width="120" style='text-align: center;'>
+								考核项目
+							</th>
+							<th width="560" style='text-align: center;'>
+								考核内容及评分标准
+							</th>
+							<th width="80" style='text-align: center;'>
+								满分
+							</th>
+							<th width="100" style='text-align: center;'>
+								扣分
+							</th>
+							<th width="80" style='text-align: center;'>
+								得分
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style='text-align: center;'>
+								1
+							</td>
+							<td style='text-align: center;'>
+								文档管理
+							</td>
+							<td style='text-align: left;'>
+								1）岗位职责不明确，分工未细化到每个人的，一人次扣1分;<br />
+								2）各部门文件收集不全的，每次扣1分; <br />
+								3）有关信息传递报告不及时，并因此影响了工程活动的，每次扣2分; <br />
+								4）监理月报及其它资料未及时上报的，一次扣1分; <br />
+								5）监理资料未按规定及时归档，保管方式不合要求的，每次扣1分; <br />
+								6）丢失信息，档案资料，每次扣2分。
+							</td>
+							<td style='text-align: center;'>
+								10
+								<input type="hidden" id="wdgl" name="wdgl" value="10" />
+							</td>
+							<td style='text-align: center;'>
+							   	<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="wdglScoreDeduct" max='10' min='0' required 
+										id="wdglScoreDeduct" onblur="calculateRow('wdglScoreDeduct')">
+							   	</div> 
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="wdglScore"
+									id="wdglScore" readonly="readonly" />
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								2
+							</td>
+							<td style='text-align: center;'>
+								出勤情况
+							</td>
+							<td style='text-align: left;'>
+								1）监理人员离岗，未办理请假手续，或虽经批准但未安排相应人员替岗的，每人次扣1分;<br />
+								2）旁站监理不坚守工地，脱岗，缺岗的，每人次扣1分。
+							</td>
+							<td style='text-align: center;'>
+								6
+								<input type="hidden" id="cqqk" name="cqqk" value="6" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 							
+									<input type="text" class="form-control" name="cqqkScoreDeduct" max='6' min='0' required 
+										id="cqqkScoreDeduct" onblur="calculateRow('cqqkScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="cqqkScore"
+									id="cqqkScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								3
+							</td>
+							<td style='text-align: center;'>
+								工作行为
+							</td>
+							<td style='text-align: left;'>
+								1）工程施工过程中，驻地监理未每天上路检查的，每天扣1分;<br /> 
+								2）专业监理工程师以上人员未经常上路巡视，处理问题不及时，延误施工的，每次扣2分;<br />
+								3）监理人员未佩带上岗证，不带监理日记等必要工具的，每次扣0.5分;<br />
+								4）监理人员不及时签认中间资料或批复开工申请批复单，影响下道工序施工的，每次扣2分;<br /> 
+								5）监理人员越权指令或不执行上级监理指令或上报的问题不及时上报的，每次扣3分。
+							</td>
+							<td style='text-align: center;'>
+								10
+								<input type="hidden" id="gzxw" name="gzxw" value="10" />
+							</td>
+							<td style='text-align: center;'>
+							    <div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="gzxwScoreDeduct" max='10' min='0' required 
+										id="gzxwScoreDeduct" onblur="calculateRow('gzxwScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="gzxwScore"
+									id="gzxwScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								4
+							</td>
+							<td style='text-align: center;'>
+								试验检测
+							</td>
+							<td style='text-align: left;'>
+								1）试验，检测抽检频率未达到30%的，每项次扣2分;<br /> 
+								2）取样，检测方法不符合规定，数据错漏，不准确，导致结果评定错误的，每项次扣1分;<br />
+								3）用施工单位的自检数据代替监理抽检结果的，每次扣2分;<br />
+								4）试验检测台账未按规定建立，填写的，每次扣1分;<br />
+								5)试验，检测原始记录不全，或丢失原始数据记录的，每次扣1分。
+							</td>
+							<td style='text-align: center;'>
+								15
+								<input type="hidden" id="syjc" name="syjc" value="15" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="syjcScoreDeduct" max='15' min='0' required
+										id="syjcScoreDeduct" onblur="calculateRow('syjcScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="syjcScore"
+									id="syjcScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								5
+							</td>
+							<td style='text-align: center;'>
+								质量安全
+							</td>
+							<td style='text-align: left;'>
+								1）分项工程不合格的，每项次扣2分;<br />
+								2）缺陷分项工程不处理，或处理不及时，或处理后仍不合格的，每项次扣3分;<br />
+								3）未能及时发现质量，安全隐患，但未造成事故的，每项次扣2分;<br />
+								4）不能及时发现问题，下达处理指令，解决问题，造成工程质量缺陷的，每项次扣2分;<br />
+								5）对重大安全隐患，未立即报告并通知施工企业整改，未造成完全事故的，每次扣2分;<br />
+								6）施工企业违规施工，未能及时发现制止，每次扣1分;<br />
+								7）施工企业因重大质量，安全问题被处罚，监理按损失每万元0.5分连带扣分。
+							</td>
+							<td style='text-align: center;'>
+								20
+								<input type="hidden" id="zlaq" name="zlaq" value="20" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="zlaqScoreDeduct" max='20' min='0' required
+										id="zlaqScoreDeduct" onblur="calculateRow('zlaqScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="zlaqScore"
+									id="zlaqScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								6
+							</td>
+							<td style='text-align: center;'>
+								工程进度
+							</td>
+							<td style='text-align: left;'>
+								1）无施工企业维护项目的详细进度计划，或进度计划不符合总体进度计划要求的，每项次扣1分;<br />
+								2）在施工过程中未对施工企业的计划实施进行检查监督或工程未能按计划进行时，未要求施工企业及时调整计划的，每次扣2分;<br />
+								3）施工单位工程进度严重滞后，又未采取有效措施，影响总体工程进度的，扣4分。
+							</td>
+							<td style='text-align: center;'>
+								10
+								<input type="hidden" id="gcjd" name="gcjd" value="10" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="gcjdScoreDeduct" max='10' min='0' required
+										id="gcjdScoreDeduct" onblur="calculateRow('gcjdScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="gcjdScore"
+									id="gcjdScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								7
+							</td>
+							<td style='text-align: center;'>
+								计量支付
+							</td>
+							<td style='text-align: left;'>
+								1）不按照招投标文件或其它文件所规定的计量范围、内容和支付细目计量的，每次扣1分;<br /> 
+								2）未建立计量支付台帐，或台帐项目不全的，每个计量项目扣1分;<br />
+								3）支付表格和证明资料审核有误，上报不及时，有遗漏、重复，错误等的，每项次扣1分。
+							</td>
+							<td style='text-align: center;'>
+								6
+								<input type="hidden" id="jlzf" name="jlzf" value="6" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="jlzfScoreDeduct" max='6' min='0' required
+										id="jlzfScoreDeduct" onblur="calculateRow('jlzfScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="jlzfScore"
+									id="jlzfScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								8
+							</td>
+							<td style='text-align: center;'>
+								监理日志
+							</td>
+							<td style='text-align: left;'>
+								1）监理日志记录不及时，内容不详，不全面的，每天扣0.2分;<br />
+								2）各种工程用表记录不完整，手续不完备，签证不齐全的，每份表格扣0.2分；如数据，资料弄虚作假的，每次扣3分;<br />
+								3）对施工企业的计量、支付、试验检测等资料未按规定及时督促检查的，每项次扣0.3分。
+							</td>
+							<td style='text-align: center;'>
+								10
+								<input type="hidden" id="jlrz" name="jlrz" value="10" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="jlrzScoreDeduct" max='10' min='0' required
+										id="jlrzScoreDeduct" onblur="calculateRow('jlrzScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="jlrzScore"
+									id="jlrzScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								9
+							</td>
+							<td style='text-align: center;'>
+								会议记录
+							</td>
+							<td style='text-align: left;'>
+								1）无故不参加有关会议和活动的，每人次扣0.5分;<br />
+								2）未及时贯彻有关会议精神，落实具体措施，导致影响工程正常施工的，每次扣2分;<br />
+								3）每月未定期或不定期召开工地会议或现场协调会议，及时解决有关问题的，每次扣2分；无会议记录的，扣0.5分。
+							</td>
+							<td style='text-align: center;'>
+								15
+								<input type="hidden" id="hyjl" name="hyjl" value="15" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="hyjlScoreDeduct" max='15' min='0' required
+										id="hyjlScoreDeduct" onblur="calculateRow('hyjlScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="hyjlScore" id="hyjlScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+								10
+							</td>
+							<td style='text-align: center;'>
+								综合管理廉政建设
+							</td>
+							<td style='text-align: left;'>
+								1）不得与所监理的施工企业发生不正当的经济往来，不得与施工企业串通损害业主利益，不准在所监理的施工企业推销材料，介绍队伍和兼职，发现一起扣2分;<br />
+								2）不得明示或暗示施工企业违反工程建设强制性标准，不得弄虚作假，降低工程质量，发现1次扣2分。
+							</td>
+							<td style='text-align: center;'>
+								20
+								<input type="hidden" id="lzjs" name="lzjs" value="20" />
+							</td>
+							<td style='text-align: center;'>
+								<div class="form-group" style="margin:0px"> 
+									<input type="text" class="form-control" name="lzjsScoreDeduct" max='20' min='0' required
+										id="lzjsScoreDeduct" onblur="calculateRow('lzjsScoreDeduct')">
+							    </div>
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control score" name="lzjsScore"
+									id="lzjsScore" readonly="readonly">
+							</td>
+						</tr>
+						<tr>
+							<td style='text-align: center;'>
+
+							</td>
+							<td style='text-align: center;'>
+
+							</td>
+							<td style='text-align: center;'>
+								总分
+							</td>
+							<td style='text-align: center;'>
+								100
+							</td>
+							<td style='text-align: center;'>
+                                    合计
+							</td>
+							<td style='text-align: center;'>
+								<input type="text" class="form-control" name="totalScore"
+									id="totalScore" readonly="readonly">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		 <div style="height:50px;padding-top:10px;border-top:1px solid #e7eaec">
+		 	<div class="col-sm-9 col-sm-offset-9">
+				<button class="btn btn-primary" type="button" onclick="save()">保存内容</button>
+				<button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+			</div>
+		</div>
+	</body>
+	<script src="/awater/lib/jquery.min.js?v=1.0.0"></script>
+	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script >	
+	<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>	
+	<script src="/awater/lib/plugins/bootstrapvalidator/bootstrapValidator.min.js" type="text/javascript" ></script>
+    <script src="/awater/lib/plugins/bootstrapvalidator/language/zh_CN.js"></script> 		
+	<script src="/awater/js/util_date.js" type="text/javascript"></script>
+	<script src="/awater/lib/plugins/datapicker/bootstrap-datepicker.js"></script>
+	<script src="/awater/lib/plugins/jquery-form/jquery.form.js"></script>
+	<script src="js/assessment-control-unit-edit.js"></script>
+</html>

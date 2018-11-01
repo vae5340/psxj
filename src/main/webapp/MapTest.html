@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+  		<title>Maps Toolbar</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="css/arcgis/claro.css" rel="stylesheet" >
+		<link href="lib/arcgis_js_api/dijit/themes/tundra/tundra.css" rel="stylesheet" type="text/css" />
+	    <link href="lib/arcgis_js_api/esri/css/esri.css" rel="stylesheet" type="text/css" />
+	    <link href="css/map.css" rel="stylesheet" type="text/css" />
+	    <link href="lib/nifty/nifty.css" rel="stylesheet" type="text/css" />
+	    
+	    <script type="text/javascript" src="lib/jquery.min.js?v=1.0.0"></script>
+		<script type="text/javascript" src="js/config/dojoConfig.js"></script>
+	    <script type="text/javascript" src="js/config/mapConfig.js"></script>
+	    <script type="text/javascript" src="lib/arcgis_js_api/init.js"></script>
+	    <script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/GisUtil/WKTUtil.js"></script>
+	    
+	    
+	    <script>
+	    	var map;
+	    	require([
+				"esri/map",
+				"esri/dijit/Scalebar",
+				"esri/symbols/SimpleLineSymbol",
+				"esri/Color",
+				"esri/layers/GraphicsLayer",
+				"esri/layers/ArcGISTiledMapServiceLayer",
+				"esri/layers/LabelLayer",
+				"esri/symbols/TextSymbol",
+				"esri/symbols/Font",
+				"esri/symbols/SimpleFillSymbol",
+				"esri/symbols/SimpleMarkerSymbol",
+				"esri/renderers/SimpleRenderer",
+				"esri/graphic",
+				"esri/geometry/Point"
+			]);
+			require(["dojo/ready"], function (ready) {
+				ready(function () {
+					map = new esri.Map("mapDiv", { 
+						logo: false,
+				 		center: [540708.8269265019,2527043.153267713], 
+						extent: new esri.geometry.Extent({
+							xmin: 524517.8557804023,
+							ymin: 2518145.1124260924,
+						    xmax: 542939.5072070386,
+							ymax: 2530249.824135519,
+							spatialReference:{wkid:2433}
+						}),
+						scale:4000
+				  	});
+				  	var scalebar = new esri.dijit.Scalebar({
+				        map: map,
+				        attachTo: 'bottom-center',
+				        scalebarUnit: "dual"
+				    });
+				    var url = "http://192.1.1.224:8399/arcgis/rest/services/map2015/MapServer";
+					var layer = new esri.layers.ArcGISTiledMapServiceLayer(url,{id:"DT"});
+				    map.addLayer(layer);
+				    
+				});
+			});
+			function test(){
+				var wktUtil = new WKTUtil();  
+			    var points = wktUtil.read("POLYGON  (( 108.38840000 22.83040000, 108.38830000 22.83340000, 108.38800000 22.83640000, 108.38750000 22.83930000, 108.38680000 22.84230000, 108.38600000 22.84510000, 108.38490000 22.84790000, 108.38370000 22.85070000, 108.38230000 22.85330000, 108.38070000 22.85580000, 108.37890000 22.85830000, 108.37700000 22.86060000, 108.37500000 22.86280000, 108.37280000 22.86480000, 108.37050000 22.86670000, 108.36800000 22.86850000, 108.36550000 22.87010000, 108.36290000 22.87150000, 108.36010000 22.87270000, 108.35730000 22.87380000, 108.35450000 22.87460000, 108.35150000 22.87530000, 108.34860000 22.87580000, 108.34560000 22.87610000, 108.34260000 22.87620000, 108.33960000 22.87610000, 108.33660000 22.87580000, 108.33370000 22.87530000, 108.33070000 22.87460000, 108.32790000 22.87380000, 108.32510000 22.87270000, 108.32230000 22.87150000, 108.31970000 22.87010000, 108.31720000 22.86850000, 108.31470000 22.86670000, 108.31240000 22.86480000, 108.31020000 22.86280000, 108.30820000 22.86060000, 108.30630000 22.85830000, 108.30450000 22.85580000, 108.30290000 22.85330000, 108.30150000 22.85070000, 108.30030000 22.84790000, 108.29920000 22.84510000, 108.29840000 22.84230000, 108.29770000 22.83930000, 108.29720000 22.83640000, 108.29690000 22.83340000, 108.29680000 22.83040000, 108.29690000 22.82740000, 108.29720000 22.82440000, 108.29770000 22.82150000, 108.29840000 22.81850000, 108.29920000 22.81570000, 108.30030000 22.81290000, 108.30150000 22.81010000, 108.30290000 22.80750000, 108.30450000 22.80500000, 108.30630000 22.80250000, 108.30820000 22.80020000, 108.31020000 22.79800000, 108.31240000 22.79600000, 108.31470000 22.79410000, 108.31720000 22.79230000, 108.31970000 22.79070000, 108.32230000 22.78930000, 108.32510000 22.78810000, 108.32790000 22.78700000, 108.33070000 22.78620000, 108.33370000 22.78550000, 108.33660000 22.78500000, 108.33960000 22.78470000, 108.34260000 22.78460000, 108.34560000 22.78470000, 108.34860000 22.78500000, 108.35150000 22.78550000, 108.35450000 22.78620000, 108.35730000 22.78700000, 108.36010000 22.78810000, 108.36290000 22.78930000, 108.36550000 22.79070000, 108.36800000 22.79230000, 108.37050000 22.79410000, 108.37280000 22.79600000, 108.37500000 22.79800000, 108.37700000 22.80020000, 108.37890000 22.80250000, 108.38070000 22.80500000, 108.38230000 22.80750000, 108.38370000 22.81010000, 108.38490000 22.81290000, 108.38600000 22.81570000, 108.38680000 22.81850000, 108.38750000 22.82150000, 108.38800000 22.82440000, 108.38830000 22.82740000, 108.38840000 22.83040000))");  
+			    var json = {
+			    	rings: points,  
+			    	spatialReference: {"wkid":4326}  
+			    }
+			    var polygon = new esri.geometry.Polygon(json);
+			    var symbolA = new esri.symbol.SimpleFillSymbol();
+   				var graphicA = new esri.Graphic(polygon, symbolA);
+			   	map.graphics.add(graphicA);
+			   	
+			   	var polygonCenter=polygon.getExtent().getCenter();
+			   	var symbolB = new esri.symbol.SimpleMarkerSymbol();
+   				var graphicB = new esri.Graphic(polygonCenter, symbolB);
+			    map.graphics.add(graphicB);
+			    
+			    map.centerAt(polygonCenter);
+			}
+			function locationByXY(){
+				var pt=new esri.geometry.Point($("#x").val(),$("#y").val(),map.spatialReference);
+				var symbol = new esri.symbol.SimpleMarkerSymbol({
+				  	"color": [255,255,255,64],
+				  	"size": 12,
+				  	"angle": -30,
+				  	"xoffset": 0,
+				  	"yoffset": 0,
+				  	"type": "esriSMS",
+				  	"style": "esriSMSCircle",
+				  	"outline": {
+				    	"color": [0,0,0,255],
+				    	"width": 1,
+				    	"type": "esriSLS",
+				    	"style": "esriSLSSolid"
+				  	}
+				});
+				var Graphic = new esri.Graphic(pt,symbol);
+    			map.graphics.add(Graphic);
+				map.centerAt(pt);
+			}
+	    </script>
+	    <style>
+	    	html,body{margin: 0px;padding: 0px;height: 100%;}
+	    </style>
+    </head>
+  	<body>
+		<div id="mapDiv" class="map J_iframe"></div>
+		
+		<div id="contorl" style="position: absolute;right: 5px; top: 5px;">
+			<input type="text" name="x" id="x" />
+			<input type="text" name="y" id="y" />
+			<button onclick="locationByXY()">location</button>
+		</div>
+		
+	</body>
+</html>

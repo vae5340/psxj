@@ -1,0 +1,168 @@
+.up-down-stream-analysis-control-panel {
+  position: absolute;
+  right: 10px;
+  top: 100px;
+  width: 200px;
+  background: #FEFEFE;
+  border: solid thin #EEEEEE;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #CCCCCC;
+  overflow: hidden; }
+  .up-down-stream-analysis-control-panel.minimized {
+    box-shadow: 0 0 5px #FF0000; }
+    .up-down-stream-analysis-control-panel.minimized .control-panel-content {
+      display: none; }
+    .up-down-stream-analysis-control-panel.minimized .control-panel-control-btns {
+      display: none; }
+  .up-down-stream-analysis-control-panel .analysis-loading {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    color: #FFFFFF;
+    opacity: 0.8;
+    z-index: 99999999;
+    text-align: center;
+    padding: 2em; }
+    .up-down-stream-analysis-control-panel .analysis-loading .loading-img {
+      height: 50%;
+      margin-bottom: 15%; }
+    .up-down-stream-analysis-control-panel .analysis-loading .loading-text {
+      font-size: 1.2em; }
+    .up-down-stream-analysis-control-panel .analysis-loading.analysis-loading-hidden {
+      display: none; }
+  .up-down-stream-analysis-control-panel .control-panel-title {
+    position: relative;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    line-height: 20px;
+    background: #FAFAFA;
+    box-shadow: 0 0 4px #CCCCCC;
+    overflow: hidden; }
+    .up-down-stream-analysis-control-panel .control-panel-title .control-panel-title-text {
+      padding-left: 15px; }
+    .up-down-stream-analysis-control-panel .control-panel-title .control-panel-title-btns {
+      position: absolute;
+      right: 15px;
+      top: 0;
+      height: 20px;
+      overflow: hidden; }
+      .up-down-stream-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn {
+        text-decoration: none;
+        padding: 5px 10px 5px 10px;
+        color: #000000; }
+        .up-down-stream-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn:hover {
+          background: #E5E5E5; }
+        .up-down-stream-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn:active {
+          background: #CACACB; }
+        .up-down-stream-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn[data-role=close]:hover {
+          background: #FF0000;
+          color: #FFFFFF; }
+        .up-down-stream-analysis-control-panel .control-panel-title .control-panel-title-btns .control-panel-title-btn[data-role=close]:active {
+          background: #F1707A; }
+  .up-down-stream-analysis-control-panel .control-panel-control-btns {
+    background: #FAFAFA;
+    box-shadow: 0 0 4px #CCCCCC;
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 5px; }
+    .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn {
+      text-decoration: none;
+      margin-right: 10px;
+      border: none;
+      outline: none;
+      padding: 5px 10px 5px 10px;
+      border-radius: 5px; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn span {
+        color: #FFFFFF;
+        font-size: 12px; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:hover {
+        cursor: pointer; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:last-child {
+        margin-right: 0; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn:active {
+        box-shadow: 0 0 5px #888888; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=pause] {
+        background: #FCAF3E; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=pause]:hover {
+          background: #B9761A; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=pause]:active {
+          background: #71460A; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=resume] {
+        background: #6FBC1F; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=resume]:hover {
+          background: #4D8B0F; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=resume]:active {
+          background: #315F03; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear] {
+        background: #FF0000; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear]:hover {
+          background: #C90000; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=clear]:active {
+          background: #890000; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm] {
+        background: #0000FF; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm]:hover {
+          background: #0000AF; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn[data-role=confirm]:active {
+          background: #000083; }
+      .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled {
+        background: #CDCDCD;
+        color: #000000; }
+        .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled:hover, .up-down-stream-analysis-control-panel .control-panel-control-btns .control-panel-control-btn.control-panel-control-btn-disabled:active {
+          box-shadow: none;
+          background: #CDCDCD;
+          color: #000000; }
+  .up-down-stream-analysis-control-panel .control-panel-content {
+    width: 100%;
+    position: relative;
+    font-size: 12px;
+    overflow-y: scroll; }
+    .up-down-stream-analysis-control-panel .control-panel-content .control-panel-tip {
+      position: absolute;
+      right: 10px;
+      top: 3px;
+      color: #FFFFFF;
+      background: #006FFF;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 1em;
+      font-weight: bold;
+      line-height: 1.5em;
+      cursor: pointer; }
+    .up-down-stream-analysis-control-panel .control-panel-content label {
+      font-weight: normal;
+      padding: 5px 10px 5px 10px; }
+    .up-down-stream-analysis-control-panel .control-panel-content .control-panel-length-input-label {
+      margin: 0; }
+      .up-down-stream-analysis-control-panel .control-panel-content .control-panel-length-input-label input {
+        width: 7em;
+        border: none;
+        outline: none;
+        background: none;
+        border-bottom: solid thin black;
+        text-align: center; }
+    .up-down-stream-analysis-control-panel .control-panel-content .control-panel-type-select-label {
+      margin: 0 0 10px 0; }
+      .up-down-stream-analysis-control-panel .control-panel-content .control-panel-type-select-label select {
+        padding: 2px 10px 2px 10px;
+        border: none;
+        outline: none;
+        background: none;
+        border-bottom: solid thin black; }
+    .up-down-stream-analysis-control-panel .control-panel-content .control-panel-data {
+      border-bottom: solid thin #EEEEEE; }
+      .up-down-stream-analysis-control-panel .control-panel-content .control-panel-data .control-panel-data-title {
+        border-left: solid 4px #888888; }
+      .up-down-stream-analysis-control-panel .control-panel-content .control-panel-data .control-panel-data-item {
+        padding: 0 0 6px 0;
+        text-align: center;
+        color: #FF0000;
+        cursor: pointer; }
+        .up-down-stream-analysis-control-panel .control-panel-content .control-panel-data .control-panel-data-item:hover {
+          color: #670000; }
+
+/*# sourceMappingURL=up-down-stream-analysis-control-panel.css.map */

@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* CSS Document */
+.right-info div {
+    float: left;
+}
+.standard-map-icon {
+    background:url(../images/standard-map-pic.png) no-repeat scroll center 0;
+}
+.satellite-map-icon{
+	background: url(../images/satellite-map-pic.png) no-repeat scroll center 0;
+}
+.image-map-icon{
+	background: url(../images/dem-icon.png) no-repeat scroll center 0;
+}
+.road-map-icon{
+	background: url(../images/road1.png) no-repeat scroll center 0;
+}
+.river-info-icon{
+	background: url(../images/heliu-icon.png) no-repeat scroll center 0;
+}
+.difang-map-icon{
+	background: url(../images/difan-icon.png) no-repeat scroll center 0;
+}
+.UAV-map-icon{
+	background: url(../images/UAV-icon.png) no-repeat scroll center 0;
+}
+.quanjingtu-720-icon{
+	background: url(../images/quanjingtu720.png) no-repeat scroll center 0;
+}
+.reservoir-map-icon{
+	background: url(../images/shuiku-icon.png) no-repeat scroll center 0;
+}
+.pump-station-icon{
+	background:url(../images/bengzhan-icon.png) no-repeat scroll center 0;
+}
+.dam-icon{
+	background: url(../images/shuizha-icon.png) no-repeat scroll center 0;
+}
+.wushuichulichang-icon{
+	background:url(../images/wushuichulichang-icon.png) no-repeat scroll center 0;
+}
+.paifangkou-icon{
+	background: url(../images/paifangkou-icon.png) no-repeat scroll center 0;
+}
+.yinjing-icon{
+	background: url(../images/yinjing-icon.png) no-repeat scroll center 0;
+}
+.paishuipz-icon{
+	background: url(../images/paishuipz-icon.png)  no-repeat scroll center 0;
+}
+.heichou35-icon{
+	background: url(../images/35heichou-icon.png) no-repeat scroll center 0;
+}
+.heichou187-icon{
+	background: url(../images/187heichou-icon.png) no-repeat scroll center 0;
+}
+.psgw-map-icon{
+	background: url(../images/psgw-icon.png) no-repeat scroll center 0;
+}
+.psgd-map-icon{
+	background: url(../images/psgd-icon.png) no-repeat scroll center 0;
+}
+.qtpsss-icon{
+	background: url(../images/qtpsss-icon.png) no-repeat scroll center 0;
+}
+
+
+.standard-map-selected-icon {
+    background:url(../images/standard-map-selected-pic.png) no-repeat scroll center 0;
+}
+.satellite-map-selected-icon{
+	background: url(../images/satellite-map-selected-pic.png) no-repeat scroll center 0;
+}
+.image-map-selected-icon{
+	background: url(../images/dem-selected-icon.png) no-repeat scroll center 0;
+}
+.road-map-selected-icon{
+	background: url(../images/road-selected.png) no-repeat scroll center 0;
+}
+.river-info-selected-icon{
+	background: url(../images/heliu-selected-icon.png) no-repeat scroll center 0;
+}
+.difang-map-selected-icon{
+	background: url(../images/difan-selected-icon.png) no-repeat scroll center 0;
+}
+.UAV-map-selected-icon{
+	background: url(../images/UAV-selected-icon.png) no-repeat scroll center 0;
+}
+.quanjingtu-720-selected-icon{
+	background: url(../images/quanjingtu720-selected.png) no-repeat scroll center 0;
+}
+.reservoir-map-selected-icon{
+	background: url(../images/shuiku-selected-icon.png) no-repeat scroll center 0;
+}
+.pump-station-selected-icon{
+	background:url(../images/bengzhan-selected-icon.png) no-repeat scroll center 0;
+}
+.dam-selected-icon{
+	background: url(../images/shuizha-selected-icon.png) no-repeat scroll center 0;
+}
+.wushuichulichang-selected-icon{
+	background:url(../images/wushuichulichang-icon.png) no-repeat scroll center 0;
+}
+.paifangkou-selected-icon{
+	background: url(../images/paifangkou-icon.png) no-repeat scroll center 0;
+}
+.yinjing-selected-icon{
+	background: url(../images/yinjing-icon.png) no-repeat scroll center 0;
+}
+.paishuipz-selected-icon{
+	background: url(../images/paishuipz-icon.png)  no-repeat scroll center 0;
+}
+.heichou35-selected-icon{
+	background: url(../images/35heichou-selected-icon.png) no-repeat scroll center 0;
+}
+.heichou187-selected-icon{
+	background: url(../images/187heichou-selected-icon.png) no-repeat scroll center 0;
+}
+.psgw-map-selected-icon{
+	background: url(../images/psgw-selected-icon.png) no-repeat scroll center 0;
+}
+.psgd-map-selected-icon{
+	background: url(../images/psgd-selected-icon.png) no-repeat scroll center 0;
+}
+.qtpsss-selected-icon{
+	background: url(../images/qtpsss-selected-icon.png) no-repeat scroll center 0;
+}
+
+
+
+.right_btn{
+	background: url(../images/right-btn.png) no-repeat 0 5px;
+	width: 21px;
+	height: 32px;
+	float: right;
+	margin-right: 5px;
+	cursor:pointer;
+}

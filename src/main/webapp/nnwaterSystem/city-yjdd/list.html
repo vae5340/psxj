@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>list.html</title>
+	<meta charset="UTF-8">	
+    <link href="../../css/bootstrap.min14ed.css" rel="stylesheet">
+	<link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="../../lib/plugins/layer-v2.4/layer/skin/layer.css"/>
+    <link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>	
+    <link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet">
+    <link href="/awater/css/plugins/bootstrapvalidator/bootstrapValidator.css" rel="stylesheet">
+  </head>
+  
+  <body>
+	 <div class="col-sm-12" style="padding-top:10px;">
+	    <div class="panel panel-default">
+  	        <div class="panel-heading" style="padding:5px 10px">查询条件</div>
+	    	<div class="panel-body">
+		     <label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;">开始时间</label>
+			 <div class="col-sm-3">
+				<input type="text" class="form-control" id="startTime">
+			 </div>
+			 <label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;">结束时间</label>
+			 <div class="col-sm-3">
+				<input type="text" class="form-control" id="endTime">
+			 </div>
+			 <div class="col-sm-4" style="text-align:left;">
+				<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary" onclick="reloadData()">查询</button>
+			 </div> 
+		 </div> 
+	 </div> 
+     <table id="table"></table>
+    </div> 
+  <script src="../../lib/jquery.min.js?v=1.0.0"></script> 
+  <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+  <script src="../../lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+  <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+  <script src="../../lib/plugins/layer-v2.4/layer/layer.js"></script>	
+  <script src="/awater/js/util_date.js" type="text/javascript"></script> 
+  <script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+  <script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+  <script src="/awater/lib/plugins/bootstrapvalidator/bootstrapValidator.js"></script> 			
+  <script>
+	     function formatter_status(value,row,index){
+            if(value==1)
+         		return "启动中";        		
+	         return "启动结束";
+	     }
+	     
+	     //function formatter_detail(value,row,index){
+	     //   return "<button class=\"btn btn-mini\" type=\"button\" onclick=\"openyyyb()\">详细</button>";
+	     //}
+	     
+	     function formatter_overView(value,row,index){
+	        return "<button onclick=showTabWindow('/awater/nnwaterSystem/EmergenControl/Municipal/view-dispatch.html?id="+row.id+"')>详情</button>";
+	     }
+	     
+	     function formatter_report(value,row,index){
+	        	return "<button onclick=showBGWindow()>查看各区</button>";
+	     }	     
+	      
+	     function formatter_time(value,row,index){
+	         if(value)
+					return getLocalTime(value.time);
+			 return '';
+	     }	     
+	     
+	     function queryParams(params){
+	       	return {
+		        pageSize:params.limit,
+		        pageNo: params.offset/params.limit+1
+	        };
+		 }
+		    
+		$("#table").bootstrapTable({
+			toggle:"table",
+			url:location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/ya-record-city!listJson.action",
+			rowStyle:"rowStyle",
+			cache: false, 
+			pagination:true,
+			striped: true,
+			pageNumber:1,
+		    pageSize: 10,
+			pageList: [10, 25, 50, 100],
+			queryParams: queryParams,
+			sidePagination: "server",
+			columns: [{field: 'templateNo',title: '方案编号',align:'center'},
+			          {field: 'templateType',title: '方案分类',align:'center'}, 
+			          {field: 'templateName',title: '方案名称',align:'center'},
+			          {field: 'templateGrade',title: '方案级别',align:'center'},
+			          {field: 'templateCreateTime',title: '编制时间',align:'center',formatter:formatter_time}, 
+			          {field: 'templatePerson',title: '编制人',align:'center'}, 
+			          {field: 'recordCreateTime',title: '发布时间',align:'center',formatter:formatter_time},
+			          {field: 'recordStatus',title: '状态',align:'center',formatter:formatter_status}, 
+			          //{title: '发布',formatter:formatter_detail},
+			          {title: '查看', formatter:formatter_overView,align:'center'},
+			          {title: '事中报告',formatter:formatter_report,align:'center'}]
+		});
+		
+		 $(window).load(function(){				
+				$("#startTime").datetimepicker({
+	              	language: 'zh-CN',
+    			  	format: 'yyyy-mm-dd hh:ii:ss',
+    			  	autoclose:true,
+    			  	pickerPosition:'bottom-right'
+    		   });
+    		   
+    		   $("#endTime").datetimepicker({
+	              	language: 'zh-CN',
+    			  	format: 'yyyy-mm-dd hh:ii:ss',
+    			  	autoclose:true,
+    			  	pickerPosition:'bottom-right'
+    		   });
+    		   
+    		   $("#startTime").on("change",function(){   		      
+    		      if($("#endTime").val()!="")
+    		      {
+    		          $("#startTime").attr('max','$("#endTime").val()');
+    		      }
+    		   });
+    		   
+    		    $("#endTime").on("change",function(){   		      
+    		      if($("#startTime").val()!="")
+    		      {
+    		           $("#endTime").attr('min','$("#startTime").val()');
+    		           //$("#endTime").val($("#endTime").val());
+    		      }
+    		   });
+   		});    	
+    			 
+	  	function showWindow(url){
+			//iframe层
+			layer.open({
+			  type: 2,
+			  title: '应急调度情况',
+			  shadeClose: true,
+			  shade: 0.5,
+			  area: ['100%', '100%'],
+			  content: url //iframe的url
+			}); 	
+		}
+		function showTabWindow(url){
+			parent.createNewtab(url,"市级调度");	
+		}
+		function showBGWindow(){
+			parent.createNewtab("/awater/nnwaterSystem/EmergenControl/Municipal/RainNews/list.html","应急调度情况"); 	
+		}
+		
+		function reloadData(){
+			var query=new Object();
+			if($("#startTime").val()!="")
+				query.startTime=getTimeLong($("#startTime").val());
+			if($("#endTime").val()!="")
+				query.endTime=getTimeLong($("#endTime").val());
+			$("#table").bootstrapTable('refresh', {url: location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-record-city!listJson.action',query:query});
+     	}
+	
+	</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>选择树</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-editable.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrapvalidator/bootstrapValidator.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/animate.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/css/zTreeStyle/metro.css"/>
+    <script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	<script src="/psxj/systemInfo/ssxjxt/xcyh/xcyh/js/tree.js"></script><!--默认的树-->
+	<script src="/psxj/systemInfo/ssxjxt/xcyh/xcyh/js/TreeForRgm.js"></script><!--RgRm的树-->
+  </head>
+<script type="text/javascript">
+    var PROCDEF_KEY=GetQueryString("PROCDEF_KEY");//获取流程节点
+    var TASK_CODE= GetQueryString("TASK_CODE");//获取流程名称
+    var PROC_INST_ID= GetQueryString("PROC_INST_ID");
+ //初始化巡查人员树
+var serverName=GetQueryString("serverName");
+var assigneeRangeKey = GetQueryString("assigneeRangeKey");
+$(function(){
+	if(TASK_CODE=="task1535532387993" && PROCDEF_KEY=="GX_XCYH_RGRM_TEST"){//调用领导层选择树
+		loadDataForRgm(name,"ROOT","","","selectedUser_tree");
+	}else{
+		// loadData(taskId,"selectedUser_tree",type);
+        loadSelectedTree(assigneeRangeKey,"selectedUser_tree")
+	}
+});
+ </script>
+  <body>
+    <div class="panel panel-blue">
+        <div class="panel-body newtree" style="height:260px;width:100%;">
+            <!-- <div id="selectedUser_tree" class="ztree" style="text-align:left;"></div>  -->
+            <ul id="selectedUser_tree" class="ztree" style="text-align:left;"></ul>
+        </div>
+    </div>
+  </body>
+</html>

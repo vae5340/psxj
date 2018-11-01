@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-editable.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div id="bootstrapDataGrid" class="animated fadeInRight" style="display:none;">
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <div class="panel panel-default">
+                <!--页面顶端的查询-->
+                <div class="panel-body">
+                    <form id="searchForm" class="form-horizontal" role="form" style="margin-top:15px;">
+                        <div class="form-group">
+                            <label class="control-label col-sm-1" for="id">模板名称:</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" name="templatnameforsearch" id="tname">
+                            </div>
+                            <label class="control-label col-sm-2" for="displayname">模板显示名称:</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" name="displaynameforsearch" id="dname">
+                            </div>
+                            <div class="col-sm-3">
+                                <input type="button" onclick="refreshData()" class="btn btn-primary J_menuItem" value="查询">
+                                <input type="button" onclick="cleanSearchData()" class="btn btn-primary J_menuItem" value="清空">
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row row-lg">
+                <div class="col-sm-12">
+                    <!-- Example Events -->
+                    <div class="example-wrap">
+                        <div class="example">
+                            <div class="btn-group hidden-xs" id="exampleTableEventsToolbar" role="group">
+                                <button id="addForm" type="button" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>新增
+                                </button>
+                                <button id="edit" type="button" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>修改
+                                </button>
+                                <button onclick="deleteData()" type="button" class="btn btn-outline btn-default">
+                                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>删除
+                                </button>
+                            </div>
+                            <table id="exampleTableEvents" class="table table-bordered"></table>
+                        </div>
+                    </div>
+                    <!-- End Example Events -->
+                    <!--addForm-->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" arialabelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content" style="margin:250px -100px;width:600px;height:410px;">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">模板信息</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="myform" class="form-horizontal" role="form" style="margin-top:15px;">
+                                        <input id="id" class="form-control" name="id" type="hidden"/>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="TemplateName">模板名称<font color="red">*</font>:</label>
+                                            <div class="col-sm-4">
+                                                <input id="TemplateName" name="templatename" class="form-control" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="DisplayName">模板显示名称<font color="red">*</font>:</label>
+
+                                            <div class="col-sm-4">
+                                                <input id="DisplayName" name="displayname"  class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4 " for="isinused">是否正在使用:</label>
+                                            <div class="col-sm-4">
+                                            <select id="IsInUsed" name="IsInUsed" class="form-control ">
+                                                <option id="yes" value="1">是</option>
+                                                <option id="no" value="0">否</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-4" for="remark">备注:</label>
+
+                                            <div class="col-sm-4">
+                                                <input id="Remark" name="remark" class="form-control">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button onclick="cleanwaring()" type="button" class="btn btn-default" data-dismiss="modal"><span
+                                            class="glypicon glypicon-remove" aria-hidden="true"></span>关闭
+                                    </button>
+                                    <button onclick="saveTemplateData()" type="btn" class="btn btn-primary" id="btn_submit" >
+                                        <span class="glyphicon glyphicon-floppy-disk" ariahidden="true"></span>保存
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--addForm-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Panel Basic -->
+</div>
+<script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+<script src="/psxj/systemInfo/ssxjxt/home/content.min.js?v=1.0.0"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-export.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/tableExport.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-editable.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-editable.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+<script type="text/javascript">
+    window.onload =
+            function () {
+                var linkList = window.parent.document.getElementsByTagName("link");//获取父窗口link标签对象列表
+                var head = document.getElementsByTagName("head").item(0);
+                //外联样式
+                for (var i = 0; i < linkList.length; i++) {
+                    var l = document.createElement("link");
+                    l.rel = 'stylesheet'
+                    l.type = 'text/css';
+                    l.href = linkList[i].href;
+                    head.appendChild(l);
+                }
+                $("#bootstrapDataGrid").show();
+            };
+</script>
+<script src="js/templatedesc-list.js"></script>
+</body>
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:06 GMT -->
+</html>

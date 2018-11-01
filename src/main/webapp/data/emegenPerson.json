@@ -1,0 +1,115 @@
+﻿[
+  {
+    "id":"1",
+    "name": "曹晨",
+    "group": " 老城所道路抢险小分队",
+    "x":108.372,
+    "y":22.853,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"2",
+     "name": "房军",
+     "group": "城南道路抢险小分队",
+     "x":108.413,
+     "y":22.840,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "娄东升",
+    "group": "城东道路抢险小分队",
+    "x":108.364,
+    "y":22.824,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "彭剑",
+    "group": "抢险突击小分队",
+     "x":108.377,
+    "y":22.850,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"2",
+     "name": "房军",
+     "group": "城南道路抢险小分队",
+     "x":108.413,
+     "y":22.840,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "娄东升",
+    "group": "城东道路抢险小分队",
+    "x":108.364,
+    "y":22.824,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "彭剑",
+    "group": "抢险突击小分队",
+     "x":108.377,
+    "y":22.850,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"2",
+     "name": "房军",
+     "group": "城南道路抢险小分队",
+     "x":108.413,
+     "y":22.840,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "娄东升",
+    "group": "城东道路抢险小分队",
+    "x":108.364,
+    "y":22.824,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "彭剑",
+    "group": "抢险突击小分队",
+     "x":108.377,
+    "y":22.850,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"2",
+     "name": "房军",
+     "group": "城南道路抢险小分队",
+     "x":108.413,
+     "y":22.840,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "娄东升",
+    "group": "城东道路抢险小分队",
+    "x":108.364,
+    "y":22.824,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "彭剑",
+    "group": "抢险突击小分队",
+     "x":108.377,
+    "y":22.850,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"2",
+     "name": "房军",
+     "group": "城南道路抢险小分队",
+     "x":108.413,
+     "y":22.840,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+  }, {
+    "id":"3",
+    "name": "娄东升",
+    "group": "城东道路抢险小分队",
+    "x":108.364,
+    "y":22.824,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}, {
+    "id":"4",
+    "name": "彭剑",
+    "group": "抢险突击小分队",
+     "x":108.377,
+    "y":22.850,
+    "icon":"<img src=\"/awater_nn/img/blue-gislocate.png\"></img>"
+}
+]

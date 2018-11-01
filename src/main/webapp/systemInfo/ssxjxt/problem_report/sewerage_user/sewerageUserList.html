@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/psxj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/psxj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<style>
+			.col-sm-cous{
+				padding-right:0px;text-align:right;padding-top: 5px;margin-bottom:5px
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+			.layui-layer-btn{
+				background: #eee;
+			}
+		</style>
+  	</head>
+  	<body>
+  	<div class="col-sm-12 mainwrapper">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form class="form-horizontal" role="form" id="myform">
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-sm-cous" >行政区</label>
+						<div class="col-sm-3" >
+							<select class="form-control" id="administrative">
+								<option value="">全部</option>
+								<option value="天河区">天河区</option>
+								<option value="番禺区">番禺区</option>
+								<option value="黄埔区">黄埔区</option>
+								<option value="白云区">白云区</option>
+								<option value="南沙区">南沙区</option>
+								<option value="海珠区">海珠区</option>
+								<option value="荔湾区">荔湾区</option>
+								<option value="花都区">花都区</option>
+								<option value="越秀区">越秀区</option>
+								<option value="增城区">增城区</option>
+								<option value="从化区">从化区</option>
+							</select>
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >项目名称</label>
+						<div class="col-sm-3" >
+							<input type="text" class="form-control" id="entryName" name="entryName" />
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >许可证号</label>
+						<div class="col-sm-3" >
+							<input type="text" class="form-control" id="licenseKey" name="licenseKey" />
+						</div>
+			     	</div>
+			     	<div class="form-group">
+			     		<label class="col-sm-1 control-label col-sm-cous" >类型</label>
+						<div class="col-sm-3" >
+							<select class="form-control" id="type">
+								<option value="">全部</option>
+								<option value="0">重点排水户</option>
+								<option value="1">一般排水户</option>
+							</select>
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >审核状态</label>
+						<div class="col-sm-3" >
+							<select class="form-control" id="state">
+								<option value="">全部</option>
+								<option value="0">未审核</option>
+								<option value="1">已审核</option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<button type="button" id="btn_query" class="btn btn-primary" onclick="search();">查询</button>
+							<button type="button" id="btn_query" class="btn btn-default" onclick="resets();">重置</button>
+						 </div>
+			     	</div>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div id="toolbar" class="btn-group" style="padding:5px">
+		        <button id="btn_add" type="button" class="btn btn-primary" onclick="addShow();">
+               <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+           </button>
+	        </div>
+			<table id="table"></table>
+		</div>
+	</div>
+  	</body>
+	 <script src="/psxj/lib/jquery.min.js?v=1.0.0"></script>
+	  <script src="/psxj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	  <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+	  <script src="/psxj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	  <script src="js/sewerageUserList.js"></script>
+</html>

@@ -1,0 +1,99 @@
+.wraper{
+	width:auto;
+	min-width:1024px;
+	height:auto;
+}
+.header{
+	width:auto;
+	height:64px;
+	background-color:#006ecc;
+	position:relative;
+		min-width:1150px;
+}
+.system_name{
+	background:url(../img/system_name.png) no-repeat 25px 18px;
+	width:339px;
+	height:44px;
+	float:left;
+}
+a.pulldown{
+	background:url(../img/pulldown.png) no-repeat 0 0px;
+	width:18px;
+	height:12px;
+	display:block;
+	float:left;
+	margin-top:25px;
+	margin-left:15px;
+}
+.sub_skin{
+	position:absolute;
+	top:10px;
+	left:800px;
+}
+.sub_skin select{	
+    font-family: Arial,'Microsoft YaHei';
+    width:116px;
+	height:24px;
+	background-color:#FFF;
+	border-radius:5px;
+	border:none;
+	}
+.skin_icon_blue{
+	background:url(../img/duban_hover.png) no-repeat 0 0;
+	width:16px;
+	height:16px;
+	line-height:16px;
+	display:block;
+	background-color:#036;
+}
+.header_l{
+	position:absolute;
+	top:15px;
+	right:20px;
+}
+.top_menu{
+	float:left;
+	margin-top:10px;
+	margin-left:30px;
+}
+.top_menu ul li{
+	float:left;
+	width:30px;
+}
+.top_menu ul li.exit{
+	border-right:1px solid #007ae2;
+	margin-right:10px;
+}
+.top_menu ul li.exit a{
+	background:url(../img/exit.png) no-repeat 0 0;
+	width:21px;
+	height:21px;
+	display:block;
+}
+.top_menu ul li.help a{
+	background:url(../img/help.png) no-repeat 0 0;
+	width:21px;
+	height:21px;
+	display:block;
+}
+.user{
+	float:left;
+	width:180px;
+}
+.user_pic{
+	background:url(../img/user.png) no-repeat 0 0;
+	width:37px;
+	height:37px;
+	display:inline-block;
+	float:left;
+	margin-right:10px;
+}
+.user_info span{
+	color:#fff;
+	display:block;
+}
+.user_info span.bold{
+	font-size:16px;
+	height:22px;
+	height:22px;
+}

@@ -1,0 +1,14 @@
+#znsb_chartDiv1 {
+	border-bottom: 1px black solid;
+	height: 250px;
+}
+#znsb_chartDiv2 {
+	border-top: 1px black solid;
+	height: 250px;
+}
+#znsb_chartDiv{
+	background-image: url('../img/swy.jpg');
+	background-repeat:no-repeat;
+	background-size: 100% auto;
+	background-position: 0 50%;
+}

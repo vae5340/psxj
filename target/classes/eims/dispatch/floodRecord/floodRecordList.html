@@ -1,0 +1,29 @@
+<div class="col-sm-12 mainwrapper" id="floodRecordList">
+  <div class="panel panel-default" style="margin-bottom:10px;">  	        
+  	<div class="panel-body">
+  		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">涝情标题</label>
+  		<div class="col-sm-2">
+  		<input type="text" class="form-control" id="floodRecordList_recordTitle" name="recordTitle" />
+  		</div>
+  		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">发布时间</label>
+  		<div class="col-sm-2">
+  		<input type="text" class="form-control" id="floodRecordList_recordTime">
+  		</div>
+  		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">发布状态</label>
+  		<div class="col-sm-2">
+  		<select type="text" class="form-control" id="floodRecordList_isRelease" name="isRelease">
+  			<option></option>
+  			<option value="0">未发布</option>
+  			<option value="1">已发布</option>
+  		</select>
+  		</div>
+  		<div class="col-sm-1" style="text-align:left;">
+  		<button type="button" class="btn btn-primary" id="floodRecordList_btn_query">查询</button><!-- onclick="reloadData()" -->
+  		</div> 
+  	</div> 
+  </div>
+  <div id="floodRecordList_toolbar" style="padding-bottom: 10px;">
+  <button type="button" class="btn btn-w-m btn-primary" id="floodRecordList_addWCWindow">微信发布</button><!--  onclick="addWCWindow();" -->
+  </div>
+  <table id="floodRecordListTable"></table>
+</div> 

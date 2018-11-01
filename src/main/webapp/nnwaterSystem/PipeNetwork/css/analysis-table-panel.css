@@ -1,0 +1,68 @@
+.analysis-table-panel {
+  width: 100%;
+  min-height: 100%;
+  background: #FFFFFF;
+  position: relative; }
+  .analysis-table-panel .table-panel-tabs {
+    width: 100%; }
+    .analysis-table-panel .table-panel-tabs.out-of-box {
+      position: absolute; }
+    .analysis-table-panel .table-panel-tabs .table-panel-tab {
+      width: auto;
+      float: left;
+      border-right: solid thin #888888;
+      border-top: solid thin #888888;
+      text-align: center;
+      padding: 8px 10px 8px 10px;
+      background: #FFFFFF; }
+      .analysis-table-panel .table-panel-tabs .table-panel-tab:hover {
+        padding-bottom: 4px;
+        border-bottom: solid 4px rgba(0, 0, 0, 0.6);
+        cursor: pointer; }
+      .analysis-table-panel .table-panel-tabs .table-panel-tab.selected {
+        padding-bottom: 4px;
+        border-bottom: solid 4px rgba(0, 0, 0, 0.6); }
+    .analysis-table-panel .table-panel-tabs .table-panel-tab-label {
+      width: auto;
+      float: left;
+      border-right: solid thin #888888;
+      border-top: solid thin #888888;
+      text-align: center;
+      padding: 8px 15px 8px 15px;
+      background: #EEEEEE; }
+  .analysis-table-panel .table-panel-tables {
+    width: 100%;
+    position: relative;
+    overflow: scroll; }
+    .analysis-table-panel .table-panel-tables .table-panel-table {
+      width: 100%;
+      background: #FFFFFF;
+      position: absolute;
+      left: 0;
+      top: 0;
+      visibility: hidden;
+      display: none; }
+      .analysis-table-panel .table-panel-tables .table-panel-table.selected {
+        visibility: visible;
+        display: table; }
+      .analysis-table-panel .table-panel-tables .table-panel-table thead {
+        background: #EEEEEE; }
+        .analysis-table-panel .table-panel-tables .table-panel-table thead th {
+          white-space: nowrap;
+          text-align: center;
+          padding: 5px 10px 5px 10px; }
+      .analysis-table-panel .table-panel-tables .table-panel-table tbody tr {
+        cursor: pointer;
+        /*
+        &:hover{
+            background: #DDDDDD;
+        }
+         */ }
+        .analysis-table-panel .table-panel-tables .table-panel-table tbody tr td {
+          white-space: nowrap;
+          text-align: center;
+          padding: 5px 10px 5px 10px; }
+        .analysis-table-panel .table-panel-tables .table-panel-table tbody tr.selected {
+          background: #DDDDDD; }
+
+/*# sourceMappingURL=analysis-table-panel.css.map */

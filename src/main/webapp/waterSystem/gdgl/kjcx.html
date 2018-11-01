@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type="text/javascript" src="../../lib/jquery/jquery.min.js"></script>
+		<script src="../../lib/bootstrap.min.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/jquery.validate.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/jquery.metadata.js" type="text/javascript"></script>
+		<script src="../../js/pjkh/messages_cn.js" type="text/javascript"></script>
+		<script type="text/javascript" src="../../js/gdgl/drawtool.js"></script>
+		<script type="text/javascript" src="../../js/gdgl/jquery.cookie.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../css/themes/bootstrap/easyui.css">
+		<link rel="stylesheet" type="text/css" href="../../css/themes/icon.css">
+		<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css" />
+		<title> </title>
+	</head>
+	<body style="width:250px">
+		<hr>
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label for="Status" class="col-xs-4 control-label">选择城区</label>
+				<select id="zone" class="col-xs-8 form-control" style="width:150px" onchange="drawTool.drawByZone(true)">
+					<option value="-1">请选择</option>
+					<option value="0">下城区</option>
+					<option value="1">上城区</option>
+				</select>
+			</div>
+		</div>
+		<a href="javascript:void(0)" onclick="drawTool.draw(true);$('#zone').val(-1)" class="btn btn-primary">画多边形</a>
+		<a href="javascript:void(0)" onclick="drawTool.cancel();" class="btn btn-default">取消</a>
+	</body>
+</html>

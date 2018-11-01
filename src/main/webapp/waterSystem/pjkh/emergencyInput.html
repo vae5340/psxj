@@ -1,0 +1,79 @@
+<form class="form-inline" action="/agsupport_hangzhou/hz-score!ajaxSave.action" method="POST" id="myForm">
+	<input name="form.typeIndex" type="hidden" value="1">
+	<input name="tables[0].id" type="hidden" value=""/>
+	<input name="tables[1].id" type="hidden" value=""/>
+	<input name="tables[2].id" type="hidden" value=""/>
+	<input name="tables[3].id" type="hidden" value=""/>
+   <!-- 表单标题开始 -->
+   <center>
+		<h2>应急抢修及设施改善考核评分表</h2>   
+	</center>
+   <!-- 表单标题结束 -->
+   	<div class="form-group">
+		<label>考核评分人：</label>
+		<input type="text" name="form.person" value="" class="{required:true} form-control input-sm"></input>
+	</div>
+	<div class="form-group">
+		<label>时间：</label>
+		<input class="text {required:true} form-control input-sm" type="text" name="form.time" onfocus="WdatePicker();" value="" />
+	</div>
+	<div class="form-group">
+		<label>汇总：</label>
+		<select class="form-control input-sm" name="form.hzScoreSummaryId" id="hzSelect" style="height:26px;"></select>
+	</div>
+	<p></p>  
+    <!-- 列表开始 -->
+     <table class="table table-bordered table-hover">
+     	<tr>
+     		<th width="5%">序号</th><th width="15%">考核内容</th><th width="30%">评分标准</th><th width="5%">分值</th><th width="30%">存在问题</th><th width="5%">得分</th>
+     	</tr>
+     	<tr>
+     		<td>1</td>
+     		<td>应急抢修</td>
+     		<td>在接到污水设施突发事件报警后，在第一时间口头通知监管部门并在1个小时内到达现场开展先期处置工作，未及时通知或到场的，每次扣3分；及时编制抢修应急方案并开展应急抢修准备工作，未按要求编制方案的每次扣2分，抢修前期协调组织不力延误进场施工的，每项扣2分；抢修期间，落实临排措施，做好污水临排处置工作，无临排措施的，每项扣4分，临排措施不到位的，每项扣2分；抢修期间，每日上报应急抢修进展情况，未按时上报的，每天扣0.5分；未在规定的时间内完成抢修工作的，每延迟一天扣0.5分。</td>
+     		<td>40</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[0].problem" ></textarea></td>
+     		<td><input onchange="calScore()" type="text" name="tables[0].score" value="" class="{required:true,max:40,min:0} form-control input-sm"></input></td>
+     	</tr>
+     	<tr>
+     		<td>2</td>
+     		<td>设施改善</td>
+     		<td>科学合理安排污水设施改善工程项目，未按要求上报或设施改善计划安排不合理的，扣1分；工程未在规定时间内完成的每项扣2分；按要求组织验收和移交工作，未按要求组织验收或移交接管的，每项扣2分； </td>
+     		<td>25</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[1].problem" ></textarea></td>
+     		<td><input onchange="calScore()" type="text" name="tables[1].score" value="" class="{required:true,max:25,min:0} form-control input-sm"></input></td>
+     	</tr>
+     	<tr>
+     		<td>3</td>
+     		<td>安全文明施工</td>
+     		<td>做好安全文明施工，设立公告牌，无人员伤亡，未按要求设置公告牌的，每次扣2分； 发生人员伤亡的，扣5分。</td>
+     		<td>20</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[2].problem" ></textarea></td>
+     		<td><input onchange="calScore()" type="text" name="tables[2].score" value="" class="{required:true,max:20,min:0} form-control input-sm"></input></td>
+
+     	</tr>
+     	<tr>
+     		<td>4</td>
+     		<td>其它</td>
+     		<td>发生媒体曝光、12319、12345有责投诉或省市领导批示批评的，每件扣3分。</td>
+     		<td>15</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[3].problem" ></textarea></td>
+     		<td><input onchange="calScore()" type="text" name="tables[3].score" value="" class="{required:true,max:15,min:0} form-control input-sm"></input></td>
+     	</tr>
+     	<tr>
+     		<td>5</td>
+     		<td>合计</td>
+     		<td></td>
+     		<td>100</td>
+     		<td>/</td>
+     		<td><span id="result"></span></td>
+     	</tr>
+     </table>
+     <!-- 列表结束 -->
+   <!-- 表单按钮开始 -->
+   <center>
+	<a href="javascript:update();" class="btn btn-primary" >确定</a>
+	<a href="javascript:void(0);" onclick="$('#template').empty();slideDiv();" class="btn btn-default" >取消</a>
+   </center>
+   <!-- 表单按钮结束 -->
+</form>

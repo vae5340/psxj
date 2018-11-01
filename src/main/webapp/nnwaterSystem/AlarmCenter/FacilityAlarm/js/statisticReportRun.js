@@ -1,0 +1,208 @@
+//数据填充	    
+function getQueryStr(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = decodeURI(window.location.search).substr(1).match(reg);
+	if (r != null) return unescape(r[2]); return "";
+}
+
+var alarmType = getQueryStr("alarmType");
+var estType = getQueryStr("estType");
+var deviceOwner = getQueryStr("deviceOwner");
+var errDate = getQueryStr("errDate");
+
+$("#columnTable").bootstrapTable({
+	toggle:"table",
+	rowStyle:"rowStyle",
+	cache: false,
+	striped: true,		
+	columns: [
+		{field: 'estType',title: '设施类型',align:'center'},
+		{field: 'outTime',title: '超时未更新',align:'center'}]
+});
+$(function () {
+	getStatisticData();
+	$("#columnTable tr:gt(0)").hover(
+    	function () { $(this).addClass("hover") },
+    	function () { $(this).removeClass("hover") }
+    )
+    $("#pieTable tr:gt(0)").hover(
+		function () { $(this).addClass("hover") },
+    	function () { $(this).removeClass("hover") }
+    )
+});
+
+//获取统计表报数据
+function getStatisticData(){
+	$.ajax({
+		method : 'GET',
+		url : '/agsupport/jk-alarm-info!statReportRun.action',
+		data:{alarmType:alarmType,estType:estType,deviceOwner:deviceOwner,errDate:errDate},
+		async : true,
+		dataType : 'json',
+		success : function(data) {
+			fillData(data);
+		},
+		error : function() {
+			parent.layer.msg('获取设施设备运行数据失败');
+		}
+	});
+}
+
+//填充页面数据
+function fillData(data){
+	$.each(data.rows,function(index,item){
+		dataArray[ssTypes[item[1]].order]=item[0];
+	});
+	$.each(ssTypes,function(index,item){
+		if(item){
+			var rowdata = new Object();
+			rowdata.estType = item.layerName;
+			rowdata.outTime = dataArray[item.order];
+			$("#columnTable").bootstrapTable("insertRow", { index: item.order-1, row: rowdata });
+		}
+	});
+	if(data){
+		fillPieView(data);
+		fillColumnView(data);
+		fillTable(data);
+	}
+}
+
+//填充柱状图视图数据
+function fillPieView(data){
+	$('#pieView').highcharts({
+		chart: {
+          	plotBackgroundColor: null,
+          	plotBorderWidth: null,
+          	plotShadow: false,
+          	backgroundColor:'#F1F1F3'
+      	},
+      	title: {
+          	text: '设施设备运行数据质量报表-饼状图'
+      	},
+      	tooltip: {
+          	hideDelay:500,
+          	pointFormat: '{series.name}:<b>{point.percentage:.1f}%</b>'
+      	},
+		plotOptions: {
+			pie: {
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+	                style: {
+	                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+	                }
+	            }
+			}
+		},
+		
+		series: [{
+			type: 'pie',
+			name: '所占比例',
+			data: [{
+				name: ssTypes[29].layerName,
+				y: dataArray[0]
+			},{
+				name: ssTypes[30].layerName,
+				y: dataArray[1]
+			},{
+				name: ssTypes[31].layerName,
+				y: dataArray[2]
+			},{
+				name: ssTypes[33].layerName,
+				y: dataArray[3]
+			},{
+				name: ssTypes[34].layerName,
+				y: dataArray[4]
+			},{
+				name: ssTypes[35].layerName,
+				y: dataArray[5]
+			},{
+				name: ssTypes[36].layerName,
+				y: dataArray[6]
+			},{
+				name: ssTypes[37].layerName,
+				y: dataArray[7]
+			}]
+		}]
+	});
+}
+
+//填充饼状图视图数据
+function fillColumnView(data){
+	$('#columnView').highcharts({
+		chart: {
+          	type:'column',
+          	plotBackgroundColor: null,
+          	plotBorderWidth: null,
+          	plotShadow: false,
+          	backgroundColor:'#F1F1F3'
+      	},
+      	title: {
+          	text: '设施设备运行数据质量报表-柱状图'
+      	},
+      	xAxis: {
+            type: 'category'
+        },
+        yAxis:{
+        	title:{text:'数量'}
+        },
+      	tooltip: {
+          	hideDelay:500,
+          	headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+          	pointFormat: '数据更新超时数量：<b>{point.y}</b>'
+      	},
+		series: [{
+			name: '内河站降雨量',
+			data: [dataArray[0]]
+		},{
+			name: '水文雨量站',
+			data: [dataArray[1]]
+		},{
+			name: '自建雨量站',
+			data: [dataArray[2]]
+		},{
+			name: '路面(管渠)水位',
+			data: [dataArray[3]]
+		},{
+			name: '河道水位',
+			data: [dataArray[4]]
+		},{
+			name: '管渠流量',
+			data: [dataArray[5]]
+		},{
+			name: '泵站水位',
+			data: [dataArray[6]]
+		},{
+			name: '河道流量',
+			data: [dataArray[7]]
+		}]
+	});
+}
+
+//填充表格数据
+function fillTable(data){
+	$.each(ssTypes,function(index,item){
+		if(item){
+			var emptyTableItem = new Object();
+			emptyTableItem.estType=item.layerName;
+			emptyTableItem.overTopPipe=0;
+			emptyTableItem.overWell=0;
+			emptyTableItem.sum=0;
+		}
+	});
+}
+
+var dataArray = new Array(0,0,0,0,0,0,0,0);
+
+var ssTypes=new Array();
+ssTypes[29]={order:0,layerId:'ssjk_29',layerName:'内河站降雨量'};
+ssTypes[30]={order:1,layerId:'ssjk_30',layerName:'水文雨量站'};
+ssTypes[31]={order:2,layerId:'ssjk_31',layerName:'自建雨量站'};
+ssTypes[33]={order:3,layerId:'ssjk_33',layerName:'路面(管渠)水位'};
+ssTypes[34]={order:4,layerId:'ssjk_34',layerName:'河道水位'};
+ssTypes[35]={order:5,layerId:'ssjk_35',layerName:'管渠流量'};
+ssTypes[36]={order:6,layerId:'ssjk_36',layerName:'河道流量'};
+ssTypes[37]={order:7,layerId:'ssjk_37',layerName:'泵站水位'};

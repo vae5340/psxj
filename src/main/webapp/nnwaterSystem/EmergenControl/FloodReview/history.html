@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>涝情回顾-以积水点为单位</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link rel="stylesheet" type="text/css" href="js/easyui.css" />
+		<link rel="stylesheet" type="text/css" href="/awater/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" />
+		<link rel="stylesheet" type="text/css" href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" />
+		<link rel="stylesheet" type="text/css" href="css/history.css" />
+	</head>
+	<body>
+		<div style="height:100%;width: 350px;float: left;overflow:hidden;">
+			<div id="waterLevelMoniter" style="width: 100%;height:50%;text-align:center;overflow-x:hidden;" class="easyui-panel" title="水位监测" >
+				<div id="containerJXSS1" style="width:50%; height: 200px; float: left;"></div>
+				<div id="containerCSK1" style="width:50%; height: 200px; float: left;"></div>
+			</div>
+			<div  id="videoMoniter" style="width: 100%;height:50%;text-align:center;overflow-x:hidden;" class="easyui-panel" title="视频监控" >
+				<div class="spdiv" id="container1">
+					<div class="shipdiv" id="ply1">
+						<div id="ply1_obj" style="width: 100%;height: 270px;">
+							<embed name="ply" width="100%" height="100%" id="ply" controller="true" src="/awater/nnwaterSystem/popup/ply/player.swf" type="application/x-shockwave-flash" flashvars="file=/awater/nnwaterSystem/popup/ply/a1.flv" allowscriptaccess="always" allowfullscreen="false" quality="high" bgcolor="red">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="height:100%;width: calc( 100% - 600px );float: left;">
+			<div id="containerYQ" style="min-width: 310px; height: 150px; margin: 0 auto"></div>
+			<div style="text-align: center;">
+				<input id="ss" class="easyui-slider" value="1" style="width:auto;" >
+			</div>
+			<iframe id="mapDiv" src="" style="width: 100%;height: calc( 100% - 175px );"  scrolling="no" frameborder="0"></iframe>
+		</div>
+		<div style="width:250px;height: 100%;float: left;">
+			<div id="ya_title" class="easyui-panel" title="应急预案" style="width:100%;height:10%;overflow-x:hidden;min-height: 45px;">
+				<p style="font-size:14px;margin: 0;">市级预案<a style="padding-left:6px" id="cityA"><font id="cityRecord" color="red"></font></a></p>
+				<p style="font-size:14px;margin: 0;">成员单位预案<a style="padding-left:6px" id="districtA"><font id="districtRecord"  color="red"></font></a></p>
+			</div>
+			<div id="ya_team" class="easyui-panel" title="应急队伍" style="width:100%;height:50%">
+				<table id="table_team"></table>
+			</div>
+			<div id="ya_good" class="easyui-panel" title="督办日志" style="width:100%;height:30%;">
+				<iframe id="superviseIframe" src="" style="width: 100%;height: 100%;overflow: hidden;"  scrolling="no" frameborder="0"></iframe>
+			</div>
+			<div id="ya_control" class="easyui-panel" title="涝情回放" style="width:100%;height:10%;text-align:center;overflow: hidden;">
+				<button id="startButton" class="btn btn-w-m btn-primary" type="button" onclick="">开始回放</button>
+				<button id="endButton" class="btn btn-w-m btn-warning" type="button" onclick="">停止回放</button>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+		<script src="js/highcharts.js"></script>
+		<script src="js/highcharts-more.js"></script>
+		
+		<script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+	    <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script>
+		<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>	
+		<script src="js/histrory.js"></script>
+		
+		<script src="js/jquery.easyui.slider.jk.js"></script>
+		<script src="js/highcharts.jk.jyq.js"></script>
+		<script src="js/highcharts.jk.jxss.js"></script>
+		<script src="js/highcharts.jk.csk.js"></script>
+	</body>
+</html>

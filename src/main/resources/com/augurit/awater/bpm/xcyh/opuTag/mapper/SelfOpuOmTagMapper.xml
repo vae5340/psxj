@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.augurit.awater.bpm.xcyh.opuTag.mapper.SelfOpuOmTagMapper" >
+    <sql id="tagAllColumns" >
+        TAG_ID tagId,
+        IS_GROUP isGroup,
+        TAG_CODE tagCode,
+        TAG_NAME tagName,
+        ORG_ID orgId,
+        PARENT_TAG_ID parentTagId,
+        SUB_COUNT subCount,
+        SORT_NO sortNo,
+        IS_ACTIVE isActive,
+        TAG_MEMO tagMemo,
+        IS_DELETED isDeleted,
+        CREATER creater,
+        CREATE_TIME createTime,
+        MODIFIER modifier,
+        MODIFY_TIME modifyTime
+    </sql>
+    <sql id="tagUserAllColumns">
+        TAG_USER_ID tagUserId,
+        TAG_ID tagId,
+        USER_ID userId,
+        CREATER creater,
+        CREATE_TIME createTime
+    </sql>
+    <!--获取用户角色信息-->
+    <select id="listOpuOmTag" resultType="OpuOmTag" >
+        select
+        <include refid="tagAllColumns"/>
+        from   OPU_OM_TAG
+        <where> 1==1
+            <if test="tagId != null">
+               AND TAG_ID=#{tagId}
+            </if>
+            <if test="tagCode != null">
+               AND TAG_CODE=#{tagCode}
+            </if>
+            <if test="tagName != null">
+               AND TAG_NAME=#{tagName}
+            </if>
+            <if test="orgId != null">
+               AND ORG_ID=#{orgId}
+            </if>
+            <if test="parentTagId != null">
+               AND PARENT_TAG_ID=#{parentTagId}
+            </if>
+            <if test="isActive != null">
+               AND IS_ACTIVE=#{isActive}
+            </if>
+            <if test="isDeleted != null">
+               AND IS_DELETED=#{isDeleted}
+            </if>
+        </where>
+    </select>
+    <!--根据用户ID获取该用户的角色信息-->
+    <select id="listOpuOmTagByUserId" resultType="OpuOmTag">
+        SELECT
+          <include refid="tagAllColumns"/>
+        FROM OPU_OM_TAG
+        WHERE TAG_ID in (SELECT TAG_ID FROM OPU_OM_TAG_USER where USER_ID=#{userId})
+    </select>
+    <!--获取角色用户列表-->
+    <select id="listOpuOmTagUser" resultType="OpuOmTagUser" >
+        select
+        <include refid="tagUserAllColumns"/>
+        from OPU_OM_TAG_USER
+        <where> 1 = 1
+            <if test="tagUserId != null" >
+                AND TAG_USER_ID = #{tagUserId}
+            </if>
+            <if test="tagId != null" >
+                AND TAG_ID = #{tagId}
+            </if>
+            <if test="userId != null" >
+                AND USER_ID = #{userId}
+            </if>
+            <if test="CREATER != null" >
+                AND CREATER = #{creater}
+            </if>
+            <if test="taskName != null" >
+                AND CREATE_TIME = #{createTime}
+            </if>
+        </where>
+    </select>
+    <!--根据角色主键获取角色用户-->
+    <select id="listOpuOmTagUserByTagId" resultType="OpuOmTagUser" >
+        select
+        <include refid="tagUserAllColumns"/>
+        FROM OPU_OM_TAG_USER
+        WHERE TAG_ID = #{tagId}
+    </select>
+    <!--根据角色编码tagCode获取角色用户-->
+    <select id="listOpuOmTagUserByTagCode" resultType="OpuOmTagUser" >
+        select
+        <include refid="tagUserAllColumns"/>
+        FROM OPU_OM_TAG_USER
+        WHERE  TAG_ID in (select TAG_ID from OPU_OM_TAG where TAG_CODE= #{tagCode})
+    </select>
+    <!--根据主键tagId获取角色信息-->
+    <select id="getOpuOmTagById" resultType="OpuOmTag" >
+        select
+        <include refid="tagAllColumns"/>
+        FROM OPU_OM_TAG
+        WHERE  TAG_ID = #{tagId}
+    </select>
+    <!--根据角色编码tagCode获取角色信息-->
+    <select id="getOpuOmTagByCode" resultType="OpuOmTag" >
+        select
+        <include refid="tagAllColumns"/>
+        FROM OPU_OM_TAG
+        WHERE  TAG_CODE = #{tagCode}
+    </select>
+
+</mapper>

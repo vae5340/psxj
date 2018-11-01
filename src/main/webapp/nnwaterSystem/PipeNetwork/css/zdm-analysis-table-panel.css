@@ -1,0 +1,58 @@
+.zdm-analysis-table-panel {
+  width: 100%;
+  min-height: 100%;
+  background: #FFFFFF;
+  position: relative; }
+  .zdm-analysis-table-panel .table-panel-tabs {
+    width: 100%; }
+    .zdm-analysis-table-panel .table-panel-tabs.out-of-box {
+      position: absolute; }
+    .zdm-analysis-table-panel .table-panel-tabs .table-panel-tab {
+      width: 5em;
+      float: left;
+      border-right: solid thin #888888;
+      border-top: solid thin #888888;
+      text-align: center;
+      padding: 8px 10px 8px 10px;
+      background: #FFFFFF; }
+      .zdm-analysis-table-panel .table-panel-tabs .table-panel-tab:hover {
+        background: #E6E6E6;
+        cursor: pointer; }
+      .zdm-analysis-table-panel .table-panel-tabs .table-panel-tab.selected {
+        background: #666666;
+        color: #FFFFFF; }
+  .zdm-analysis-table-panel .table-panel-tables {
+    width: 100%;
+    position: relative;
+    overflow: scroll; }
+    .zdm-analysis-table-panel .table-panel-tables .table-panel-table {
+      width: 100%;
+      background: #FFFFFF;
+      position: absolute;
+      left: 0;
+      top: 0;
+      visibility: hidden;
+      display: none; }
+      .zdm-analysis-table-panel .table-panel-tables .table-panel-table.selected {
+        visibility: visible;
+        display: table; }
+      .zdm-analysis-table-panel .table-panel-tables .table-panel-table thead {
+        background: #EEEEEE; }
+        .zdm-analysis-table-panel .table-panel-tables .table-panel-table thead th {
+          white-space: nowrap;
+          text-align: center;
+          padding: 5px 10px 5px 10px; }
+      .zdm-analysis-table-panel .table-panel-tables .table-panel-table tbody tr {
+        /*
+        &:hover{
+            background: #DDDDDD;
+        }
+         */ }
+        .zdm-analysis-table-panel .table-panel-tables .table-panel-table tbody tr td {
+          white-space: nowrap;
+          text-align: center;
+          padding: 5px 10px 5px 10px; }
+        .zdm-analysis-table-panel .table-panel-tables .table-panel-table tbody tr.selected {
+          background: #DDDDDD; }
+
+/*# sourceMappingURL=zdm-analysis-table-panel.css.map */

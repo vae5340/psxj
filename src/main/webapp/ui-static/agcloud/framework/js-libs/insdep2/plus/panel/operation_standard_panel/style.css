@@ -1,0 +1,19 @@
+/*
+  Easyui Of Insdep Theme 2.x 扩展面板
+  https://www.insdep.com/
+*/
+.clear{ clear:both} 
+
+.operation_standard_header.panel-header{ 
+	background-color: #fff; border-bottom:0 none;
+    box-shadow:0 0 10px rgba(0,0,0,.2); 
+}
+.operation_standard_body.panel-body{ background-color: #ececec;}
+
+.operation_standard_content_panel{ width: 100%; height:auto; clear: both; background-color: #fff; border: 1px solid #e1e3e4; }
+
+.operation_standard_content_border_bottom{ border-bottom: 1px solid #e1e3e4;}
+
+.operation_standard_tools,.operation_standard_content{border:0 none; }
+.operation_standard_tools{}
+.operation_standard_content{}

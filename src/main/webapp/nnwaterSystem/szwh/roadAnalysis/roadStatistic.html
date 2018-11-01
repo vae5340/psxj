@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>道路统计</title>
+	<meta charset="UTF-8">	
+	<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	<script src="/awater/lib/jquery.min.js?v=2.1.4"></script>
+	<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script type="text/javascript" src="/awater/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="/awater/lib/highchart/js/highcharts.js"></script>
+	<script type="text/javascript" src="/awater/lib/highchart/js/modules/exporting.js"></script>
+	<script type="text/javascript" src="/awater/lib/highchart/js/highcharts-zh_cn.js"></script>
+	<style>
+	     html,body{
+			height:100%;
+		 }
+		.panel{
+			margin-bottom:0px
+		 }
+		 #tableDiv,.radiusDiv{
+		    border-radius: 5px;
+		    margin-top: 20px;
+		    box-shadow: 0px 0px 10px #333333;
+		 }
+		 table{width:100%}
+		.table thead {
+		    padding-right:15px;
+		    display: block;
+		}
+		.table tbody{
+		    display: block;
+			height: 400px;
+			overflow: auto;
+		}
+		td{
+		    text-align:center;
+		    padding:0px 6px;
+            border-bottom: 1px #D3D3D3 solid;
+            border-right: 1px #D3D3D3 solid;
+        }
+	</style>
+  
+   <body style="padding:0px 20px 10px 25px">
+         <div id="content" style="height:100%;width:100%;display:none">
+             <div style="width:100%;text-align:center;font-size:35px;background-color:#FFFFFF;line-height:60px;">
+                  <font face="宋体" style="letter-spacing:8px;">道路统计</font>
+             </div>	
+             <div class="f-Left" style="width:100%">
+				  <div id="tableDiv" class="table-responsive">
+				  </div>
+			</div>
+		   <div class="radiusDiv" style="height:440px;width:100%">
+			  <ul id="myTab" class="nav nav-tabs nav-justified">
+				  <li class="active"><a href="#column" data-toggle="tab" style="height:6%">柱状图</a></li>
+				  <li><a href="#pie" data-toggle="tab">饼状图</a></li>
+			  </ul>
+			  <div id="myTabContent" class="tab-content" style="height:94%">
+				<div class="tab-pane fade in active" id="column">
+                    <div id="container" style="height:400px;width:100%"></div>				     
+				</div>
+				<div class="tab-pane fade" id="pie" align="center" style="background-color:#F1F1F3">
+				   <div id="containerPie" style="height:400px"></div>
+				</div>
+			</div>	
+	    </div>
+	  </div>  
+	  <div id="imgDiv" style="height:100%;width:100%;padding-top:230px;padding-left:500px">
+	      <img src='/awater/nnwaterSystem/PipeNetwork/img/loading.gif'/>
+	  </div>
+    </body>
+	<script>
+      var statisticArr=[];
+      var layerIds=[19,20,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36];
+      var intervalIdx;
+	  $(function(){
+	      parent.getRoadStatistic(layerIds,statisticArr,0);
+		  intervalIdx=setInterval("generateMap()",500);
+	  });
+	  
+	  function generateMap(){
+	      statisticArr=parent.roadStatisticArr;
+	      if(!statisticArr||statisticArr.length==0)
+	          return;
+		  clearInterval(intervalIdx);
+		  $("#imgDiv").hide();
+		  $("#content").show();
+		  $("#tableDiv").html(parent.roadTableHtml);
+	      $('#container').highcharts({
+	        chart: {
+	            type: 'column',
+		        backgroundColor:'#F1F1F3'
+	        },
+	        title: {
+	            text: '道路长度柱状图'
+	        },
+	        xAxis: {
+	            categories: [
+	                '高速公路',
+	                '快速路',
+	                '轻轨线',
+	                '水南高速',
+	                '省道',
+	                '县乡道路',
+	                '国道',
+	                '高架桥_高速公路',
+	                '高架桥_快速路',
+	                '高架桥_主干道',
+	                '高架桥_次要道路',
+	                '主干道',
+	                '次要道路',
+	                '支道',
+	                '双线铁路',
+	                '单线铁路',
+	                '地下隧道'    
+	            ],
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            title: {
+	                text: '长度（米）'
+	            }
+	        },
+	        legend: {
+		         enabled: false
+		    },
+	        tooltip: {
+		          shared: false,
+		          hideDelay:500
+		    },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0,
+	                dataLabels: {
+	                    enabled: true,
+	                    formatter: function () {
+			                return this.y + '米';   
+			            }
+	                }
+	            }
+	        }, 
+	        series: [{
+	        	name:'长度',
+	            data: [{y:statisticArr[0],color:"rgba(255,197,59,1)"},{y:statisticArr[1],color:"rgba(209,255,115,1)"},
+	                 {y:statisticArr[2],color:"rgba(255,102,0,1)"},{y:statisticArr[3],color:"rgba(255,165,56,1)"},
+	                 {y:statisticArr[4],color:"rgba(255,165,36,1)"},{y:statisticArr[5],color:"rgba(180,180,0,1)"},
+	                 {y:statisticArr[6],color:"rgba(255,255,166,1)"},{y:statisticArr[7],color:"rgba(190,179,145,1)"},
+	                 {y:statisticArr[8],color:"rgba(254,232,110,1)"},{y:statisticArr[9],color:"rgba(189,217,99,1)"},
+	                 {y:statisticArr[10],color:"rgba(191,214,179,1)"},{y:statisticArr[11],color:"rgba(255,235,175,1)"},
+	                 {y:statisticArr[12],color:"rgba(0,255,174,1)"},{y:statisticArr[13],color:"rgba(0,102,255,1)"},
+	                 {y:statisticArr[14],color:"rgba(115,0,255,1)"},{y:statisticArr[15],color:"rgba(255,0,0,1)"},
+	                 {y:statisticArr[16],color:"rgba(189,217,79,1)"}]
+	        }]
+	    });
+	    
+	    $('#containerPie').highcharts({
+			    chart: {
+		            plotBackgroundColor: null,
+		            plotBorderWidth: null,
+		            plotShadow: false,
+		            backgroundColor:'#F1F1F3'
+		        },
+		        title: {
+		            text: '道路长度饼状图'
+		        },
+		        tooltip: {
+		            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+		            hideDelay:500
+		        },
+		        plotOptions: {
+		            pie: {
+		                allowPointSelect: true,
+		                cursor: 'pointer',
+		                dataLabels: {
+		                    enabled: true,
+		                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+		                    style: {
+		                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+		                    }
+		                }
+		            }
+		        },
+		        series: [{
+		            type: 'pie',
+		            name: '所占比例',
+		            data: [
+		            	{
+ 						    name:'高速公路',
+		                    y: statisticArr[0],
+		                    sliced: true,
+		                    selected: true,
+		                    color:"rgba(255,197,59,1)"		                
+		                },{
+ 						    name:'快速路',
+		                    y: statisticArr[1],
+		                    color:"rgba(209,255,115,1)"		                
+		                },{
+		                    name:'水南高速',
+		                    y: statisticArr[2],
+		                    color:"rgba(255,102,0,1)"
+		                },{
+		                    name:'轻轨线',
+		                    y: statisticArr[3],
+		                    color:"rgba(255,165,56,1)"		
+		                },{
+ 						    name:'省道',
+		                    y: statisticArr[4],
+		                    color:"rgba(255,165,56,1)"		                
+		                },{
+ 						    name:'县乡道路',
+		                    y: statisticArr[5],
+		                    color:"rgba(180,180,0,1)"		                
+		                },{
+		                    name:'国道',
+		                    y: statisticArr[6],
+		                    color:"rgba(255,255,166,1)"
+		                },{
+		                    name:'高架桥_高速公路',
+		                    y: statisticArr[7],
+		                    color:"rgba(190,179,145,1)"		
+		                },{
+ 						    name:'高架桥_快速路',
+		                    y: statisticArr[8],
+		                    color:"rgba(254,232,110,1)"		                
+		                },{
+ 						    name:'高架桥_主干道',
+		                    y: statisticArr[9],
+		                    color:"rgba(189,217,99,1)"		                
+		                },{
+		                    name:'高架桥_次要道路',
+		                    y: statisticArr[10],
+		                    color:"rgba(191,214,179,1)"
+		                },{
+		                    name:'主干道',
+		                    y: statisticArr[11],
+		                    color:"rgba(255,235,175,1)"		
+		                },{
+ 						    name:'次要道路',
+		                    y: statisticArr[12],
+		                    color:"rgba(0,255,174,1)"		                
+		                },{
+ 						    name:'支道',
+		                    y: statisticArr[13],
+		                    color:"rgba(0,102,255,1)"		                
+		                },{
+		                    name:'双线铁路',
+		                    y: statisticArr[14],
+		                    color:"rgba(115,0,255,1)"
+		                },{
+		                    name:'单线铁路',
+		                    y: statisticArr[15],
+		                    color:"rgba(255,0,0,1)"		
+		                },{
+		                    name:'地下隧道',  
+		                    y: statisticArr[16],
+		                    color:"rgba(189,217,99,1)"		
+		                }
+		            ]
+		        }]
+		    });
+	  }
+ </script>
+</html>

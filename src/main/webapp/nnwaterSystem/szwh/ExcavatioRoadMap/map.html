@@ -1,0 +1,44 @@
+<!DOCTYPE html>                
+<html>
+	<head>
+	    <title>开挖审批地图</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+	    <link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet" />    
+	    <link href="/awater/css/arcgis/claro.css" rel="stylesheet" type="text/css" />
+	    <link href="/awater/lib/arcgis_js_api/dijit/themes/tundra/tundra.css" rel="stylesheet" type="text/css" />
+	    <link href="/awater/lib/arcgis_js_api/esri/css/esri.css" rel="stylesheet" type="text/css"  />
+	    
+	    <style>
+		    html,body{
+		   		width: 100%;
+		    	height:100%;
+		    }
+	    	.map{
+	    		margin: 0;
+	    		padding:0;
+	    		width: 100%;
+	    		height:100%;
+	    	}
+	    </style>
+  	</head>
+	<body>
+		<div id="mapDiv" class="map"></div>
+		<div style="position:absolute; top: 0%; left:100%;margin-left: -190px;text-align: right;">
+			<table id="drawTb" style="display: none;width: 190px;">
+				<tr>
+					<td><button data-dojo-type="dijit/form/Button" id="drawButton">项目定位</button></td>
+					<td style="background-color: white;"><span id="drawStatus" style="color: red;padding-right: 10px;font-size: 18px;">项目未定位</span></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+  	<script type="text/javascript" src="/awater/lib/jquery.min.js?v=1.0.0"></script>	
+    <script type="text/javascript" src="/awater/js/config/dojoConfig.js"></script>
+    <script type="text/javascript" src="/awater/js/config/mapConfig.js"></script>
+    <script type="text/javascript" src="/awater/lib/arcgis_js_api/init.js"></script>		
+    <script type="text/javascript" src="js/initMap.js"></script>
+</html>

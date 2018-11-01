@@ -1,0 +1,145 @@
+/*
+ *	
+ *	全局配置样式
+ *	说明：引入此样式必须在 insdep.easyui.min.css 之后
+ *	
+*/
+/*全局字体与字体大小
+html,body {
+  font-family: "Microsoft YaHei",Arial,Helvetica,sans-serif,"SimSun";
+  font-size: 12px;
+}
+*/
+/*全局字体颜色
+html,body,a,a:link,a:visited,a:hover,a:active{color: #4a4a4a;}
+*/
+
+
+/*
+定义全局面板的标题栏高度
+受影响控件：Panel、Accordion、Layout、window、DataGrid、DataList等继承Panel控件的全部组件
+*/
+.panel-header{ padding:10px 15px; /*默认 padding:5px;*/ }
+.panel-header .panel-icon{ left:10px;  /*默认 left:5px;*/}
+.panel-header .panel-title b{ padding-top:10px; padding-bottom:10px; /*默认 padding-top:5px; padding-bottom:5px;*/ }
+
+
+
+.window-header{ padding:10px 15px; /*默认 padding:5px;*/ }
+.window-header .panel-icon{ left:10px;  /*默认 left:5px;*/}
+.window-header .panel-title b{ padding-top:10px; padding-bottom:10px; /*默认 padding-top:5px; padding-bottom:5px;*/ }
+/*
+独立组件标题栏高度定义,默认值与panel-header相同，如不设置默认继承全局
+.accordion .panel-header{}
+.accordion .panel-header .panel-icon{}
+
+.datagrid .panel-header{}
+.datagrid .panel-header .panel-icon{}
+
+.window .panel-header{}
+.window .panel-header .panel-icon{}
+*/
+
+
+
+
+
+
+/*
+ *	Form 表单系列控件圆角大小，默认border-radius:0;
+ *	
+.textbox,.textbox .textbox-text {
+  -moz-border-radius:5px;
+  -webkit-border-radius:5px;
+  border-radius:5px;
+}
+*/
+
+
+/* LinkButton 高度全局自定义*/
+.l-btn{ height:28px; }
+.l-btn,.l-btn-text{ line-height:28px;}
+.l-btn-large{ height: auto; }
+
+.textbox-text{line-height:20px;}
+
+/**/
+.tabs-header .tabs{ height:38px !important; }
+.tabs-header .tabs .tabs-inner{ height:37px !important; line-height:37px !important; }
+.tabs-header.tabs-header-left .tabs,.tabs-header.tabs-header-right .tabs{ height: 100% !important; }
+
+
+
+/*
+ *	Tooltip 重定义Tooltip全局样式;
+ *	
+.tooltip {
+  background-color: #fff;
+  border-color: #bbb;
+  color:#000;
+}
+.tooltip-right .tooltip-arrow-outer {
+  border-right-color: #bbb;
+}
+.tooltip-right .tooltip-arrow {
+  border-right-color: #fff;
+}
+.tooltip-left .tooltip-arrow-outer {
+  border-left-color: #bbb;
+}
+.tooltip-left .tooltip-arrow {
+  border-left-color: #fff;
+}
+.tooltip-top .tooltip-arrow-outer {
+  border-top-color: #bbb;
+}
+.tooltip-top .tooltip-arrow {
+  border-top-color: #fff;
+}
+.tooltip-bottom .tooltip-arrow-outer {
+  border-bottom-color: #bbb;
+}
+.tooltip-bottom .tooltip-arrow {
+  border-bottom-color: #fff;
+}
+*/
+
+
+
+/*
+DataGrid 字段标题栏高度全局定义
+受影响控件：继承DataGrid的全部控件
+*/
+.datagrid .datagrid-header{ height:29px; /*默认height:24px*/}
+.datagrid .datagrid-header .datagrid-htable td{ padding:5px 0;/*默认padding:2px 0;*/}
+/*
+DataGrid 字段数据栏高度全局定义
+受影响控件：继承DataGrid的全部控件
+*/
+.datagrid .datagrid-row{ height:32px; /*默认height:25px*/}
+.datagrid-cell,
+.datagrid-cell-group,
+.datagrid-header-rownumber,
+.datagrid-cell-rownumber{height: 28px; line-height: 28px;/*默认height: 18px;line-height: 18px;*/}
+
+/*
+DataGrid 单元格前后间距
+*/
+
+.datagrid-cell,
+.datagrid-cell-group{ padding: 0 8px;/*默认padding: 0 4px;*/}
+
+/*
+DataGrid 工具栏行高全局定义
+受影响控件：继承DataGrid的全部控件
+*/
+.datagrid .datagrid-toolbar{ padding: 5px 2px;/*默认 padding: 1px 2px;*/}
+
+
+
+/*内的按钮*/
+.datagrid .datagrid-cell .l-btn{ height:22px; }
+.datagrid .datagrid-cell .l-btn,.datagrid .datagrid-cell .l-btn-text{ line-height:22px;}
+.datagrid .datagrid-cell .l-btn-large{ height: auto; }
+
+

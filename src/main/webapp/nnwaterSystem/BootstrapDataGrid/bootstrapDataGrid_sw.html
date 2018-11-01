@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link href="lib/jquery-easyui-1.4.5/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+    
+	<script type="text/javascript">
+	function showPoint(){
+		var frames=window.parent.window.document.getElementById("main"); 
+		frames.contentWindow.getInfo(); 
+	}	
+	</script>
+</head>
+
+<body style="background-color:white;height:300px;">
+    <div class="animated fadeInRight">
+		<div class="col-sm-12">
+			<!-- Example Events -->
+			<table id="table" data-toggle="table"
+				   data-click-to-select="true"
+				   data-row-style="rowStyle"
+				   data-pagination="false"
+				   data-search="true"
+				   data-height="380">
+				<thead>
+
+				<tr>
+					<th class="hidden" data-field="OBJECTID">OBJECTID</th>
+					<th class="hidden" data-field="station_code">站码</th>
+					<th data-field="station_name">站名</th>
+					<th data-field="hl">河流</th>
+					<th data-field="type">站类</th>
+					<th class="hidden" data-field="jsarea">集水面积</th>
+					<th class="hidden" data-field="x">经度</th>
+					<th class="hidden" data-field="y">纬度</th>
+				</tr>
+				</thead>
+			</table>
+			<!-- End Example Events -->
+		</div>
+    </div>
+    <script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript">
+	
+	function queryParams() {
+        return {
+            type: 'owner',
+            sort: 'updated',
+            direction: 'desc',
+            per_page: 100,
+            page: 1
+        };
+    }
+	
+	var $table = $('#table'), $remove = $('#re_send_selected');
+
+    $(function () {
+		/*
+        $table.on('check.bs.table uncheck.bs.table check-all.bs.table uncheck-all.bs.table', function () {
+            $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+        });
+		*/
+		$table.on('click-row.bs.table', function (row,obj) {
+	        window.parent.showInfoWindowByPoint('sw',obj);
+        });
+        $.ajax({
+			method : 'GET',
+			url : location.protocol+"//"+location.hostname+':6080/arcgis/rest/services/NanNing/MapServer/5/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&returnTrueCurves=false&resultOffset=&resultRecordCount=&f=pjson',
+			async : true,
+			dataType : 'json',
+			success : function(data) {
+				var row=new Array();
+				for (i in data.features){
+					var obj=new Object();
+					obj.OBJECTID=data.features[i].attributes.OBJECTID;
+					obj.station_code=data.features[i].attributes.station_code;
+					obj.station_name=data.features[i].attributes.station_name;
+					obj.hl=data.features[i].attributes.river;
+					obj.type=data.features[i].attributes.station_class;
+					obj.jsarea=data.features[i].attributes.drainage_area;
+					obj.x=data.features[i].geometry.x;
+					obj.y=data.features[i].geometry.y;
+					row.push(obj);
+				}
+				$table.bootstrapTable('load', row);
+			},
+			error : function() {
+				alert('error');
+			}
+		});
+    });
+
+	/*
+    function actionFormatter(value, row, index) {
+        return [
+            '<button class="btn btn-primary resend">重新发送邀请</button>'
+        ].join('');
+    }
+	
+    window.actionEvents = {
+        'click .resend': function (e, value, row, index) {
+            alert('重新发送该邀请, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        }
+    };
+	*/
+    </script>
+</body>
+</html>

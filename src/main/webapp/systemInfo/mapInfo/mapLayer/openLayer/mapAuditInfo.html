@@ -1,0 +1,81 @@
+<div class="form-group" >
+	<label class="col-sm-3 control-label">上报人</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="mark_person" name="mark_person" readonly/>
+	</div>
+	<label class="col-sm-3 control-label">上报时间</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="mark_time" name="mark_time" style="width:110%;" readonly/>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">上报类型</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="report_type" name="report_type"/>
+	</div>
+	<label class="col-sm-3 control-label">设施类型</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="component_type" name="component_type" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">纠错种类</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="correct_type" name="correct_type" />
+	</div>
+</div>
+<div class="form-group attr" style="display: none">
+	<label class="col-sm-3 control-label" id="attr_attrOne">设施属性1</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="attr_one" name="attr_one" />
+	</div>
+	<label class="col-sm-3 control-label" id="attr_attrTwo">设施属性2</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="attr_two" name="attr_two" />
+	</div>
+</div>
+<div class="form-group attr" style="display: none">
+	<label class="col-sm-3 control-label" id="attr_attrFour">设施属性4</label>
+	<div class="col-sm-3" id="attrFour_div">
+		<input type="text" class="form-control input-sm" id="attr_four" name="attr_four" />
+	</div>
+	<label class="col-sm-3 control-label" id="attr_attrThree">设施属性3</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="attr_three" name="attr_three" />
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">上报说明</label>
+	<div class="col-sm-9">
+		<textarea rows="2" cols="2" id="desription" name="desription" class="form-control input-sm"></textarea>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">所在道路</label>
+	<div class="col-sm-9">
+		<textarea rows="2" cols="2" class="form-control input-sm" id="road" name="road"></textarea>
+	</div>
+</div>
+<div class="form-group">
+	<label class="col-sm-3 control-label">设施位置</label>
+	<div class="col-sm-9">
+		<textarea rows="2" cols="2" class="form-control input-sm" id="addr" name="addr"></textarea>
+	</div>
+</div>
+<div class="form-group check" style="display: none" >
+	<label class="col-sm-3 control-label">审批人名称</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="check_person" name="check_person" />
+	</div>
+	<label class="col-sm-3 control-label">审批时间</label>
+	<div class="col-sm-3">
+		<input type="text" class="form-control input-sm" id="check_time" name="check_time" width="110%" readonly/>
+	</div>
+</div>
+<div class="form-group check" style="display: none" check="true">
+	<label class="col-sm-3 control-label">审批备注</label>
+	<div class="col-sm-9">
+		<textarea rows="2" cols="2" id="check_desription" name="check_desription" class="form-control input-sm"></textarea>
+	</div>
+</div>
+<input type="hidden" class="form-control" id="objectid" name="objectid" />

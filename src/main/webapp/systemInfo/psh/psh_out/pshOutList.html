@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/awater_swj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/awater_swj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/awater_swj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/awater_swj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+	    <link href="/awater_swj/css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
+		<style>
+			.col-sm-cous{
+				padding-right:0px;text-align:right;padding-top: 5px;margin-bottom:5px
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+			.layui-layer-btn{
+				background: #eee;
+			}
+		</style>
+  	</head>
+  	<body>
+  	<div class="col-sm-12 mainwrapper">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form class="form-horizontal" role="form" id="myform">
+					<div class="form-group">
+						<label class="col-sm-1 control-label col-sm-cous" >所属区域</label>
+						<div class="col-sm-2" >
+							<select class="form-control" id="area">
+								<option value="">全部</option>
+								<option value="天河区">天河区</option>
+								<option value="番禺区">番禺区</option>
+								<option value="黄埔区">黄埔区</option>
+								<option value="白云区">白云区</option>
+								<option value="南沙区">南沙区</option>
+								<option value="海珠区">海珠区</option>
+								<option value="荔湾区">荔湾区</option>
+								<option value="花都区">花都区</option>
+								<option value="越秀区">越秀区</option>
+								<option value="增城区">增城区</option>
+								<option value="从化区">从化区</option>
+							</select>
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >所属镇(街)</label>
+						<div class="col-sm-2" >
+							<input type="text" class="form-control" id="town" name="town" />
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >排水户名称</label>
+						<div class="col-sm-2" >
+							<input type="text" class="form-control" id="name" name="name" />
+						</div>
+			     	</div>
+			     	<div class="form-group">
+						<label class="col-sm-1 control-label col-sm-cous" >排水许可证</label>
+						<div class="col-sm-2" >
+							<select class="form-control" id="hasCert3">
+								<option value="">全部</option>
+								<option value="1">有</option>
+								<option value="0">无</option>
+							</select>
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >排污许可证</label>
+						<div class="col-sm-2" >
+							<select class="form-control" id="hasCert4">
+								<option value="">全部</option>
+								<option value="1">有</option>
+								<option value="0">无</option>
+							</select>
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >营业执照</label>
+						<div class="col-sm-2" >
+							<select class="form-control" id="hasCert1">
+								<option value="">全部</option>
+								<option value="1">有</option>
+								<option value="0">无</option>
+							</select>
+						</div>
+			     	</div>
+			     	<div class="form-group">
+			     	<label class="col-sm-1 control-label col-sm-cous" >污水类别</label>
+						<div class="col-sm-2" >
+							<select id="dischargerType1" class="selectpicker show-tick form-control" multiple data-live-search="false">
+								<optgroup id="pcode" label="污水类别"></optgroup>
+							</select>
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >开始时间</label>
+						<div class="col-sm-2">
+							<input type="text" class="form_datetime form-control" id="startTime" name="startTime" readOnly />
+						</div>
+						<label class="col-sm-1 control-label col-sm-cous" >结束时间</label>
+						<div class="col-sm-2">
+							<input type="text" class="form_datetime form-control" id="endTime" name="endTime" readOnly />
+						</div>
+						<div class="col-sm-3">
+							<button type="button" id="btn_query" class="btn btn-primary" onclick="search();">查询</button>
+							<button type="button" id="btn_query" class="btn btn-default" onclick="resets();">重置</button>
+							<button type="button" id="btn_loadToExcel"  class="btn btn-primary" onClick ="exportExcel()">导出excel</button> 
+						 </div>
+			     	</div>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<table id="table"></table>
+		</div>
+	</div>
+  	</body>
+	 <script src="/awater_swj/lib/jquery.min.js?v=1.0.0"></script> 
+	  <script src="/awater_swj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+	  <script src="/awater_swj/lib/plugins/bootstrap-select/bootstrap-select.js" charset="UTF-8"></script>   
+	  <script src="/awater_swj/js/util_date.js" type="text/javascript"></script>
+	  <script src="/awater_swj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/awater_swj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/awater_swj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>	
+	  <script src="js/pshOutList.js"></script>
+</html>

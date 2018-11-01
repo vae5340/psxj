@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+	<link href="../../css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    
+	<script type="text/javascript">
+	function showPoint(){
+		var frames=window.parent.window.document.getElementById("main"); 
+		frames.contentWindow.getInfo(); 
+	}	
+	</script>
+</head>
+
+<body style="background-color:white;height:300px;">
+    <div class="animated fadeInRight">
+		<div class="col-sm-12">
+			<!-- Example Events -->
+			<table id="table" data-toggle="table"
+				   data-click-to-select="true"
+				   data-row-style="rowStyle"
+				   data-pagination="false"
+				   data-search="true"
+				   data-height="380">
+				<thead>
+
+				<tr>
+					<th class="hidden" data-field="combId">combId</th>
+					<th data-field="name">井下水位名称</th>
+					<th class="hidden" data-field="x">经度</th>
+					<th class="hidden" data-field="y">纬度</th>
+				</tr>
+				</thead>
+			</table>
+			<!-- End Example Events -->
+		</div>
+    </div>
+    <script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script type="text/javascript">
+	
+	function queryParams() {
+        return {
+            type: 'owner',
+            sort: 'updated',
+            direction: 'desc',
+            per_page: 100,
+            page: 1
+        };
+    }
+	
+	var $table = $('#table'), $remove = $('#re_send_selected');
+
+    $(function () {
+		$table.on('click-row.bs.table', function (row,obj) {
+	        window.parent.showInfoWindowByPoint(obj);
+        });
+        $.ajax({
+			method : 'GET',
+			url : location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/rest/pscomb/getAllMonitorStationNew?estType=21',
+			async : true,
+			dataType : 'json',
+			success : function(data) {
+				var row=new Array();
+				for (i in data.rows){
+					var obj=new Object();
+					obj.combId=data.rows[i].combId;
+					obj.name=data.rows[i].combName;
+					obj.x=data.rows[i].xcoor;
+					obj.y=data.rows[i].ycoor;
+					obj.type=data.rows[i].estType;
+					row.push(obj);
+				}
+				$table.bootstrapTable('load', row);
+			},
+			error : function() {
+				alert('error');
+			}
+		});
+    });
+
+	/*
+    function actionFormatter(value, row, index) {
+        return [
+            '<button class="btn btn-primary resend">重新发送邀请</button>'
+        ].join('');
+    }
+	
+    window.actionEvents = {
+        'click .resend': function (e, value, row, index) {
+            alert('重新发送该邀请, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        }
+    };
+	*/
+    </script>
+</body>
+</html>

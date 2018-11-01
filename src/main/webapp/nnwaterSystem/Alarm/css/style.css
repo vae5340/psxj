@@ -1,0 +1,20 @@
+﻿/* CSS Document */
+*{margin:0;padding:0;font-size:12px;}
+body{ background:white;}
+input,button,select,textarea{outline:none;}
+ul,li,dl,ol{list-style:none;}
+a{color:#666; text-decoration:none;}
+
+.bcon{ width:300px; border:1px solid #eee;}
+.bcon h1{ border-bottom:1px solid #eee; padding:0 10px;}
+.bcon h1 b{ font:bold 14px/40px '宋体'; border-top:2px solid #3492D1; padding:0 8px; margin-top:-1px; display:inline-block;}
+
+.list_lh{ height:75px; overflow:hidden;width:100%;}
+.list_lh li{ padding:5px;height: 20px;}
+.list_lh li.lieven{ background:#F0F2F3;}
+.list_lh li p{ height:10px; line-height:10px;}
+.list_lh li p a{ float:left;}
+.list_lh li p span{ color:#000000; float:right;}
+.btn_lh:hover{ color:#fff; text-decoration:none;}
+.a_red{ color:#FB0000; font-weight: bold;  }
+.a_yellow{ color:#FE6602; font-weight: bold; }

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>排水设施巡检系统</title>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="renderer" content="webkit">
+	    <meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+	
+	    <!--[if lt IE 9]>
+	    <meta http-equiv="refresh" content="0;ie.html" />
+	    <![endif]-->
+	    
+	    <link rel="shortcut icon" href="/psxj/img/awater.png">
+	    <link href="/psxj/css/bootstrap.min.css?v=3.4.0" rel="stylesheet">
+	    <link href="css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+	    <link href="css/animate.min.css" rel="stylesheet">
+		<link href="css/style.min862f.css?v=4.1.0" rel="stylesheet">
+		<link href="css/augur.min.css" rel="stylesheet">
+		<link href="css/augur.expand.css" rel="stylesheet">
+		<link href="css/arcgis/claro.css" rel="stylesheet" >
+	    <link href="lib/arcgis_js_api/dijit/themes/tundra/tundra.css" rel="stylesheet" type="text/css" />
+	    <link href="lib/arcgis_js_api/esri/css/esri.css" rel="stylesheet" type="text/css" />
+	    <link href="lib/arcgis_js_api/esri/css/esri_expand.css" rel="stylesheet" type="text/css" />
+	    <link href="css/map.css" rel="stylesheet" type="text/css"/>
+	    <link href="lib/nifty/nifty.css" rel="stylesheet" type="text/css" />
+	    <link rel="stylesheet" href="/psxj/css/plugins/jsPanel/jquery-ui.min.css">
+	    <link rel="stylesheet" href="/psxj/css/plugins/jsPanel/jquery.jspanel.css">
+		<link rel="stylesheet" href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css">
+	    <link rel="stylesheet" href="lib/plugins/layer-v2.4/layer/skin/layer.css">
+		<link rel="stylesheet" href="lib/zTree/css/zTreeStyle/metro.css">
+		<!--<link rel="stylesheet" href="lib/plugins/layer-v2.4/layer/skin/layer-expand.css">-->   
+		<!-- map样式 --> 
+		<link href="plugins/hplus/css/augur.min.css" rel="stylesheet">
+		<link href="plugins/hplus/css/tuli.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/frame.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/global.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/style.css" rel="stylesheet" type="text/css">
+		<link href="plugins/hplus/css/tool.css"  rel="stylesheet" type="text/css">
+		<link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<link href="/psxj/systemInfo/ssxjxt/style/blue/css/validate.css" rel="stylesheet">
+		<style>
+			.esriSimpleSliderTL {
+				bottom: 50px;
+			    right: 25px;
+			}
+			.tool_bar{
+				width: 98px;
+				height: auto;
+				box-shadow: 2px 0 20px #ddd;
+				top: 13px;
+				left: calc(100% - 100px);
+				z-index:7;
+				background-color: white;
+				position: absolute;
+				border-radius: 5px 5px 5px 5px;
+			}
+			.tool_bar_layer{
+				width: 98px;
+				height: auto;
+				box-shadow: 2px 0 20px #ddd;
+				top: 13px;
+				left: calc(100% - 210px);
+				z-index:7;
+				background-color: white;
+				position: absolute;
+				border-radius: 5px 5px 5px 5px;
+			}
+
+	    	a:hover{color:#F5841D;}
+	    	#exitA{color:#ffffff;}
+	    	.btn-default {
+			    color: #333;
+			    background-color: #fff;
+			    border-color: #ccc;
+			}
+			.btn-primary {
+			    color: #fff;
+			    background-color: #337ab7;
+			    border-color: #2e6da4;
+			}
+			.esriPopup .titlePane {background-color: #337ab7;}
+		    .esriPopup .pointer.top {background: #337ab7;}
+			.clearInput{display: none;position: absolute;width: 24px;height: 24px;margin: 4px 0 0 -22px;background:url(/psxj/img/close.png) no-repeat;outline: none;}
+		    @keyframes blink{
+				0%{opacity: 1;}
+			  	50%{opacity: 1;}
+			  	50.01%{opacity: 0;} /* 注意这里定义50.01%立刻透明度为０，可以设置闪烁效果 */
+			  	100%{opacity: 0;} 
+			}
+			/* 添加兼容性前缀 */
+			@-webkit-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			@-moz-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			@-ms-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			@-o-keyframes blink {
+			    0% { opacity: 1; }
+			    50% { opacity: 1; }
+			    50.01% { opacity: 0; }
+			    100% { opacity: 0; }
+			}
+			
+			/* 定义blink类*/
+			.blink{
+			    animation: blink 2s linear infinite;  
+			    /* 其它浏览器兼容性前缀 */
+			    -webkit-animation: blink 2s linear infinite;
+			    -moz-animation: blink 2s linear infinite;
+			    -ms-animation: blink 2s linear infinite;
+			    -o-animation: blink 2s linear infinite;
+			    color: #dd4814;
+			}			
+			#search_location {
+			    width: 100%;
+			    margin: 10px auto;
+			    text-indent: 10px;
+			    border: 1px solid #d0d0d0;
+			    box-shadow: 3px 2px 6px 0px #B0B0B0;
+			    border-radius: 5px;
+			    height: 30px; 
+			    font-size: 14px;
+			}
+			.form-control {
+			    overflow-x: hidden;
+			}
+			.index_title{
+				padding-top: 6px;
+				margin-left: 10px;
+				font-size: 40px;
+				float: left;
+				color: #b8f1ff;
+				font-weight: 600;
+			}
+		</style>
+		<script type="text/javascript">
+			var serverName="psxj";
+			var sde_user="sde";
+			var userCode="";
+			var agcom_url="agcom";
+			document.onkeydown = function (e) {
+	            if (!e) e = window.event;
+	            if ((e.keyCode || e.which) == 13) {
+	            	searchLocation();
+	            }
+	        }
+		</script>
+	</head>
+	<body class="fixed-sidebar full-height-layout gray-bg fixed-nav mini-navbar pace-done skin-1" style="overflow:hidden">
+   		<!-- 权属范围信息输入表单 -->
+   		<div class="tab-content" id="qsfwxx" style="width:90%;display:none;margin:auto" >
+   			<form id="qsfw" class="form-horizontal" >
+   				<div class="form-group">
+					<label class="col-sm-2 control-label">权属类型<font color="red">*</font> </label>
+					<div class="col-sm-4">
+						<select class="form-control" id="qslx" name="qslx" onchange="changeQsdw(this.options[this.options.selectedIndex].value)" required >
+							<option value="其他业主单位权属">其他业主单位权属</option>
+							<option value="城中村权属管理">城中村权属管理</option>
+							<option value="三不管设施">三不管设施</option>
+							<option value="待查区">待查区</option>
+						</select>
+					</div>
+					<label id="qsdwText" class="col-sm-2 control-label">权属单位<font color="red">*</font></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="qsdw" name="qsdw" required />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">养护单位<font color="red">*</font> </label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="yhdw" name="yhdw" required />
+					</div>
+					<label class="col-sm-2 control-label">管网长度(米)<font color="red">*</font></label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="gwcd" name="gwcd" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">养护范围描述  </label>
+					<div class="col-sm-10">
+						<textarea rows="2" class="form-control"  id="yhfwms" name="yhfwms" ></textarea>
+					</div>
+				</div>
+   			</form>
+   		</div>
+   		<!-- 地图模态框 -->
+		<div id="mapInfo_content"></div>
+   		<div id="wrapper">
+		<!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" id="prtHd3" role="navigation"
+		 style="width: 50px;top: 105px;position: fixed;"><!-- style="position:absolute;" -->
+			<div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="leftMenu">
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+		
+		<!--左侧导航开始2-->
+		<!--
+		伸缩设置：	
+		1、只伸缩三级菜单时，将ID为leftDiv容器只包含三级菜单
+		2、伸缩二、三级菜单时，将ID为leftDiv容器只包含二、三级菜单
+		-->
+		<div id="leftDiv" class="leftDiv" style="left: 50px;margin-top: 70px;border-radius: 5px 5px 5px 5px;">
+            <div id="funPannel" class="funPannelOn">
+                <ul id="side-menu" class="bs-glyphicons" >					
+				</ul>
+			</div>
+		</div>
+		<div id="seperator" class="seperator" style="display: none">
+		</div>
+        <!--左侧导航结束2-->
+		
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1" style="margin-left:400px;">
+            <div class="row border-bottom" id="prtHd1" height="75px" >
+                <nav class="navbar navbar-static-top" role="navigation">
+					<span class="index_title">排水设施巡检系统</span>
+					<div class="user clearfloat">
+						<div class="userInfo clearfloat">
+							<div class="uimg"><a href="#"><img src="img/icon/gly.png" style='width:33px;height:33px;'/></a></div>
+							<div class="umsg"><em id="userName"></em>&nbsp;<span class="arrowDown"></span></div>
+							<ul class="setting">
+								<li><a>修改密码</a></li>
+								<li><a class="android">Android版下载</a></li>
+								<li><a href="logout">退出</a></li>
+							</ul>
+							<input type="hidden" id="parentOrgArea"/>
+							<input type="hidden" id="parentOrgAreaId"/>
+						</div>
+					</div>
+                    
+					<ul class="tnav" id="topMenu">
+					</ul>
+					<div id='btn_list'><a id='list' class='firstList'>菜单</a></div>
+                </nav>
+            </div>
+            <div class="row content-tabs" id="prtHd2" style="margin-top: 63px;margin-left: -85px;">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id=wrapper-map>地图服务</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right" style="z-index:32">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                        </li>
+                        <li class="divider"><br><br></li>
+                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                        </li>
+                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+           	 <div class="row J_mainContent" id="content-main" style="margin-left: -35px;"><!--  style="position: absolute;" -->
+           	<div class="J_iframe" name="iframe0" id="wrapper-map" data-id="wrapper-map" style="width: 100%;height: 100%;">
+						<!-- 地图控件开始 -->
+<div id="search_box" class="search_box" style='display:none'>
+	<div id="tab_box" class="tab_box"></div>
+	<div class="content_box">
+		<div class="pullup"></div>
+		<div id="tab_ContentAll" style="overflow:auto;background-color: white;max-height:450px;  padding:10px;"></div>
+	</div>
+</div>
+<div class="tool_bar" id="prtHd4">
+	<ul>
+		<li class="tool_btn" style="float:left"><a href="#">工具</a>
+			<ul class="sub_toolmenu" style="display:none">
+				<li id="tool_qingchu" class="qingchu"><a href="#">清除</a></li>
+				<li id="tool_query" class="query"><a href="#">查询</a></li>
+				<li id="tool_fangda" class="fangda"><a href="#">放大</a></li>
+				<li id="tool_suoxiao" class="suoxiao"><a href="#">缩小</a></li>
+				<li id="tool_pingyi" class="pingyi"><a href="#">平移</a></li>
+				<li id="tool_cexian" class="cexian"><a href="#">测线</a></li>
+				<li id="tool_cemian" class="cemian"><a href="#">测面</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div class="tool_bar_layer">
+	<ul>
+		<li class="tool_btn_layer" style="float:left">
+			<a href="#">图层</a>
+			<ul class="sub_toolmenu" style="display:none">
+				<li id="tool_gaw" class="" onclick="checkbox_layer(this)">
+					<input type="checkbox" checked/>
+					<a href="#">管线</a>
+				</li>
+				<li id="tool_problem" class="" onclick="checkbox_layer(this)">
+					<input type="checkbox" />
+					<a href="#">问题上报</a>
+				</li>
+				<li id="tool_check" class="" onclick="checkbox_layer(this)">
+					<input type="checkbox"  />
+					<a href="#">数据上报</a>
+				</li>
+				<li id="tool_psh" class="" onclick="checkbox_layer(this)">
+					<input type="checkbox" />
+					<a href="#">排水户</a>
+				</li>
+				<li id="qsfw_tc" class="" onclick="checkbox_layer(this)">
+					<input type="checkbox" checked/>
+					<a href="#">权属范围</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<div id="selectLayer" style="margin-top: -5px; margin-left: 35px">  
+      <div class="infoPanel">
+         <div class="infoBox" style="height: 100%; width: 100%">
+             <!--tab标题-->
+             <div id="divSearchResultTitle" style="overflow-x: scroll; overflow-y: hidden; width: auto; display: none">
+                 <ul class="tabs" id="searchResultTitle" style="background: transparent;">
+                 </ul>
+             </div>
+             <!--tab内容-->
+             <div class="tab_container" id="searchResultInfo" style="background: transparent; width: 99%; height: 100%; display: none;"></div>
+         </div>
+     </div>
+ </div>
+ <div class="expandBox">
+     <p>  详细信息</p>
+     <span id="closeExpand" class="close"></span>
+     <table id="exampleTableEvents" class="table table-bordered"></table>
+ </div>
+<div id="loadingWindow" style="display:none;text-align: center;opacity:0.7;background:#000;position:absolute;z-index:99999;bottom:0px;width:100%;height:100%">
+	<img src="plugins\hplus\images\Loading.gif" style="padding-top: 25%;"/><a>正在加载...</a>
+</div>
+     <div id="mapType-wrapper">
+		<div id="mapType">
+			<div class="mapTypeCard normal active" data-name="normalMap">
+				<span>地图</span>
+			</div>
+			<div class="mapTypeCard earth" data-name="earth">
+				<span>卫星影像</span>
+			</div>
+		</div>
+	</div>
+	
+<!-- 地图控件结束 -->
+<!-- 地图DIV 开始 -->
+<div class="J_iframe1" name="map_iframe0" id="mapDiv" data-id="mapDiv">
+	
+</div>
+<!-- 鼠标在地图上移动时xy变化效果 -->
+<div id="coorDiv" style="position: absolute; bottom: 10px; z-index: 1000; margin-left: 20px;"></div>
+<!-- 是否显示管线 上报数据  问题上报 -->
+<div id="checked_isShowData" style="position: absolute; top: 13px;  right: 5px;">
+</div>
+<!-- 权属范围新增与取消按钮 -->
+<div  id="qsfwBts" style="position: absolute;top: 13px;left: calc(100% - 360px);background-color: #fff;
+		border-radius: 5px 5px 5px 5px;">
+	<div class="btn-group">
+	    <button type="button" class="btn btn-default">权属范围编辑</button>
+	    <button type="button" class="btn btn-default dropdown-toggle" 
+	        data-toggle="dropdown">
+	        <span class="caret"></span>
+	        <span class="sr-only">切换下拉菜单</span>
+	    </button>
+	    <ul class="dropdown-menu" style="font-size:14px" role="menu">
+	        <li><a href="#" id="addFence">新增</a></li>
+	        <li><a href="#" id="updateFence">修改</a></li>
+	        <li><a href="#" id="deleteFence">删除</a></li>
+	        <li class="divider"></li>
+	        <li><a href="#" id="clearFence">清除</a></li>
+	    </ul>
+	</div>
+</div> 
+<!-- 中文搜索或原管网数据编号定位-->
+<div id="sc-home-map-search" style="left:40%; width: 20%; height: 30px; ">
+  <input id="search_location" type="text" placeholder="输入地名地址或原管网数据编号定位">
+  <img title="清空" onclick="clear_searchLocation()" id="search-clear-btn" src="plugins/hplus/img/cross.png" style="top: 25px; right: 30px; width: 10px; height: 10px;display:none">
+  <img title="查询" onclick="searchLocation()" src="plugins/hplus/img/search.png" style="position: absolute;top: 22px; right: 8px; width: 16px; height: 16px;">
+</div>
+        <!-- 地图图例 结束 -->
+		</div>
+	</div>
+</div>
+        <!--右侧部分结束-->
+    <script type="text/javascript" src="lib/jquery.min.js?v=1.0.0"></script>
+    <script src="/psxj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+    <script src="/psxj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+    <script type="text/javascript" src="lib/bootstrap.min.js?v=3.3.6"></script>
+    <!-- 图片预览插件 -->
+    <link href="/psxj/systemInfo/js/viewer/js/viewer.min.css" rel="stylesheet"/>
+    <script src="/psxj/systemInfo/js/viewer/js/viewer.min.js"></script>
+    <script type="text/javascript" src="lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<!-- <script type="text/javascript" src="lib/plugins/bootstrap-table/bootstrap-table.min.js"></script> -->
+	<!-- 图片预览插件加载 -->
+	<script type="text/javascript" src="lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script type="text/javascript" src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	<script type="text/javascript" src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+   
+    <script type="text/javascript" src="lib/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script type="text/javascript" src="lib/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script type="text/javascript" src="lib/plugins/layer-v2.4/layer/layer.js"></script>
+    <script type="text/javascript" src="lib/hplus.min.js?v=4.1.0"></script>
+    <script type="text/javascript" src="lib/plugins/pace/pace.min.js"></script>
+	<script type="text/javascript" src="lib/highchart/js/highcharts.js"></script>
+	<script type="text/javascript" src="lib/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+    <script type="text/javascript" src="js/uiWidgets.js"></script>
+    <script type="text/javascript" src="lib/contabs.min.js"></script>
+    <script type="text/javascript" src="js/config/dojoConfig.js"></script>
+    <script type="text/javascript" src="js/config/mapConfig.js"></script>
+    <script type="text/javascript" src="lib/arcgis_js_api/init.js"></script>
+    <script type="text/javascript" src="js/common.js"></script> 
+    <script type="text/javascript" src="lib/augur.min.js?v=1.0.0"></script>
+    <!-- 地图服务(路径)加载路径配置 -->
+    <script type="text/javascript" src="systemInfo/js/map-config.js"></script> 
+    <script type="text/javascript" src="js/initMap.js"></script>
+    <script type="text/javascript" src="js/esri.symbol.MultiLineTextSymbol.js"></script>
+    <script type="text/javascript" src="lib/augur.map.js"></script>
+    <script type="text/javascript" src="js/bj-map.js"></script>
+    <script type="text/javascript" src="lib/nifty/nifty.js" ></script>
+    <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+    <script src="/psxj/js/utils/iframe-util.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/util_addMarker.js"></script>
+    <!-- <script src="/psxj/lib/plugins/jsPanel/jquery.ui.touch-punch.min.js"></script> -->
+    <script src="/psxj/lib/plugins/jsPanel/jquery.jspanel-compiled.js"></script>
+    <script type="text/javascript" src="lib/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/psxj/nnwaterSystem/PipeNetwork/js/pipeGis.js"></script>
+    <script type="text/javascript" src="/psxj/nnwaterSystem/szwh/js/locator.js"></script>
+    <script type="text/javascript" src="/psxj/nnwaterSystem/szwh/js/infoQuery.js"></script>
+    <script type="text/javascript" src="systemInfo/js/map-openLayer.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=lxukz8Kzlady8a0HqUboegq1Rt2DRSDG"></script>
+  </body>
+</html>

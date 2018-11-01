@@ -1,0 +1,54 @@
+html,body{
+	height:100%;
+	overflow:hidden;
+	overflow-y:hidden;
+	padding:0 5px;
+}
+.container-fluid{
+	padding-left: 1px;
+	padding-right: 1px;
+	height: 100%;
+}
+.well{
+	background:transparent;
+	border: 2px solid #39AEF5;
+	height: 100%;
+	padding: 0px;
+}
+#wellTitle{
+	background-color: #39AEF5;
+	width: 100%;
+	float: left;
+	border-top-left-radius:0;
+	border-top-right-radius:0;
+	padding: 5px;
+}
+#wellQueryBar{
+	width: 100%;
+	float: left;
+	padding-left: 5px;
+	padding-top: 5px;
+}
+#wellBottonBarCenter{
+	background-color: #BBDEF4;
+	width: 496px;
+	padding: 5px;
+	margin-top: 10px;
+	text-align: right;
+}
+#wellBottonBar{
+	background-color: #BBDEF4;
+	width: 496px;
+	padding: 5px;
+	margin-top: 10px;
+	position:fixed; 
+	bottom:0;
+	text-align: right;
+	margin-bottom: 2px;
+}
+#echartTile{
+	width: 100%;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}

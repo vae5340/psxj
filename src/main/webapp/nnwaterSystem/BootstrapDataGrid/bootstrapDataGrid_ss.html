@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="../../css/style.min862f.css?v=4.1.0" rel="stylesheet">    
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">     
+    <style>
+     table th{font-size:16px;font-weight:400}
+     .control-label{font-weight:400}
+    </style>
+    <script src="/awater/lib/jquery-2.1.4.js?v=2.1.4"></script>
+    <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script >
+    <script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>  
+    <script src="/awater/waterSystem/establishment/js/nnArea.js"></script>  
+    
+	<script type="text/javascript">
+	function changeTable(heightValue){
+		$('#table').bootstrapTable('resetView', {
+			height: heightValue-180
+		});
+	}
+	function showPoint(){
+		var frames=window.parent.window.document.getElementById("main"); 
+		frames.contentWindow.getInfo(); 
+	}	
+	
+	(function($){
+		$(window).load(function(){
+			$("#table").on('post-body.bs.table', function (row,obj) {
+				$(".fixed-table-body").mCustomScrollbar({
+					mouseWheelPixels:300
+				});				
+			});	
+				
+			$("#table").on('click-row.bs.table', function (row,obj) {
+		       if(obj.combId==undefined)
+			     	showTabWindow("/awater/waterSystem/ssjk/ssjk-dim-main.html?combId="+obj.id);	
+			   else		
+			        showTabWindow("/awater/waterSystem/ssjk/ssjk-dim-main.html?combId="+obj.combId);	
+			});							
+		});    		    		    		   		
+	})(jQuery);
+	</script>
+</head>
+
+<body style="background-color:white;height:300px;">
+    <div class="animated fadeInRight">
+		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:8px;text-align:left;">成员单位</label>
+		<div class="col-sm-8" style="margin-bottom:5px;width:74%">
+			<select type="text" class="form-control" id="districtName">	
+			  <option></option>		
+			</select>
+		</div>
+		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:8px;text-align:left;">设施地址</label>
+		<div class="col-sm-8" style="margin-bottom:5px;width:74%">
+			<input type="text" class="form-control" id="combName">
+		</div>
+		<label class="control-label col-sm-1" style="width:80px;padding-right:0px;padding-top:8px;text-align:left;">设施类型</label>
+		<div class="col-sm-6" style="margin-bottom:10px">
+			<select type="text" class="form-control" id="estType">
+			   <option></option>
+			   <option value=6>排水泵站</option>
+			   <option value=13>积水点</option>
+			   <option value=17>视频点</option>
+			   <option value=18>内河站点</option>
+			   <option value=20>水文站</option>
+			   <option value=21>窨井</option>
+			   <option value=22>仓库</option>
+			</select>
+		</div>
+		<div class="col-sm-2" style="text-align:left;">
+			<button type="button" id="btn_query" class="btn" onclick="reloadData()">查询</button>
+		</div> 	
+		<table id="table"></table>
+    </div>
+	<script type="text/javascript">
+		function format_type(value, row, index){
+			switch(value){
+			  case 6:
+			     return '排水泵站';
+			 case 13:
+			     return '积水点';
+			 case 17:
+			     return '视频点';
+			 case 18:
+			     return '内河站点';
+			 case 20:
+			     return '水文站';
+			 case 21:
+			     return '窨井';
+		      case 22:
+			     return '仓库';
+			}
+		}
+		
+		function showTabWindow(url){
+			parent.createNewtab(url,"设备详情");	
+		}
+			
+		function reloadData(){
+			var query=new Object();
+			if($("#districtName").val()!="")
+				query.area=$("#districtName").val();
+			if($("#combName").val()!="")
+				query.combName=$("#combName").val();
+			if($("#estType").val()!="")
+				query.estType=$("#estType").val();
+			$("#table").bootstrapTable('refresh', {url: location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ps-comb!listNoPageJson.action',query:query});
+		}
+			
+	    $(function(){
+	        for(var index in nnArea){
+	            $("#districtName").append("<option value="+nnArea[index].code+">"+nnArea[index].name+"</option>");	        
+	        }
+	         
+			$("#table").bootstrapTable({
+					toggle:"table",
+					height:parent.window.$("#leftMenuTableDiv").height()-210,
+					url: location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/rest/pscomb/getAllMonitorStationNew',
+					rowStyle:"rowStyle",
+					cache: false, 
+					striped: true,
+					sidePagination: "server",
+					columns: [
+						{field:'id',visible: false,title: '编号',align:'center'},
+						{field:'combName',visible: true,title: '设施地址',align:'center'},
+						{field:'estType',visible: true,title: '设施类型',align:'center',formatter:format_type},
+						{field:'xcoor',visible: false,title: 'x坐标',align:'center'},
+						{field:'ycoor',visible: false,title: 'y坐标',align:'center'}
+			    ]
+			});
+		});
+    </script>
+</body>
+</html>

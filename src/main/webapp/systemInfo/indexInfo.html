@@ -1,0 +1,202 @@
+<!-- 地图控件开始 -->
+ <div id="sc-home-map-search">
+  <input id="sc-home-map-search-input" type="text" placeholder="查找河涌水系等..." style="height: 30px; font-size: 14px;">
+  <img title="清空" id="search-clear-btn" src="plugins/hplus/img/cross.png" style="top: 25px; right: 30px; width: 10px; height: 10px;display:none">
+ 	<img id="search-input-btn" src="plugins/hplus/img/search.png" style="top: 22px; right: 8px; width: 16px; height: 16px;">
+ </div>
+
+<div id="search_box" class="search_box" style='display:none'>
+	<div id="tab_box" class="tab_box"></div>
+	<div class="content_box">
+		<div class="pullup"></div>
+		<div id="tab_ContentAll" style="overflow:auto;background-color: white;max-height:450px;  padding:10px;"></div>
+	</div>
+</div>
+<div class="tool_bar">
+	<ul>
+		<li class="tool_btn"><a href="#">工具</a>
+			<ul class="sub_toolmenu" style="display:none">
+				<li id="tool_query" class="query"><a href="#">查询</a></li>
+				<li id="tool_extentquery" class="kuangxuan"><a href="#">框选</a></li>
+				<li id="tool_fangda" class="fangda"><a href="#">放大</a></li>
+				<li id="tool_suoxiao" class="suoxiao"><a href="#">缩小</a></li>
+				<li id="tool_pingyi" class="pingyi"><a href="#">平移</a></li>
+				<li id="tool_cexian" class="cexian"><a href="#">测线</a></li>
+				<li id="tool_cemian" class="cemian"><a href="#">测面</a></li>
+				<li id="tool_qingchu" class="qingchu"><a href="#">清除</a></li>
+			</ul>
+		</li>
+	</ul>
+</div>
+
+<div id="selectLayer" style="margin-top: -5px; margin-left: 35px">  
+      <div class="infoPanel">
+         <div class="infoBox" style="height: 100%; width: 100%">
+             <!--tab标题-->
+             <div id="divSearchResultTitle" style="overflow-x: scroll; overflow-y: hidden; width: auto; display: none">
+                 <ul class="tabs" id="searchResultTitle" style="background: transparent;">
+                 </ul>
+             </div>
+             <!--tab内容-->
+             <div class="tab_container" id="searchResultInfo" style="background: transparent; width: 99%; height: 100%; display: none;"></div>
+         </div>
+     </div>
+ </div>
+ <div class="expandBox">
+     <p>  详细信息</p>
+     <span id="closeExpand" class="close"></span>
+     <table id="exampleTableEvents" class="table table-bordered"></table>
+ </div>
+<div id="loadingWindow" style="display:none;text-align: center;opacity:0.7;background:#000;position:absolute;z-index:99999;bottom:0px;width:100%;height:100%">
+	<img src="plugins\hplus\images\Loading.gif" style="padding-top: 25%;"/><a>正在加载...</a>
+</div>
+      <!--
+       <div id="legendWindow" class="legendWindowBox" style="z-index:99999;bottom:0px">
+          <div class="tl_container">
+		<h2>图例<a href="#" id='tuliSlideBtn' class="arrow_up"></a></h2>
+	<div class="tl_icon" style="display:none;height:350px;">
+		<ul>
+			<li><img src="plugins/hplus/img/gongpaipump.png" width="20px" height="20px"><span>泵站</span></li> 
+			<li><img src="plugins/hplus/img/daxinggate.png" width="20px" height="10px"><span>水闸</span></li>
+			<li><img src="plugins/hplus/img/dike.png" width="60px" height="10px"><span>堤防</span></li>
+			<li><img src="plugins/hplus/img/quanjing720.png" width="20px" height="20px"><span>全景720</span></li>
+			<li><img src="plugins/hplus/img/wrjxf.png" width="40px" height="4px"><span>无人机巡飞</span></li>
+			<li><img src="plugins/hplus/img/DEMtuli.png" width="95px" height="16px"><span>DEM</span></li>
+		</ul>
+	</div>
+	</div>
+      </div>
+       -->
+
+      <!--地图工具栏-->
+     <div id="tool-box">
+         <ul class="toolBar">
+             <li class="menu down"><a id="tool_selectTool" href="#" title="选择图层"></a>
+             </li>
+         </ul>
+     </div>
+     
+     <div id="mapType-wrapper">
+	<div id="mapType">
+		<div class="mapTypeCard normal active" data-name="normalMap">
+			<span>地图</span>
+		</div>
+		<div class="mapTypeCard earth" data-name="earth">
+			<span>卫星影像</span>
+		</div>
+		<div class="mapTypeCard dem" data-name="dem">
+			<span>DEM</span>
+		</div>
+	</div> 
+</div>	
+<!-- 图层控制 -->
+<div id="layer_box" class="layer_box" style="display:none">
+	<div id="right-info-div" class="right-info" style="z-index: 1001; width: 70%; overflow: auto; max-width: 350px; height: 83%; position: fixed; bottom: 0px; right: 0%; background: #f9f9f9 none repeat scroll 0% 0%; border: 1px solid #e7e7e7;overflow-x: hidden;">
+     		<div class="right-info-theme" style="color: #fff;font-size: 14px;font-weight: 700;height: 32px;line-height: 32px;text-indent: 30px;
+		width: 100%;background:#419ee6  url(plugins/hplus/images/layer_ctrol_icon.png) no-repeat 5px 6px;">图层控制<span id="btn_HideLayerControl" class="right_btn" title="隐藏图层控制">2</span></div>
+      	<div class="right-info-theme" style="width: 100%;height:32px;line-height: 32px;text-indent: 30px;font-size: 14px;background:#f1f1f1 url(plugins/hplus/images/layer_icon.png) no-repeat 5px 5px;border-bottom: 1px solid #dcdcdc;">基础底图</div>
+      	<div class="right-info-theme-list" style="width: 100%;background: #f9f9f9;">
+		<div onclick="changeBaseMap('DiTu')" class="right-item" style="margin: 10px 5px; vertical-align: middle; text-align: center; float: left; width: 72.5px;">
+			<div id="standard-map-icon" class="standard-map-selected-icon right-item-icon" name="standardLayer" style="width: 72.5px; height: 53px; background-size: 50px auto; text-align: center; "></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">标准地图</div>
+		</div>
+		<div onclick="changeBaseMap('WeiXingYingXiang')" class="right-item" style="margin: 10px 5px; float: left; width: 72.5px;"  title="(2000比例尺内不显示)">
+			<div id="satellite-map-icon" class="satellite-map-icon right-item-icon" name="satelliteLayer" style="width: 72.5px; height: 53px; background-size: 50px auto;">
+			</div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">卫星地图</div>
+		</div>
+		<div onclick="changeBaseMap('WeiXingYingXiangGGW')" class="right-item" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div id="satellite-map-ggw-icon" class="satellite-map-icon right-item-icon" name="satelliteLayer" style="width: 72.5px; height: 53px; background-size: 50px auto;">
+			</div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">卫星地图-国规委</div>
+		</div>
+		<div onclick="changeBaseMap('DemYingXiang')" class="right-item" style="margin: 10px 5px; float: left; width: 72.5px;" title="(2000比例尺内不显示)">
+			<div id="dem-map-icon" class="image-map-icon right-item-icon" name="demgeLayer" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">DEM</div>
+		</div>
+		<!-- 
+          	<div class="right-item" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div onclick="changeLayerVisible('JiChu',this,'road-map-selected-icon','road-map-icon')" id="road-map-icon" class="road-map-selected-icon right-item-icon" name="demgeLayer" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">基本要素</div>
+		</div>
+		 -->
+      	</div>
+      	<div class="right-info-special" style="width: 100%;height:32px;line-height: 32px;text-indent: 30px;font-size: 14px;background:#f1f1f1 url(plugins/hplus/images/layer_icon.png) no-repeat 5px 5px;border-bottom: 1px solid #dcdcdc;border-top: 1px solid #dcdcdc;">广州水系</div>
+      	<div class="right-info-special-list" style="width:100%;background: #f9f9f9;">
+      		<div class="right-item" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('shuixi',this,'river-info-selected-icon','river-info-icon')" id="river-info-icon" class="river-info-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">河流(涌)</div>
+		</div>
+		<div class="right-item" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('shuixidiming',this,'river-info-selected-icon','river-info-icon')" id="river-info-icon" class="river-info-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">水系地名</div>
+		</div>
+      	</div>
+      	<div class="right-info-special" style="width: 100%;height:32px;line-height: 32px;text-indent: 30px;font-size: 14px;background:#f1f1f1 url(plugins/hplus/images/layer_icon.png) no-repeat 5px 5px;border-bottom: 1px solid #dcdcdc;border-top: 1px solid #dcdcdc;">水利设施</div>
+      	<div class="right-info-special-list" style="width:100%;background: #f9f9f9;">
+      		<div class="getlist-icon right-item" id="shuiku" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('res',this,'reservoir-map-selected-icon','reservoir-map-icon')" id="reservoir-map-icon" class="reservoir-map-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">水库</div>
+		</div>
+		<div class="getlist-icon right-item" id="difang" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('dike',this,'difang-map-selected-icon','difang-map-icon')" id="difang-map-icon" class="difang-map-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">堤防</div>
+		</div>
+		<div class="getlist-icon right-item" id="shuizha" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('gate',this,'dam-selected-icon','dam-icon')" id="dam-icon" class="dam-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">水闸</div>
+		</div>
+		<div class="getlist-icon right-item" id="pump" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('pump',this,'pump-station-selected-icon','pump-station-icon')" id="pump-station-icon" class="pump-station-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">泵站</div>
+		</div>
+		
+      	</div>
+      		<div class="right-info-special" style="width: 100%;height:32px;line-height: 32px;text-indent: 30px;font-size: 14px;background:#f1f1f1 url(plugins/hplus/images/layer_icon.png) no-repeat 5px 5px;border-bottom: 1px solid #dcdcdc;border-top: 1px solid #dcdcdc;">多媒体</div>
+      	<div class="right-info-special-list" style="width:100%;background: #f9f9f9;">
+      		<div class="getlist-icon right-item" id="quanjingtu" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('quanjingtu',this,'quanjingtu-720-selected-icon','quanjingtu-720-icon')" id="quanjingtu-720-icon" class="quanjingtu-720-selected-icon right-item-icon" "="" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">720全景图</div>
+		</div>
+      		<div class="getlist-icon right-item" id="wurenjixunfei" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div  onclick="changeLayerVisible('wurenjixunfei',this,'UAV-map-selected-icon','UAV-map-icon')" id="UAV-map-icon" class="UAV-map-selected-icon right-item-icon" name="mediaLayer" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">无人机巡飞</div>
+		</div>
+      	</div>
+      	<!-- 
+      	<div class="right-info-special" style="width: 100%;height:32px;line-height: 32px;text-indent: 30px;font-size: 14px;background:#f1f1f1 url(plugins/hplus/images/layer_icon.png) no-repeat 5px 5px;border-bottom: 1px solid #dcdcdc;border-top: 1px solid #dcdcdc;">黑臭水体治理</div>
+      	<div class="right-info-special-list" style="width:100%;background: #f9f9f9;">
+      		<div class="getlist-icon right-item" id="heliuzhili35" style="margin: 10px 5px 10px 10px; float: left; width: 72.5px;">
+			<div id="heichou35-icon" onclick="changeLayerVisible('heliuzhili35',this,'heichou35-selected-icon','heichou35-icon')" class="heichou35-selected-icon right-item-icon" name="standardLayer" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">近期35条</div>
+		</div>
+		<div class="getlist-icon right-item" id="heliuzhili187" style="margin: 10px 5px; float: left; width: 72.5px;">
+			<div id="heichou187-icon" onclick="changeLayerVisible('heliuzhili187',this,'heichou187-selected-icon','heichou187-icon')" class="heichou187-selected-icon right-item-icon" name="standardLayer" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">远期187条(含35条)</div>
+		</div>
+      	</div>
+      	 -->
+      	<div class="right-info-special" style="width: 100%;height:32px;line-height: 32px;text-indent: 30px;font-size: 14px;background:#f1f1f1 url(plugins/hplus/images/layer_icon.png) no-repeat 5px 5px;border-bottom: 1px solid #dcdcdc;border-top: 1px solid #dcdcdc;">排水设施</div>
+      	<div class="right-info-special-list" style="width:100%;background: #f9f9f9;"> 
+      		<div class="getlist-icon right-item" id="paishuiguanwang" style="margin: 10px 5px; float: left; width: 72.5px;" title="①排水管线&#10;②排水沟渠&#10;(2000比例尺内显示)">
+			<div  onclick="changeLayerVisible('PaiShui',this,'psgw-map-selected-icon','psgw-map-icon')" id="psgw-map-icon" class="psgw-map-selected-icon right-item-icon" style="width: 72.5px; height:53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">排水管网</div>
+		</div>
+		<!-- 
+		<div class="getlist-icon right-item" id="paishuiguandian" style="margin: 10px 5px; float: left; width: 72.5px;"  title="①溢流堰&#10;②雨水口&#10;③排放口&#10;④窨井&#10;⑤拍门">
+			<div  onclick="changeLayerVisible('paishuiguandian',this,'psgd-map-selected-icon','psgd-map-icon')" id="psgd-map-icon" class="psgd-map-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">排水管点</div>
+		</div>
+		<div class="getlist-icon right-item" id="qtpsss" style="margin: 10px 5px; float: left; width: 72.5px;"  title="①闸&#10;②泵站&#10;③污水处理厂&#10;④监测点">
+			<div  onclick="changeLayerVisible('qtpsss',this,'qtpsss-selected-icon','qtpsss-icon')" id="qtpsss-icon" class="qtpsss-selected-icon right-item-icon" style="width: 72.5px; height: 53px; background-size: 50px auto;"></div>
+			<div style="text-align: center;margin-top: 5%;width: 100%;">其他排水设施</div>
+		</div> -->
+      	</div>
+      	</div>
+</div>
+<!-- 图层控制 -->
+<!-- 地图控件结束 -->
+<!-- 地图DIV 开始 -->
+<div class="J_iframe" name="iframe0" id="mapDiv" data-id="mapDiv"></div>
+<!-- 鼠标在地图上移动时xy变化效果 -->
+<div id="coorDiv" style="position: absolute; bottom: 11%; z-index: 1000; margin-left: 20px;"></div>

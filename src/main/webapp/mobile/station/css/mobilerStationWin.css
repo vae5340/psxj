@@ -1,0 +1,773 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0
+}
+
+ul {
+    margin: 0;
+    padding: 0
+}
+
+ul li {
+    list-style: none
+}
+
+.app-panal-head-spe {
+    opacity: 0.86;
+    border-bottom: 1px solid #ffffff;
+    background: #008bcf;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#005495', endColorstr='#03bdce', GradientType=1);
+}
+.app-panal-head .app-panal-head-title {
+    height: 100%;
+    margin-left: 10px;
+    float: left;
+    font-size: 15px;
+    color: #ffffff;
+    font-family: 'Microsoft YaHei', 'SimHei';
+    white-space: nowrap;
+}
+.header {
+    height: 5%;
+}
+
+.header .nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0px 1px #ccc;
+    height: 100%;
+    overflow-x: scroll;
+    white-space: nowrap;
+    cursor:pointer;
+}
+
+.header .nav li {
+    width: 5rem;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.96rem;
+    flex: none;
+}
+
+.header .nav li:nth-child(3) {
+    width: auto;
+    margin-left: 5rem
+}
+
+.header .nav li.select {
+    border-bottom:3px solid grey;
+}
+
+.time-group input{
+    height: 24px;
+    width: 135px;
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 24px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.contentBox {
+    height: 83%;
+    padding: 0 0.5rem;
+    box-sizing: border-box
+}
+
+.contentBox .real-time {
+    width: 100%;
+    height: 100%;
+    background: url(../img/bg.png) no-repeat;
+    background-size: cover;
+}
+
+/*窨井水位特殊处理 start*/
+.contentBox .real-time-yj {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+/*窨井水位特殊处理 end*/
+
+/*泵站水位特殊处理 start*/
+.contentBox .real-time-bz {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+/*泵站水位特殊处理 end*/
+
+
+.nav .select {
+    border-bottom: 1px solid blue
+}
+
+.play-speed {
+    height: 6%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.play-speed .operation {
+    height: 100%
+}
+
+.play-speed .operation span:nth-child(1) {
+    margin-right: 0.5rem
+}
+
+.play-speed .operation span:nth-child(2) {
+    margin-right: 1rem
+}
+
+.play-speed .operation select {
+    margin-right: 0.3rem
+}
+
+.play-speed .operation .play {
+    display: inline-block;
+    width: 3rem;
+    height: 100%;
+    background: #5CB85C;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem
+}
+
+.play-speed .reporting-time {
+    margin-left: 2rem
+}
+
+.subnav-wrap .subnav {
+    overflow-x: scroll;
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.1rem;
+    background: #f5f5f5
+}
+.subnav-wrap .subnav li {
+    width: 5rem;
+    flex: none;
+    text-align: center;
+}
+
+.subnav-wrap {
+    width: 100%;
+    background: #ebf0f7;
+    position: relative;
+    white-space: nowrap;
+    border-bottom: 1px solid #d8dce5;
+    margin: 0
+}
+
+.subnav {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: -1px
+}
+
+.subnav li {
+    padding: 0 13px;
+    height: 25px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 25px;
+    display: inline-block;
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2d2f33;
+    position: relative;
+    transition: all .2s cubic-bezier(.645, .045, .355, 1);
+    border: 1px solid transparent;
+    margin: -1px -1px 0;
+    color: #878d99;
+    cursor: pointer
+}
+
+.subnav li.active {
+    color: #409EFF;
+    background-color: #fff;
+    border-right-color: #d8dce5;
+    border-left-color: #d8dce5
+}
+
+.tabs-nav li:hover {
+    color: #409EFF
+}
+
+.subpage {
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+}
+
+.subnav-main {
+    height: calc(100% - 25px);
+    width: 100%;
+    border-top: none;
+    background: #fff
+}
+
+.subpage.active {
+    display: block
+}
+
+.depth-of-water ul{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+.depth-of-water ul li{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.depth-of-water .water{
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid red
+}
+.background-color{
+    background: blue
+}
+.selected{
+    background: #fff;
+    color: aqua
+}
+.jsd-container .tudi{
+    position: absolute;
+    bottom: 0;
+    height: 3.5em;
+    width: 100%;
+}
+.jsd-container .tudi .tudi1{
+    height: 20%;
+    background-color: #D6BC96;
+    width: 100%;
+}
+.jsd-container .tudi .tudi2{
+    height: 80%;
+    background-color: #B8925E;
+    width: 100%;
+}
+.jsd-container .tudi .source{
+    position: absolute;
+    bottom: 5px;
+    left: 30%;
+    font-size: 13px;
+    color:#FFFFFF;
+}
+.jsd-container{
+    width: 100%;
+    height:100%;
+    position: relative;
+    font-size: 12px;
+}
+.jsd-container .time-container{
+    position: absolute;
+    top:-70px;
+    right: 10px;
+}
+.jsd-container .content{
+    position: absolute;
+    bottom: 3.5em;
+    width: 100%;
+    height: calc(100% - 3.5em);
+    background:url(../img/bg.png);
+    background-size:cover;
+    -moz-background-size:cover; /* 老版本的 Firefox */
+    background-repeat:no-repeat;
+}
+
+/*窨井水位特殊处理 --start*/
+.jsd-container .contentYJ{
+    width: 18.2em;
+    height: 21.2em;
+    background: url("../img/well.png") no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    position: relative;
+    top: 85px;
+    left: 90px;
+}
+.contentYJ .load {
+    width: 6.9em;
+    height: 14em;
+    position: relative;
+}
+.contentYJ .box {
+    background: #73bbe6;
+    height: 0.2em;
+    width: inherit;
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+}
+.load .topTip.warn-value1,.load .topTip.warn-value2,.load .topTip.warn-value3{
+    position: absolute;
+    top: -1em;
+    left: -11.5em;
+}
+
+.load .topTip.warn-value1:after,.load .topTip.warn-value2:after,.load .topTip.warn-value3:after{
+    content: '';
+    position: absolute;
+    display: block;
+    top: 50%;
+    width: 4.5em;
+    right: -5em;
+    height: 1px;
+    z-index: 2;
+}
+.load .topTip.warn-value1:after{
+    background-color: red;
+}
+.load .topTip.warn-value2:after{
+    background-color: orange;
+}
+.load .topTip.warn-value3:after{
+    background-color: yellow;
+}
+.load .text {
+    position: absolute;
+    top: -1.7em;
+    border-radius: 5px 5px 0 0;
+    width: 100%;
+    z-index: 10;
+}
+
+/*箭头向下*/
+.load .text .water-level-bg,.load .text .water-level-yz{
+    text-align: center;
+    height: 1.5em;
+    vertical-align: middle;
+    line-height: 1.5em;
+}
+.load .text .water-info {
+    display: block;
+    min-width: 3em;
+    border-bottom: #0066cc 1px solid;
+}
+.load .text .water-info:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-top: 1.2em solid #0066cc;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.load .text .water_info span {
+    margin-left: 2em;
+}
+.load .text .water_info {
+    display: inline-block;
+    min-width: 3em;
+    border-bottom: #0066cc 1px solid;
+}
+
+.load .text .water_info:before{
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 0.8em solid transparent;
+    border-right: 0.8em solid transparent;
+    border-top: 1.2em solid #0066cc;
+    position: absolute;
+    bottom: 0;
+}
+.box-left,.box-right{
+    position: absolute;
+    bottom: 1.45em;
+    background-color: #73bbe6;
+    width: 4.9em;
+}
+.box-left{
+    left: -4.9em;
+}
+.box-right{
+    left: 6.9em;
+}
+.pipeTip.value3{
+    position: relative;
+    top: 4em;
+    left: -1em;
+}
+/*窨井水位特殊处理 --end*/
+
+/*泵站水位特殊处理 --start*/
+.pumpProfileInfo .contentBZ{
+    width: 20.2em;
+    height: 23.2em;
+    background: url("../img/yanzha.png") no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    position: relative;
+    top: 50px;
+    left: 20px;
+}
+.profile-container .box {
+    background: #3B8879;
+    bottom: 0;
+    width: inherit;
+    position: absolute;
+    text-align: center;
+}
+.profile-container .box_l {
+    width: 50%;
+    bottom: 18%;
+}
+
+.profile-container .box_r {
+    width: 34.5%;
+    left: 65.5%;
+    bottom: 18%;
+}
+
+/*泵坑、渠箱*/
+#bengkeng {
+    width: 7em;
+    height: 7.5em;
+    border: 0.3em solid #838591;
+    border-top: 0;
+    position: relative;
+}
+#quxiang {
+    width: 6em;
+    display: block;
+    height: 12em;
+    top: -12.5em;
+    border: 0.3em solid #838591;
+    position: relative;
+    left: 14em;
+}
+.typeTip {
+    position: absolute;
+    top: -2em;
+    left: 0em;
+    font-size: 14px;
+    display: block;
+    width: inherit;
+    font-weight: bold;
+}
+.boxdiv {
+    width: 100%;
+    background: #3B8879;
+    height: 0;
+    bottom: 0;
+    position: absolute;
+}
+/*泵站水位特殊处理 --end*/
+
+.jsd-container .content .water-container{
+    position:  absolute;
+    bottom: 0;
+    width:  100%;
+    background: #3B8879;
+}
+.jsd-container .content .water-container .water-value{
+    position: absolute;
+    /*top: -1.2em;*/
+    border-bottom: 1px #0066cc solid;
+    margin-left: 20%;
+    width: 5em;
+    text-align: right;
+}
+.jsd-container .content .water-container .water-value:before{
+    position: absolute;
+    bottom: 0;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 0.8em solid transparent;
+    border-right: 0.8em solid transparent;
+    border-top: 1.2em solid #0066cc;
+    display: block;
+}
+.jsd-container .content .warn-level{
+    border-top: 1px solid red;
+    position: absolute;
+    width: 38%;
+    right: 0;
+    bottom: 0;
+}
+.jsd-container .content .warn-level .warn-value{
+    color:#ff0000;
+    position: absolute;
+    top: -1.5em;
+    right: 0;
+}
+.jsd-container .content .level3{
+    border-top-color: yellow;
+}
+.jsd-container .content .level2{
+    border-top-color: orange;
+}
+.jsd-container .content .level3 .warn-value{
+    color:yellow;
+    border-top-color: yellow;
+}
+.jsd-container .content .level2 .warn-value{
+    color:orange;
+    border-top-color: orange;
+}
+.jsd-container .content .ruler-container{
+    background-color: #fffaf4;
+    color: #A76538;
+    width: 4em;
+    padding-top: 2em;
+    margin-left: 45%;
+    height: calc(100% - 8em);
+    position: absolute;
+    bottom: 0;
+}
+.jsd-container .content .ruler-container .ruler {
+    position: relative;
+    height: 100%;
+}
+.ruler .cm,.ruler .mm,.ruler .mm1 {
+    position: absolute;
+    border-bottom: 1px solid #A76538;
+    bottom: 0px;
+}
+.ruler .cm {
+    width: 1.2em;
+    padding-left: 1em;
+    height: 1em;
+    line-height: 1em;
+}
+.ruler .mm {
+    width: 0.5em;
+}
+.ruler .mm1 {
+    width: 0.9em;
+}
+
+/*过程线*/
+.sub-echart {
+    width: 500px;
+    height: 330px
+}
+
+.hisTable{
+    position: relative;
+    top:20px;
+    width: 520px;
+    height: 375px;
+    display:none;
+    padding: 5px 0;
+}
+
+/*雨量特殊处理*/
+.hisTableYL{
+    position: relative;
+    top:20px;
+    width: 520px;
+    height: 325px;
+    padding: 5px 0;
+}
+
+.chart2table_btn {
+    position: absolute;
+    right:0;
+    top:27px;
+    height: 20px;
+    width: 20px;
+    overflow: hidden;
+}
+.chart2table_btn.chart-icon{
+    background: url(../img/icon/btn-chart-table.png) -0px -0px no-repeat;
+}
+
+.chart2table_btn.chart-icon:hover{
+    background: url(../img/icon/btn-chart-table.png) -20px -0px no-repeat;
+}
+
+.chart2table_btn.table-icon {
+    background: url(../img/icon/btn-chart-table.png) -0px -20px no-repeat;
+}
+
+.chart2table_btn.table-icon:hover{
+    background: url(../img/icon/btn-chart-table.png) -20px -20px no-repeat;
+}
+
+/*水闸水位特殊处理 --start*/
+.contentBox .real-time-sw {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+.wasProfileInfo .contentSZ{
+    width: 20.2em;
+    height: 23.2em;
+    background: url("../img/yanzha.png") no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    position: relative;
+    top: 50px;
+    left: 20px;
+}
+/*水闸水位特殊处理 --end*/
+
+/*水库水位特殊处理*/
+.imgSK {
+    height: 70%;
+    width: 96%;
+    background-size: 100% 100%;
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    bottom:0;
+    z-index: 20;
+}
+.contentSK .load.reservoir-load{
+    width:18em;
+    bottom:4em;
+    position:absolute;
+    height:16em
+}
+.contentSK .box{
+    background: #3B8879;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+}
+.contentSK .line {
+    position: absolute;
+    height: 1px;
+    background: red;
+    width: 100%;
+    z-index: 1;
+}
+.contentSK .line.warn-level1{
+    background: red;
+    color: red;
+}
+.contentSK .line.warn-level2{
+    background: orange;
+    color: orange;
+}
+.contentSK .line.warn-level3{
+    background: yellow;
+    color: yellow;
+}
+
+/*河道水位特殊处理*/
+.riverProfileInfo .contentHD {
+    /*height: 70%;
+    background-size: 100% 100%;
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    bottom:0;
+    z-index: 9999;*/
+}
+.imgHD {
+    height: 70%;
+    width: 96%;
+    background-size: 100% 100%;
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    bottom:0;
+    z-index: 20;
+}
+.contentHD .load.river-load{
+    width:23em;
+    bottom:5.5em;
+    position:absolute;
+    height:16em
+}
+.contentHD .box{
+    background: #3B8879;
+    bottom: 0;
+    width: inherit;
+    position: absolute;
+    text-align: center;
+}
+.hedaomark{
+    height: 70%;
+    background-size: 100% 100%;
+    display: inline-block;
+    position: absolute;
+    left: 6px;
+    bottom:0;
+    z-index: 9999;
+}
+.contentHD .line {
+    position: absolute;
+    height: 1px;
+    background: red;
+    width: 100%;
+    z-index: 50;
+}
+.contentHD .line.warn-level1{
+    background: red;
+    color: red;
+}
+.contentHD .line.warn-level2{
+    background: orange;
+    color: orange;
+}
+.contentHD .line.warn-level3{
+    background: yellow;
+    color: yellow;
+}
+
+/*水质*/
+.basic-info-row {
+    width: 100%;
+    height: 28px;
+    display: block;
+}
+
+.basic-info-cell {
+    float: left;
+    width: 93%;
+    line-height: 28px;
+    display: block;
+    padding: 0px 10px;
+}
+.basic-info-cell:nth-child(2n+1) {
+    background-color: #e7eef8;
+}
+.basic-info-cell .time_type{
+    min-width: 50px;
+    vertical-align: middle;
+    height: 25px;
+    line-height: 25px;
+    display: inline;
+}
+.basic-info-cell .time_type input{
+    vertical-align: middle;
+}
+.basic-info-cell-header {
+    color: #005aa0;
+    display: inline;
+}
+.basic-info-cell-content {
+    color: #333333;
+    display: inline;
+}

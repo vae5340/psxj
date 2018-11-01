@@ -1,0 +1,63 @@
+.swmm-assessment {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  font-size: 16px; }
+  .swmm-assessment .swmm-assessment-header {
+    width: 100%;
+    font-size: 14px;
+    box-shadow: 0 0 5px #888888; }
+    .swmm-assessment .swmm-assessment-header ul {
+      list-style: none;
+      margin: 0;
+      padding: 5px; }
+      .swmm-assessment .swmm-assessment-header ul li {
+        text-align: left;
+        display: inline-block;
+        margin-right: 1.5em; }
+  .swmm-assessment .swmm-assessment-table-wrapper {
+    width: auto;
+    float: left;
+    margin: 10px; }
+    .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table {
+      width: 100%; }
+      .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr {
+        border-bottom: solid thin #BBBBBB; }
+        .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr:first-child {
+          border-top: solid thin #BBBBBB; }
+        .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr th {
+          text-align: right;
+          border-right: solid thin #BBBBBB;
+          padding: 8px 4px 8px 4px;
+          white-space: nowrap; }
+          .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr th:first-child {
+            border-left: solid thin #BBBBBB; }
+          .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr th:last-child {
+            border-right: solid thin #BBBBBB; }
+        .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr td {
+          text-align: left;
+          padding: 4px;
+          white-space: nowrap;
+          padding: 8px 4px 8px 4px; }
+          .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr td:first-child {
+            border-left: solid thin #BBBBBB; }
+          .swmm-assessment .swmm-assessment-table-wrapper .swmm-assessment-table tr td:last-child {
+            border-right: solid thin #BBBBBB; }
+  .swmm-assessment .assessment-chart-container {
+    float: left;
+    width: 45%;
+    height: 250px;
+    box-shadow: 0 0 5px #888888;
+    margin: 5px; }
+
+.swmm-assessment-legend-wrapper {
+  z-index: 1000000;
+  background: #FEFEFE;
+  box-shadow: 0 0 5px #555555;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: auto;
+  padding: 10px; }
+
+/*# sourceMappingURL=swmm-assessment.css.map */

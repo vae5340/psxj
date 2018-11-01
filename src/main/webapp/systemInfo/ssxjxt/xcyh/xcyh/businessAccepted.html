@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/list.css" rel="stylesheet" type="text/css" />
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/global.css" rel="stylesheet" type="text/css" />
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/page-style.css" rel="stylesheet" type="text/css"/>
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-editable.css" rel="stylesheet">
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet">
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/blueimp/css/blueimp-gallery.min.css" rel="stylesheet">
+<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/swiper/swiper.min.css" rel="stylesheet">
+<title>列表信息</title>
+  <style>
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+    span.form-control{
+      border: 1px solid #fff;
+      margin-top: -7px;
+    }
+  </style>
+</head>
+<body>
+<!--list_container-->
+<div class="list_container">
+  <!--container_left-->
+  <div class="container_left">
+    <div class="map">
+      <!-- <iframe id="mapDiv" data-id="mapDiv" class="J_iframe"  target="_self" frameborder="0"></iframe> -->
+      <div id="mapDiv" style="width:100%;height:100%;"></div>
+    </div>
+    <a href="#" class="btn_l" onclick="changePageStyle(this)"></a>
+    <!--   <a href="#" class="btn_r"></a>-->
+  </div>
+  <!--container_left END-->
+  <!--container_right-->
+  <div class="container_right">
+    <div class="list_box">
+      <div class="list_tab">
+        <div class="tabList">
+          <ul id="tabList">
+          </ul>
+        </div>
+        <!--tabCon-->
+        <div class="tabCon" id="tabCon">
+        <div id="bootstrapDataGrid" class="animated fadeInRight" style="display:none;width:100%;height:80%;">
+          <div class="ibox float-e-margins" style="height: 100%">
+            <div class="ibox-content" style="height: 100%">
+              <div class="row row-lg" style="height: 100%">
+                <div style="height:100%;overflow:auto;width: auto">
+                  <!-- Example Events -->
+                  <div class="example-wrap">
+                    <div class="example">
+                      <table id="exampleTableEvents" class="table table-bordered"></table>
+                    </div>
+                  </div>
+                  <!-- End Example Events -->
+                  <!--sendForm-->
+                  <div class="modal fade" id="sendModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                  aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="sendModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+                          <form id="sendForm" class="form-horizontal" role="form" style="margin-top:15px;">
+
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                  class="glypicon glypicon-remove" aria-hidden="true"></span>关闭
+                          </button>
+                          <button id="send" type="button" class="btn btn-primary" >
+                            <span class="glyphicon glyphicon-floppy-disk" ariahidden="true"></span>保存
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--sendForm-->
+                  <!--reassignForm-->
+                  <div class="modal fade" id="reassignModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                  aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="reassignModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+                          <form id="reassignForm" class="form-horizontal" role="form" style="margin-top:15px;">
+
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                  class="glypicon glypicon-remove" aria-hidden="true"></span>关闭
+                          </button>
+                          <button id="reassign" type="button" class="btn btn-primary" >
+                            <span class="glyphicon glyphicon-floppy-disk" ariahidden="true"></span>转派
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--reassignForm-->
+                  <!--ReturnForm-->
+                  <div class="modal fade" id="ReturnModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                  aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title" id="ReturnModalLabel"></h4>
+                        </div>
+                        <div class="modal-body">
+                          <form id="ReturnForm" class="form-horizontal" role="form" style="margin-top:15px;">
+                            <div class="form-group"><label for="returnContent" class="col-sm-2 control-label"><font color="red" style="vertical-align:middle">&nbsp;*</font>回退原因:</label>
+                              <div class="col-sm-10">
+                                <textarea   class="form-control" rows="8" id="returnContent" placeholder="请输入内容"></textarea>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                  class="glypicon glypicon-remove" aria-hidden="true"></span>关闭
+                          </button>
+                          <button id="returnButton" type="button" class="btn btn-primary" >
+                            <span class="glyphicon glyphicon-floppy-disk" ariahidden="true"></span>回退
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--ReturnForm-->
+                  <!--  查看历史审批意见弹窗 -->
+                  <div class="modal fade" id="m_modal_historyComment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel_3"
+                       aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header" style="padding:10px 10px 0px 10px;height: 40px;">
+                          <h5 class="modal-title" id="exampleModalLabel_3">
+                            历史审批意见
+                          </h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body miniScrollbar">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="m_datatable" id="historyCommentTable" ></div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--<div class="modal-footer">
+                          <button type="button" class="btn btn-secondary cancel" data-dismiss="modal">
+                            取消
+                          </button>
+                          <button type="button" class="btn btn-primary confirm">
+                            保存
+                          </button>
+                        </div>-->
+                      </div>
+                    </div>
+                  </div>
+                  <!--查看历史审批意见弹窗-->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- End Panel Basic -->
+        </div>
+            <!-- 插入分页的div -->
+            <div id="page-plugin-div"></div>
+
+        </div>
+        <!--tabCon END-->
+
+        <!--info_box-->
+        <div class="info_box">
+            <!--images-->
+            <div class="info_img">
+                <div class="swiper-container" id="swiper_container" style="display: none">
+                    <div class="swiper-wrapper" id="swiper_wrapper">
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+            <!--image lightbox-->
+            <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+                <div class="slides"></div>
+                <h3 class="title"></h3>
+                <a class="prev">‹</a>
+                <a class="next">›</a>
+                <a class="close">×</a>
+                <ol class="indicator"></ol>
+            </div>
+            <!--info_tab-->
+          <div class="info_com" style="position: relative">
+            <div class="info_tab" style="position: relative;z-index: 2">
+              <ul id="infoTab">
+                <li class="cur" id="baseInfo_tab">基本信息</li>
+                <li id="process_tab">处理情况</li>
+                <li id="moreDetail_tab">更多信息</li>
+              </ul>
+            </div>
+            <div id="infoCon" style="position: absolute; top: 0px; right: 0; left: 0;bottom:0px;margin-bottom: 0px;">
+              <!-- 基本信息  -->
+              <div class="info_b" id="baseInfo" style="margin-top: 30px;overflow:auto">
+                <div class="col-md-12 column">
+                  <form id="gxForm" style="display:none">
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">设施类型:</label>
+                      <div class="col-sm-10">
+                        <span type="text" class="form-control" id="SSLX"></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">紧急程度:</label>
+                      <div class="col-sm-4">
+                          <span type="text" class="form-control" id="JJCD"></span>
+                      </div>
+                      <label class="control-label col-sm-2">问题类型:</label>
+                      <div class="col-sm-4">
+                        <span type="text" class="form-control" id="BHLX"></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">问题地点:</label>
+                      <div class="col-sm-10">
+                          <span type="text"  class="form-control" id="SZWZ"></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">问题描述:</label>
+                      <div class="col-sm-10">
+                        <span type="text" class="form-control" id="WTMS"></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">上报人:</label>
+                      <div class="col-sm-4">
+                        <span type="text" class="form-control" id="SBR"></span>
+                      </div>
+                      <label class="control-label col-sm-2">上报时间:</label>
+                      <div class="col-sm-4">
+                        <span type="text" class="form-control" id=SBSJ></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="control-label col-sm-2">上报单位:</label>
+                      <div class="col-sm-4">
+                        <span type="text"  class="form-control" id="PARENT_ORG_NAME"></span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div class="info_b" id="process" style="margin-top: 30px;">
+                <div style="height: 82%;overflow-y:auto;">
+                  <!--办理经过-->
+                  <table id="processTable" ></table><!-- class="table table-bordered table-hover"  -->
+                  <!-- 插入分页的div -->
+                </div>
+                <div id="info-page-plugin-div" style="margin-right: 10px;margin-top: 4px"></div>
+              </div>
+              <div class="info_b" id="moreDetail" style="margin-top: 30px"></div>
+            </div>
+          </div>
+
+          <!-- <a href="#" class="b_t"></a>-->
+        </div>
+          <a href="#" class="b_b" onclick="changePageStyle(this)"></a>
+        <!--info_box END-->
+        <!--container_right END-->
+      </div>
+    </div>
+  </div>
+</div>
+<!--list_container END-->
+<script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+<script src="/psxj/systemInfo/ssxjxt/home/content.min.js?v=1.0.0"></script>
+<script src="/psxj/systemInfo/ssxjxt/home/contabs.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput_locale_zh.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-export.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/tableExport.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-editable.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table-editable.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-paginator.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/asi/agcom/initMap.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/blueimp/jquery.blueimp-gallery.min.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/plugins/swiper/swiper.jquery.min.js"></script>
+<script type="text/javascript" src="/psxj/js/config/dojoConfig.js"></script>
+<script type="text/javascript" src="/psxj/js/config/mapConfig.js"></script>
+<script type="text/javascript" src="/psxj/lib/arcgis_js_api/init.js"></script>
+<script type="text/javascript" src="/psxj/js/util_date.js"></script>
+
+<!--引入分页插件的js文件-->
+<script src="/psxj/systemInfo/ssxjxt/lib/asi/page/page.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/lib/asi/panal/panal.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/xcyh/xcyh/js/xcyh_public.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/xcyh/xcyh/js/wfPublic.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/xcyh/xcyh/js/lyHarmfulReport.js"></script>
+<script src="/psxj/systemInfo/ssxjxt/xcyh/xcyh/js/businessAccepted.js"></script>
+<script>
+  window.onload = function () {
+            var linkList = window.parent.document.getElementsByTagName("link");//获取父窗口link标签对象列表
+            var head = document.getElementsByTagName("head").item(0);
+            //外联样式
+            for (var i = 0; i < linkList.length; i++) {
+              var l = document.createElement("link");
+              l.rel = 'stylesheet'
+              l.type = 'text/css';
+              l.href = linkList[i].href;
+              head.appendChild(l);
+            }
+            $("#bootstrapDataGrid").show();
+          };
+</script>
+</body>
+</html>

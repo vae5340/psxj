@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>成员单位调度室-地图展示</title>
+		<meta charset="UTF-8">		
+		<link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet" type="text/css" />   
+		<link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet" />				 
+		<link href="/awater/css/arcgis/claro.css" rel="stylesheet" type="text/css" />
+		<link href="/awater/lib/arcgis_js_api/dijit/themes/tundra/tundra.css" rel="stylesheet" type="text/css" />
+		<link href="/awater/lib/arcgis_js_api/esri/css/esri.css" rel="stylesheet" type="text/css"  />
+		<link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+	    <link href="/awater/css/augur.min.css?v=1.0" rel="stylesheet">
+		<link href="/awater/lib/arcgis_js_api/esri/css/esri_expand.css" rel="stylesheet" type="text/css" />
+		
+		<script src="/awater/lib/jquery-2.1.4.js?v=2.1.4" type="text/javascript"></script>
+	    <script type="text/javascript" src="/awater/js/config/dojoConfig.js"></script>
+	    <script type="text/javascript" src="/awater/js/config/mapConfig.js"></script>
+	    <script type="text/javascript" src="/awater/lib/arcgis_js_api/init.js"></script>
+	    
+	    <style>
+		    html,body{width: 100%;height:100%;}
+	    	.map{margin: 0;padding:0;width: 100%;height:100%;position:absolute;}
+	    </style>
+	</head>
+  	<body>
+		<div id="mapDiv" class="map J_iframe"></div> 
+		<script type='text/javascript'>
+			function getQueryStr(name) {
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+				var r = decodeURI(window.location.search).substr(1).match(reg);
+				if (r != null) return unescape(r[2]); return "";
+			}
+			//成员单位预案编号
+			var recordId=getQueryStr("modelId");
+			//刷新图层句柄
+			var intervalIndex;
+			
+			//关闭刷新图层事件
+			function stopInterval(){
+				clearInterval(intervalIndex);
+			}
+		</script>
+		<script type="text/javascript" src="/awater/js/uiWidgets.js"></script>
+		<script type="text/javascript" src="/awater/nnwaterSystem/EmergenControl/js/augur.min.js"></script>
+		<script type="text/javascript" src="/awater/waterSystem/ssjk/js/ssjk-global.js" ></script>        
+		<script type="text/javascript" src="/awater/waterSystem/ssjk/js/ssjk-data.js" ></script>
+		<script type="text/javascript" src="/awater/waterSystem/establishment/js/nnArea.js"></script>
+		<script type="text/javascript" src="js/ssjk-map-View.js" ></script>
+		<script type="text/javascript" src="js/initMap.js"></script>
+		
+	</body>
+</html>

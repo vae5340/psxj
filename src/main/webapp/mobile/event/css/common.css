@@ -1,0 +1,178 @@
+﻿*{ margin:0;padding:0;list-style-type:none;box-sizing: border-box;self.tableView.showsVerticalScrollIndicator =NO;}
+b{list-style:none;}
+a,img{border:0;}
+ul,ol,li{ list-style: none;}
+h1,h2,h3,h4,h5,h6{font-size:100%; font-weight:normal;}
+html{
+    font-size: 100px;
+}
+body{ font-size: 14px;height:100%; font-family: "Microsoft YaHei"; color:#181818;overflow-x:visible\9 ;}
+a{color:#ffffff;text-decoration: none;}
+/*去掉点击阴影、ios滚动不顺畅问题*/
+body{
+    /*-webkit-tap-highlight-color: rgba(0,0,0,0);*/
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/*去除系统默认的样式*/
+input[type=range] {
+    -webkit-appearance: none;
+    border-radius: 10px; /*这个属性设置使填充进度条时的图形为圆角*/
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}    
+/*给滑动轨道(track)添加样式*/
+input[type=range]::-webkit-slider-runnable-track {
+    height: 15px;
+    border-radius: 10px; /*将轨道设为圆角的*/
+    box-shadow: 0 1px 1px #def3f8, inset 0 .125em .125em #0d1112; /*轨道内置阴影效果*/
+}
+/*给滑块(thumb)添加样式*/
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 25px;
+    width: 25px;
+    margin-top: -5px; /*使滑块超出轨道部分的偏移量相等*/
+    background: #ffffff; 
+    border-radius: 50%; /*外观设置为圆形*/
+    border: solid 0.125em rgba(205, 224, 230, 0.5); /*设置边框*/
+    box-shadow: 0 .125em .125em #3b4547; /*添加底部阴影*/
+}
+.clearfix:before, .clearfix:after { 
+    content:"."; 
+    display:block; 
+    height:0; 
+    visibility:hidden; 
+    clear:both; 
+} 
+.clearfix:after { 
+    clear: both; 
+}
+		body{
+			width:100%;
+			height:100%;
+		}
+		.title{
+			height:35px;
+			width:100%;
+			line-height:35px;
+			background:#fff;
+			color:#000;
+			padding-left:10px;
+		}
+		.title img{
+			width:22px;
+			float:left;
+			margin:5px 5px 0 0;
+		}
+
+		.linelist{
+			width:100%;
+			line-height:20px;
+			color:#666;
+			background:#FFFFF0;
+			padding: 5px 0;
+		}
+		.listleft{
+			width:30%;
+			float:left;
+			padding: 5px 0 5px 15px;
+		}
+		.listright{
+			width:70%;
+			float:left;
+			padding: 5px 0;
+			border-bottom:1px solid #999;
+		}
+		.incon{
+			padding:0 10px;
+			margin:20px 0;
+		}
+		.textarea{
+			width:100%;
+			line-height:25px;
+			border:none;
+			border-bottom:1px solid #999;
+			min-height:80px;
+		}
+		.model{
+			width:100%;
+			border-radius: 6px;
+			border:1px solid #999;
+			padding:5px 10px ;
+			margin-top:10px;
+		}
+		.model p{
+			line-height:30px;
+			border-bottom:1px dashed  #999;
+		}
+		.imgbox{
+			padding:10px 0;
+		}
+		.img{
+			width:50px;
+			height:50px;
+			background:#ccc;
+			float:left;
+			margin-right:10px;
+		}
+		.img.current{
+			width:90%;
+			height:90%;
+			position:fixed;
+			top:5%;
+			left:5%;
+			z-index:99;
+		}
+		.desk{
+			width:100%;
+			height:100%;
+			position:fixed;
+			top:0;
+			left:0;
+			background:rgba(0,0,0,0.8);
+			display:none;
+			z-index:98;
+		}
+		.img img{
+			width:100%;
+			height:100%;
+		}
+		.qustitle{
+			line-height:20px;
+			height:30px;
+			color:#3A5FCD;
+			padding:5px 0;
+		}
+		.qustitle span{
+			width:20px;
+			height:20px;
+			float:left;
+			border-radius: 50%;
+			background:#00EE76;
+			border:5px solid #9AFF9A;
+			margin:0 15px;
+		}
+		.qusin{
+			padding-left:50px;
+		}
+		.phone{
+			color:#1874CD;
+			margin-left:5px;
+		}
+		.phone img{
+			width:18px;
+			margin:0 5px 0 10px;
+		}
+
+
+		.advicecontent{
+			padding-left:10px;
+			padding-right:5px;
+		}
+
+		.adviceitem{
+			border-top:1px solid  #999;
+		}

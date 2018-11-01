@@ -1,0 +1,100 @@
+{
+  "jkAlarmInfo": {
+    "name": "jkAlarmInfo",
+    "sheetName": "监测数据预警信息",
+	"sheetTitle": "监测数据预警信息(导出时间：${datetime}, 记录数：${totalCount})",
+	"headerRowHeight": 28,
+	"titleRowHeight": 30,
+	"bodyRowHeight": 23,
+	"fields": [
+	  { "field": "combName", "name": "设施地址", "type": "String", "cols": 35 },
+	  { "field": "deviceName", "name": "设备名称", "type": "String", "cols": 15 },
+	  { "field": "itemDimName", "name": "监控项名称", "type": "String", "cols": 15 },
+	  { "field": "alarmValue", "name": "监控值", "type": "Double", "cols": 12 },
+	  { "field": "alarmDate", "name": "监控日期", "type": "Date", "cols":  30 },
+	  { "field": "alarmType", "name": "监控类型", "type": "String", "cols": 15,
+      	"enum": {
+		  "1": "超越警戒",
+		  "2": "超越管顶",
+		  "3": "超越井盖",
+		  "4": "超越岸边"
+		}
+	  }
+	]
+  },
+  "dutyManagementInfo": {
+    "name": "dutyManagementInfo",
+    "sheetName": "值班管理信息",
+	"sheetTitle": "值班管理信息(导出时间：${datetime}, 记录数：${totalCount})",
+	"headerRowHeight": 28,
+	"titleRowHeight": 30,
+	"bodyRowHeight": 23,
+	"fields": [
+	  {"field": "personName","name":"人员名称","type": "String", "cols": 15},
+	  {"field": "phoneNumber","name":"联系方式","type": "String", "cols": 15}, 
+	  {"field": "dateStr","name":"值班日期","type": "String", "cols": 20},
+	  {"field": "orgName","name":"所属机构","type": "String", "cols": 25}
+	]
+  },
+  "deviceFaultInfo": {
+	"name": "deviceFaultInfo",
+	"sheetName": "设备故障预警信息",
+	"sheetTitle": "设备故障预警信息(导出时间：${datetime}, 记录数：${totalCount})",
+	"headerRowHeight": 28,
+	"titleRowHeight": 30,
+	"bodyRowHeight": 23,
+	"fields": [
+		{ "field": "combName", "name": "设施地址", "type": "String", "cols": 35 },
+		{ "field": "estType", "name": "设备类型", "type": "String", "cols": 20,
+		  "enum": {
+		    "6": "排水泵站",
+			"13": "积水点",
+			"18": "内河站点",
+			"19": "雨量站",
+			"20": "水文站",
+			"21": "窨井",
+			"22": "仓库"
+		  }
+		},
+		{ "field": "deviceName", "name": "设备名称", "type": "String", "cols": 15 },
+		{ "field": "itemName", "name": "监控项名称", "type": "String", "cols": 15 },
+		{ "field": "d_value", "name": "监控值", "type": "Double", "cols": 12 },
+		{ "field": "sys_update_time", "name": "检查时间", "type": "Date", "cols": 30 },
+		{ "field": "device_update_time", "name": "数据更新时间", "type": "Date", "cols": 30 },
+		{ "field": "errorDate", "name": "故障时间", "type": "String", "cols": 40 }
+	]
+  },
+  "deviceBatteryAlarmInfo": {
+	"name": "deviceBatteryAlarmInfo",
+	"sheetName": "设备电量异常信息",
+	"sheetTitle": "设备电量异常信息(导出时间：${datetime}, 记录数：${totalCount})",
+	"headerRowHeight": 28,
+	"titleRowHeight": 30,
+	"bodyRowHeight": 23,
+	"fields": [
+		{ "field": "combName", "name": "设施地址", "type": "String", "cols": 35 },
+		{ "field": "estType", "name": "设备类型", "type": "String", "cols": 20,
+		  "enum": {
+		    "6": "排水泵站",
+			"13": "积水点",
+			"18": "内河站点",
+			"19": "雨量站",
+			"20": "水文站",
+			"21": "窨井",
+			"22": "仓库"
+		  }
+		},
+		{ "field": "deviceName", "name": "设备名称", "type": "String", "cols": 15 },
+		{ "field": "itemName", "name": "监控项名称", "type": "String", "cols": 15 },
+		{ "field": "sys_update_time", "name": "检查时间", "type": "Date", "cols": 30 },
+		{ "field": "device_update_time", "name": "数据更新时间", "type": "Date", "cols": 30 },
+		{ "field": "battery_status", "name": "故障类型", "type": "String", "cols": 40,
+		  "enum": {
+		    "1": "电量低于30%",
+			"2": "电量低于25%"
+		  }
+		},
+		{ "field": "errorDate", "name": "故障时间", "type": "String", "cols": 40 }
+	]
+  }
+}

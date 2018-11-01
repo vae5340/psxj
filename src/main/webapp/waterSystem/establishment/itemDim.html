@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/table_bootstrap.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:20:03 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>监测项管理</title>
+	<link href="../../css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="../../css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="../../css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="../../css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="../../css/animate.min.css" rel="stylesheet">
+    <link href="/awater/css/augur.expand.css" rel="stylesheet"type="text/css" />
+    <link href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" rel="stylesheet">
+	
+	<style>
+		.bigPicCloseBtn{
+			position:fixed;
+			right:10px;
+			top:10px;
+			width:50px;
+			height:50px;
+			border-radius:25px;
+			cursor:pointer;
+			background:white;
+			background-image:url('/awater/img/close.png');
+			background-repeat:no-repeat;
+			background-size:cover;
+			z-index:2
+		}
+		.bigPicCloseBtn:hover{
+			background:#d4d4d4;
+			background-image:url('/awater/img/close.png');
+			background-repeat:no-repeat;
+			background-size:cover;
+		}
+	</style>
+</head>
+
+<body class="gray-bg">
+    <div class="animated fadeInRight">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content" style="padding:0 40px;">
+            	<div class="panel panel-default">
+					<!--<div class="panel-heading">查询条件</div>
+					-->
+					<div class="panel-body">
+						<form id="formSearch" class="form-horizontal">
+							<div class="form-group" style="margin-top:15px">
+							
+								<div id="itemDimSearch" style="display:none;">
+									<label class="control-label col-sm-1" style="width:103px;" for="txt_search_departmentname">监测项编码</label>
+									<div class="col-sm-3">
+										<input type="text" class="form-control" id="txt_search_item_id">
+									</div>
+									<label class="control-label col-sm-1" style="width:103px;" for="txt_search_statu">监测项名称</label>
+									<div class="col-sm-3">
+										<input type="text" class="form-control" id="txt_search_item_name">
+									</div>
+									<div class="col-sm-2" style="text-align:left;">
+										<button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+									</div>
+								</div>
+								
+								<div id="deviceName" style="display:none;">
+									<input type="hidden" id="deviceId" />
+									<label class="col-sm-2 control-label">设备名称</label>
+									<div class="col-sm-4" >
+										<input type="text" class="form-control" id="deviceName2" name="deviceName2" readonly="readonly">
+									</div>
+								</div>	
+							</div>
+						</form>
+					</div>
+				</div> 
+                <div class="row row-lg">
+                    <div class="col-sm-12">
+                        <!-- Example Events -->
+                        <div class="example-wrap">
+                            <div class="example">
+                                <div class="btn-group hidden-xs" id="itemDimTableEventsToolbar" role="group">
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toAdd()">
+                                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>新增
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" onclick="toUpdate('')" >
+                                        <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>编辑
+                                    </button>
+                                    <button type="button" class="btn btn-outline btn-default" onclick="isDelete()"> 
+                                        <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>删除
+                                    </button>
+                                </div>
+                                <table id="itemDimTableEvents">
+									
+                                </table>
+                            </div>
+                        </div>
+                        <!-- End Example Events -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Panel Basic -->
+    </div>
+	
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="itemDimModal" tabindex="-1" role="dialog"  aria-labelledby="itemDimModalLabel" aria-hidden="true">
+		   <div class="modal-dialog" style="width:900px;">
+			  <div class="modal-content">
+				 <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="itemDimModalLabel">新增</h4>
+				 </div>
+				 <form id="itemDimForm" class="form-horizontal m-t"> 
+					 <div class="modal-body">
+							<input type="hidden" id="id" />
+							<input type="hidden" id="pid" />
+							<div class="form-group">
+								<label class="col-sm-2 control-label">指标编码<font color="red">*</font></label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="itemId" name="itemId" required="" aria-required="true"> 
+								</div>
+								<label class="col-sm-2 control-label">指标名称<font color="red">*</font></label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="itemName" name="itemName"  required="" aria-required="true">
+								</div>
+							</div>
+						    <div class="form-group">
+								<!-- <label class="col-sm-2 control-label">工程编码</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="sttnId" name="sttnId">
+								</div> -->
+								<label class="col-sm-2 control-label">监测类型<font color="red">*</font></label>
+								<div class="col-sm-4">
+									<select class="form-control" id="itemType" name="itemType" required="" aria-required="true"> 								  							  	
+								      <option value="ZZ_WL">闸站水位</option> 
+								      <option value="CSK_WL">出水口水位</option>
+								      <option value="JSD_WL">积水点水位</option>
+								      <option value="JX_WL">井下水位</option>
+								      <option value="DP_WL">泵站水位</option>
+								      <option value="ZQ_WL">河道水位</option>
+								      <option value="YL_WL">降水量</option>
+								      <option value="HL_WQ">河流水质</option>
+								      <option value="Q">流量</option>
+								      <option value="TPT">温度</option>
+								      <option value="VD">视频</option>
+								      <option value="CK">仓库详细信息</option>
+								      <option value="CLD">撤离点详细信息</option>								      
+								      <option value="AZD">安置点详细信息</option>
+								    </select>
+								</div>
+								<label class="col-sm-2 control-label">所属表<font color="red">*</font></label>
+								<div class="col-sm-4">
+									<select class="form-control" id="itemTable" name="itemTable" required="" aria-required="true"> 								  							  							     
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">显示排序</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="sort" name="sort">
+								</div>
+								<label class="col-sm-2 control-label">计量单位</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="unit" name="unit">
+								</div>
+							</div>
+							<!--<div class="form-group">
+								<label class="col-sm-2 control-label">属性标识</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="itemTag" name="itemTag">
+								</div>
+								<label class="col-sm-2 control-label">传输频率</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="rate" name="rate">
+								</div>
+							</div>-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">上限值</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="upperLimit" name="upperLimit">
+								</div>
+								<label class="col-sm-2 control-label">下限值</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="lowerLimit" name="lowerLimit">
+								</div>
+							</div>
+							<!--<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">波动限制</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="surgeLimit" name="surgeLimit">
+								</div>
+								<label class="col-sm-2 control-label">工程ID</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="codeId" name="codeId">
+								</div>
+							</div>-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">父项</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="parentItem" name="parentItem">
+								</div>
+								<label class="col-sm-2 control-label">警告值1</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="warnLimit" name="warnLimit">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">警告值2</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="warnLimit2" name="warnLimit2">
+								</div>
+								<label class="col-sm-2 control-label">警告值3</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="warnLimit3" name="warnLimit3">
+								</div>
+							</div>
+							<!--<div class="hr-line-dashed"></div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">警告值4</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="warnLimit4" name="warnLimit4">
+								</div>
+								<label class="col-sm-2 control-label">警告值5</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="warnLimit5" name="warnLimit5">
+								</div>
+							</div>
+							
+							<label class="col-sm-2 control-label">警告值6</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="warnLimit6" name="warnLimit6">
+								</div>-->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">基础值1</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="baseValue1" name="baseValue1">
+								</div>
+								<label class="col-sm-2 control-label">基础值2</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="baseValue2" name="baseValue2">
+								</div>
+							</div>						
+							<div class="form-group">
+								<label class="col-sm-2 control-label">视频地址</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="videoUrl" name="videoUrl">
+								</div>							
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">默认显示</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="defaultShow" name="defaultShow">
+								</div>
+								<label class="col-sm-2 control-label">是否显示</label>
+								<div class="col-sm-4">
+									<select class="form-control" id="isShow" name="isShow" > 
+								      <option value="1">是</option> 
+								      <option value="0">否</option>
+								    </select>
+								</div>
+							</div>
+					 </div>
+					  
+					 <div class="modal-footer">
+						<button type="submit" id="submitBtn" class="btn btn-primary">提交</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					 </div>
+				</form>
+			  </div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="delcfmModel">  
+	  <div class="modal-dialog">  
+		<div class="modal-content message_align">  
+		  <div class="modal-header">  
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>  
+			<h4 class="modal-title">提示信息</h4>  
+		  </div>  
+		  <div class="modal-body">  
+			<p>您确认要删除吗？</p>  
+		  </div>  
+		  <div class="modal-footer">  
+			 <input type="hidden" id="url"/>  
+			 <a  onclick="doDelete()" class="btn btn-success" data-dismiss="modal">确定</a>  
+			 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>  
+		  </div>  
+		</div><!-- /.modal-content -->  
+	  </div><!-- /.modal-dialog --> 
+	</div>
+	
+	<div id="showBigImageDiv" style="position:absolute;width:100%;left:0px;top:0;z-index:20000000;display:none">
+		<div style="position:relative;width:100%;height:100%;left:0px;top:0;background:#454545;opacity:0.7"></div>
+		<div class="bigPicCloseBtn" onClick="closeBigImage()"></div>
+		<div id="imgBoxDiv" style="position:absolute;left:0;top:20px;width:100%;height:100%;text-align:center">
+			
+		</div>
+	</div>
+	
+	<script src="../../lib/jquery.min.js?v=2.1.4"></script>
+    <script src="../../lib/bootstrap.min.js?v=3.3.6"></script>
+    <script src="../../lib/content.min.js?v=1.0.0"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="../../lib/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+	<script src="../../lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+	<script src="../../lib/plugins/toastr/toastr.min.js"></script>
+	<script src="../../lib/plugins/validate/jquery.validate.min.js"></script>
+	<script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>
+	<script src="../../lib/plugins/validate/messages_zh.min.js"></script>
+	<script src="js/itemDim.js"></script>
+	<script src="/awater/js/common.js"></script> 
+</body>
+</html>

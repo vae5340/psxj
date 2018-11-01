@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="sortApp">
+  <head>
+    <title>字段排序</title>
+	<meta charset="UTF-8">	
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/page-style.css" rel="stylesheet" type="text/css"/>
+	<link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/animate.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/angular/app/lib/angular/angular.min.js"></script>
+  </head>
+  
+<body class="yui3-container" ng-controller="sortController">
+<div class="yui3-dlg-container">
+	<div class="yui3-app-category-content-container"  style="left:0px;">
+		<div class="category-content-container" style="left:0px;">
+		    <div class="category-fields-container" ng-controller ='sortController'>
+				<div class = "pickfield" style="position:absolute;top:5px;width:100%;height:100%;line-height:33px;">
+					<div class='yui3-app-field-setting' style="height:95%">
+						<table class="fields-table" style="height:95%">
+							<tr style="line-height:10px;height:20px">
+								<td class='paneTitle rightTitle'  style="line-height:10px;height:20px;width:250px;"><strong>列表字段</strong><span class='rightTitleTip'></span></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td class='pane rightPane' style="width:400px;">
+								   	<div  style="overflow:auto;margin:auto;height:80%;top:2px;" >
+										<div ng-model='formFields' ng-repeat="item in formFields" ng-click="selectFormField($index)" ng-class='{fieldDIVclickedBlur:$index==formFieldIndex}' class="fieldDIV">
+											<span>{{item.fieldname+"："+item.displayname}}</span>
+										</div>
+									</div>
+								</td>
+								<td class='btnPane'>
+									<div class="yui3-field-button yui3-field-button-bottom" ng-click='bottomMoveClick()'>
+									</div>
+									<div class="yui3-field-button yui3-field-button-top" ng-click='topMoveClick()'>
+									</div>
+									<div class="yui3-field-button yui3-field-button-down " ng-click='downMoveClick()'>
+									</div>
+									<div class="yui3-field-button yui3-field-button-up"  ng-click='upMoveClick()'>
+									</div>
+								</td>
+						   </tr>
+						</table>
+					</div>
+				</div>
+				<div style="position:absolute;bottom:10px;overflow:hidden;right:70px;" ><button class="btn btn-primary" ng-click='saveBtnClick()'>保存</div></button></div>
+		    </div>
+		</div>
+	</div>
+</div>
+</body>
+  	<script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+  	<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+    <script src="js/fieldsort.js"></script>
+</html>

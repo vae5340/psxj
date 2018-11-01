@@ -1,0 +1,718 @@
+/*----------stat-----------*/
+.desktop-container {
+    font-family: 瀵邦喛钂嬮梿鍛寸拨;
+    color: #000000;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.project-timespan {
+    width: 100%;
+    height: 25px;
+    color: #1d1d1d;
+    font-size: 13px;
+}
+
+.stat-panel {
+    width: 100%;
+    height: 100%;
+}
+
+.stat-timespan {
+    width: 100%;
+    height: 25px;
+    color: #1d1d1d;
+}
+
+.stat-table {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    height: 50%;
+}
+
+.stat-chart {
+    width: 100%;
+    padding-top: 10px;
+}
+
+.stat-search {
+    background: url("../img/icon/search-blue.png") no-repeat center center;
+    width: 22px;
+    height: 22px;
+    left: 497px;
+    top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: absolute;
+}
+
+@media only screen and (min-width: 368px) and (max-width: 470px) {
+    .stat-searchScreen {
+        left: 415px;
+        top: 10px;
+    }
+}
+@media only screen and (min-width: 471px) and (max-width: 490px) {
+    .stat-searchScreen {
+        left: 438px;
+        top: 10px;
+    }
+}
+@media only screen and (min-width: 471px) and (max-width: 490px) {
+    .list-searchScreen {
+        left: 307px;
+        top: 10px;
+    }
+}
+.list-search {
+    background: url("../img/icon/search-blue.png") no-repeat center center;
+    width: 22px;
+    height: 22px;
+    left: 307px;
+    top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.stat-view {
+    background: url("../img/icon/stat-view.png") no-repeat center center;
+    width: 22px;
+    height: 22px;
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.list-panel {
+    width: 100%;
+    height: 90%;
+}
+
+.stat-decoration {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.stat-cursor {
+    cursor: pointer;
+}
+
+/*------ list------------*/
+.list-group-item-image-index1 .listItemImg {
+    background: url(../img/list/locBar.png) 0px -40px no-repeat;
+}
+
+.list-group-item-image-index2 .listItemImg {
+    background: url(../img/list/locBar.png) -30px -40px no-repeat;
+}
+
+.list-group-item-image-index3 .listItemImg {
+    background: url(../img/list/locBar.png) -60px -40px no-repeat;
+}
+
+.list-group-item-image-index4 .listItemImg {
+    background: url(../img/list/locBar.png) -90px -40px no-repeat;
+}
+
+.list-group-item-image-index5 .listItemImg {
+    background: url(../img/list/locBar.png) -120px -40px no-repeat;
+}
+
+.list-group-item-image-index6 .listItemImg {
+    background: url(../img/list/locBar.png) -150px -40px no-repeat;
+}
+
+.list-group-item-image-index7 .listItemImg {
+    background: url(../img/list/locBar.png) -180px -40px no-repeat;
+}
+
+.list-group-item-image-index8 .listItemImg {
+    background: url(../img/list/locBar.png) -210px -40px no-repeat;
+}
+
+.list-group-item-image-index9 .listItemImg {
+    background: url(../img/list/locBar.png) -240px -40px no-repeat;
+}
+
+.list-group-item-image-index10 .listItemImg {
+    background: url(../img/list/locBar.png) -270px -40px no-repeat;
+}
+
+.list-datagroup-content {
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    right: 0px;
+    text-align: left;
+    border-top: solid 1px #ffffff;
+    border-bottom: solid 1px #ffffff;
+    overflow-y: auto;
+    scrollbar-arrow-color: #eeeeee;
+    scrollbar-face-color: #eeeeee;
+    scrollbar-3dlight-color: #000000;
+    scrollbar-highlight-color: #ffffff;
+    scrollbar-shadow-color: #ffffff;
+    scrollbar-darkshadow-color: #eeeeee;
+    scrollbar-track-color: #ffffff;
+    scrollbar-base-color: #ffffff;
+}
+
+.list-datagroup-content .list-group {
+    margin-bottom: 0;
+    line-height: 140%;
+}
+
+.list-datagroup-content .list-group .list-group-item:first-child {
+    cursor: pointer;
+    padding: 0px;
+    background: transparent;
+    border-style: none;
+}
+
+.list-datagroup-content .list-group .list-group-item {
+    cursor: pointer;
+    padding: 0px;
+    background: transparent;
+    border-left-style: none;
+    border-top-style: dashed;
+    border-bottom-style: none;
+    border-right-style: none;
+}
+
+.list-datagroup-content .list-group .list-group-item .active {
+    padding: 5px 10px;
+    background-color: #65a7e7;
+}
+
+.list-group-item-human {
+    width: 100%;
+    height: 100%;
+    padding: 5px 0px 5px 52px;
+    background: url(images/list/human.png) 10px center no-repeat;
+}
+
+.list-datagroup-pager {
+    position: absolute;
+    left: 10px;
+    right: 0px;
+    bottom: 60px;
+    height: 0px;
+    background-color: #eeeeee;
+    display: none;
+}
+
+.list-datagroup-pager .app-pager {
+    width: 100%;
+    position: absolute;
+    bottom: 4px;
+}
+
+.search-tip {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    padding-top: 40%;
+    background-color: transparent;
+    color: #1d1d1d;
+    font-size: 15px;
+    text-align: center;
+    z-index: 99;
+    display: none;
+}
+
+/*------tabs------------*/
+.nav-tabs {
+    margin-left: 20px;
+    border-bottom: none;
+}
+
+.nav-tabs > li > a {
+    background-color: #fff;
+    color: #1f66aa;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border-color: #aeaeae #aeaeae transparent;
+}
+
+/*------panel------------*/
+.panel-blue .panel-heading {
+    background-color: rgb(104, 171, 234);
+}
+
+/*----------metadatatable-------------*/
+.metadatatable-container .form-group {
+    padding: 0px;
+    border-bottom: 1px dotted #DDD;
+}
+
+.fieldlist-table {
+    width: 100%;
+    border: 1px solid #CCCCCC;
+}
+
+.fieldlist-table tr {
+    height: 30px;
+}
+
+.fieldlist-table td {
+    border: 1px solid #CCCCCC;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tablefield-add {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: url(../img/icon/meta/add.png) left center no-repeat;
+}
+
+.tablefield-del {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: url(../img/icon/meta/delete.png) left center no-repeat;
+}
+
+.tablefield-match {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: url(../img/icon/meta/match.png) left center no-repeat;
+}
+
+.tablefield-sync {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: url(../img/icon/meta/sync.png) left center no-repeat;
+}
+
+/*----------fieldsort-------------*/
+.yui3-app-category-content-container {
+    position: absolute;
+    top: 0;
+    left: 250px;
+    right: 1px;
+    bottom: 1px;
+}
+
+.yui3-app-category-content-container .tip-and-button-container {
+    width: 100%;
+    height: 32px;
+    position: absolute;
+    top: 0;
+}
+
+.yui3-app-category-content-container .category-content-container {
+    width: 100%;
+    height: 99%;
+    position: absolute;
+    padding-left: 5px;
+}
+
+.yui3-app-category-content-container .category-content-container .categoryTableList {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    width: 901px;
+    height: 90%;
+    border: 1px solid #9BA7B5;
+}
+
+.yui3-app-category-content-container .category-fields-container {
+    width: 99%;
+    height: 100px;
+}
+
+.yui3-app-category-content-container .fields-table {
+    width: 99%;
+}
+
+.yui3-app-category-content-container .fields-table input {
+    width: 150px;
+    background-color: white;
+    border: 1px solid #CCCCCC;
+    display: inline-block;
+    height: 16px;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+
+.yui3-app-category-content-container .fields-table input[class|="combo"] {
+    border: none;
+}
+
+.yui3-app-category-content-container .fields-table select {
+    width: 185px;
+    background-color: white;
+    border: 1px solid #CCCCCC;
+    display: inline-block;
+    height: 21px;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+
+.yui3-app-category-content-container .fields-table .label {
+    color: #003665;
+    width: 60px;
+    height: 30px;
+    padding-left: 20px;
+}
+
+.yui3-app-category-content-container .fields-table .input {
+    width: 180px;
+}
+
+.yui3-app-category-content-container .fieldlist-table {
+    width: 100%;
+    border: 1px solid #CCCCCC;
+    background-color: #F7FBFA;
+}
+
+.yui3-app-category-content-container .fieldlist-table tr {
+    height: 30px;
+}
+
+.yui3-app-category-content-container .fieldlist-table td {
+    border: 1px solid #CCCCCC;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.yui3-app-category-content-container .fieldlist-table input {
+    height: 20px;
+}
+
+.yui3-app-category-content-container .fieldlist-table select {
+    height: 20px;
+}
+
+.yui3-app-category-content-container .fieldlist-table .textbox {
+    width: 70%;
+    background-color: white;
+    border: 1px solid #CCCCCC;
+    display: inline-block;
+    height: 25px;
+    text-align: middle;
+}
+
+/*fieldsetting*/
+.yui3-app-field-setting .paneTitle {
+    border: 1px solid #95A1B1;
+    width: 200px;
+    background: url("../img/icon/meta/sprite_repeat_x.png") repeat-x 0 -206px;
+    height: 28px;
+    padding: 0 0 0 5px
+}
+
+.yui3-app-field-setting {
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+}
+
+.yui3-app-field-setting .paneTitle {
+    border: 1px solid #95A1B1;
+    width: 160px;
+    background: url("../img/icon/meta/sprite_repeat_x.png") repeat-x 0 -206px;
+    height: 28px;
+    padding: 0 0 0 5px
+}
+
+.yui3-app-field-setting .pane {
+    border-bottom: 1px solid #95A1B1;
+    border-right: 1px solid #95A1B1;
+    border-left: 1px solid #95A1B1;
+    width: 160px;
+    height: 280px;
+}
+
+.yui3-app-field-setting .btnPane {
+    top: 30%;
+}
+
+.yui3-app-field-setting .leftFieldDiv {
+    height: 300px;
+    overflow: auto;
+    margin: auto
+}
+
+.yui3-app-field-setting .rightFieldDiv {
+    height: 300px;
+    overflow: auto;
+    margin: auto
+}
+
+.yui3-app-field-setting .chooseBtn {
+    background: url("../img/icon/meta/fieldsettings.png");
+    height: 16px;
+    width: 46px;
+    float: left;
+    cursor: pointer;
+    margin: 0 0 5px 3px;
+}
+
+.yui3-app-field-setting .rightBtn {
+    background-position: -92px 0;
+    margin-top: 10px
+}
+
+@media only screen and (min-width: 368px) and (max-width: 801px) {
+    .screenBtn {
+        margin-top:-7%;
+        left:-4%
+    }
+}
+
+@media only screen and (min-width: 368px) and (max-width: 801px) {
+    .screenBoult {
+        top:-31%;
+    }
+}
+.yui3-app-field-setting .leftBtn {
+    background-position: 0 0;
+    margin: 5px 0 95px 3px;
+}
+
+.yui3-app-field-setting .rightAllBtn {
+    background-position: -138px 0;
+}
+
+.yui3-app-field-setting .leftAllBtn {
+    background-position: -46px 0;
+    margin-top: 3px
+}
+
+.yui3-app-field-setting .itemBlurField {
+    background-color: #81E0F7;
+}
+
+.yui3-app-field-setting .itemSelected {
+    background-color: blue;
+    color: white
+}
+
+.yui3-app-field-setting .optionInitFieldClass {
+    padding-left: 5px;
+}
+
+.yui3-app-field-setting .optionInitRightFieldClass {
+    padding-left: 20px;
+}
+
+.yui3-field-footer {
+    height: 30px;
+    margin: 0 30px;
+}
+
+.yui3-app-field-setting .yui3-field-button {
+    background: url("../img/icon/meta/fieldsettings.png") repeat scroll 0 0 transparent;
+    cursor: pointer;
+    float: right;
+    height: 16px;
+    margin: 5px;
+    width: 11px;
+}
+
+.yui3-app-field-setting .yui3-field-button-up {
+    background-position: -184px 0;
+}
+
+.yui3-app-field-setting .yui3-field-button-down {
+    background-position: -195px 0;
+}
+
+.yui3-app-field-setting .yui3-field-button-top {
+    background-position: -206px 0;
+}
+
+.yui3-app-field-setting .yui3-field-button-bottom {
+    background-position: -217px 0;
+}
+
+.yui3-app-field-setting .fields-table .fieldDIV:hover {
+    cursor: pointer;
+    color: blue;
+    background: #8080ff;
+}
+
+.fieldDIVclickedBlur {
+    background-color: #0e83ef;
+    cursor: pointer;
+}
+
+.tableName:hover {
+    cursor: pointer;
+    color: blue;
+    background: #8080ff;
+}
+
+.tablefield-match {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: url(../img/icon/meta/match.png) left center no-repeat;
+}
+
+/*----------------formpageconfiguration----------*/
+.formpageconfiguration-container .form-group {
+    padding: 0px;
+    border-bottom: 1px dotted #DDD;
+}
+
+.btn-tc {
+    background-color: #FFFFFF;
+}
+
+/*----------------infodetail----------*/
+.basic-info-row {
+    width: 100%;
+    height: 28px;
+    display: block;
+}
+
+.basic-info-row:nth-child(2n+1) {
+    background-color: #e7eef8;
+}
+
+.basic-info-cell {
+    float: left;
+    width: 50%;
+    line-height: 28px;
+    display: block;
+    padding: 0px 10px;
+}
+
+.basic-info-cell-header {
+    color: #005aa0;
+    display: inline;
+}
+
+.basic-info-cell-content {
+    color: #333333;
+    display: inline;
+}
+
+/*----------------page----------*/
+.page {
+    width: 100%;
+    height: 38px;
+    bottom: 0;
+    overflow: hidden;
+    border-top: 0px solid #eaeaea;
+    text-align: right;
+    background-color: #fff;
+}
+
+.page .page_content {
+    height: 38px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: left;
+    display: inline-block;
+}
+
+.page .page_content span {
+    line-height: 38px;
+    margin-left: 10px;
+    color: #337ab7;
+}
+
+.page a {
+    font-size: 14px;
+    line-height: 38px;
+    float: left;
+    margin-left: 10px;
+}
+
+.page input {
+    width: 35px;
+    height: 28px;
+    border: 1px solid #b2b2b2;
+    float: left;
+    margin: 5px 10px;
+    text-align: left;
+    vertical-align: middle;
+    outline: none;
+    padding: 3px 5px;
+}
+
+.page_btn {
+    font-size: 15px;
+    color: #fff;
+    float: left;
+    width: 50px;
+    height: 30px;
+    background-color: #049fef;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 4px;
+}
+.exprot_btn {
+    font-size: 15px;
+    color: #fff;
+    height: 30px;
+    background-color: #049fef;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 4px;
+}
+
+.myfont {
+    overflow: hidden; /*自动隐藏文字*/
+    text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+    white-space: nowrap; /*强制不换行*/
+    width: 20em; /*不允许出现半汉字截断*/
+}
+.stat-chart{ height:50%; margin:0 auto}
+@media screen and (min-height: 1201px) {
+    .stat-chart {
+        top:46%;
+    }
+}
+/* 设置了浏览器高度不小于1201px时 abc 显示1200px宽度 */
+@media screen and (max-height: 1200px) {
+    .stat-chart {
+        top:46%;
+    }
+}
+@media screen and (max-height: 900px) {
+    .stat-chart {
+        top:47%;
+    }
+}
+@media screen and (max-height: 800px) {
+    .stat-chart {
+        top:48%;
+    }
+}
+/* 设置了浏览器高度不大于900px时 abc 显示900px宽度 */
+@media screen and (max-height: 700px) {
+    .stat-chart {
+        top:48%;
+    }
+}
+/* 设置了浏览器高度不大于800px时 abc 显示200px宽度 */
+
+@media screen and (max-height: 500px) {
+    .stat-chart {
+        top:50%;
+    }
+}

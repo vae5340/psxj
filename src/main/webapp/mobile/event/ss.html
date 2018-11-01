@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- 指定页面编码utf-8 -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no" />
+    <script src="js/jquery-1.11.1.min.js"></script>
+	<link href="css/common.css" rel="stylesheet" type="text/css" />
+  </head> 
+ </head>
+  <body>
+	<div>
+		<div class="title"><img src="img/img_p.png"><label>问题来源（巡查员上报）</label></div>
+		<div class="detail">
+		</div>
+	</div>
+	<div class="incon">
+		<div>
+			<p>问题描述</p>
+			<div class="textarea"></div>
+		</div>
+		<div class="model clearfix">
+			<p>现场图片</p>
+			<div class="imgbox clearfix">
+				
+			</div>
+		</div>
+	</div>
+	<div class="qusbox">
+		<div class="title"><img src="img/ic_process.png"><label><label>处理情况</label></div>
+	</div>
+	<div class="desk"></div>
+<script>
+var url = "http://39.108.76.192:8080/agweb_ha/rest/agdic/agdicByTypeCodeItem/A161016"
+
+$.ajax({
+      type:'get',
+      url:url,
+      data:{},
+      dataType:'json',
+      success:function(result){
+      	alert(JSON.stringify(result));
+      }
+    });
+         
+</script>
+  </body>
+</html>

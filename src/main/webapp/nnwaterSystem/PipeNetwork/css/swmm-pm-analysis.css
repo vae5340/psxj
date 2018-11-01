@@ -1,0 +1,69 @@
+.swmm-pm-analysis {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+  .swmm-pm-analysis .control-panel {
+    width: 220px;
+    height: 100%;
+    display: inline-block;
+    background: #EEEEEE;
+    float: left; }
+    .swmm-pm-analysis .control-panel .control-btns {
+      text-align: center; }
+      .swmm-pm-analysis .control-panel .control-btns button {
+        margin: 10px 10px 10px 0; }
+    .swmm-pm-analysis .control-panel .pipe-info .pipe-info-title {
+      padding-top: 10px;
+      padding-bottom: 6px;
+      border-left: solid 5PX #666666;
+      padding-left: 10px;
+      background: #EAEAEA; }
+    .swmm-pm-analysis .control-panel .pipe-info .pipe-info-list {
+      overflow: scroll;
+      background: #FAFAFA; }
+      .swmm-pm-analysis .control-panel .pipe-info .pipe-info-list li {
+        border-bottom: solid thin #EEEEEE;
+        padding: 10px 10px 6px 10px;
+        text-align: center; }
+        .swmm-pm-analysis .control-panel .pipe-info .pipe-info-list li:hover {
+          color: #0000FF;
+          background: #F0F0F0;
+          cursor: pointer; }
+  .swmm-pm-analysis .result-panel {
+    width: 80%;
+    height: 100%;
+    display: inline-block;
+    background: #F8F8F8; }
+    .swmm-pm-analysis .result-panel.result-panel-hidden {
+      display: none; }
+    .swmm-pm-analysis .result-panel .result-panel-control-panel {
+      border-bottom: solid thin #444444; }
+      .swmm-pm-analysis .result-panel .result-panel-control-panel .result-panel-time-slider-wrapper {
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px; }
+        .swmm-pm-analysis .result-panel .result-panel-control-panel .result-panel-time-slider-wrapper .result-panel-time-slider-control-panel {
+          width: 100%;
+          text-align: center; }
+          .swmm-pm-analysis .result-panel .result-panel-control-panel .result-panel-time-slider-wrapper .result-panel-time-slider-control-panel .result-panel-time-slider-label {
+            display: inline;
+            padding-left: 5px;
+            padding-right: 5px;
+            border-right: solid thin #555555;
+            text-align: center;
+            margin-right: 1em; }
+          .swmm-pm-analysis .result-panel .result-panel-control-panel .result-panel-time-slider-wrapper .result-panel-time-slider-control-panel .result-panel-input-wrapper {
+            display: inline;
+            margin-right: 1em; }
+            .swmm-pm-analysis .result-panel .result-panel-control-panel .result-panel-time-slider-wrapper .result-panel-time-slider-control-panel .result-panel-input-wrapper input {
+              text-align: center; }
+          .swmm-pm-analysis .result-panel .result-panel-control-panel .result-panel-time-slider-wrapper .result-panel-time-slider-control-panel .result-panel-control-btns {
+            display: inline; }
+        .swmm-pm-analysis .result-panel .result-panel-control-panel .result-panel-time-slider-wrapper .result-panel-time-slider {
+          width: 100%;
+          overflow: hidden; }
+    .swmm-pm-analysis .result-panel .result-panel-chart-wrapper {
+      -webkit-user-select: none;
+      user-select: none; }
+
+/*# sourceMappingURL=swmm-pm-analysis.css.map */

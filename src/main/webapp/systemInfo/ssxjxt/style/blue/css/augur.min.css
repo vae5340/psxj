@@ -1,0 +1,694 @@
+﻿@charset "UTF-8";
+/*初始化*/
+div,ul,li{
+	margin:0;
+	padding:0;
+}
+li{
+	list-style:none;
+}
+/*左侧伸缩面板样式开始*/
+.leftDiv{
+	position:absolute;
+	width:140px;
+	/*height:100%;*/
+	background-color:#028beb;
+	left:70px;
+	top:122px;
+	border: 1px solid #9ac3f6;
+}
+#tool-button-expand{position:absolute;width:70px;height:43px;cursor:pointer;background:url("../img/expand.png") no-repeat center center;border-bottom: 1px solid #e7eaec;display:none;}
+#tool-button-contracts{width:70px;height:43px;cursor:pointer;background:url("../img/contracts.png") no-repeat center center;border-bottom: 1px solid #e7eaec;}
+#nav { margin-bottom: 0;background:#049fef}
+
+.seperator{
+	position:absolute;
+	left:385px;
+	top:42%;
+	width:15px;
+	height:30px;
+	background-color:#fff;
+	background-image:url("../img/left_btn_open.png");
+	background-position: center !important;
+	background-repeat: no-repeat;
+	border-color:#a0a1a3;
+	border-image: none;
+	border-style: solid  none solid solid;
+	border-width: 1px  0px 1px 1px;
+	cursor:pointer;
+	z-index:10;
+	background:#fff url("../img/left_btn_open.png") no-repeat 2 26;
+}
+.seperatorOpen:hover{
+	background:#fff url("../img/left_btn_open_on.png") no-repeat 2 26;
+}
+
+.seperatorClose{
+	position:absolute;
+	left:400px;
+	top:42%;
+	width:15px;
+	height:30px;
+	background-color:#ffffff;
+	background-image:url("../img/left_btn_close.png");
+	background-position: center !important;
+	background-repeat: no-repeat;
+	border-color:#a0a1a3;
+	border-image: none;
+	border-style: solid none solid solid;
+	border-width: 1px 0px 1px 1px;
+	cursor:pointer;
+	z-index:10000000;
+	background:#fff url("../img/left_btn_close.png") no-repeat 2 26;
+}
+.seperatorClose:hover{
+	background:#fff url("../img/left_btn_close_on.png") no-repeat 2 26;
+}
+/*左侧伸缩面板样式结束*/
+/*二级菜单默认样式*/
+/*
+.fixli a{
+	background:#39aef5;
+	color:#fff !important
+}
+*/
+
+/*底部文字样式开始*/
+.pull-center {
+	text-align:center !important
+}
+/*底部文字样式结束*/
+
+.nav.navbar-right>li>a {
+	color:#FFFFFF /*#999c9e*/
+}
+
+
+
+/*三级菜单面板样式开始*/
+.navbar-default2 {
+	background-color:transparent;
+	border-color:#2f4050;
+	position:relative
+}
+body.mini-navbar .navbar-default2 .nav>li>.nav-second-level li a {
+	font-size:12px;
+	border-radius:0 2px 2px 0
+}
+body.mini-navbar .navbar-static-side2 {
+	width:70px
+}
+body.mini-navbar .nav-label,body.mini-navbar .navbar-default2 .nav li a span,body.mini-navbar .profile-element {
+	display:none
+}
+body.mini-navbar .navbar-default2 .nav>li>a {
+	font-size:16px
+}
+body.canvas-menu .navbar-static-side2,body.fixed-sidebar .navbar-static-side2 {
+	position:fixed;
+	width:220px;
+	z-index:2001;
+	height:100%
+}
+body.fixed-sidebar.mini-navbar .navbar-static-side2 {
+	width:330px
+}
+body.body-small.fixed-sidebar.mini-navbar .navbar-static-side2{
+	width:70px
+}
+body.fixed-sidebar.mini-navbar .navbar-default2 .nav>li>.nav-second-level li a {
+	font-size:12px;
+	border-radius:3px
+}
+body.canvas-menu.mini-navbar .navbar-default2 .nav>li>.nav-second-level li a {
+	font-size:13px;
+	border-radius:3px
+}
+body.canvas-menu nav.navbar-static-side2 {
+	z-index:2001;
+	background:red;
+	height:100%;
+	position:fixed;
+	display:none
+}
+.bs-glyphicons {
+	margin:0 -10px 20px;
+}
+.bs-glyphicons li {
+margin: 0 3px 20px;
+/*background-color:none !important;*/
+}
+.bs-glyphicons li:hover {
+	/*
+	color:null !important;
+	background-color:null !important;
+	*/
+
+}
+@media (min-width:768px) {
+	.bs-glyphicons {
+	/**
+	margin-right:0;
+	margin-left:0
+	**/
+	}
+	.bs-glyphicons li {
+		width:60px;
+		height:80px;
+		cursor:pointer;
+		font-size:12px;
+		list-style:none
+	}
+}
+
+/*
+//伸缩二、三级菜单时放开注释，设置该样式为：margin:0 0 0 0px;
+//伸缩三级菜单：以下注释掉的2个class样式给注释起来，引用系统样式表;
+body.body-small.fixed-sidebar.mini-navbar #page-wrapper,body.fixed-sidebar.mini-navbar #page-wrapper {
+	margin:0 0 0 0px
+}
+body.mini-navbar #page-wrapper {
+	margin:0 0 0 0px
+}
+*/
+body.mini-navbar .navbar-default .nav>li>a {
+	font-size:12px
+}
+.funPannelOff{
+border-bottom: 1px solid #d2d2d2;margin-top: 15px;height: 0px;z-index: -1;
+}
+.funPannelOff li{
+	display:none;
+}
+.funPannelOn{
+border-bottom: 1px solid #d2d2d2;margin-top: 15px;z-index: -1;
+}
+.funIco{
+padding-right:7px;
+display: block;
+width:45px;
+height:45px;
+border-radius:45px;
+overflow:hidden;
+margin:0 auto;
+}
+/*三级菜单面板样式结束*/
+
+.leftmenu-mubanmiaoshu{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/mubanmiaoshu.png)left center no-repeat; }
+.leftmenu-fenleiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/fenleiguanli.png)left center no-repeat; }
+.leftmenu-mubanguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/mubanguanli.png)left center no-repeat; }
+.leftmenu-jiegouguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/jiegouguanli.png)left center no-repeat; }
+.leftmenu-zidianguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/zidianguanli.png)left center no-repeat; }
+.leftmenu-yemianpeizhi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/yemianpeizhi.png)left center no-repeat; }
+
+.leftmenu-renwushitudingyi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/renwushitudingyi.png)left center no-repeat; }
+.leftmenu-renwushitucaidan{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/renwushitucaidan.png)left center no-repeat; }
+.leftmenu-renwushitujueseguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/renwushitujueseguanli.png)left center no-repeat; }
+.leftmenu-renwushituziduan{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/renwushituziduan.png)left center no-repeat; }
+
+.leftmenu-zerenwanggebangding{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/zerenwanggebangding.png)left center no-repeat; }
+.leftmenu-zerenwanggedingyi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/zerenwanggedingyi.png)left center no-repeat; }
+
+.leftmenu-andaolufenlei{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/andaolufenlei.png)left center no-repeat; }
+.leftmenu-daolusheshiliang{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/daolusheshiliang.png)left center no-repeat; }
+.leftmenu-qiaoliangsheshiliang{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/qiaoliangsheshiliang.png)left center no-repeat; }
+
+.leftmenu-yuanlinxinxiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/yuanlinxinxiguanli.png)left center no-repeat; }
+.leftmenu-daoqiaosheshiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/daoqiaosheshiguanli.png)left center no-repeat; }
+.leftmenu-shizhengsheshiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shizhengsheshiguanli.png)left center no-repeat; }
+.leftmenu-jiancesheshiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/jiancesheshiguanli.png)left center no-repeat; }
+
+.leftmenu-shoulipingtai{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shoulipingtai.png)left center no-repeat; }
+
+.leftmenu-xunchayuanshangbao{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/xunchayuanshangbao.png)left center no-repeat; }
+.leftmenu-anjianfenleitongji{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/anjianfenleitongji.png)left center no-repeat; }
+.leftmenu-weiwanchenganjiantongji{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/weiwanchenganjiantongji.png)left center no-repeat; }
+.leftmenu-anjianchuliqingkuangtongji{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/anjianchuliqingkuangtongji.png)left center no-repeat; }
+.leftmenu-anjianchuzhijishilvfenxi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/anjianchuzhijishilvfenxi.png)left center no-repeat; }
+.leftmenu-anjiantongbifenxi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/anjiantongbifenxi.png)left center no-repeat; }
+
+.leftmenu-jingxiashuiwei{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/jingxiashuiwei.png)left center no-repeat; }
+.leftmenu-shipinjiankong{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shipinjiankong.png)left center no-repeat; }
+.leftmenu-shebeiguzhangyujing{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shebeiguzhangyujing.png)left center no-repeat; }
+.leftmenu-hedaoshuiwei{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/hedaoshuiwei.png)left center no-repeat; }
+.leftmenu-dianliangyichangyujing{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/dianliangyichangyujing.png)left center no-repeat; }
+
+.leftmenu-sheshiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/sheshiguanli.png)left center no-repeat; }
+.leftmenu-shebeiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shebeiguanli.png)left center no-repeat; }
+.leftmenu-jiankongxiangguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/jiankongxiangguanli.png)left center no-repeat; }
+.leftmenu-biaoguanxiguanli{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/biaoguanxiguanli.png)left center no-repeat; }
+.leftmenu-shujushouquan{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shujushouquan.png)left center no-repeat; }
+
+.leftmenu-dianxuanchaxun{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/dianxuanchaxun.png)left center no-repeat; }
+.leftmenu-juxingchaxun{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/juxingchaxun.png)left center no-repeat; }
+.leftmenu-duobianxingchaxun{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/duobianxingchaxun.png)left center no-repeat; }
+.leftmenu-daolumingchaxun{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/daolumingchaxun.png)left center no-repeat; }
+.leftmenu-jiaochakouchaxun{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/jiaochakouchaxun.png)left center no-repeat; }
+.leftmenu-tufuhaochaxun{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/tufuhaochaxun.png)left center no-repeat; }
+.leftmenu-shuipingjingju{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shuipingjingju.png)left center no-repeat; }
+.leftmenu-chuizhijingju{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/chuizhijingju.png)left center no-repeat; }
+.leftmenu-futushendu{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/futushendu.png)left center no-repeat; }
+.leftmenu-paishuiliuxiang{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/paishuiliuxiang.png)left center no-repeat; }
+.leftmenu-liantongfenxi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/liantongfenxi.png)left center no-repeat; }
+.leftmenu-baoguanfenxi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/baoguanfenxi.png)left center no-repeat; }
+.leftmenu-zongpoumian{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/zongpoumian.png)left center no-repeat; }
+.leftmenu-hengduanmian{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/hengduanmian.png)left center no-repeat; }
+.leftmenu-shoumingfenxi{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/shoumingfenxi.png)left center no-repeat; }
+
+.leftmenu-list{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/leftmenu-list.png)left center no-repeat; }
+.leftmenu-stat{position:absolute;width:18px; height:18px; background:url(../img/icon/left_ico/leftmenu-stat.png)left center no-repeat; }
+
+/*一级菜单和二级菜单开始*/
+.fixed-nav #wrapper { padding-top:74px;}
+#wrapper { background:#049fef;}
+.navbar-static-side { background:#028beb}
+.skin-1 .nav>li>a { font-weight:normal; text-align:center; color:#fff;}
+body.mini-navbar .navbar-default .nav>li>a { font-size:13px;}
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover { background:none;}
+.fa-all:before{display:block; width:45px; height:32px;margin:6px; content:no-close-quote;}
+.fa-jcsj:before { background:url(../img/icon/left_ico/mubanmiaoshu.png)left center no-repeat; }
+.defactive .fa-jcsj:before{background:url(../img/icon/left_ico/mubanmiaoshu.png)right center no-repeat;}
+.nav>li>a i{margin-right:0px;}
+
+.fa-road:before { background:url(../img/icon/left_ico/road.png) center no-repeat;}
+.fa-bdg:before { background:url(../img/icon/left_ico/bdg.png) center no-repeat;}
+.defactive .fa-bdg:before{background:url(../img/icon/left_ico/bdg.png) center no-repeat;}
+.fa-light:before { background:url(../img/icon/left_ico/light.png) center no-repeat;}
+.defactive .fa-light:before{background:url(../img/icon/left_ico/light.png) center no-repeat;}
+.fa-yjdd:before { background:url(../img/icon/left_ico/yjdd.png) center no-repeat;}
+
+.defactive .fa-yjdd:before{background:url(../img/icon/left_ico/yjdd.png)right center no-repeat;}
+.fa-fxcz:before { background:url(../img/icon/left_ico/fxcz.png)left center no-repeat;}
+.defactive .fa-fxcz:before{background:url(../img/icon/left_ico/fxcz.png)right center no-repeat;}
+.fa-glwh:before { background:url(../img/icon/left_ico/glwh.png)left center no-repeat;}
+.defactive .fa-glwh:before{background:url(../img/icon/left_ico/glwh.png)right center no-repeat;}
+.fa-gwfx:before { background:url(../img/icon/left_ico/gwfx.png)left center no-repeat;}
+.defactive .fa-gwfx:before{background:url(../img/icon/left_ico/gwfx.png)right center no-repeat;}
+.fa-dtcx:before { background:url(../img/icon/left_ico/dtcx.png)left center no-repeat;}
+.defactive .fa-dtcx:before{background:url(../img/icon/left_ico/dtcx.png)right center no-repeat;}
+.fa-gxtj:before { background:url(../img/icon/left_ico/gxtj.png)left center no-repeat;}
+.defactive .fa-gxtj:before{background:url(../img/icon/left_ico/gxtj.png)right center no-repeat;}
+.fa-kjls:before { background:url(../img/icon/left_ico/kjls.png)left center no-repeat;}
+.defactive .fa-kjls:before{background:url(../img/icon/left_ico/kjls.png)right center no-repeat;}
+.fa-fwfb:before { background:url(../img/icon/left_ico/fwfb.png)left center no-repeat;}
+.defactive .fa-fwfb:before{background:url(../img/icon/left_ico/fwfb.png)right center no-repeat;}
+.fa-ssgl:before { background:url(../img/icon/left_ico/ssgl.png)left center no-repeat;}
+.defactive .fa-ssgl:before{background:url(../img/icon/left_ico/ssgl.png)right center no-repeat;}
+.fa-kwsp:before { background:url(../img/icon/left_ico/kwsp.png)left center no-repeat;}
+.defactive .fa-kwsp:before{background:url(../img/icon/left_ico/kwsp.png)right center no-repeat;}
+.fa-yhgl:before { background:url(../img/icon/left_ico/yhgl.png)left center no-repeat;}
+.defactive .fa-yhgl:before{background:url(../img/icon/left_ico/yhgl.png)right center no-repeat;}
+.fa-GIScxfx:before { background:url(../img/icon/left_ico/GIScxfx.png)left center no-repeat;}
+.defactive .fa-GIScxfx:before{background:url(../img/icon/left_ico/GIScxfx.png)right center no-repeat;}
+.fa-kjcx:before { background:url(../img/icon/left_ico/kjcx.png)center no-repeat;}
+.defactive .fa-kjcx:before{background:url(../img/icon/left_ico/kjcx.png)center no-repeat;}
+.fa-tjcx:before { background:url(../img/icon/left_ico/tjcx.png)center no-repeat;}
+.defactive .fa-tjcx:before{background:url(../img/icon/left_ico/tjcx.png)center no-repeat;}
+.fa-lcfx:before { background:url(../img/icon/left_ico/lcfx.png)center no-repeat;}
+.defactive .fa-lcfx:before{background:url(../img/icon/left_ico/lcfx.png)center no-repeat;}
+.fa-ltfx:before { background:url(../img/icon/left_ico/ltfx.png)center no-repeat;}
+.defactive .fa-ltfx:before{background:url(../img/icon/left_ico/ltfx.png)center no-repeat;}
+.fa-mnfx:before { background:url(../img/icon/left_ico/mnfx.png)center no-repeat;}
+.defactive .fa-mnfx:before{background:url(../img/icon/left_ico/mnfx.png)center no-repeat;}
+.fa-ssjmdy:before { background:url(../img/icon/left_ico/ssjmdy.png)center no-repeat;}
+.defactive .fa-ssjmdy:before{background:url(../img/icon/left_ico/ssjmdy.png)center no-repeat;}
+.fa-rwstpz:before { background:url(../img/icon/left_ico/rwstpz.png)center no-repeat;}
+.defactive .fa-rwstpz:before{background:url(../img/icon/left_ico/rwstpz.png)center no-repeat;}
+.fa-zrwgpz:before { background:url(../img/icon/left_ico/zrwgpz.png)center no-repeat;}
+.defactive .fa-zrwgpz:before{background:url(../img/icon/left_ico/zrwgpz.png)center no-repeat;}
+.fa-sstj:before { background:url(../img/icon/left_ico/sstj.png)center no-repeat;}
+.defactive .fa-sstj:before{background:url(../img/icon/left_ico/sstj.png)center no-repeat;}
+.fa-ssgl2:before { background:url(../img/icon/left_ico/ssgl2.png)center no-repeat;}
+.defactive .fa-ssgl2:before{background:url(../img/icon/left_ico/ssgl2.png)center no-repeat;}
+.fa-ywsl:before { background:url(../img/icon/left_ico/ywsl.png)center no-repeat;}
+.defactive .fa-ywsl:before{background:url(../img/icon/left_ico/ywsl.png)center no-repeat;}
+.fa-tjfx:before { background:url(../img/icon/left_ico/tjfx.png)center no-repeat;}
+.defactive .fa-tjfx:before{background:url(../img/icon/left_ico/tjfx.png)center no-repeat;}
+.fa-ssjk:before { background:url(../img/icon/left_ico/ssjk.png)center no-repeat;}
+.defactive .fa-ssjk:before{background:url(../img/icon/left_ico/ssjk.png)center no-repeat;}
+.fa-whgl:before { background:url(../img/icon/left_ico/whgl.png)center no-repeat;}
+.defactive .fa-whgl:before{background:url(../img/icon/left_ico/whgl.png)center no-repeat;}
+
+.tnav { float:right; margin-right:20px; padding-right:20px;border-right: 1px dotted #8dd6fb;}
+.tnav li { float:left;list-style: none;}
+.tnav li a { display:block; float:left; margin:0 15px; height:20px; padding-top:8px; color:#fff; font-size:13px; text-align:center;}
+.tnav li a:hover, .tnav .hover a  { color:#ff0;}
+.tnav .zxjc { background:url(../img/icon/top_ico/zxjc.png) no-repeat; margin:0 auto;}
+.tnav .zxjc:hover, .tnav .hover .zxjc ,.tnav_def  .zxjc{ background:url(../img/icon/top_ico/zxjc.png) -45px  no-repeat; margin:0 auto;}
+.tnav .flyj { background:url(../img/icon/top_ico/flyj.png) no-repeat; margin:0 auto;}
+.tnav .flyj:hover, .tnav .hover .flyj ,.tnav_def  .flyj{ background:url(../img/icon/top_ico/flyj.png) -45px  no-repeat; margin:0 auto;}
+.tnav .ssgl2 { background:url(../img/icon/top_ico/ssgl2.png) no-repeat; margin:0 auto;}
+.tnav .ssgl2:hover, .tnav .hover .ssgl2 ,.tnav_def  .ssgl2{ background:url(../img/icon/top_ico/ssgl2.png) -45px  no-repeat; margin:0 auto;}
+.tnav .xcyh { background:url(../img/icon/top_ico/xcyh.png) no-repeat; margin:0 auto;}
+.tnav .xcyh:hover, .tnav .hover .xcyh ,.tnav_def  .xcyh{ background:url(../img/icon/top_ico/xcyh.png) -45px  no-repeat; margin:0 auto;}
+.tnav .yjzh { background:url(../img/icon/top_ico/yjzh.png) no-repeat; margin:0 auto;}
+.tnav .yjzh:hover, .tnav .hover .yjzh ,.tnav_def  .yjzh{ background:url(../img/icon/top_ico/yjzh.png) -45px  no-repeat; margin:0 auto;}
+.tnav .zxjk { background:url(../img/icon/top_ico/zxjk.png) no-repeat; margin:0 auto;}
+.tnav .zxjk:hover, .tnav .hover .zxjk ,.tnav_def  .zxjk{ background:url(../img/icon/top_ico/zxjk.png) -45px  no-repeat; margin:0 auto;}
+.tnav .gwGIS { background:url(../img/icon/top_ico/gwGIS.png) no-repeat; margin:0 auto;}
+.tnav .gwGIS:hover, .tnav .hover .gwGIS ,.tnav_def  .gwGIS{ background:url(../img/icon/top_ico/gwGIS.png) -45px  no-repeat; margin:0 auto;}
+.tnav .szwh { background:url(../img/icon/top_ico/szwh.png) no-repeat; margin:0 auto;}
+.tnav .szwh:hover, .tnav .hover .szwh ,.tnav_def  .szwh{ background:url(../img/icon/top_ico/szwh.png) -45px  no-repeat; margin:0 auto;}
+.tnav .gxfx { background:url(../img/icon/top_ico/guanxian.png) no-repeat; margin:0 auto;}
+.tnav .gxfx:hover, .tnav .hover .gxfx ,.tnav_def  .gxfx{ background:url(../img/icon/top_ico/guanxian_hover.png) no-repeat; margin:0 auto;}
+.tnav .swgw { background:url(../img/icon/top_ico/swgw.png) no-repeat; margin:0 auto;}
+.tnav .swgw:hover, .tnav .hover .swgw ,.tnav_def  .swgw{ background:url(../img/icon/top_ico/swgw.png) -45px  no-repeat; margin:0 auto;}
+.tnav .gxsq { background:url(../img/icon/top_ico/gxsq.png) no-repeat; margin:0 auto;}
+.tnav .gxsq:hover, .tnav .hover .gxsq ,.tnav_def  .gxsq{ background:url(../img/icon/top_ico/gxsq.png) -45px  no-repeat; margin:0 auto;}
+.tnav .gxfx2 { background:url(../img/icon/top_ico/gxfx.png) no-repeat; margin:0 auto;}
+.tnav .gxfx2:hover, .tnav .hover .gxfx2 ,.tnav_def  .gxfx2{ background:url(../img/icon/top_ico/gxfx.png) -45px  no-repeat; margin:0 auto;}
+.tnav .tj { background:url(../img/icon/top_ico/tj.png) no-repeat; margin:0 auto;}
+.tnav .tj:hover, .tnav .hover .tj ,.tnav_def  .tj{ background:url(../img/icon/top_ico/tj.png) -45px  no-repeat; margin:0 auto;}
+.tnav .kjcx { background:url(../img/icon/top_ico/chaxun.png) no-repeat; margin:0 auto;}
+.tnav .kjcx:hover, .tnav .hover .kjcx ,.tnav_def  .kjcx{ background:url(../img/icon/top_ico/chaxun_hover.png) no-repeat; margin:0 auto;}
+.tnav .tjbb { background:url(../img/icon/top_ico/tjbb.png) no-repeat; margin:0 auto;}
+.tnav .tjbb:hover, .tnav .hover .tjbb ,.tnav_def  .tjbb{ background:url(../img/icon/top_ico/tjbb.png) -45px  no-repeat; margin:0 auto;}
+
+.J_menuItem  .tm_ssgl{background:url(../img/icon/jc/ssgl.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_ssgl:hover,.tm_default .tm_ssgl{background:url(../img/icon/jc/ssgl.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sbgl{background:url(../img/icon/jc/sbgl.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sbgl:hover,.tm_default .tm_ssgl{background:url(../img/icon/jc/sbgl.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jkxgl{background:url(../img/icon/jc/jkxgl.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jkxgl:hover,.tm_default .tm_ssgl{background:url(../img/icon/jc/jkxgl.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jklx{background:url(../img/icon/jc/jklx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jklx:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/jklx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_nhjc{background:url(../img/icon/jc/nhjc.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_nhjc:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/nhjc.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jsdjc{background:url(../img/icon/jc/jsdjc.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jsdjc:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/jsdjc.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jxswjc{background:url(../img/icon/jc/jxswjc.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jxswjc:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/jxswjc.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jcdt{background:url(../img/icon/jc/jcdt.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jcdt:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/jcdt.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_twsp{background:url(../img/icon/jc/twsp.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_twsp:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/twsp.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_ldt{background:url(../img/icon/jc/ldt.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_ldt:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/ldt.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_qxyt{background:url(../img/icon/jc/qxyt.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_qxyt:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/qxyt.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_qxxx{background:url(../img/icon/jc/qxxx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_qxxx:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/qxxx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_swjc{background:url(../img/icon/jc/swjc.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_swjc:hover,.tm_default .tm_jklx{background:url(../img/icon/jc/swjc.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_bzjc{background:url(../img/icon/jc/bzjc.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_bzjc:hover,.tm_default .tm_bzjc{background:url(../img/icon/jc/bzjc.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dtxs{background:url(../img/icon/jc/dtxs.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dtxs:hover,.tm_default .tm_dtxs{background:url(../img/icon/jc/dtxs.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sjztt{background:url(../img/icon/jc/sjztt.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sjztt:hover,.tm_default .tm_sjztt{background:url(../img/icon/jc/sjztt.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sjqxt{background:url(../img/icon/jc/sjqxt.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sjqxt:hover,.tm_default .tm_sjqxt{background:url(../img/icon/jc/sjqxt.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_tjfx{background:url(../img/icon/jc/tjfx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_tjfx:hover,.tm_default .tm_tjfx{background:url(../img/icon/jc/tjfx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jyfx{background:url(../img/icon/jc/jyfx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jyfx:hover,.tm_default .tm_jyfx{background:url(../img/icon/jc/jyfx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sjdb{background:url(../img/icon/jc/sjdb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sjdb:hover,.tm_default .tm_sjdb{background:url(../img/icon/jc/sjdb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_lshs{background:url(../img/icon/jc/lshs.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_lshs:hover,.tm_default .tm_lshs{background:url(../img/icon/jc/lshs.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sblb{background:url(../img/icon/jc/sblb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sblb:hover,.tm_default .tm_sblb{background:url(../img/icon/jc/sblb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jclb{background:url(../img/icon/jc/jclb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jclb:hover,.tm_default .tm_jclb{background:url(../img/icon/jc/jclb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jbzx{background:url(../img/icon/jc/jbzx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jbzx:hover,.tm_default .tm_jbzx{background:url(../img/icon/jc/jbzx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jcdsz{background:url(../img/icon/jc/jcdsz.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jcdsz:hover,.tm_default .tm_jbzx{background:url(../img/icon/jc/jcdsz.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+
+.J_menuItem  .tm_bzjk{background:url(../img/icon/fl/bzjk.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_bzjk:hover,.tm_default .tm_bzjk{background:url(../img/icon/fl/bzjk.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_swjk{background:url(../img/icon/fl/swjk.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_swjk:hover,.tm_default .tm_swjk{background:url(../img/icon/fl/swjk.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_lssw{background:url(../img/icon/fl/lssw.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_lssw:hover,.tm_default .tm_lssw{background:url(../img/icon/fl/lssw.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sjzhdds{background:url(../img/icon/fl/sjzhdds.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sjzhdds:hover,.tm_default .tm_sjzhdds{background:url(../img/icon/fl/sjzhdds.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_qjzhdds{background:url(../img/icon/fl/qjzhdds.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_qjzhdds:hover,.tm_default .tm_qjzhdds{background:url(../img/icon/fl/qjzhdds.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dgfx{background:url(../img/icon/fl/dgfx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dgfx:hover,.tm_default .tm_dgfx{background:url(../img/icon/fl/dgfx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_gwsxy{background:url(../img/icon/fl/gwsxy.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_gwsxy:hover,.tm_default .tm_gwsxy{background:url(../img/icon/fl/gwsxy.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_gwlx{background:url(../img/icon/fl/gwlx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_gwlx:hover,.tm_default .tm_gwlx{background:url(../img/icon/fl/gwlx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_spjk{background:url(../img/icon/fl/spjk.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_spjk:hover,.tm_default .tm_spjk{background:url(../img/icon/fl/spjk.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_tqyb{background:url(../img/icon/fl/tqyb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_tqyb:hover,.tm_default .tm_tqyb{background:url(../img/icon/fl/tqyb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_yqcx{background:url(../img/icon/fl/yqcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_yqcx:hover,.tm_default .tm_yqcx{background:url(../img/icon/fl/yqcx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sqcx{background:url(../img/icon/fl/sqcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sqcx:hover,.tm_default .tm_sqcx{background:url(../img/icon/fl/sqcx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_nlyc{background:url(../img/icon/fl/nlyc.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_nlyc:hover,.tm_default .tm_nlyc{background:url(../img/icon/fl/nlyc.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_yjllw{background:url(../img/icon/fl/yjllw.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_yjllw:hover,.tm_default .tm_yjllw{background:url(../img/icon/fl/yjllw.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_flzjk{background:url(../img/icon/fl/flzjk.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_flzjk:hover,.tm_default .tm_yjllw{background:url(../img/icon/fl/flzjk.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_flwzk{background:url(../img/icon/fl/flwzk.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_flwzk:hover,.tm_default .tm_yjllw{background:url(../img/icon/fl/flwzk.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_bfd{background:url(../img/icon/fl/bfd.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_bfd:hover,.tm_default .tm_bfd{background:url(../img/icon/fl/bfd.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_yjsb{background:url(../img/icon/fl/yjsb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_yjsb:hover,.tm_default .tm_yjsb{background:url(../img/icon/fl/yjsb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_yjqxdw{background:url(../img/icon/fl/yjqxdw.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_yjqxdw:hover,.tm_default .tm_yjsb{background:url(../img/icon/fl/yjqxdw.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sjyjyamb{background:url(../img/icon/fl/sjyjyamb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sjyjyamb:hover,.tm_default .tm_sjyjyamb{background:url(../img/icon/fl/sjyjyamb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_qjyjyamb{background:url(../img/icon/fl/qjyjyamb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_qjyjyamb:hover,.tm_default .tm_sjyjyamb{background:url(../img/icon/fl/qjyjyamb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sjdd{background:url(../img/icon/fl/sjdd.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sjdd:hover,.tm_default .tm_sjdd{background:url(../img/icon/fl/sjdd.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_yyyb{background:url(../img/icon/fl/yyyb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_yyyb:hover,.tm_default .tm_yyyb{background:url(../img/icon/fl/yyyb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_nlxxtj{background:url(../img/icon/fl/nlxxtj.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_nlxxtj:hover,.tm_default .tm_nlxxtj{background:url(../img/icon/fl/nlxxtj.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_qxftj{background:url(../img/icon/fl/qxftj.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_qxftj:hover,.tm_default .tm_qxftj{background:url(../img/icon/fl/qxftj.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jsdxx{background:url(../img/icon/fl/jsdxx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jsdxx:hover,.tm_default .tm_jsdxx{background:url(../img/icon/fl/jsdxx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_spsb{background:url(../img/icon/fl/spsb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_spsb:hover,.tm_default .tm_spsb{background:url(../img/icon/fl/spsb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_ywy{background:url(../img/icon/fl/ywy.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_ywy:hover,.tm_default .tm_ywy{background:url(../img/icon/fl/ywy.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_bysz{background:url(../img/icon/fl/bysz.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_bysz:hover,.tm_default .tm_bysz{background:url(../img/icon/fl/bysz.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_yjsz{background:url(../img/icon/fl/yjsz.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_yjsz:hover,.tm_default .tm_yjsz{background:url(../img/icon/fl/yjsz.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+
+.J_menuItem  .tm_hdmfx{background:url(../img/icon/gw/hdmfx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_hdmfx:hover,.tm_default .tm_hdmfx{background:url(../img/icon/gw/hdmfx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_zpmfx{background:url(../img/icon/gw/zpmfx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_zpmfx:hover,.tm_default .tm_zpmfx{background:url(../img/icon/gw/zpmfx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sxyfx{background:url(../img/icon/gw/sxyfx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sxyfx:hover,.tm_default .tm_zpmfx{background:url(../img/icon/gw/sxyfx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_kjcx{background:url(../img/icon/gw/kjcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_kjcx:hover,.tm_default .tm_kjcx{background:url(../img/icon/gw/kjcx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sxcx{background:url(../img/icon/gw/sxcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sxcx:hover,.tm_default .tm_sxcx{background:url(../img/icon/gw/kscx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_kscx{background:url(../img/icon/gw/kjcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_kscx:hover,.tm_default .tm_kscx{background:url(../img/icon/gw/kscx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_gjcx{background:url(../img/icon/gw/gjcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_gjcx:hover,.tm_default .tm_gjcx{background:url(../img/icon/gw/gjcx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_lhcx{background:url(../img/icon/gw/lhcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_lhcx:hover,.tm_default .tm_lhcx{background:url(../img/icon/gw/lhcx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_xzqtj{background:url(../img/icon/gw/xzqtj.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_xzqtj:hover,.tm_default .tm_xzqtj{background:url(../img/icon/gw/xzqtj.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dbxtj{background:url(../img/icon/gw/dbxtj.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dbxtj:hover,.tm_default .tm_dbxtj{background:url(../img/icon/gw/dbxtj.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jdls{background:url(../img/icon/gw/jdls.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jdls:hover,.tm_default .tm_jdls{background:url(../img/icon/gw/jdls.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_mjls{background:url(../img/icon/gw/mjls.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_mjls:hover,.tm_default .tm_mjls{background:url(../img/icon/gw/mjls.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_jlls{background:url(../img/icon/gw/jlls.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_jlls:hover,.tm_default .tm_jlls{background:url(../img/icon/gw/jlls.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_fwjk{background:url(../img/icon/gw/fwjk.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_fwjk:hover,.tm_default .tm_fwjk{background:url(../img/icon/gw/fwjk.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_fwml{background:url(../img/icon/gw/fwml.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_fwml:hover,.tm_default .tm_fwml{background:url(../img/icon/gw/fwml.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_fwrz{background:url(../img/icon/gw/fwrz.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_fwrz:hover,.tm_default .tm_fwrz{background:url(../img/icon/gw/fwrz.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+
+
+.J_menuItem  .tm_sslb{background:url(../img/icon/sz/sslb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sslb:hover,.tm_default .tm_sslb{background:url(../img/icon/sz/sslb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dalb{background:url(../img/icon/sz/dalb.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dalb:hover,.tm_default .tm_dalb{background:url(../img/icon/sz/dalb.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_sblr{background:url(../img/icon/sz/sblr.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_sblr:hover,.tm_default .tm_sblr{background:url(../img/icon/sz/sblr.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dbsp{background:url(../img/icon/sz/dbsp.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dbsp:hover,.tm_default .tm_dbsp{background:url(../img/icon/sz/dbsp.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_zbsp{background:url(../img/icon/sz/zbsp.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_zbsp:hover,.tm_default .tm_zbsp{background:url(../img/icon/sz/zbsp.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_ybjsp{background:url(../img/icon/sz/ybjsp.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_ybjsp:hover,.tm_default .tm_ybjsp{background:url(../img/icon/sz/ybjsp.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_ybjsp{background:url(../img/icon/sz/ybjsp.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_ybjsp:hover,.tm_default .tm_ybjsp{background:url(../img/icon/sz/ybjsp.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_gzrw{background:url(../img/icon/sz/gzrw.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_gzrw:hover,.tm_default .tm_gzrw{background:url(../img/icon/sz/gzrw.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_rwkh{background:url(../img/icon/sz/rwkh.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_rwkh:hover,.tm_default .tm_rwkh{background:url(../img/icon/sz/rwkh.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dldw{background:url(../img/icon/sz/dldw.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dldw:hover,.tm_default .tm_dldw{background:url(../img/icon/sz/dldw.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dlcx{background:url(../img/icon/sz/dlcx.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dlcx:hover,.tm_default .tm_dlcx{background:url(../img/icon/sz/dlcx.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+.J_menuItem  .tm_dltj{background:url(../img/icon/sz/dltj.png) right no-repeat;border: 3px solid #fff;border-bottom: 2px solid #fff;}
+.J_menuItem  .tm_dltj:hover,.tm_default .tm_dltj{background:url(../img/icon/sz/dltj.png) 4px no-repeat;border:none;background-color:#6bc6fb;}
+
+
+.user { float:right; height:60px; margin-top:7px;}
+.exit { float:right; padding:15px;}
+.uimg { float:right;}
+.uimg img { width:60px; height:60px; border-radius:50%;}
+.umsg { margin-right:135px; padding:10px 0; text-align:right;}
+.umsg b { display:block; font-size:15px; color:#fff; font-weight:normal;}
+.umsg em { padding:2px 0px; background:#0585d6; color:#b8f5fc; font-style:normal; font-size:14px; border-radius:3px;}
+#btn_list, .firstList{display:none;}
+
+.bs{ position:absolute; top:8px;}
+.bs a{display:block; width:10px; height:9px; margin-right:8px; float:left; display:inline;}
+.bs .a1{ background:url(../img/lan2.gif) no-repeat;}
+.bs .a2{ background:url(../img/lv.gif) no-repeat;}
+
+/*一级菜单和二级菜单结束*/
+.roll-right.btn-group{
+right: 0px;
+}
+.roll-right.J_tabRight{
+right: 80px;
+}
+/*地图工具栏*/
+.tool-box { position:absolute; right:10px; top:20px; z-index:31;}
+.tool-container { width:293px; padding:3px 0; background:#fff; border:1px solid #dedede;}
+.tool-container div { float:left; padding:3px 6px; border-right:1px solid #f1f1f1;}
+.tool-container div a { color:#666;}
+.tool-container .noline { border:0;}
+.tool-container em { float:left; width:16px; height:16px; background:url(../img/ico.png) -8px -10px no-repeat;}
+.tool-container a img{ float:left; width:16px; height:16px;}
+.tool-container a:hover { color:#06C;}
+.tool-container b { float:left; font-weight:normal;}
+/* .map a span { background-position:-8px -123px;}
+.map a:hover span { background-position:-8px -55px;}
+.video a span { background-position:-128px -123px;}
+.video a:hover span { background-position:-128px -54px;}
+.dx a span { background-position:-83px -123px;}
+.dx a:hover span { background-position:-83px -54px;}
+.tool a span { background-position:-48px -123px;}
+.tool a:hover span { background-position:-48px -55px;}
+.cj a span { background-position:-50px -215px;}
+.cj a:hover span { background-position:-89px -215px;}
+.bj a span { background-position:-89px -174px;}
+.bj a:hover span { background-position:-49px -174px;}
+.fx a span { background-position:-172px -125px;}
+.fx a:hover span { background-position:-172px -59px;} */
+.tool { position:relative;}
+.menu-xl { position:absolute; margin-left:-9999px; width:76px; background:#fff; border:1px solid #dedede; border-top:0;}
+.menu-xl li { padding:5px;}
+.tool:hover .menu-xl, .tool.sfhover .menu-xl { margin-top:21px; z-index:5; margin-left:-6px; position:absolute;}
+.list-city { background:#fff; border:1px solid #dedede; margin-top:2px; width:295px; display:none;position:absolute;top:45px;right:8px;z-index:1000;}
+.title-city { padding:5px 0; font-size:15px; text-indent:5px; border-bottom:1px solid #f2f2f2;}
+.nr-city { padding:5px; width:295px;}
+.hot-city a { padding:5px;}
+.px a { padding:5px;}
+.s-city { border-top:1px solid #f2f2f2; padding:5px 0; height:250px; overflow-y:auto;}
+.s-city dt { float:left; width:50px; text-indent:5px; font-size:30px; color:#999; font-weight:normal;}
+.s-city dd { margin-left:50px; padding-top:15px;}
+.s-city dd em { float:left; width:50px; font-style:normal; font-size:15px; font-weight:bold; color:#06C;}
+.x-city { display:block; margin-left:60px;}
+.x-city a { float:left; padding:0 5px; color:#666;}
+/*图例*/
+ul, li, dl, dt, dd { list-style:none; margin:0; padding:0;}
+.legend { position:absolute; bottom:0px; width:110px; z-index:9999;}
+.top-legend { position:absolute; top:0; left:0; width:70px; height:25px; line-height:23px; text-align:center; background:#fff; border:1px solid #dedede; border-bottom:0; border-radius:5px 5px 0 0; z-index:1;}
+.top-legend a { color:#666; font-weight:bold;}
+.top-legend a:hover { color:#06C;}
+.top-legend a em { margin-top:2px; width:16px; height:16px; float:right; background:url(../img/ico.png) -8px -10px no-repeat;}
+.top-legend a em1 { margin-top:2px; width:16px; height:16px; float:right; background:url(../img/ico.png) -8px -170px no-repeat;}
+.content-legend { position:relative; margin-top:24px; background:#fff; border:1px solid #dedede; z-index:0;}
+.list-legend li { float:left; width:100px; margin:3px;}
+.list-legend li a { display:block; height:30px; line-height:30px; padding:0 5px; border:1px solid #eee; color:#666;}
+.list-legend li a img { vertical-align:middle; margin-right:3px;}
+.list-legend li a:hover { border:1px solid #0e9aef; color:#0e9aef; }
+.list-legend .hover a { border:1px solid #0e9aef; color:#0e9aef; background:url(../img/hover.png) right bottom no-repeat;}
+
+/*屏幕自适应*/
+/*自适应下的一级菜单样式*/
+@media screen and (max-width:890px){
+  #topMenu{
+	  position:absolute;
+	  margin:0;
+	  padding:0;
+	  top:60px;
+	  right:108px;
+	  border:none;
+	  padding:0 20px;
+	  background-color:#39aef5;
+	  display:none;
+  }
+  #topMenu li:last-child{
+	  border:none;
+  }
+  #topMenu li{
+	  border-bottom: 1px dotted #8dd6fb;
+	  clear:both;
+  }
+  #topMenu a{
+	  margin:10px;
+	  padding:5px;
+	  background-image:none;
+	  color:#fff;
+  }
+  #topMenu div{
+	  display:none;
+  }
+  #topMenu  a:hover{
+	  color:yellow;
+  }
+  .user{
+	  width:50%;
+	  height:50%;
+  }
+  .uimg{
+	  position:absolute;
+	  top:8px;
+	  right:4px;
+  }
+  .uimg img{
+	  width:50%;
+	  height:50%;
+  }
+  .umsg b{
+	  display:none;
+  }
+  .umsg em{
+	  font-size:0.9em;
+	  float:right;
+	  position:absolute;
+	  right:18px;
+	  top:45px;
+  }
+  .exit img{
+	  display:none;
+  }
+  #btn_list{
+	position:absolute;
+	right:100px;
+	top:18px;
+	width:110px;
+	height:40px;
+	border-right: 1px dotted #8dd6fb;
+	display:block;
+}
+.firstList{
+	display:block;
+	width:88px;
+	height:36px;
+	color:#fff;
+	text-align:center;
+	line-height:36px;
+	background:url(../img/btn_listHover.png) no-repeat;
+}
+.firstList:hover{
+	color:yellow;
+}
+}

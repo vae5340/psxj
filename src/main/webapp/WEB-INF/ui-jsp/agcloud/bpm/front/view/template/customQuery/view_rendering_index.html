@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html style="overflow-x: hidden;height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    overflow: auto;">
+<head>
+    <#include "../common/agcloud-meta.html">
+    <#include "../common/mertronic5.html">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>${viewComment!}</title>
+    <script type="text/javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/process/wfCommon.js" ></script>
+    <link rel="stylesheet" href="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/css/animate.css" />
+    <link rel="stylesheet" href="${http_base_url}/ui-static/agcloud/framework/js-libs/bootstrap-table/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/css/commonSearch.css" />
+    <link rel="stylesheet" href="${http_base_url}/ui-static/agcloud/framework/js-libs/bootstrap-table/bootstrap-table-page.css" />
+    <!--<link rel="stylesheet" href="${http_base_url}/ui-static/agcloud/framework/js-libs/bootstrap4/css/bootstrap.css" />-->
+    <!--<script type="text/javascript" src="${http_base_url}/ui-static/agcloud/framework/js-libs/bootstrap4/js/bootstrap.min.js" ></script>-->
+    <script type="text/javascript" src="${http_base_url}/ui-static/agcloud/framework/js-libs/bootstrap-table/bootstrap-table.min.js" ></script>
+    <script type="text/javascript" src="${http_base_url}/ui-static/agcloud/framework/js-libs/bootstrap-table/bootstrap-table-zh-CN.min.js" ></script>
+    <script type="text/javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/commonSearch.js" ></script>
+    <script type="text/javascript" src="${http_base_url}/ui-static/agcloud/framework/js-libs/bootstrap-table/bootstrap-table-page.js" ></script>
+    <style>
+        .m-datatable--error{
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+    <script>
+        var viewId = '${viewId}';
+    </script>
+</head>
+<body style="width: 100%;overflow-x: hidden;">
+<div>
+    <!--<div style="height: 45px">
+        &lt;!&ndash; 标题导航 &ndash;&gt;
+        <nav class="agcloud-navbar">
+            <div class="agcloud-navbar-container">
+                <a class="agcloud-navbar-brand agcloud-icon-data-dictionary" href="javascript:void(0);" style="font-size: 16px">${viewComment!}</a>
+                <div class="agcloud-navbar-collapse">
+                    <ul class="agcloud-navbar-tabs">
+                        <li class="agcloud-nav-item">
+                            <a href="" class="agcloud-nav-icon  agcloud-navbar-icon-question"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>-->
+    <!-- 主要显示内容 -->
+    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+        <div class="m-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="m-portlet" style="border-bottom: none;margin-bottom: 0px;">
+                        <div class="m-portlet__body" style="margin-top:-10px;padding: 15px 15px 0px 15px;">
+                            <input type="hidden" id="pageCode" value="10101">
+                            <input type="hidden" id="refdomain" value="">
+                            <input type="hidden" id="refpagecode" value="01">
+                            <input id="preViewId" type="hidden"	 value="${currentView.viewId}" />
+                            <input id="preViewCode" type="hidden"	 value="${currentView.viewCode}" />
+
+                            <!-- 查询 -->
+                            <div id="search" style="padding-top: -30px">
+                                <div class="row-fluid">
+                                    <div class=" col-lg-6 input-group">
+                                        <span style="line-height: 43px;font-weight: 700;font-size: 14px;">一般查询：</span>
+                                        <input id="searchInput_keyword" name="mykey" onkeyup="keywordChange()" type="text" class="form-control" placeholder="问题描述、问题地点、问题道路">
+                                        <span class="input-group-btn"><button onclick="searchBtnClick()" class="btn btn-info btn-sm" type="button">查询</button></span>
+                                        <#if bpmViewEntity.searchItemEntities?? &&   (bpmViewEntity.searchItemEntities?size>0)>
+                                            <a href="#" onclick="collapseExpansionSearch('local_data',  'query-conditions');" style="line-height: 43px; margin-left: 20px;color:#36a3f7">筛选查询</a>
+                                        </#if>
+                                    </div>
+                                </div>
+
+                                <div class="yixuan">
+                                    <div class="clear-all-conditions"><a href="#" onclick="clearAllCondition()" class="clear-btn"><span><i class=" fa fa-trash-o"></i>&nbsp;清空</span></a></div>
+                                    <div class="enshrine" style="margin-right: -150px"><a href="#" onclick="alert('功能开发中，敬请期待！')" class="enshrine-btn"><span><i class=" fa fa-star-o"></i>&nbsp;收藏</span></a></div>
+                                    <table>
+                                        <tbody>
+                                        <tr class="new">
+                                            <td><p class="part-title-icon-bg part-title-icon-bg-blue"><i class="glyphicon glyphicon-compressed"></i></p></td>
+                                            <td width="80" align="left" class="title">全部结果></td><td><div class="yixuanNavList"></div></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="query-conditions">
+                                    <div class="sel">
+                                        <#if bpmViewEntity.searchItemEntities??>
+                                            <#list bpmViewEntity.searchItemEntities as item>
+                                                ${item.widgetsHtml!}
+                                            </#list>
+                                        </#if>
+                                        <div class="op" onclick="collapseExpansionSearch('local_data',  'query-conditions');"> <span>收起筛选面板<i class=" fa fa-angle-up"></i></span> </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--begin: Datatable -->
+                            <!--<div class="m_datatable m-datatable m-datatable&#45;&#45;default m-datatable&#45;&#45;loaded" id="local_data" style="position: static; zoom: 1;">-->
+                                <!--<table  id="customTable" style="display: block; min-height: 300px;height: 1000px; overflow-x: auto;" class="m-datatable__table">-->
+                                <!--</table>-->
+                            <!--</div>-->
+                            <div id="local_data">
+                                <table  id="customTable"></table>
+                            </div>
+                            <!--end: Datatable -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑数据信息 -->
+    <div class="modal fade" id="problem_view_modal" tabindex="-1" role="dialog"
+         aria-labelledby="problem_view_modal_title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document" style="width: 700px;">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 15px;height: 45px;">
+                    <h5 class="modal-title" id="problem_view_modal_title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="problem_view_form" name="problem_view_form" method="post">
+                        <input type="hidden" name="PROBLEM_ID"/>
+                        <input type="hidden" name="TASK_ID"/>
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">问题描述:</label>
+                            <div class="col-lg-9">
+                                <textarea class="form-control" name="PROBLEM_DESC" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">问题地点:</label>
+                            <div class="col-lg-9">
+                                <textarea class="form-control" name="PROBLEM_LOCATION" rows="2"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">问题所在道路:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control m-input" name="PROBLEM_ROAD"  placeholder="请输入问题所在道路..."/>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">设施类型:</label>
+                            <div class="col-lg-9">
+                                <select  type="text" class="form-control" name="DEVICE_TYPE" >
+                                    <option value="1">窨井</option>
+                                    <option value="2">雨水口</option>
+                                    <option value="3">排放口</option>
+                                    <option value="4">排水管道</option>
+                                    <option value="5">排水沟渠</option>
+                                    <option value="6">其他</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">问题类型:</label>
+                            <div class="col-lg-9">
+                                <select  data-width="100%" class="selectpicker"  data-live-search="true" name="PROBLEM_TYPE_SELECT" type="text" multiple>
+                                    <option value="1">淤积</option>
+                                    <option value="2">水溢出</option>
+                                    <option value="3">水满管</option>
+                                    <option value="4">存在偷排</option>
+                                    <option value="5">井盖损坏</option>
+                                    <option value="6">井盖缺失</option>
+                                    <option value="7">井盖异响</option>
+                                    <option value="8">沉陷</option>
+                                    <option value="9">凸起</option>
+                                    <option value="10">挂牌损坏</option>
+                                    <option value="11">其他</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">紧急程度:</label>
+                            <div class="col-lg-9">
+                                <select type="text" class="form-control" name="URGENT_TYPE">
+                                    <option value="1" selected>一般</option>
+                                    <option value="2">较紧急</option>
+                                    <option value="3">紧急</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">是否自行处理:</label>
+                            <div class="col-lg-9">
+                                <select type="text" class="form-control" name="HANDLE_MYSELF">
+                                    <option value="1" selected>是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group m-form__group row" >
+                            <label class="col-lg-3 col-form-label">是否短信通知:</label>
+                            <div class="col-lg-9">
+                                <select type="text" class="form-control" name="SEND_MESSAGE">
+                                    <option value="1" selected>是</option>
+                                    <option value="0">否</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="text-align: right;">
+                            <button type="submit" style="width: 100px" onclick="saveProblem()" class="btn btn-info">保存</button>
+                            <button id="closeProblemViewModelBtn" style="width: 90px" type="button" class="btn btn-secondary">关闭</button>
+                            <!--<button id="resetAddViewFormBtn" type="button" class="btn btn-secondary">重置</button>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function(){
+        var commonSearchData = {
+            url : '',//查询url
+            title : "您已选择",
+            dataList : [],
+            total:0
+        };
+        $("#search").commonSearch(commonSearchData,function(param){
+            //TODO 查询回调函数
+        });
+
+        $('#closeProblemViewModelBtn').click(function(){
+            $('#problem_view_modal').modal('hide');
+        });
+        //初始化日期查询框
+        initDateQuery();
+        //初始化数字查询框
+        initNumberQuery();
+
+        //20180725 新增
+        //窗口变化时，去动态计算是否有更多项，并显示更多按钮
+        $(window).resize(function() {
+            showOrHiddenMoreBtn();
+            fitTable();
+        });
+        //表格初始化完成回调事件
+        function loadCallback() {
+            fitTable();
+            //这个 点击是为了 分页的选择每页显示数量 时第一次点击不显示的问题，但会触使页面向按钮处定位。还可以优化
+            // $(".fixed-table-pagination .dropdown-toggle").click();
+            //表头样式
+            $(".fixed-table-header").css("margin-bottom","-1px");
+        }
+        var callbackOptions= {
+            loadCallback:loadCallback
+        };
+        //使用bootstrap-table渲染数据，参数：表格div 的id，查询参数，自定义回调函数集合
+        bootstrapTable = bootstrapTableRender.initTable(mdatatableId,callbackOptions);
+    })
+</script>
+<script>
+    var mdatatableId='customTable';
+    var queryInput_name_mykey='searchInput_keyword';
+    var bootstrapTable = $("#" + mdatatableId);
+    //查看
+    function editProblem(rowData){
+        $('#problem_view_modal_title').html('编辑问题上报信息');
+        $('#problem_view_modal').modal('show');
+
+        var arr=rowData.PROBLEM_TYPE.split(',');
+        $('#problem_view_modal').find('select[name="PROBLEM_TYPE_SELECT"]').selectpicker('val', arr);
+
+        loadFormData(true,"#problem_view_form",rowData);
+
+    }
+
+    function saveProblem(){
+        var problemType = $('#problem_view_modal').find('select[name="PROBLEM_TYPE_SELECT"]').selectpicker('val');
+        var params = $('#problem_view_form').serializeArray();
+        params.push({"name":"PROBLEM_TYPE","value":problemType.toString()});
+
+        var values = {};
+        for (var item in params) {
+            values[params[item].name] = params[item].value;
+        }
+
+        $.ajax({
+            url: ctx+'/front/smart/form/saveMobileFormData.do',
+            type: "post",
+            data: {
+                isNew: '0',
+                formCode: 'TEST_PROBLEM',
+                values: JSON.stringify(values)
+            },
+            dataType: "json",
+            error: function(result) {
+                swal('错误信息', result.message, 'error');
+            },
+            success: function(result) {
+                if(result.success){
+                    swal('提示信息', "保存信息成功！", 'info');
+                }else{
+                    swal('错误信息', "保存信息失败！", 'error');
+                }
+            }
+        });
+    }
+    //表格自适应
+    function fitTable() {
+        var element = $(".query-conditions");
+        var height = $("#" + mdatatableId).height() + 74;
+        if(element.hasClass("on")){
+            height = height > window.innerHeight - 217 - element.height() ? height : window.innerHeight - 217 - element.height();
+        }else{
+            height = height > window.innerHeight - 183 ? height : window.innerHeight - 183;
+        }
+        //刷新表格高度
+        bootstrapTable.bootstrapTable("resetView",{height:height});
+    }
+</script>
+<script type="text/javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/bootstrap-table-render.js" ></script>
+<script type="text/javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/bootstrap-table-format.js" ></script>
+<!--<script src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/bizJs/mertronic-table-render.js" type="text/javascript"></script>-->
+<!--<script src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/bizJs/mertronic-table-format.js" type="text/javascript"></script>-->
+</body>
+</html>

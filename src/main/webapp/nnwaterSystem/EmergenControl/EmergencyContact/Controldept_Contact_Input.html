@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  	<head>
+	    <title>指挥部通信录-信息修改</title>
+	    <meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+		<link href="/awater/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+		
+		<script src="/awater/lib/jquery-2.1.4.js?v=2.1.4"></script>
+		<script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+		<script src="js/Controldept_Contact_Input.js"></script>
+	</head>
+  
+  	<body>
+		<div id="content" style="height:calc( 100% - 50px );padding: 20px;">
+			<form id="form" class="form-horizontal">
+		        <input type="hidden" id="id" name="id" >
+				<div class="form-group" >
+					<label class="col-sm-2 control-label">名称</label>
+					<div class="col-sm-10">
+						<input class="form-control" type="text" id="name" name="name">
+					</div>
+				</div>						
+				<div class="form-group">
+					<label class="col-sm-2 control-label">联系电话</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text" id="telNum" name="telNum">
+					</div>
+					<label class="col-sm-2 control-label">传真</label>
+					<div class="col-sm-4">
+						<input class="form-control" type="text" id="fax" name="fax">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">备注</label>
+					<div class="col-sm-10">
+						<textarea id="bz" name="bz" class="form-control" rows="4" style="max-width: 100%;"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div style="width:100%;height:50px;padding-top:10px;border-top:1px solid #3277B2;background-color: #E0DEDE;">
+			<div class="col-sm-9 col-sm-offset-8">
+				<button class="btn btn-primary" type="button" onclick="save()">保存内容</button>
+				<button class="btn btn-white" type="button" onclick="cancel()">取消</button>
+			</div>
+		</div>
+  	</body>
+</html>

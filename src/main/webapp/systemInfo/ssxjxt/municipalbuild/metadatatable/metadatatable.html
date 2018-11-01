@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>模板结构管理</title>
+	<meta charset="UTF-8">	
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico"> 
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/page-style.css" rel="stylesheet" type="text/css"/>
+	<link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-table/bootstrap-editable.css" rel="stylesheet">
+	<link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrapvalidator/bootstrapValidator.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/animate.min.css" rel="stylesheet">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/css/zTreeStyle/metro.css" />
+    <script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/knockout/knockout-3.2.0.js"></script>
+
+  </head>
+  <body>
+	<div class="metadatatable-container" style="display: inline-block;width:100%;height:99%;margin-top:5px;">
+		<div class="col-xs-12 row" style="height:100%;">
+			<div class="col-xs-3 "  style="height:100%;">
+				<div class="panel panel-blue" style="height:100%;width:100%;overflow:auto;border-color: rgb(104,171,234);">
+					<div class="panel-heading" style="width:100%;">
+					    <div class="role-head-logo"></div>
+					    <div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:35px;margin-top:5px;">市政设施</div>
+					</div>
+					<div class="panel-body newtree">
+						<div id="metadatatable_tree" class="ztree" style="text-align:left;"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-9 "  style="height:100%;">
+				<ul id="metadatatable_nav" class="nav nav-tabs">				 
+				  <li role="presentation"><a href="#metadatatable_add_tab" aria-controls="metadatatable_add_tab" role="tab" data-toggle="tab">模板结构配置</a></li>
+				  <li role="presentation" class="active"><a href="#metadatatable_list_tab" aria-controls="metadatatable_list_tab" role="tab" data-toggle="tab">模板结构列表</a></li>
+				  <li role="presentation" class="navbar-right" style="margin-right:5px;"><button  class="btn btn-primary" data-bind="{click:saveMetadatatable}">保存</button></li>
+				  <li role="presentation" class="navbar-right" style="margin-right:5px;"><button  class="btn btn-primary" data-bind="{click:sortMetadatatable}">排序</button></li>
+				  <li role="presentation" class="navbar-right" style="margin-right:5px;"><button  class="btn btn-primary" data-bind="{click:deleteMetadatatable}">删除</button></li>
+				  <li role="presentation" class="navbar-right" style="margin-right:5px;"><button  class="btn btn-primary" data-bind="{click:addMetadatatable}">新增</button></li>
+				</ul>
+				<div id="tab-content-panel" class="tab-content  panel panel-grad" style="height:95%;border-color:rgb(104,171,234);">
+					<div role="tabpanel" class="tab-pane" id="metadatatable_add_tab">
+					 <form id="defaultForm" >
+						<div class="panel-body full-height" style="overflow-x: auto;overflow-y:auto;">
+						 <div class="form-horizontal" style="margin: 5px 25px 5px 25px;">
+						    <input data-bind="{value:metadatatable.ID}" style="display:none;" type="text">						  
+							<div id="form-group-row" class="form-group">
+								<label class="form-label col-sm-2">所属模板:</label>
+								<div class="form-controls col-sm-4">
+									<select id="templateName" class="required form-control"  placeholder=""  data-bind="{value:metadatatable.templateName}" >
+								    </select>
+								</div>
+								<label class="form-label col-sm-2">表显示名称:</label>
+								<div class="form-controls col-sm-4">
+									<input class="required form-control" placeholder=""  data-bind="{value:metadatatable.displayName}" >
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label col-sm-2">表物理名称:</label>
+								<div class="form-controls col-sm-4">
+									<input id="tableName" class="required form-control" placeholder=""  name="tableName" data-bind="{value:metadatatable.tableName}" >
+								</div>
+								<label class="form-label col-sm-2">主键字段:</label>
+								<div class="form-controls col-sm-4">
+									<input class="required form-control" placeholder="" name="primaryKeyName" data-bind="{value:metadatatable.primaryKeyName}" >
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="form-label col-sm-2">关联字段:</label>
+								<div class="form-controls col-sm-4">
+									<input class="required form-control" placeholder="" name="relatedFieldName" data-bind="{value:metadatatable.relatedFieldName}" >
+								</div>
+								<label class="form-label col-sm-2">数据类型:</label>
+								<div class="form-controls col-sm-4">
+									<select id="tableType" class="required form-control" placeholder=""  data-bind="{value:metadatatable.tableType}" >
+									   <option value="0">非空间数据</option>
+									   <option value="1">空间数据</option>									   
+								    </select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div id="tablestatecode">
+									<label class="form-label col-sm-2">表状态标识:</label>
+									<div class="form-controls col-sm-4">
+										<input class="required form-control" placeholder=""  data-bind="{value:metadatatable.tableStateCode}" >
+									</div>
+								</div>
+								<div>
+									<label class="form-label col-sm-2">字段标记分类:</label>
+									<div class="form-controls col-sm-4">
+										<select id="belongMetaCodeName" class="required form-control" placeholder="" name="belongMetaCodeName" data-bind="{value:metadatatable.belongMetaCodeName}" >
+											<option value=""></option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div id="layerType">
+									<label class="form-label col-sm-2">图层类型:</label>
+									<div class="form-controls col-sm-4">
+										<select class="required form-control" placeholder=""  data-bind="{value:metadatatable.layerType}" >
+											<option value="1">点</option>
+											<option value="2">线</option>
+											<option value="3">面</option>
+										</select>
+									</div>
+								</div>
+
+								<div id="getTableField">
+									<label class="form-label col-sm-2">参考表物理名称:</label>
+									<div class="form-controls col-sm-2">
+										<input id="referenceTable" class="required form-control col-sm-8" placeholder="" name="referenceTable" data-bind="{value:metadatatable.referenceTable}" >
+									</div>
+									<div class="form-controls col-sm-2">
+										<button  class="btn-primary" data-bind="{click:getTableField}">获取字段</button>
+										<button  class="btn-primary" data-bind="{click:getDataSource}" id="datasourceModal">其他数据源</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div id="hasfile">
+									<label class="form-label col-sm-2">是否拥有附件:</label>
+									<div class="form-controls col-sm-4">
+										<select class="required form-control" placeholder=""  data-bind="{value:metadatatable.hasfile}" >
+											<option value="0">否</option>
+											<option value="1">是</option>
+										</select>
+									</div>
+									<label class="form-label col-sm-2">是否作为数据字典:</label>
+									<div class="form-controls col-sm-4">
+										<select class="required form-control" placeholder=""  data-bind="{value:metadatatable.isDictionary}" >
+											<option value="0">否</option>
+											<option value="1">是</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+							 <div class="form-group">
+								 <div class="col-sm-12">
+									 <div class="panel panel-success" style="height:100%;width: auto">
+										 <div class="panel-heading  text-left col-sm-12" style="width:100%;">编辑录入字段</div>
+										 <div title="新增字段" class="tablefield-add" style="margin-right:5px;position:absolute;top:10px;right:160px;cursor:pointer;"></div>
+										 <div title="删除字段" class="tablefield-del" style="margin-right:5px;position:absolute;top:10px;right:120px;cursor:pointer;"></div>
+										 <div title="匹配基类" class="tablefield-match" style="margin-right:5px;position:absolute;top:10px;right:80px;cursor:pointer;"></div>
+										 <div title="同步字段" class="tablefield-sync" style="margin-right:5px;position:absolute;top:10px;right:40px;cursor:pointer;"></div>
+										 <div id="paneltable" class="panel-body" style="overflow:auto;">
+											 <table id="editDetailTableField" class="fieldlist-table">
+											 </table>
+										 </div>
+									 </div>
+								 </div>
+							 </div>
+						</div>
+						</div>
+					 </form>
+					</div>
+					<div role="tabpanel" class="tab-pane active " id="metadatatable_list_tab" style="overflow-y:auto;height:100%;">
+						<table id="metadatatable_table" class="table table-striped table-hover text-center">
+							<thead class="text-center">
+								<tr>
+									<th class="text-center">所属模板名称</th>
+									<th class="text-center">表显示名称</th>
+									<th class="text-center">表物理名称</th>
+									<th class="text-center">表模板类型</th>
+									<th class="text-center">关联字段</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--ko foreach: metadatatablelist-->
+								<tr>
+									<td data-bind="{text:templatename}"></td>
+									<td data-bind="{text:displayname}"></td>
+									<td data-bind="{text:tablename}"></td>
+									<td data-bind="{text:tabletypename}"></td>
+									<td data-bind="{text:relatedfieldname}"></td>
+								</tr>
+								<!--/ko-->
+							</tbody>
+						</table>
+					</div>
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" arialabelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content" style="margin:250px -100px;width:800px;height:540px;">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+											aria-hidden="true">&times;</span></button>
+									<h4 class="modal-title" id="myModalLabel">获取表结构字段</h4>
+								</div>
+								<div class="modal-body" style="width:95%;height:80%;">
+									<div class="panel panel-blue"
+										 style="height:100%;width:50%;border-color: rgb(104,171,234);float: left">
+										<div class="panel-heading">
+											<div style="color: #FFFFFF;font-family: 黑体;font-size: 14px;text-align: left;margin-left:5px;margin-top:0px;"> 连接类型
+											</div>
+										</div>
+										<div class="panel-body" style="height:90%;">
+											<div  style="height:98%">
+												<select multiple class="form-control" style="height:100%;overflow:auto" id="connectType" onchange="singleSelect()" >
+													<option value="Mysql">Mysql</option>
+													<option value="Oracle">Oracle</option>
+													<option value="Sqlserver">Sqlserver</option>
+													<option value="Mongodb">Mongodb</option>
+													<option value="Access">MS Access</option>
+												</select>
+											</div>
+										</div>
+									</div>
+									<div style="height:90%;width:50%;float: right">
+										<form id="myform" class="form-horizontal" role="form" style="margin-top:15px;">
+											<div class="form-group" style="display: none">
+												<label class="control-label col-sm-4" style="text-align:left;margin-left: 20px" >驱动名:</label>
+												<div class="col-sm-7" style="float: left">
+													<input id="driverName" name="driname"  class="form-control" readonly>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-4" style="text-align:left;margin-left: 20px">数据库名<font color="red">*</font>:</label>
+												<div class="col-sm-7" style="float: left">
+													<input name="dbname"  class="form-control" id="dbname" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-4" style="text-align:left;margin-left: 20px" required>ip地址<font color="red">*</font>:</label>
+												<div class="col-sm-7" style="float: left">
+													<input name="address"  class="form-control" id="address" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-4 " style="text-align:left;margin-left: 20px">端口号<font color="red">*</font>:</label>
+												<div class="col-sm-7" style="float: left">
+													<input  name="dbport"  class="form-control" id="dbport" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-4" style="text-align:left;margin-left: 20px">用户名<font color="red">*</font>:</label>
+												<div class="col-sm-7" style="float: left">
+													<input name="dbuser" class="form-control" id="dbuser" required>
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-4" style="text-align:left;margin-left: 20px">密码:</label>
+												<div class="col-sm-7" style="float: left">
+													<input name="dbpassword" class="form-control" id="dbpassword">
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-7"></label>
+												<div class="checkbox" >
+													<label><input type="checkbox" value="" style="margin-top:3px" id="rmbUser" name="rmUser">保存密码</label>
+												</div>
+											</div>
+												<label class="control-label col-sm-12"></label>
+												<label class="control-label col-sm-2"></label>
+												<input type="button" value="测试连接" name="tconnect" class="btn btn-primary" style="float:left;" onclick="testconnect()">
+										</form>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<div id="getTableField2">
+										<label class="form-label col-sm-2">参考物理表名<font color="red">*</font>:</label>
+										<div class="form-controls col-sm-7">
+											<input id="tbname" class="form-control col-sm-8">
+										</div>
+										<div class="form-controls col-sm-2">
+											<input type="button"  class="btn btn-primary" onclick="matchFields()" value="获取字段">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+  </body>
+	<script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+  	<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+  	<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/directionkeycontrolcursor.js"></script>
+    <script src="/psxj/systemInfo/ssxjxt/lib/plugins/zTree/js/jquery.ztree.all-3.5.min.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrapvalidator/bootstrapValidator.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+	<script src="js/metadatatable.js"></script>
+  	<script src="/psxj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+    <script src="/psxj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+</html>

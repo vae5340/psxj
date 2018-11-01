@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/psxj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/psxj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<link href="/psxj/systemInfo/js/style.css" rel="stylesheet"/>
+	    <link href="/psxj/systemInfo/js/viewer/viewer.min.css" rel="stylesheet"/>
+		<style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+		</style>
+  	</head>
+  	<body>
+  	<div class="col-sm-12">
+  		<div class="tabbable" id="tabs-148620">
+  			<div class="tab-content">
+				<form id="lack" class="form-horizontal">
+					<div class="modal-body">
+						<input type="hidden" id="id"/>
+						<input type="hidden" id="writerId"/>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">签到人</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="signerName" name="signerName" readonly/>
+							</div>
+							<label class="col-sm-3 control-label">签到时间</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control"
+									id="signTime" name="signTime" readonly/>
+							</div>
+							<!--data-date-format="yyyy-mm-dd hh:ii"-->
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">电话</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="phone" name="phone" readonly/>
+							</div>
+							<label class="col-sm-3 control-label">职务</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control"
+									   id="title" name="title" readonly/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">所属区域</label>
+							<div class="col-sm-3">
+								<input type="text" class="form-control" id="orgName" name="orgName" readonly />
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">所属机构</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control"
+									   id="directOrgName" name="directOrgName" readonly/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">所属道路</label>
+							<div class="col-sm-9">
+								<textarea rows="2" cols="2" class="form-control" id="road" name="road" readonly></textarea>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">标识地址</label>
+							<div class="col-sm-9">
+								<textarea rows="2" cols="2" class="form-control" id="addr" name="addr" readonly></textarea>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+  	</body>
+	 <script src="/psxj/lib/jquery.min.js?v=1.0.0"></script>
+	 <script src="/psxj/systemInfo/js/viewer/viewer.min.js"></script>
+	  <script src="/psxj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	  <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+	  <script src="/psxj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	<!-- <script src="js/echarts.js"></script> -->
+	<script src="js/dailySignInput.js"></script>
+</html>

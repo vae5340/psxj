@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>  
+		<title>市级预案督办</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/awater/css/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+	    <link href="/awater/css/style.min862f.css?v=4.1.0" rel="stylesheet"/>				 		
+		<link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet" type="text/css"/>   
+		<link href="/awater/css/arcgis/claro.css" rel="stylesheet" type="text/css"/>
+		<link href="/awater/lib/arcgis_js_api/dijit/themes/tundra/tundra.css" rel="stylesheet" type="text/css"/>
+		<link href="/awater/lib/arcgis_js_api/esri/css/esri.css" rel="stylesheet" type="text/css"/>
+		<link href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" rel="stylesheet" type="text/css"/>
+		<link href="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/jquery.mCustomScrollbar.css" rel="stylesheet">
+	    <link href="/awater/css/augur.min.css?v=1.0" rel="stylesheet">
+		<link href="/awater/lib/arcgis_js_api/esri/css/esri_expand.css" rel="stylesheet" type="text/css" />
+		<link href="/awater/lib/zTree/css/zTreeStyle/metro.css" rel="stylesheet" >
+		<style>
+			html,body{width: 100%;height:100%;}
+			.map{margin: 0;padding:0}
+			.panel-info>.panel-heading{background-color:#38ABF1;border-color:#38ABF1;}
+			.unitTitle{font-weight: bold;color: red;font-size: 15px;}
+		</style>
+	</head>
+  
+	<body style="overflow: hidden;">
+		<div style="float:left;width:160px;height: 100%">
+			<div id="ya_titledd" class="panel panel-info" style="margin-bottom:0px;height:30%;;border-color: #ddd">
+				<div class="panel-heading" style="padding:0px 5px 0px 5px;height:20px;"><span style="color: white;">调度日志</span></div>
+				<div class="panel-body" style="padding:0px;height:calc(100% - 20px)">
+					<iframe id="alarmInfoNew" scrolling="no" width="100%" height="100%" frameborder="0"></iframe>
+				</div>
+			</div>
+			<div id="ya_titledb" class="panel panel-info" style="margin-bottom:0px;height:calc( 100% - 30% );border-color: #ddd">
+				<div class="panel-heading" style="padding:0px 5px 0px 5px;height:20px;"><span style="color: white;">督办记录</span></div>
+				<div class="panel-body" style="padding:0px;height:calc(100% - 20px)">
+					<iframe id="supervise" scrolling="no" width="100%" height="100%" frameborder="0"></iframe>
+				</div>
+			</div>
+		</div>
+	  	<div id="mapDiv" class="map J_iframe" style="position:absolute;width:calc(100% - 160px);left:160px;height:100%"></div>
+	  	<div style="margin-top:0px;position:absolute;right:330px;height:30px" align="right">
+	  	   <button class="btn" type="button"  onclick=reload() style="background-color:white;color:red;font-weight:bold;font-size:15px">刷&nbsp;新&nbsp;</button>
+	  	</div>
+		<div style="position:absolute;width:330px;margin-bottom:0px;right:0px;height:100%">			
+			<div id="ya_title" class="panel panel-info" style="margin-bottom:0px;height:50px;border-color: #ddd">
+				<div class="panel-heading" style="padding:0px 5px 0px 5px;color: white;">应急预案</div>
+				<div class="panel-body" style="padding:0px;">
+					<div id="cityRecordTitleDiv" style="padding:5px;">市级启动预案<a style="padding-left:6px" id="cityA"><font id="cityRecord" color="red"></font></a></div> 
+				</div>
+			</div>
+			<div class="panel panel-info" style="margin-bottom:0px;height:calc( 100% - 50px );border-color: #FFFFFF">
+				<div class="panel-heading" style="padding:0px 5px 0px 5px;height:20px;"><span style="color: white;">各成员单位响应情况</span></div>
+				<div class="panel-body" style="padding:0px;height:calc(100% - 20px);">	      	     	       
+					<div id="tableResponeDiv" style="height:calc( 100% - 130px );overflow: auto;">
+						<table id="tableRespone" class="table table-bordered" style="background-color:white;margin-bottom:0px;"></table>
+					</div>
+					<div style="height: 130px;">
+						<table id="tableAction" class="table table-bordered" style="background-color:white;margin-bottom:0px;"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="/awater/lib/jquery-2.1.4.js?v=2.1.4" type="text/javascript"></script>
+		<script src="/awater/lib/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="/awater/lib/bootstrap.min.js" type="text/javascript"></script>		
+		<script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		<script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+		<script src="/awater/js/util_date.js" type="text/javascript"></script>
+		<script src="/awater/lib/zTree/js/jquery.ztree.all-3.5.min.js" type="text/javascript" ></script>
+		<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mousewheel.min.js"></script >
+		<script src="/awater/lib/plugins/malihu-custom-scrollbar-plugin-master/js/minified/jquery.mCustomScrollbar.min.js"></script>	    
+	    <script type="text/javascript" src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>		
+	    <script type="text/javascript" src="/awater/js/config/dojoConfig.js"></script>
+	    <script type="text/javascript" src="/awater/js/config/mapConfig.js"></script>
+	    <script type="text/javascript" src="/awater/lib/arcgis_js_api/init.js"></script>
+	    <script type="text/javascript" src="/awater/nnwaterSystem/map/js/initMap.js"></script>	    
+		<script type="text/javascript" src="/awater/js/common.js"></script>     
+	    <script type="text/javascript" src="/awater/js/uiWidgets.js"></script>
+	    <script type="text/javascript" src="/awater/nnwaterSystem/EmergenControl/js/augur.min.js"></script>
+	    <script type="text/javascript" src="/awater/waterSystem/ssjk/js/ssjk-global.js" ></script>        
+	    <script type="text/javascript" src="/awater/waterSystem/ssjk/js/ssjk-data.js" ></script>
+	    <script type="text/javascript" src="/awater/waterSystem/ssjk/js/ssjk-map.js" ></script>
+	    <script type="text/javascript" src="js/Supervise.js" ></script>  
+	</body>
+</html>

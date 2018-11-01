@@ -1,0 +1,156 @@
+<form class="form-inline" action="/agsupport_hangzhou/hz-score!ajaxSave.action" method="POST" id="myForm">
+	<input name="form.typeIndex" type="hidden" value="0">
+	<input name="tables[0].id" type="hidden" value=""/>
+	<input name="tables[1].id" type="hidden" value=""/>
+	<input name="tables[2].id" type="hidden" value=""/>
+	<input name="tables[3].id" type="hidden" value=""/>
+	<input name="tables[4].id" type="hidden" value=""/>
+	<input name="tables[5].id" type="hidden" value=""/>
+	<input name="tables[6].id" type="hidden" value=""/>
+	<input name="tables[7].id" type="hidden" value=""/>
+	<input name="tables[8].id" type="hidden" value=""/>
+	<input name="tables[9].id" type="hidden" value=""/>
+	<input name="tables[10].id" type="hidden" value=""/>
+	<input name="tables[11].id" type="hidden" value=""/>
+   <!-- 表单标题开始 -->
+   	<center>
+		<h2>日常维护考核评分信息</h2>   
+	</center>
+   <!-- 表单标题结束 -->
+
+	<div class="form-group">
+		<label>考核评分人：</label>
+		<input type="text" name="form.person" value="" class="{required:true} form-control input-sm"></input>
+	</div>
+	<div class="form-group">
+		<label>时间：</label>
+		<input class="text {required:true} form-control input-sm" type="text" name="form.time" onfocus="WdatePicker();" value="" />
+	</div>
+	<div class="form-group">
+		<label>汇总：</label>
+		<select class="form-control input-sm" name="form.hzScoreSummaryId" id="hzSelect" style="height:26px;"></select>
+	</div>
+	<p></p>
+    <!-- 列表开始 -->
+     <table class="table table-bordered table-hover">
+     	<tr>
+     		<th width="5%">序号</th><th colspan="2" width="15%">考核内容</th><th width="30%">评分标准</th><th width="5%">分值</th><th width="30%">存在问题</th><th width="5%">得分</th>
+     	</tr>
+     	<tr>
+     		<td>1</td>
+     		<td rowspan="6">月度考核</td>
+     		<td >内部管理</td>
+     		<td >建立排水设施巡查制度。未建立排水设施巡查制度的，扣1分；未按月度计划要求完成养护的每项扣0.5分；未按要求上报年度管网养护计划（每年1月底前）、生产运行情况总结（每月月底前）、生产运行计划（每月5日前）、污水处理厂运行月报表（每月5日前）的，每项扣1分。</td>
+			<td >10</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[0].problem" ></textarea></td>
+    		<td ><input type="text" onchange="calScore()" name="tables[0].score" value="" class="{required:true,max:10,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>2</td>
+     		<td>日常维护</td>
+     		<td >加强设施日常养护，特别是移交接管过程中存在质量缺陷的设施。污水管网、泵站、污水处理厂日常检查发现的问题，扣分分值参照各自集中考核检查评分表；交办事项未按要求办结及重大活动未按交办要求保障的，每次每件扣2分。</td>
+			<td>30</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[1].problem"></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[1].score" value="" class="{required:true,max:30,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>3</td>
+     		<td>设施验收</td>
+     		<td>配合做好市政建设项目验收检查、交接和质量回访等工作。未按要求做好设施交接前或质量回访期内检查及书面反馈工作的，每项扣1分。未按养护通知单要求将新建设施纳入养护范围的，每项扣1分。</td>
+			<td>15</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[2].problem"></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[2].score" value="" class="{required:true,max:15,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>4</td>
+     		<td>安全生产</td>
+     		<td>按要求做好安全生产，不出现因日常运行不当或养护不到位造成的排水不畅、污水满溢、生化池出水超标、设施未运行、有责投诉等问题，发生一次每处每件扣2分。擅自开启污水管网、污水泵站溢流排放口的，每次每处扣3分。</td>
+			<td>20</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[3].problem"></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[3].score" value="" class="{required:true,max:20,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>5</td>
+     		<td>污泥处置</td>
+     		<td>按要求落实污泥处置，有污泥处置合同，有科学、合理的污泥处置办法。无污泥处置合同的扣5分；污泥处置外运准确填写四联单，未按要求填写的每单扣0.5分；污泥处置造成二次污染或有责投诉的，扣3分。</td>
+			<td>10</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[4].problem"></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[4].score" value="" class="{required:true,max:10,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>6</td>
+     		<td>水量调度</td>
+     		<td>按要求落实污水系统调度。因调度不到位，引起污水满溢的，每次扣1分；无正当理由，一二期与三期日处理水量偏差较大的（超过10万吨/日），每天扣1分。</td>
+			<td>15</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[5].problem"></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[5].score" value="" class="{required:true,max:15,min:0} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>7</td>
+     		<td rowspan="5">年度考核</td>
+     		<td>污染减排</td>
+     		<td>配合做好年度COD、氨氮污染减排计划上报，并认真组织实施。未按要求上报减排计划的，扣2分；未完成年度减排目标的，扣5分。</td>
+			<td>/</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[6].problem"></textarea></td>
+    		<td><input type="text" onchange="calScore()" name="tables[6].score" value="" class="{max:0,min:-5} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>8</td>
+     		<td>防汛防台</td>
+     		<td>建立应急处置机制及防汛防台预案，每年汛期来临前上报预案备案，并按预案落实各项措施，发现未按预案落实的每处扣1分；汛期发生污水满溢导致积水的，处置不及时的每处每次扣2分；未及时反馈防汛防台信息的扣1分；防汛期间因运行不当，造成人员伤亡等安全事故的，扣5分。</td>
+			<td>/</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[7].problem"></textarea></td>
+    		<td><input  type="text" onchange="calScore()" name="tables[7].score" value="" class="{max:0,min:-5} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>9</td>
+     		<td>台账管理</td>
+     		<td >建立排水设施档案及养护台帐制度。未建立排水设施档案或台账的，每项扣2分，档案、台账不完整、准确、清晰的，每处扣0.5分。</td>
+			<td>/</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[8].problem"></textarea></td>
+    		<td><input  type="text" onchange="calScore()" name="tables[8].score" value="" class="{max:0,min:-5} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>10</td>
+     		<td>城管目标</td>
+     		<td>未完成城管年度目标任务的，按照城管目标考核细则进行扣分。</td>
+			<td>/</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[9].problem"></textarea></td>
+    		<td><input  type="text" onchange="calScore()" name="tables[9].score" value="" class="{max:0,min:-5} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>11</td>
+     		<td>水量保证</td>
+     		<td>七格污水处理厂一、二期工程年处理水量达不到基本水量要求的，扣3分。</td>
+			<td>/</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[10].problem"></textarea></td>
+    		<td><input  type="text" onchange="calScore()" name="tables[10].score" value="" class="{max:0,min:-5} form-control input-sm"/></td>
+     	</tr>
+     	<tr>
+     		<td>12</td>
+     		<td></td>
+     		<td>其他</td>
+     		<td>省、市领导批示表扬的，工作出色的，给予适当加分。</td>
+			<td>/</td>
+     		<td><textarea class="form-control" style="width:100%;max-width: 100%;" rows="3" name="tables[11].problem"></textarea></td>
+    		<td><input  type="text" onchange="calScore()" name="tables[11].score" value="" class="form-control input-sm" /></td>
+     	</tr>
+     	<tr>
+     		<td>13</td>
+     		<td></td>
+     		<td>合计</td>
+     		<td></td>
+			<td>100</td>
+     		<td>/</td>
+    		<td><span id="result"></span></td>
+     	</tr>
+     </table>
+     <!-- 列表结束 -->
+ 
+   <!-- 表单按钮开始 -->
+   <center>
+	<a href="javascript:update();" class="btn btn-primary" >确定</a>
+	<a href="javascript:void(0);" onclick="$('#template').empty();slideDiv();" class="btn btn-default" >取消</a>
+   </center>
+   <!-- 表单按钮结束 -->
+</form>

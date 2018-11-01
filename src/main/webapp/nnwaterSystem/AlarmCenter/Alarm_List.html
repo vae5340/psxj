@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>报警中心</title>
+	<meta charset="UTF-8">	
+    
+	<link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet"/>
+	<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+	<link href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" rel="stylesheet" type="text/css"/>
+    <link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>	
+    <link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+  </head>
+  
+  <body>
+     <div class="col-sm-12 mainwrapper">
+	    <div class="panel panel-default">
+  	        <div class="panel-heading" style="padding:5px 10px">查询条件</div>
+	    	<div class="panel-body">
+		     
+			 <label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">设备类型</label>
+			 <div class="col-sm-2">
+				<select class="form-control" id="estType" name="estType">
+					<option value=""></option>
+					<option value="6">排水泵站</option>
+					<option value="13">积水点</option>
+					<option value="17">视频点</option>
+					<option value="18">内河站点</option>
+					<option value="19">雨量站</option>
+					<option value="20">水文站</option>
+					<option value="21">窨井</option>
+					<option value="22">仓库</option>
+				</select>
+			 </div>
+			 <label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">监控类型</label>
+			 <div class="col-sm-2">
+				<select class="form-control" id="alarmType" name="alarmType">
+					<option value=""></option>
+					<option value="1">超出监测水位</option>
+					<option value="13">监测设备电压异常</option>
+				</select>
+			 </div>
+			 <label class="control-label col-sm-1" style="width:80px;padding-right:0px;text-align:left;padding-top: 5px;">权属单位</label>
+			 <div class="col-sm-2">
+				<select class="form-control" id="area" name="area">
+					<option value=""></option>
+					<option value="450102">兴宁区</option>
+					<option value="450103">青秀区</option>
+					<option value="450105">江南区</option>
+					<option value="450107">西乡塘区</option>
+					<option value="450108">良庆区</option>
+					<option value="450109">邕宁区</option>
+					<option value="450122">武鸣县</option>
+					<option value="450123">隆安县</option>
+					<option value="450124">马山县</option>
+					<option value="450125">上林县</option>
+					<option value="450126">宾阳县</option>
+					<option value="450127">横县</option>
+				</select>
+			 </div>
+			 <div class="col-sm-1" style="text-align:left;">
+				<button type="button" id="btn_query" class="btn btn-primary" onclick="reloadData()">查询</button>
+			 </div> 
+		 </div> 
+	 </div> 
+     <table id="table"></table>
+    </div> 
+  </body>
+  <script src="/awater/lib/jquery.min.js?v=1.0.0"></script> 
+  <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+  <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+  <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+  <!--  <script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script> -->
+  <script src="/awater/js/util_date.js" type="text/javascript"></script>
+  <script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+  <script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>			
+  <script>
+	     
+	     function format_operation(value,row,index){
+	         return "<button class='btn btn-primary' onclick=showBGWindow()>详情</button>";
+	     }
+	     function format_icon(value,row,index){
+	     	if(row.alarmType==1)
+				return "<img src='/awater/img/danger.png' width='18' height='18'>";
+			else
+				return "<img src='/awater/img/exclamation.png' width='18' height='18'>";
+	     }	       
+	     function format_color(value,row,index){
+	         return "<font style='color:red;'>"+value+"</button>";
+	     }	     
+	     function format_time(value,row,index){
+	         if(value)
+					return getLocalTime(value.time);
+			 return '';
+	     }	     
+	     
+	     function queryParams(params) {
+	       	return {
+		        pageSize:params.limit,
+		        pageNo: params.offset/params.limit+1,
+				alarmType:$("#alarmType").val(),
+				estType:$("#estType").val(),
+				area:$("#area").val()
+	        };
+		 }
+		    
+	    function format_type(value, row, index){
+			if(value==1)
+				return '超出监测水位';
+			else
+				return '监测设备电压异常';
+		}
+		function format_owner(value, row, index){
+			return '兴宁区';
+		}
+		
+		var DictList=null;
+		
+		$(function(){ 
+	        	$.ajax({
+					method : 'GET',
+					url : location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/ya-template-city!getAllDict.action',
+					async : false,
+					dataType : 'json',
+					success : function(data) {
+						DictList=data;
+						$("#table").bootstrapTable({
+							toggle:"table",
+							url:location.protocol+"//"+location.hostname+":"+location.port+"/agsupport/jk-alarm-info!listJson.action",
+							rowStyle:"rowStyle",
+							cache: false, 
+							pagination:true,
+							striped: true,
+							pageNumber:1,
+						    pageSize: 10,
+							pageList: [10, 25, 50, 100],
+							queryParams: queryParams,
+							sidePagination: "server",
+							columns: [{field: 'icon',title: '',visible: true,align:'center',formatter:format_icon},
+									  {field: 'id',title: '报警编号',visible: false,align:'center'},
+									  {field: 'combId',title: '设施编号',visible: false,align:'center'},
+							          {field: 'combName',title: '设施地址',align:'center'}, 
+							          {field: 'deviceId',title: '设备编号',visible: false,align:'center'},
+							          {field: 'deviceName',title: '设备名称',align:'center'},
+							          {field: 'deviceOwner',title: '设备权属单位',align:'center',formatter:format_owner},
+							          {field: 'itemDimId',title: '监控项编号',visible: false,align:'center',}, 
+							          {field: 'itemDimName',title: '监控项名称',align:'center'}, 
+							          {field: 'alarmValue',title: '监控值',align:'center',formatter:format_color},
+							          {field: 'alarmDate',title: '监控日期',align:'center',formatter:format_time}, 
+							          {field: 'alarmType',title: '监控类型',align:'center',formatter:format_type},
+							          {field: 'alarmDescription',title: '监控描述',align:'center'}]
+						});
+					},
+					error : function() {
+						alert('error');
+					}
+			  });
+	     });	  
+		$(window).load(function(){				
+				$("#startTime").datetimepicker({
+	              	language: 'zh-CN',
+    			  	format: 'yyyy-mm-dd hh:ii:ss',
+    			  	autoclose:true,
+    			  	pickerPosition:'bottom-right'
+    		   });
+    		   
+    		   $("#endTime").datetimepicker({
+	              	language: 'zh-CN',
+    			  	format: 'yyyy-mm-dd hh:ii:ss',
+    			  	autoclose:true,
+    			  	pickerPosition:'bottom-right'
+    		   });
+   		});
+   		
+	  	function showWindow(id){
+			layer.open({
+			  type: 2,
+			  title: '应急调度情况',
+			  shadeClose: false,
+			  shade: 0.5,
+			  area: ['900px', '600px'],
+			  content: location.protocol+"//"+location.hostname+":"+location.port+'/awater/nnwaterSystem/EmergenControl/District/Record/Record_Input.html?id='+id
+			}); 	
+		}		
+		
+		function showTabWindow(url){
+			parent.createNewtab(url,"成员单位调度详情");	
+		}
+		
+		function showBGWindow(){
+			parent.createNewtab("/awater/nnwaterSystem/EmergenControl/District/RainNews/list.html","抢险情况"); 	
+		}
+		
+		function reloadData(){
+			var query=new Object();
+			if($("#alarmType").val()!="")
+				query.alarmType=$("#alarmType").val();
+			if($("#estType").val()!="")
+				query.estType=$("#estType").val();
+			if($("#area").val()!="")
+				query.area=$("#area").val();
+			$("#table").bootstrapTable('refresh', {url: location.protocol+"//"+location.hostname+":"+location.port+'/agsupport/jk-alarm-info!listJson.action',query:query});
+     	}
+	</script>
+</html>

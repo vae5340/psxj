@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.augurit.awater.awaterMobile.monitoring.subject.mapper.SubjectMapper">
+
+    <!--获取测站实时数据的最大最小日期-->
+    <select id="getDateRange" resultType="map"  parameterType="map">
+
+        <if test="sttp!= null and sttp =='UP' ">
+            select to_char(min(tm), 'yyyy-MM-dd hh24:mi:ss') min_date,to_char(max(tm), 'yyyy-MM-dd hh24:mi:ss') max_date  from ST_CONDUIT_R where 1=1
+            <if test="stcd != null and stcd !='' ">and stcd=#{stcd} </if>
+            <if test="mnit != null and mnit ==1 "> and q is not null </if>
+            <if test="mnit != null and mnit ==2 "> and z is not null</if>
+            <if test="mnit != null and mnit ==7 "> and v is not null</if>
+        </if>
+
+        <if test="sttp!= null and sttp =='WL' ">
+            select to_char(min(tm), 'yyyy-MM-dd hh24:mi:ss') min_date,to_char(max(tm), 'yyyy-MM-dd hh24:mi:ss') max_date  from ST_SURDEP_R  where 1=1
+            <if test="stcd != null and stcd !='' "> and stcd=#{stcd}</if>
+            <if test="mnit != null and mnit ==2 "> and z is not null</if>
+        </if>
+
+        <if test="sttp!= null and sttp =='DD' ">
+            select to_char(min(tm), 'yyyy-MM-dd hh24:mi:ss') min_date,to_char(max(tm), 'yyyy-MM-dd hh24:mi:ss') max_date  from ST_WAS_R  where 1=1
+            <if test="stcd != null and stcd !='' "> and stcd=#{stcd}</if>
+            <if test="mnit != null and mnit ==1 "> and TGTQ is not null</if>
+            <if test="mnit != null and mnit ==2 "> and ( UPZ is not null or DWZ is not null or CHANB is not null )</if>
+        </if>
+
+        <if test="sttp!= null and sttp =='DP' ">
+            select to_char(min(tm), 'yyyy-MM-dd hh24:mi:ss') min_date,to_char(max(tm), 'yyyy-MM-dd hh24:mi:ss') max_date  from ST_PUMP_R where 1=1
+            <if test="stcd != null and stcd !='' "> and stcd=#{stcd}</if>
+            <if test="mnit != null and mnit ==1 "> and PMPQ is not null</if>
+            <if test="mnit != null and mnit ==2"> and (PPUPZ is not null or PPDWZ is not null or CHANB is not null or PUMPPT is not null)</if>
+        </if>
+
+        <if test="sttp!= null and sttp =='ZZ' ">
+            select to_char(min(tm), 'yyyy-MM-dd hh24:mi:ss') min_date,to_char(max(tm), 'yyyy-MM-dd hh24:mi:ss') max_date  from ST_RIVER_R where 1=1
+            <if test="stcd != null and stcd !='' "> and stcd=#{stcd}</if>
+            <if test="mnit != null and mnit ==1 "> and q is not null</if>
+            <if test="mnit != null and mnit ==2 "> and z is not null </if>
+        </if>
+
+        <if test="sttp!= null and sttp =='RR' ">
+            select to_char(min(tm), 'yyyy-MM-dd hh24:mi:ss') min_date,to_char(max(tm), 'yyyy-MM-dd hh24:mi:ss') max_date  from ST_RSVR_R where 1=1
+            <if test="stcd != null and stcd !='' ">and stcd=#{stcd}</if>
+            <if test="mnit != null and mnit ==2 ">and RZ is not null</if>
+        </if>
+
+        <if test="sttp!= null and sttp =='PP' ">
+            select to_char(min(tm), 'yyyy-MM-dd hh24:mi:ss') min_date,to_char(max(tm), 'yyyy-MM-dd hh24:mi:ss') max_date  from ST_PPTN_R where 1=1
+            <if test="stcd != null and stcd !='' ">and stcd=#{stcd}</if>
+        </if>
+
+        <if test="sttp!= null and sttp =='FQ' ">
+            select *  from
+            (
+            select to_char(min(SPT), 'yyyy-MM-dd hh24:mi:ss')  min_time,to_char(max(SPT), 'yyyy-MM-dd hh24:mi:ss')  max_time  from
+            (select s2.stcd,s2.spt from  WQ_PCP_D s2
+            LEFT JOIN WQ_NMISP_D s3
+            on s2.STCD = s3.STCD and s2.spt=s3.spt
+            LEFT JOIN WQ_HYDROE_D s4
+            on s2.STCD = s4.STCD and s2.spt=s4.spt)
+            where stcd=#{stcd}
+            ) t1,
+            (
+            select to_char(min(DATATIME), 'yyyy-MM-dd')  min_date,to_char(max(DATATIME), 'yyyy-MM-dd') max_date  from WQ_DAYSTAT_S where  stcd=#{stcd}
+            ) t2
+        </if>
+
+    </select>
+
+    <!--获取河道的警戒值-->
+    <select id="getRiverProperties" resultType="Map">
+     select STCD,
+     LDKEL,
+     RDKEL,
+     WRZ,--警戒水位
+     WRQ,--警戒流量
+     GRZ,--保证水位
+     GRQ,--保证流量
+     TAZ,--高水位告警值
+     TAQ,--大流量告警值
+     LAZ,--低水位告警值
+     LAQ--小流量告警值
+      from ST_RVFCCH_B where stcd =#{stcd}
+    </select>
+
+    <!--获取积水点的警戒值-->
+    <select id="getWaterpointsProperties" resultType="Map">
+        select stcd,
+        SDEP,--轻度积水深度
+        MDEP,--中度积水深度
+        BDEP--严重积水深度
+        from ST_SURDEPCH_B
+        where stcd =#{stcd}
+    </select>
+
+    <!--获取窨井的警戒值-->
+    <select id="getConduitProperties" resultType="Map">
+        select
+        MDEP,--最高管顶深度
+        FWD,--满管预警深度
+        BTELV,--井底高程
+        WNPRE,--预警压力
+        WNDEP --预警水位
+        from ST_CONDUITCH_B t1 join ST_WELLDEPCH_B t2
+        on t1.stcd=T2.stcd
+        where t1.stcd =#{stcd}
+    </select>
+
+    <!--获取水闸的警戒值-->
+    <select id="getSluiceProperties" resultType="Map">
+        select STCD,
+        WASTPELV,--截污渠渠顶高程
+        WASBTEL,--截污渠渠底高
+        WASH,--渠箱高
+        WRZ--警戒水位
+        from ST_WASCH_B
+        where stcd =#{stcd}
+    </select>
+
+    <!--获取水库的警戒值-->
+    <select id="getReservoirProperties" resultType="Map">
+        select T1.STCD,
+        RSVRTP,--水库类型
+        DAMEL,--坝顶高程
+        CKFLZ,--校核洪水位
+        DSFLZ,--设计洪水位
+        NORMZ,--正常高水位
+        DDZ,--死水位
+        ACTZ,--兴利水位
+        TTCP,--总库容
+        FLDCP,--防洪库容
+        ACTCP,--兴利库容
+        DDCP, --死库容
+        LAZ,--低水位告警值
+        FSLTDZ,--汛限水位
+        FSLTDW--汛限库容
+        from ST_RSVRFCCH_B t1 join ST_RSVRFSR_B t2 on t1.stcd=T2.STCD
+        where t1.stcd =#{stcd}
+    </select>
+
+    <!--获取排水管网历史数据-->
+    <select id="getDrainageHis" resultType="map" parameterType="map">
+        select t.stcd, to_char(t.tm, 'yyyy-MM-dd hh24:mi:ss') tm, z,q,v from ST_CONDUIT_R t where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(#{fromDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(#{toDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--获取排水管网近一周或一个月数据-->
+    <select id="getDrainageDataByTimewm" resultType="map" parameterType="map">
+        select t.stcd, to_char(t.tm, 'yyyy-MM-dd') tm,nvl(avg_z,0) avg_z ,nvl(avg_v,0) avg_v ,nvl(avg_q,0) avg_q,nvl(max_z,0) max_z,nvl(max_q,0) max_q,nvl(max_v,0) max_v,nvl(min_z,0) min_z,nvl(min_q,0) min_q,nvl(min_v,0) min_v from ST_CONDUIT_R_DATE t where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--获取排水管网近三个月数据-->
+    <select id="getDrainageDataByTime3m" resultType="map" parameterType="map">
+        select t.stcd, to_char(t.tm, 'yyyy-MM-dd') tm,nvl(avg_z,0) avg_z ,nvl(avg_v,0) avg_v ,nvl(avg_q,0) avg_q,nvl(max_z,0) max_z,nvl(max_q,0) max_q,nvl(max_v,0) max_v,nvl(min_z,0) min_z,nvl(min_q,0) min_q,nvl(min_v,0) min_v from ST_CONDUIT_R_WEEK t where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--获取排水管网近半年或近一到五年的数据-->
+    <select id="getDrainageDataByTime6my" resultType="map" parameterType="map">
+        select t.stcd, to_char(t.tm, 'yyyy-MM') tm, nvl(avg_z,0) avg_z ,nvl(avg_v,0) avg_v ,nvl(avg_q,0) avg_q,nvl(max_z,0) max_z,nvl(max_q,0) max_q,nvl(max_v,0) max_v,nvl(min_z,0) min_z,nvl(min_q,0) min_q,nvl(min_v,0) min_v from ST_CONDUIT_R_MONTH t where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--积水点历史数据-->
+    <select id="getFloodPointHis" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd hh24:mi:ss') tm,nvl(t.z,0) z from ST_SURDEP_R  t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(#{fromDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(#{toDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--积水点近一周或近一个月的数据-->
+    <select id="getFloodPointDateByTimewm" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd') tm,nvl(t.avg_z,0) avg_z ,nvl(t.max_z,0) max_z ,nvl(t.min_z,0) min_z from ST_SURDEP_R_DATE  t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--积水点近三个月的数据-->
+    <select id="getFloodPointDateByTime3m" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd') tm,nvl(t.avg_z,0) avg_z ,nvl(t.max_z,0) max_z ,nvl(t.min_z,0) min_z from ST_SURDEP_R_WEEK  t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--积水点近半年或者近一到五年的数据-->
+    <select id="getFloodPointDateByTime6my" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM') tm,nvl(t.avg_z,0) avg_z ,nvl(t.max_z,0) max_z ,nvl(t.min_z,0) min_z from ST_SURDEP_R_MONTH  t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!-- 查看泵站站上站下历史水位 -->
+    <select id="queryPumpHist" resultType="map" parameterType="map">
+        SELECT TM,PPDWZ,PPUPZ,CHANB,PUMPPT,PMPQ FROM ST_PUMP_R t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(#{fromDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(#{toDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!-- 查看泵站站上站下近一周或一个月的数据 -->
+    <select id="getPumpDataByTimewm" resultType="map" parameterType="map">
+        SELECT  to_char(t.tm, 'yyyy-MM-dd') TM,nvl(t.MAX_PPUPZ,0) PPUPZ,nvl(t.MAX_PPDWZ,0) PPDWZ, nvl(t.MAX_CHANB,0) CHANB,nvl(t.MAX_PUMPPT,0) PUMPPT,nvl(AVG_PPDWZ,0)AVG_PPDWZ,nvl(AVG_PPUPZ,0) AVG_PPUPZ,nvl(AVG_CHANB,0) AVG_CHANB,nvl(AVG_PUMPPT,0) AVG_PUMPPT,nvl(AVG_PMPQ,0) AVG_PMPQ,nvl(MAX_PPUPZ,0) MAX_PPUPZ,nvl(MAX_PPDWZ,0) MAX_PPDWZ,nvl(MAX_CHANB,0) MAX_CHANB,nvl(MAX_PUMPPT,0) MAX_PUMPPT,nvl(MAX_PMPQ,0) MAX_PMPQ,nvl(MIN_PPUPZ,0) MIN_PPUPZ,nvl(MIN_PPDWZ,0) MIN_PPDWZ,nvl(MIN_CHANB,0) MIN_CHANB,nvl(MIN_PUMPPT,0) MIN_PUMPPT,nvl(MIN_PMPQ,0) MIN_PMPQ   FROM ST_PUMP_R_DATE t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!-- 查看泵站站上站下近三个月的数据 -->
+    <select id="getPumpDataByTime3m" resultType="map" parameterType="map">
+        SELECT  to_char(t.tm, 'yyyy-MM-dd') TM,nvl(t.MAX_PPUPZ,0) PPUPZ,nvl(t.MAX_PPDWZ,0) PPDWZ, nvl(t.MAX_CHANB,0) CHANB,nvl(t.MAX_PUMPPT,0) PUMPPT,nvl(AVG_PPDWZ,0)AVG_PPDWZ,nvl(AVG_PPUPZ,0) AVG_PPUPZ,nvl(AVG_CHANB,0) AVG_CHANB,nvl(AVG_PUMPPT,0) AVG_PUMPPT,nvl(AVG_PMPQ,0) AVG_PMPQ,nvl(MAX_PPUPZ,0) MAX_PPUPZ,nvl(MAX_PPDWZ,0) MAX_PPDWZ,nvl(MAX_CHANB,0) MAX_CHANB,nvl(MAX_PUMPPT,0) MAX_PUMPPT,nvl(MAX_PMPQ,0) MAX_PMPQ,nvl(MIN_PPUPZ,0) MIN_PPUPZ,nvl(MIN_PPDWZ,0) MIN_PPDWZ,nvl(MIN_CHANB,0) MIN_CHANB,nvl(MIN_PUMPPT,0) MIN_PUMPPT,nvl(MIN_PMPQ,0) MIN_PMPQ    FROM ST_PUMP_R_WEEK t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!-- 查看泵站站上站下近半年或近一到五年的数据 -->
+    <select id="getPumpDataByTime6my" resultType="map" parameterType="map">
+        SELECT  to_char(t.tm, 'yyyy-MM') TM,nvl(t.MAX_PPUPZ,0) PPUPZ,nvl(t.MAX_PPDWZ,0) PPDWZ, nvl(t.MAX_CHANB,0) CHANB,nvl(t.MAX_PUMPPT,0) PUMPPT,nvl(AVG_PPDWZ,0)AVG_PPDWZ,nvl(AVG_PPUPZ,0) AVG_PPUPZ,nvl(AVG_CHANB,0) AVG_CHANB,nvl(AVG_PUMPPT,0) AVG_PUMPPT,nvl(AVG_PMPQ,0) AVG_PMPQ,nvl(MAX_PPUPZ,0) MAX_PPUPZ,nvl(MAX_PPDWZ,0) MAX_PPDWZ,nvl(MAX_CHANB,0) MAX_CHANB,nvl(MAX_PUMPPT,0) MAX_PUMPPT,nvl(MAX_PMPQ,0) MAX_PMPQ,nvl(MIN_PPUPZ,0) MIN_PPUPZ,nvl(MIN_PPDWZ,0) MIN_PPDWZ,nvl(MIN_CHANB,0) MIN_CHANB,nvl(MIN_PUMPPT,0) MIN_PUMPPT,nvl(MIN_PMPQ,0) MIN_PMPQ   FROM ST_PUMP_R_MONTH t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!--查询一个时间段雨量-->
+    <select id="queryRainfallOneTime" parameterType="map" resultType="map">
+        select t.stcd, to_char(t.tm, 'yyyy-mm-dd hh24:mi:ss') tm, t.drp, t.intv, t.pdr, t.dyp, t.wth from st_pptn_r t
+        where t.stcd = #{stcd}
+        <if test="startTime != null">
+            and t.tm &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and t.tm &lt;= #{endTime}
+        </if>
+        order by tm
+    </select>
+
+    <!-- 查看时段水库水位情况 -->
+    <select id="queryReservoirPeriod" resultType="map">
+        select
+        to_char(t1.TM,'yyyy-mm-dd hh24:mi:ss') tm,
+        nvl(t1.DRP,0) drp,
+        t1.rz,
+        t2.FSLTDZ xxsw,
+        t3.NORMZ zzsw
+        from
+        (select s1.stcd,s1.tm,S1.rz,s2.drp from
+        ST_RSVR_R s1 left join
+        ST_PPTN_R s2 on s1.stcd=s2.stcd and s1.tm=s2.tm
+        ) t1
+        left join ST_RSVRFSR_B t2
+        on t1.stcd=t2.stcd
+        left join ST_RSVRFCCH_B t3
+        on t1.stcd=t3.stcd
+        where t1.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and tm &gt;=  to_date(#{fromDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and tm &lt;=  to_date(#{toDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by tm desc
+    </select>
+
+    <!--查询水库一周或者一个月的数据-->
+    <select id="getRSVRDataByTimewm" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd') tm,nvl(t.AVG_RZ,0) AVG_RZ,nvl(t.AVG_INQ,0) AVG_INQ,nvl(t.MAX_RZ,0) MAX_RZ,nvl(t.MAX_INQ,0) MAX_INQ,nvl(t.MIN_RZ,0) MIN_RZ,nvl(t.MIN_INQ,0) MIN_INQ
+        from ST_RSVR_R_DATE t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--查询水库三个月的数据-->
+    <select id="getRSVRDataByTime3m" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd') tm,nvl(t.AVG_RZ,0) AVG_RZ,nvl(t.AVG_INQ,0) AVG_INQ,nvl(t.MAX_RZ,0) MAX_RZ,nvl(t.MAX_INQ,0) MAX_INQ,nvl(t.MIN_RZ,0) MIN_RZ,nvl(t.MIN_INQ,0) MIN_INQ
+        from ST_RSVR_R_WEEK t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--查询水库半年或一年的数据-->
+    <select id="getRSVRDataByTime6my" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM') tm,nvl(t.AVG_RZ,0) AVG_RZ,nvl(t.AVG_INQ,0) AVG_INQ,nvl(t.MAX_RZ,0) MAX_RZ,nvl(t.MAX_INQ,0) MAX_INQ,nvl(t.MIN_RZ,0) MIN_RZ,nvl(t.MIN_INQ,0) MIN_INQ
+        from ST_RSVR_R_MONTH t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--查询河流历史数据-->
+    <select id="getRiverHis" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd hh24:mi:ss') tm,nvl(t.z,0) z,nvl(t.q,0) q
+        from ST_RIVER_R t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(#{fromDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(#{toDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--查询河流一周或一月数据-->
+    <select id="getRiverDataByTimewm" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd') tm,nvl(t.avg_z,0) avg_z,nvl(t.avg_q,0) avg_q,nvl(MAX_Z,0) MAX_Z, nvl(MAX_Q,0) MAX_Q,nvl(MIN_Z,0) MIN_Z,nvl(MIN_Q,0) MIN_Q
+        from ST_RIVER_R_Date t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+
+    <!--查询河流三月数据-->
+    <select id="getRiverDataByTime3m" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd') tm,nvl(t.avg_z,0) avg_z,nvl(t.avg_q,0) avg_q,nvl(MAX_Z,0) MAX_Z, nvl(MAX_Q,0) MAX_Q,nvl(MIN_Z,0) MIN_Z,nvl(MIN_Q,0) MIN_Q
+        from ST_RIVER_R_Week t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!--查询河流半年或一年数据-->
+    <select id="getRiverDataByTimey" resultType="map" parameterType="map">
+        select to_char(t.tm, 'yyyy-MM-dd') tm,nvl(t.avg_z,0) avg_z,nvl(t.avg_q,0) avg_q,nvl(MAX_Z,0) MAX_Z, nvl(MAX_Q,0) MAX_Q,nvl(MIN_Z,0) MIN_Z,nvl(MIN_Q,0) MIN_Q
+        from ST_RIVER_R_Month t
+        where t.stcd=#{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.tm &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.tm &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        order by t.tm desc
+    </select>
+
+    <!-- 查看水闸历史水位情况 -->
+    <select id="queryWasHist" resultType="map" parameterType="map">
+        SELECT to_char(t.tm,'yyyy-MM-dd hh24:mi:ss') TM,nvl(t.UPZ,0) UPZ,nvl(t.DWZ,0) DWZ, nvl(t.CHANB,0) CHANB,nvl(t.TGTQ,0) TGTQ FROM ST_WAS_R t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(#{fromDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(#{toDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!-- 查看水闸近一周或一个月的水位情况 -->
+    <select id="getWasDateByTimewm" resultType="map" parameterType="map">
+        SELECT to_char(t.tm,'yyyy-MM-dd') TM,nvl(t.AVG_UPZ,0) UPZ,nvl(t.AVG_DWZ,0) DWZ, nvl(t.AVG_CHANB,0) CHANB,nvl(t.AVG_TGTQ,0) TGTQ,nvl(MAX_UPZ,0) MAX_UPZ,nvl(MAX_DWZ,0) MAX_DWZ,nvl(MAX_TGTQ,0) MAX_TGTQ,nvl(MAX_CHANB,0) MAX_CHANB,nvl(MIN_UPZ,0) MIN_UPZ,nvl(MIN_DWZ,0) MIN_DWZ,nvl(MIN_TGTQ,0) MIN_TGTQ,nvl(MIN_CHANB,0)  MIN_CHANB FROM ST_WAS_R_DATE t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!-- 查看水闸近三个月的水位情况 -->
+    <select id="getWasDateByTime3m" resultType="map" parameterType="map">
+        SELECT to_char(t.tm,'yyyy-MM-dd') TM,nvl(t.AVG_UPZ,0) UPZ,nvl(t.AVG_DWZ,0) DWZ, nvl(t.AVG_CHANB,0) CHANB,nvl(t.AVG_TGTQ,0) TGTQ,nvl(MAX_UPZ,0) MAX_UPZ,nvl(MAX_DWZ,0) MAX_DWZ,nvl(MAX_TGTQ,0) MAX_TGTQ,nvl(MAX_CHANB,0) MAX_CHANB,nvl(MIN_UPZ,0) MIN_UPZ,nvl(MIN_DWZ,0) MIN_DWZ,nvl(MIN_TGTQ,0) MIN_TGTQ,nvl(MIN_CHANB,0)  MIN_CHANB  FROM ST_WAS_R_WEEK t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!-- 查看水闸近半年或一到五年的水位情况 -->
+    <select id="getWasDateByTime6my" resultType="map" parameterType="map">
+        SELECT to_char(t.tm,'yyyy-MM') TM,nvl(t.AVG_UPZ,0) UPZ,nvl(t.AVG_DWZ,0) DWZ, nvl(t.AVG_CHANB,0) CHANB,nvl(t.AVG_TGTQ,0) TGTQ,nvl(MAX_UPZ,0) MAX_UPZ,nvl(MAX_DWZ,0) MAX_DWZ,nvl(MAX_TGTQ,0) MAX_TGTQ,nvl(MAX_CHANB,0) MAX_CHANB,nvl(MIN_UPZ,0) MIN_UPZ,nvl(MIN_DWZ,0) MIN_DWZ,nvl(MIN_TGTQ,0) MIN_TGTQ,nvl(MIN_CHANB,0)  MIN_CHANB  FROM ST_WAS_R_MONTH t
+        WHERE t.stcd = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and t.TM &gt;= to_date(substr(#{fromDate},1,10), 'yyyy-MM-dd')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and t.TM &lt;= to_date(substr(#{toDate},1,10), 'yyyy-MM-dd')
+        </if>
+        ORDER BY t.TM desc
+    </select>
+
+    <!-- 查看黑臭水体、污水处理厂 历史监测项 -->
+    <select id="queryAllItemHis" resultType="map" parameterType="map">
+        SELECT s1.STCD,s1.STNM,s1.STTP,to_char(s2.SPT, 'yyyy-MM-dd hh24:mi') spt,
+        s2.PH,s2.SS,HUMID,s2.ENVT,s2.CLAR_ITY,
+        s3.TN,s3.NH3N,s3.TP,s3.CODcr,s3.DOX,
+        s4.Q2,s4.Z
+        FROM WQ_WQSINF_B  s1
+        LEFT JOIN WQ_PCP_D  s2 --理化指标项目数据表
+        on s1.STCD=s2.STCD
+        LEFT JOIN WQ_NMISP_D s3 --非金属无机物项目数据表
+        on s1.STCD = s3.STCD and s2.spt=s3.spt
+        LEFT JOIN WQ_HYDROE_D s4 --水文要素数据表
+        on s1.STCD = s4.STCD and s2.spt=s4.spt
+        WHERE s1.STCD = #{stcd}
+        <if test="fromDate != null and fromDate != ''">
+            and s2.SPT &gt;= to_date(#{fromDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        <if test="toDate != null and toDate != ''">
+            and s2.SPT &lt;= to_date(#{toDate}, 'yyyy-MM-dd hh24:mi:ss')
+        </if>
+        ORDER BY s2.SPT desc
+    </select>
+
+    <!-- 污水处理厂 日均历史监测项 -->
+    <select id="queryAllItemHisDay" resultType="map" parameterType="map">
+        SELECT to_char(DATATIME,'yyyy-MM-dd') SPT,
+        ENVTAVG ENVT,ENHUMIDAVG HUMID,PHAVG PH,Q2AVG Q2,SSAVG ss,CODCRAVG CODCR,TNAVG TN,NH3NAVG NH3N,TPAVG TP
+        FROM WQ_DAYSTAT_S  WHERE  STCD = #{stcd}
+        AND DATATIME &gt;= to_date(#{fromDate}, 'yyyy-MM-dd')
+        AND DATATIME &lt;= to_date(#{toDate}, 'yyyy-MM-dd')
+        ORDER BY DATATIME desc
+    </select>
+
+</mapper>

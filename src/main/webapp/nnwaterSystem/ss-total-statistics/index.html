@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>设施总览</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+		<!-- 警报页面样式 -->
+		<link rel="stylesheet" type="text/css" href="css/alarm_info.css" />
+		<!-- 管线管点样式 -->
+		<link rel="stylesheet" type="text/css" href="css/pipe_stats.css" />
+		<!-- 智能设备管理样式 -->
+		<link rel="stylesheet" type="text/css" href="css/fac_stats.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="../../lib/plugins/layer-v2.4/layer/skin/layer.css" /> -->
+		
+		<style>
+			ul{ float:left; margin:10px 0 0px; height:auto; }
+			ul li{float:left; display:inline; margin:0 0px 5px; }
+			html,body{font-family: '宋体'}
+		</style>
+		<!--[if IE 8]>
+			<link rel="stylesheet" type="text/css" href="css/index-ie8.css" />
+		<![endif]-->
+	</head>
+	<body style="margin:0;padding-left:20px;">
+		<!-- 实时事件信息 -->  
+			<!-- 左侧Div -->
+			<div class="col-md-12">
+				<div class="headDiv" style="height:auto;margin-top: 10px;">
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/lmsp.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">地面视频</div>
+						<div id="ssjk_25" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>	
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/jjsp.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;font-size: 16px;">交警视频</div>
+						<div id="ssjk_26" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/ylz.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">内河雨量站</div>
+						<div id="ssjk_29" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/ylz.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">水文雨量站</div>
+						<div id="ssjk_30" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/ylz.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">自建雨量站</div>
+						<div id="ssjk_31" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/jxsw.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">路面(管渠)水位</div>
+						<div id="ssjk_33" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float:left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/hdsw.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">河道水位</div>
+						<div id="ssjk_34" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/gdll.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">管渠流量</div>
+						<div id="ssjk_35" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/hdll.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">河道流量</div>
+						<div id="ssjk_36" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/bzsw.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">泵站水位</div>
+						<div id="ssjk_37" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/bzsp.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">排水泵站视频</div>
+						<div id="ssjk_27" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/nhbzsp.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">内河泵站视频</div>
+						<div id="ssjk_28" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/jsd.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">积水点</div>
+						<div id="ssjk_13" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/ck.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">仓库</div>
+						<div id="ssjk_22" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/azd.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">安置点</div>
+						<div id="ssjk_23" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+					<div style="float: left;height:auto;padding-right: 10px;">
+						<div style="height:25px;width:25px;background-image:url('img/eatType/cld.png');background-size:cover;float: left;"></div>
+						<div class="class_name" style="float: left;">撤离点</div>
+						<div id="ssjk_24" class="numfont" style="color: #FFA07A;float: left;"></div>
+					</div>
+				</div>
+			</div>
+			<!-- 左侧Div结束 -->
+			<!-- 右侧Div -->
+			<div class="col-md-12" style="height:auto;margin-top: 10px;">
+				<div id="tableDiv" class="table-responsive" style="width:100%;float: left;" >
+					<table class="table" id="tableInfo" style="width: 1500px;height: 500px;">
+					</table>
+					<!--div id="tipDiv">提示：点击设备数量可查看详细信息</div-->
+				</div>
+			</div>
+			<div class="col-md-12" style="margin-top:20px;">
+				<!-- 按区域柱状图 -->
+				<div class="chart" style="width: 100%;float: left;">
+					<div class="header" style="height: 24px;font-size: 15px;border-bottom: 1px black solid; line-height: 24px;padding-left: 10px">按区域统计</div>
+					<div id="pie-chart" style="height: 100%;width: 100%;"></div>
+				</div>
+				
+				
+			</div>  
+			<div class="col-md-12" style="margin-top:20px;">
+			<!-- 按类型柱状图 -->
+				<div class="chart" style="width: 100%;float:right;">
+					<div class="header" style="height: 24px;font-size: 15px;border-bottom: 1px black solid; line-height: 24px;padding-left: 10px">按类型统计</div>
+					<div id="pie-chart2" style="height: 100%;width: 100%;"></div>
+				</div>
+			</div>
+		<!-- 右侧Div结束 -->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/echarts.js"></script>
+		<script src="js/countUp.js"></script>
+		<script src="js/alarm_info.js"></script>
+		<script src="js/pipe_stats.js"></script>
+		<!-- <script src="../../lib/plugins/layer-v2.4/layer/layer.js"></script>
+		<script src="js/fac_stats.js"></script> -->
+		<script src="/awater/waterSystem/establishment/js/nnArea.js"></script>
+		<script type="text/javascript" src="/awater/waterSystem/ssjk/js/ssjk-global.js"></script>
+		<script src="js/index.js"></script>
+		<script src="/awater/js/common.js"></script> 
+	</body>
+</html>

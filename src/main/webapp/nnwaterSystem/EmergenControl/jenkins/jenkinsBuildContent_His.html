@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <title>测试模块</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+	    <link href="/awater/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/awater/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/awater/lib/plugins/layer-v2.4/layer/skin/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/awater/css/augur.expand.css" rel="stylesheet" type="text/css"/>	
+	    <link href="/awater/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+  	</head>
+  	<body>
+  		<div class="animated fadeInRight">
+			<div class="col-sm-12 mainwrapper">
+				<div class="panel panel-default">					
+				   	<div class="panel-body" style="padding:5px;">
+				   		<label class="control-label col-sm-1" style="padding-right:0px;padding-top:7px;">事件名称</label>
+						<div class="col-sm-2">
+							<!-- <input type="text" class="form-control" id="name" placeholder="事件名称"> -->
+							<select class="form-control" id="name" placeholder="事件名称">
+								<option></option>
+							</select>
+						</div>
+				   	
+						<label class="control-label col-sm-1" style="padding-right:0px;padding-top:7px;">事件名称</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="likeName" placeholder="事件名称">
+						</div>
+						
+						<label class="control-label col-sm-1" style="padding-right:0px;padding-top:7px;text-align:left;">运行结果</label>
+						<div class="col-sm-2">
+							<select id="status" class="form-control">
+								<option></option>
+								<option value="1">成功</option>
+								<option value="2">失败</option>
+							</select>
+						</div>
+			        </div>
+			        <div class="panel-body" style="padding:5px;">
+			        	<label class="control-label col-sm-1" style="padding-right:0px;padding-top:7px;">开始时间</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="startTime" placeholder="开始时间">
+						</div>
+						
+						<label class="control-label col-sm-1" style="padding-right:0px;padding-top:7px;">结束时间</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="endTime" placeholder="结束时间">
+						</div>
+						
+						<!-- <div class="col-sm-12" style="text-align: right;padding-top:5px;"> -->
+						<div class="col-sm-2" style="text-align: left">
+							<button type="button" id="btn_query" class="btn btn-primary" >查询</button>
+						</div> 
+			        </div>
+			    </div>
+	      		<table id="table"></table>
+          </div>
+        </div>
+		<script src="/awater/lib/jquery.min.js?v=1.0.0"></script> 
+		  <script src="/awater/lib/bootstrap.min.js?v=3.3.6"></script>
+		  <script src="/awater/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+		  <script src="/awater/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+		  <script src="/awater/js/util_date.js" type="text/javascript"></script>
+		  <script src="/awater/lib/plugins/layer-v2.4/layer/layer.js"></script>
+		  <script src="/awater/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+		  <script src="/awater/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>	
+		  <script src="/awater/js/common.js"></script> 
+		<script src="js/jenkinsBuildContent_His.js"></script>
+	</body>
+</html>

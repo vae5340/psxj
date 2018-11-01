@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/page-style.css" rel="stylesheet" type="text/css"/>
+	<link href="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/css/jqx.base.css" rel="stylesheet" type="text/css"/>
+	<link href="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/css/jqx.energyblue.css" rel="stylesheet" type="text/css"/>
+	<link href="/psxj/systemInfo/ssxjxt/style/blue/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+	<script src="/psxj/systemInfo/ssxjxt/lib/jquery.min.js?v=1.0.0"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/asi/common/common.js"></script>
+    <script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jquery/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxcore.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxbuttons.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxscrollbar.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxdata.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/generatedata.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/plugins/jquery/jqxgrid/jqxgrid.selection.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/echarts/js/echarts-all.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/knockout/knockout-3.2.0.js"></script>
+	<script type="text/javascript" src="/psxj/systemInfo/ssxjxt/lib/3rdparty/pager/jquery.twbsPagination.js"></script>
+	<script src="/psxj/systemInfo/ssxjxt/lib/plugins/layer-v2.4/layer/layer.js"></script>
+	
+</head>
+<body>
+	<div class="desktop-container"  style="height:100%;width:100%;">
+		<div class="collapsecontainer" style="padding-left:5px;padding-top:10px;">
+			<div class="project-timespan">
+				起<input type="text" id="dateFrom" class="app-datepick" style="width:90px;"/>
+				止<input type="text" id="dateTo" class="app-datepick" style="width:90px;"/>
+				<input type="text" name="recType" id="queryType" style="width: 120px;height: 24px;margin-left: 10px" placeholder="请输入查询内容"/>
+				<div class="stat-search"></div>
+				<div class="stat-view" style="display:none"></div>
+			</div>
+		</div>
+		<div id="stat-panel" class="stat-panel" style="display:block">
+		    <div class="stat-table" style="top:45px;left:8px;"></div>
+	        <div class="stat-chart" style="position:absolute;top:46%;bottom:0;left:0px;width:99%;"></div>
+		    <div class="stat-chart-tip" style="position:absolute;top:46%;bottom:0;left:0px;right:0;display:none;color:#1d1d1d;font-size:14px;text-align:center;padding-top:30%;">查询无数据</div>
+		</div>
+		<div id="list-panel" class="list-panel" style="display:none;">
+	    	<div class="search-tip">查询无数据</div>
+			<div class="list-datagroup-content" style="background:#fff;height:86%;">
+				<ul class="list-group" data-bind="foreach:listDataArray">
+					<li class="list-group-item">
+						<div data-bind="css:$data.className,click: function() {$parent.listItemImageClick($data)},event: {mouseover: function() {$parent.listItemImageHover($data)},mouseout: function() {$parent.listItemImageOut($data)}}" style="width:100%;height:100%;cursor:pointer;">
+							<div style="width:25px;height:100%;margin-left:5px;position:absolute;">
+								<div class="listItemImg" style="width:25px;height:40px;cursor:pointer;position:absolute;top: 50%;margin-top:-20px;">
+								</div>
+							</div>
+							<div data-bind="click: function() {$parent.listItemClick($data)}" style="width:100%;height:100%;color:#1d1d1d;padding:5px 0 5px 35px;">
+								<div>
+									<span data-bind="text:procStartdate"></span>
+									&nbsp;&nbsp;
+									<span data-bind="text:busMemo4"></span>
+								</div>
+								<div>
+									<span>问题描述：</span>
+									<span data-bind="text:busMemo6"></span>
+								</div>
+								<div>
+									<span>地址：</span>
+									<span data-bind="text:busMemo5,attr:{title:busMemo5}"></span>
+								</div>
+								<div style="width:16px;height:16px;position:absolute;top:5px;right:20px;cursor:pointer;">
+										<span data-bind="click: function() {$parent.projectInfo($data)}" class="realarm">
+											.....
+										</span>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="list-datagroup-pager">
+				<nav aria-label="Page navigation" style="height:0px;">
+			        <ul class="pagination" id="pagination"></ul>
+			    </nav>
+			</div>
+		</div>
+	</div>
+	
+</body>
+<script src="js/patrol-report-stat.js"></script>
+</html>

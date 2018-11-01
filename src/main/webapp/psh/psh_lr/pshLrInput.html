@@ -1,0 +1,526 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/psxj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/psxj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput-master/css/fileinput.min.css" rel="stylesheet">
+		<!-- <link href="/psxj/systemInfo/ssxjxt/style/blue/css/plugins/bootstrap-fileinput/fileinput.min.css" rel="stylesheet"> -->
+		<link href="/psxj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	    <link href="/psxj/lib/plugins/datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+		<link href="/psxj/systemInfo/js/style.css" rel="stylesheet"/>
+	    <link href="/psxj/systemInfo/ssxjxt/style/blue/css/validate.css" rel="stylesheet">
+	    <style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			/* .form-control {
+			    overflow-x: hidden;
+			    height: 25px;
+			} */
+			.form-group{
+				margin-bottom: 10px;
+			}
+			/* .form-group{
+			height: 25px;
+			}
+			.area{
+			height: 42px;
+			}
+			.img{
+			height: 100px;
+			} */
+			.col-sm-2{
+				text-align: center;
+				margin-left: 0px;
+				width: 120px;
+			}
+			.table th, .table td {  
+				text-align: center;  
+				vertical-align: middle!important;  
+			}
+			.yclssDiv{
+				border-style: dashed;
+				border-width: 2px;
+				border-color: #979798;
+				padding:10px 0px;
+			}
+			.lbsm{
+				font-weight: 100;
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+		</style>
+  	</head>
+  	<body>
+  	<div class="col-sm-12">
+  		<div class="panel panel-default">
+			<ul id="myTab" class="nav nav-tabs nav-justified">
+	            <li class="active" id="jbqk_li"><a href="#jbqk_Tab" data-toggle="tab">基本情况</a></li>
+	            <li id="hylb_li"><a href="#hylb_Tab" data-toggle="tab">行业类别</a></li>
+	            <li id="jbqk2_li"><a href="#jbqk2_Tab" data-toggle="tab">接驳情况</a></li>
+	            <li id="yclss_li"><a href="#yclss_Tab" data-toggle="tab">预处理设施</a></li>
+			</ul>
+			<!--tab内容-->
+	        <div id="myTabContent" class="tab-content" style="margin-top:0px;overflow-x: hidden; overflow-y: auto; height: 100% width:auto;">
+	            <div  class="tab-pane fade in active" id="jbqk_Tab">
+	                <form id="jbqk" class="form-horizontal" >
+						<div class="modal-body">
+							<input type="hidden" id="id" name="id"/>
+							<input type="hidden" id="markPersonId" name="markPersonId"/>
+							<input type="hidden" id="area" name="area"/>
+							<input type="hidden" id="village" name="village"/>
+							<input type="hidden" id="street" name="street"/>
+							<input type="hidden" id="jzwcode" name="jzwcode"/>
+							<input type="hidden" id="sfdtl" name="sfdtl"/>
+							<input type="hidden" id="doorplateAddressCode" name="doorplateAddressCode"/>
+							<div class="form-group img">
+								<label class="col-sm-2 control-label">现场图片<font color="red">*(<span id="xctpNum">0</span>/9)</font></label>
+								<div class="col-sm-10">
+		                            <input type="file" name="file" id="xctpFile" multiple class="file-loading form-control" />
+		                        </div>
+							</div>
+							<!-- <div class="form-group" id="xctp" style="margin:15px auto;display:none">
+		                    	<table id="xctpFileTable" class="table table-bordered" ></table>
+		                    </div> -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排水户名称<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="name" name="name" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">所属镇(街)<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="town" name="town" readonly="readonly"/>
+								</div>
+							</div>
+							<!-- <div class="form-group">
+								<label class="col-sm-2 control-label">排水单元编号</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="psdy" name="psdy" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排水单元名称</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="fqname" name="fqname" readonly="readonly"/>
+								</div>
+							</div> -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">门牌号<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="mph" name="mph" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">月用水量(吨)</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="volume" name="volume" />
+								</div>
+							</div>
+							<div class="form-group area">
+								<label class="col-sm-2 control-label">详细地址<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<textarea rows="2" class="form-control" id="addr" name="addr"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">产权人姓名</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="owner" name="owner" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">产权人联系电话</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="ownerTele" name="ownerTele" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">经营人(法人)姓名</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="operator" name="operator" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">经营人(法人)联系电话</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="operatorTele" name="operatorTele" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">工商营业执照</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert1" id="cert1-0" value="0" > 无
+									<input type="radio" name="hasCert1" id="cert1-1" value="1" > 有
+								</div>
+							</div>
+							<div class="form-group yyzz" style="display:none">
+								<label class="col-sm-2 control-label">营业执照编码<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="cert1Code" name="cert1Code" />
+								</div>
+							</div>
+							<div class="form-group img yyzz" style="display:none">
+								<label class="col-sm-2 control-label">营业执照图片<font color="red">*(<span id="yyzzNum">0</span>/3)</font></label>
+								<div class="col-sm-10">
+		                            <input type="file" name="file" id="yyzzFile" multiple class="file-loading form-control" />
+		                        </div>
+							</div>
+							<!-- <div class="form-group" id="yyzz" style="margin:15px auto;display:none">
+		                    	<table id="yyzzFileTable" class="table table-bordered" ></table>
+		                    </div> -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">接驳意见核准书</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert2" id="cert2-0" value="0" > 无
+									<input type="radio" name="hasCert2" id="cert2-1" value="1" > 有
+								</div>
+							</div>
+							<div class="form-group img hzs" style="display:none">
+								<label class="col-sm-2 control-label">核准书图片<font color="red">*(<span id="hzsNum">0</span>/3)</font></label>
+								<div class="col-sm-10">
+		                            <input type="file" name="file" id="hzsFile" multiple class="file-loading form-control" />
+		                        </div>
+							</div>
+							<!-- <div class="form-group" id="hzs" style="margin:15px auto;display:none">
+		                    	<table id="hzsFileTable" class="table table-bordered" ></table>
+		                    </div> -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排水许可证</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert3" id="cert3-0" value="0" > 无
+									<input type="radio" name="hasCert3" id="cert3-1" value="1" > 有
+								</div>
+							</div>
+							<div class="form-group psxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证编码<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="cert3Code" name="cert3Code" />
+								</div>
+							</div>
+							<div class="form-group img psxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证图片<font color="red">*(<span id="psxkzNum">0</span>/3)</font></label>
+								<div class="col-sm-10">
+		                            <input type="file" name="file" id="psxkzFile" multiple class="file-loading form-control" />
+		                        </div>
+							</div>
+							<!-- <div class="form-group" id="psxkz" style="margin:15px auto;display:none">
+		                    	<table id="psxkzFileTable" class="table table-bordered" ></table>
+		                    </div> -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label">排污许可证</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="hasCert4" id="cert4-0" value="0" > 无
+									<input type="radio" name="hasCert4" id="cert4-1" value="1" > 有
+								</div>
+							</div>
+							<div class="form-group pwxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证编码<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="cert4Code" name="cert4Code" />
+								</div>
+							</div>
+							<div class="form-group img pwxkz" style="display:none">
+								<label class="col-sm-2 control-label">许可证图片<font color="red">*(<span id="pwxkzNum">0</span>/3)</font></label>
+								<div class="col-sm-10">
+		                            <input type="file" name="file" id="pwxkzFile" multiple class="file-loading form-control" />
+		                        </div>
+							</div>
+							<!-- <div class="form-group" id="pwxkz" style="margin:15px auto;display:none">
+		                    	<table id="pwxkzFileTable" class="table table-bordered" ></table>
+		                    </div> -->
+							<div class="form-group area" style="margin-top: 2px;">
+								<label class="col-sm-2 control-label">上报说明</label>
+								<div class="col-sm-10">
+									<textarea rows="2" id="description" name="description" class="form-control"></textarea>
+								</div>
+							</div>
+							<div style="display: none" id="sbDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">上报人</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="markPerson" name="markPerson" disabled="disabled"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">上报单位</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="parentOrgName" name="parentOrgName" disabled="disabled"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">上报时间</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control"  data-date-format="yyyy-mm-dd hh:ii:ss"
+											id="markTime" name="markTime" disabled="disabled"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">最后编辑时间</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control"  data-date-format="yyyy-mm-dd hh:ii:ss"
+											id="updateTime" name="updateTime" disabled="disabled"/>
+									</div>
+								</div>
+							</div>
+							<div style="display: none" id="shDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">审核人</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="checkPerson" name="checkPerson" disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">审核时间</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" data-date-format="yyyy-mm-dd hh:ii"
+											id="checkTime" name="checkTime" disabled="disabled" />
+									</div>
+								</div>
+								<div class="form-group" name="isHi">
+									<label class="col-sm-2 control-label">审核备注</label>
+									<div class="col-sm-10">
+										<textarea rows="2" cols="2" id="checkDesription" name="checkDesription" class="form-control" disabled="disabled"></textarea>
+									</div>
+								</div>
+								<br>
+								<a onclick="checkRecord()" class='btn btn-primary '>查看历史审核意见</a>
+							</div>		
+						</div>
+					</form>
+	            </div>
+	            <div class="tab-pane" id="hylb_Tab">
+	                <form id="hylb" class="form-horizontal" >
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">污水类别<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<select  class="form-control" id="dischargerType1" name="dischargerType1" onchange="changeHylb(this.options[this.options.selectedIndex].value)">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">单位类型<font color="red">*</font></label>
+								<div class="col-sm-10">
+									<select  class="form-control" id="dischargerType2" name="dischargerType2" onchange="change(this.options[this.options.selectedIndex].value)">
+										<option value=""></option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group" style="display: none" id="dwlx">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="dischargerType3" name="dischargerType3"  />
+								</div>
+							</div>
+						</div>
+					</form>
+	            </div>
+	            <div class="tab-pane" id="jbqk2_Tab">
+	            	<form id="jbqk2" class="form-horizontal" >
+	            		<div  style="text-align: right;margin-top:20px;margin-right:20px;" >
+	            			<a href="#" onclick="addWellShow();">+添加接驳井</a>
+	            		</div>
+	            		<hr style="height:1px;border:none;border-top:1px solid #555555;" />
+						<div class="modal-body" id="jbqkForm">
+							<!-- <div class="form-group"><label style="text-align: center;" class="col-sm-12 control-label">功能建设中</label></div> -->
+						</div>
+					</form>
+	            </div>
+	            <div class="tab-pane" id="yclss_Tab">
+	            	<form id="yclss" class="form-horizontal" >
+						<div class="modal-body">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">隔油池</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac1"  value="无" > 无
+									<input type="radio" name="fac1"  value="有" > 有
+								</div>
+							</div>
+							<div style="display: none" id="gyc" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac1Cont"  value="开启" > 开启
+										<input type="radio" name="fac1Cont"  value="关闭" > 关闭
+										<input type="radio" name="fac1Cont"  value="故障" > 故障
+										<input type="radio" name="fac1Cont"  value="其他" > 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="gycYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="Cont1" id="fac1Cont" placeholder="描述" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac1Main"  value="是" > 是
+										<input type="radio" name="fac1Main"  value="否" > 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac1Record"  value="有" > 有
+										<input type="radio" name="fac1Record"  value="无" > 无
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">格栅</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac2"  value="无" > 无
+									<input type="radio" name="fac2"  value="有" > 有
+								</div>
+							</div>
+							<div style="display: none" id="gs" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac2Cont"  value="开启" > 开启
+										<input type="radio" name="fac2Cont"  value="关闭" > 关闭
+										<input type="radio" name="fac2Cont"  value="故障" > 故障
+										<input type="radio" name="fac2Cont"  value="其他" > 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="gsYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="Cont2" id="fac2Cont" placeholder="描述" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac2Main"  value="是" > 是
+										<input type="radio" name="fac2Main"  value="否" > 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac2Record"  value="有" > 有
+										<input type="radio" name="fac2Record"  value="无" > 无
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">沉淀池</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac3"  value="无" > 无
+									<input type="radio" name="fac3"  value="有" > 有
+								</div>
+							</div>
+							<div style="display: none" id="cdc" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac3Cont"  value="开启" > 开启
+										<input type="radio" name="fac3Cont"  value="关闭" > 关闭
+										<input type="radio" name="fac3Cont"  value="故障" > 故障
+										<input type="radio" name="fac3Cont"  value="其他" > 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="cdcYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="Cont3" id="fac3Cont" placeholder="描述" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac3Main"  value="是" > 是
+										<input type="radio" name="fac3Main"  value="否" > 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac3Record"  value="有" > 有
+										<input type="radio" name="fac3Record"  value="无" > 无
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">其他预处理设施</label>
+								<div class="col-sm-10" style="padding-top:7px">
+									<input type="radio" name="fac4"  value="无" > 无
+									<input type="radio" name="fac4"  value="有" > 有
+								</div>
+							</div>
+							<div style="display: none" id="qtyclss" class="yclssDiv">
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">设施名称<font color="red">*</font></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" id="ssmc" name="ssmc" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">运行情况<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac4Cont"  value="开启" > 开启
+										<input type="radio" name="fac4Cont"  value="关闭" > 关闭
+										<input type="radio" name="fac4Cont"  value="故障" > 故障
+										<input type="radio" name="fac4Cont"  value="其他" > 其他
+									</div>
+								</div>
+								<div class="form-group" style="display: none" id="qtyclssYxqk">
+									<label class="col-sm-2 control-label lbsm"></label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="Cont4" id="fac4Cont" placeholder="描述" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">是否进行养护<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac4Main"  value="是" > 是
+										<input type="radio" name="fac4Main"  value="否" > 否
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label lbsm">养护记录与台账<font color="red">*</font></label>
+									<div class="col-sm-10" style="padding-top:7px">
+										<input type="radio" name="fac4Record"  value="有" > 有
+										<input type="radio" name="fac4Record"  value="无" > 无
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+	            </div>
+	        </div>
+		</div>
+	</div>
+	
+  	</body>
+	 <script src="/psxj/lib/jquery.min.js?v=1.0.0"></script>
+	 <script src="/psxj/systemInfo/ssxjxt/lib/jquery.validate.js"></script>
+     <script src="/psxj/systemInfo/ssxjxt/lib/custom-validateRules.js"></script>
+	  <script src="/psxj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/psxj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script>
+	  <script src="/psxj/js/util_date.js" type="text/javascript"></script>
+	  <!-- <script src="/psxj/lib/plugins/layui/layui.js"></script> -->
+	  <script src="/psxj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+	  <script src="/psxj/lib/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+	  <!-- <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput.min.js"></script>
+      <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput/fileinput_locale_zh.js"></script> -->
+      <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput-master/js/fileinput.min.js"></script>
+      <script src="/psxj/systemInfo/ssxjxt/lib/plugins/bootstrap-fileinput-master/js/locales/zh.js"></script>
+	<!-- <script src="js/echarts.js"></script> -->
+	<!-- <script src="js/common.js"></script> -->
+	<script src="js/pshLrInput.js"></script>
+</html>

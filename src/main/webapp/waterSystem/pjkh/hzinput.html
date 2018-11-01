@@ -1,0 +1,80 @@
+<form class="form-inline" action="${ctx}/hz-score-summary!ajaxSave.action" method="POST" id="myForm">
+	<input name="tables[0].id" type="hidden" value=""/>
+	<input name="tables[1].id" type="hidden" value=""/>
+	<input name="tables[2].id" type="hidden" value=""/>
+	<input name="tables[3].id" type="hidden" value=""/>
+	<input name="tables[4].id" type="hidden" value=""/>
+   <!-- 表单标题开始 -->
+	<center>
+		<h2>汇总信息</h2>   
+	</center>
+	     
+   <!-- 表单标题结束 -->
+   
+	<div class="form-group">
+		<label>被检查单位:</label>
+		<input class="text {required:true} form-control input-sm" type="text" name="form.company" value=""/>
+	</div>
+	<div class="form-group">
+		<label>时间:</label>
+		<input class="text {required:true} form-control input-sm" type="text" name="form.time" onfocus="WdatePicker();" value=""/>
+	</div>
+	<p></p>
+   <!-- 表单域结束 -->
+    <!-- 列表开始 -->
+     <table class="table table-bordered table-hover">
+     	<tr>
+     		<th>序号</th><th colspan="2">考核内容</th><th>权重</th><th>考核得分</th><th>综合得分</th>
+     	</tr>
+     	<tr>
+     		<td>1</td>
+     		<td colspan="2">日常维护</td>
+     		<td>20</td>
+     		<td><input class="form-control input-sm" disabled type="text" name="tables[0].assessmentScore" value=""/></td>
+    		<td><input type="text" class="{required:true,max:20,min:0} form-control input-sm" onchange="calComprehensiveScore()" name="tables[0].comprehensiveScore" value=""/></td>
+     	</tr>
+     	<tr>
+     		<td>2</td>
+     		<td colspan="2">应急抢修及设施改善</td>
+     		<td>20</td>
+     		<td><input class="form-control input-sm" disabled type="text" name="tables[1].assessmentScore" value=""/></td>
+     		<td><input type="text" class="{required:true,max:20,min:0} form-control input-sm" onchange="calComprehensiveScore()" name="tables[1].comprehensiveScore" value=""/></td>
+     	</tr>
+     	<tr>
+     		<td rowspan='3'>3</td>
+     		<td rowspan='3'>集中考核检查</td>
+     		<td>污水泵站</td>
+     		<td>20</td>
+     		<td><input class="form-control input-sm" disabled type="text" name="tables[2].assessmentScore" value=""/></td>
+     		<td><input type="text" class="{required:true,max:20,min:0} form-control input-sm" onchange="calComprehensiveScore()" name="tables[2].comprehensiveScore" value=""/></td>
+     	</tr>
+     	<tr>
+     		<td>污水管网</td>
+     		<td>20</td>
+     		<td><input class="form-control input-sm" disabled type="text" name="tables[3].assessmentScore" value=""/></td>
+     		<td><input type="text" class="{required:true,max:20,min:0} form-control input-sm" onchange="calComprehensiveScore()" name="tables[3].comprehensiveScore" value=""/></td>
+     	</tr>
+     	<tr>
+     		<td>污水处理厂</td>
+     		<td>20</td>
+     		<td><input class="form-control input-sm" disabled type="text" name="tables[4].assessmentScore" value=""/></td>
+     		<td><input type="text" class="{required:true,max:20,min:0} form-control input-sm" onchange="calComprehensiveScore()" name="tables[4].comprehensiveScore" value=""/></td>
+     	</tr>
+     	<tr>
+     		<td>4</td>
+     		<td colspan="2">合 计</td>
+     		<td>100</td>
+     		<td><span id="score1"></span></td>
+     		<td><span id="score2"></span></td>
+     		<td></td>
+     	</tr>
+     </table>
+     <!-- 列表结束 -->
+   
+   <!-- 表单按钮开始 -->
+   <center>
+	<a href="javascript:update();" class="btn btn-primary" >确定</a>
+	<a href="javascript:void(0);" onclick="$('#template').empty();slideDiv();" class="btn btn-default" >取消</a>
+   </center>
+   <!-- 表单按钮结束 -->
+</form>

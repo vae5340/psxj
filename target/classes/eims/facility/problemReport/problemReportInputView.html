@@ -1,0 +1,87 @@
+<div id="problemReportInputView_content" style="height:calc( 100% - 50px );">
+	<form id="problemform" class="form-horizontal" enctype="multipart/form-data" method="post">
+		<div style="padding:12px 20px 0px 0px">
+			<input type="hidden" id="id" name="id">
+			<input type="hidden" id="yaId" name="yaId">
+				<input type="hidden" id="jsdId" name="jsdId">		        
+			<div class="form-group">
+				<label class="col-sm-2 control-label">事件名称</label>
+				<div class="col-sm-10">
+					<input id="problemName" name="problemName" class="form-control input-lg" disabled="disabled" />
+				</div>
+			</div>							
+			<div class="form-group">
+				<label class="col-sm-2 control-label">积水面积</label>
+				<div class="col-sm-10">
+					<input id="jsdArea" name="jsdArea" class="form-control input-lg" disabled="disabled" />
+				</div>
+			</div>							
+			<div class="form-group">
+				<label class="col-sm-2 control-label">积水深度</label>
+				<div class="col-sm-10">
+					<input id="jsdDepth" name="jsdDepth" class="form-control input-lg" disabled="disabled" />
+				</div>
+			</div>							
+			<div class="form-group">
+				<label class="col-sm-2 control-label">事件描述</label>
+				<div class="col-sm-10">
+					<textarea id="problemDescription" name="problemDescription" class="form-control" rows="3" style="max-width: 100%;" disabled="disabled"></textarea>
+				</div>
+			</div>	
+			<!-- <div class="form-group">
+			<label class="col-sm-2 control-label">积水点编号</label>
+				<div class="col-sm-10">
+					<table id="tableJsd"></table>				
+				</div>	
+			</div>	 -->			
+			<div class="form-group" id="uploadInfo" style="display:none">
+				<label class="col-sm-2 control-label">上报人</label>
+				<div class="col-sm-4">
+					<input class="form-control input-lg" type="text" id="problemPerson" name="problemPerson" disabled="disabled" />
+				</div>
+					<label class="col-sm-2 control-label">上报时间</label>
+				<div class="col-sm-4">
+					<input class="form-control input-lg" id="problemTime" name="problemTime" disabled="disabled" />
+				</div>
+			</div>						
+			<!-- <div class="form-group" >			
+				<label class="col-sm-2 control-label">状态</label>
+				<div class="col-sm-10">
+					<select class="form-control input-lg" id="problemStatus" name="problemStatus">
+						<option></option>
+					</select>
+				</div>				
+			</div> -->
+			<div class="form-group" id="problemReportInputView_view" style="display:none">
+				<label class="col-xs-2 control-label">现场展示</label>
+					<div class="col-xs-10">
+						<table id="problemReportInputView_table"></table>                   	
+					</div>
+			</div>
+			<!-- <div class="form-group" id="uploadDiv">
+				<label class="col-sm-2 control-label">上传图片</label>
+				<div class="col-sm-10">
+					<input class="projectfile" multiple type="file" id="uploadImage" name="uploadImage" accept="image/*" disabled="disabled"/>-->
+					<!--<input type="file" id="fileGroupId" name="fileGroupId">-->
+				<!-- </div>
+			</div>-->
+			<div class="form-group">
+				<label class="col-sm-2 control-label">备注</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="bz" name="bz"  rows="3" disabled="disabled"></textarea>
+				</div>
+			</div>
+			<div class="form-group" id="problemReportInputView_view2" style="display:none">
+				<label class="col-xs-2 control-label">处理后现场展示</label>
+				<div class="col-xs-10">
+					<table id="problemReportInputView_table2"></table>
+				</div>
+			</div>
+		</div>  
+	</form>
+</div>
+<div style="width:100%;height:50px;padding-top:8px;border-top:1px solid #e7eaec;background-color: #F8F8F8">
+	<div class="col-sm-11 col-sm-offset-10">
+		<button class="btn btn-white" type="button" id="problemReportCancelBtn">关闭</button>
+	</div>
+</div>

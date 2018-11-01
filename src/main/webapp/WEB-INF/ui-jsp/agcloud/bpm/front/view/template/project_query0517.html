@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>项目查询</title>
+    <#include "common/agcloud-meta.html">
+    <#include "common/mertronic5.html">
+<link href="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/css/projec_query.css" rel="stylesheet" type="text/css">
+<link href="${http_base_url}/ui-static/agcloud/framework/ui-themes/blue/agcloud_custom_style_bundle.css" rel="stylesheet" type="text/css">
+<!--<script language="javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/jquery.js"></script>-->
+<!--<script language="javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/search_data_c.js"></script>-->
+<!--<script language="javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/search_box.js"></script>-->
+<!--<script language="javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/search_result.js"></script>-->
+<!--<script language="javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/search.js"></script>-->
+<!--<script language="javascript" src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/js/my_collection.js"></script>-->
+</head>
+<body>
+<div class="header"> 
+  <!-- top end --> 
+  <!-- nag start -->
+  <div class="dw_wp"> <a name="search"></a>
+    <input type="hidden" id="pageCode" value="10101">
+    <input type="hidden" id="refdomain" value="">
+    <input type="hidden" id="refpagecode" value="01">
+      <input id="preViewId" type="hidden"	 value="${currentView.viewId}" />
+      <input id="preViewCode" type="hidden"	 value="${currentView.viewCode}" />
+    <!--标题-->
+    <div class="project-header">
+      <h4>项目查询</h4>
+    </div>
+    <!--标题 END--> 
+    <!--搜索框-->
+    <div class="cxbox">
+      <div class="input-group">
+        <input type="text" class="form-control form-control-warning" placeholder="项目编码、项目名称、项目单位名称">
+        <div class="input-group-append">
+          <button class="btn btn-brand" type="button">搜索</button>
+        </div>
+      </div>
+    </div>
+    <!--搜索框 END--> 
+    <!--已选条件-->
+    <div id="dw_choice_mk"></div>
+    <div class="dw_choice">
+      <div class="in"> <span class="title">已选条件：</span>
+        <p>ui(全文)+广州<span class="btn btn-secondary btn-sm agcloud-btn-margin-l-10" onclick="multipleChoiceShow(&#39;completiontime&#39;, false)">清空</span></p>
+      </div>
+    </div>
+    <!--已选条件 END--> 
+    
+    <!--过滤条件-->
+    
+    <div class="dw_filter dw_filter on">
+      <div class="el mk" id="filter_projecttype"> <span class="title">项目类型：</span>
+        <ul>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="" class="dw_c_blue" href="">全部</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="" class="" href="">审批</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="" class="" href="">核准</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="" class="" href="">备案</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="el on" id="multichoices_projecttype" style="display:none"> <span class="title">项目类型：</span>
+        <ul>
+          <li data-value="99" class="on" onclick="checkMultipleChoice(this, &#39;projecttype&#39;)" name="defaultmultichoices"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>全部</a></li>
+          <li data-value="0" onclick="checkMultipleChoice(this, &#39;projecttype&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>审批</a></li>
+          <li data-value="1" onclick="checkMultipleChoice(this, &#39;projecttype&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>核准</a></li>
+          <li data-value="2" onclick="checkMultipleChoice(this, &#39;projecttype&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>备案</a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="err" style="display:none">最多只能选择5项</div>
+        <div class="btnbox"> <span class="btn btn-info btn-sm" track-type="searchTrackButtonClick" event-type="9" id="submit_projecttype" onclick="submitMultiChoices(&#39;projecttype&#39;)">确定</span><span class="btn btn-secondary btn-sm agcloud-btn-margin-l-10" onclick="multipleChoiceShow(&#39;projecttype&#39;, false)">取消</span> </div>
+      </div>
+      <div class="el mk" id="filter_area"> <span class="title">地区：</span> <span class="more Dm">更多</span> <span class="dx dicon Dm" onclick="multipleChoiceShow(&#39;area&#39;, true);">多选</span>
+        <ul>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="dw_c_blue" href="#">全部</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">省本级</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">杭州市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">宁波市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">温州市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">嘉兴市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">湖州市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">绍兴市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">金华市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">衡州市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">舟山市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">台州市</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="20" class="" href="#">丽水市</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="el on" id="multichoices_area" style="display:none"> <span class="title">地区：</span>
+        <ul>
+          <li data-value="99" class="on" onclick="checkMultipleChoice(this, &#39;area&#39;)" name="defaultmultichoices"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>全部</a></li>
+          <li data-value="01" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>省本级</a></li>
+          <li data-value="02" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>杭州市</a></li>
+          <li data-value="03" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>宁波市</a></li>
+          <li data-value="04" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>温州市</a></li>
+          <li data-value="05" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>嘉兴市</a></li>
+          <li data-value="06" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>湖州市</a></li>
+          <li data-value="07" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>绍兴市</a></li>
+          <li data-value="08" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>金华市</a></li>
+          <li data-value="09" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>衡州市</a></li>
+          <li data-value="10" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>舟山市</a></li>
+          <li data-value="11" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>台州市</a></li>
+          <li data-value="12" onclick="checkMultipleChoice(this, &#39;area&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>丽水市</a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="err" style="display:none">最多只能选择5项</div>
+        <div class="btnbox"> <span class="btn btn-info btn-sm" track-type="searchTrackButtonClick" event-type="3" id="submit_area" onclick="submitMultiChoices(&#39;area&#39;)">确定</span><span class="btn btn-secondary btn-sm agcloud-btn-margin-l-10" onclick="multipleChoiceShow(&#39;area&#39;, false)">取消</span></div>
+      </div>
+      <div class="el" id="filter_industry"> <span class="title">行业：</span> <span class="more  Dm">更多</span> <span class="dx dicon Dm" onclick="multipleChoiceShow(&#39;industry&#39;, true);">多选</span>
+        <ul>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="dw_c_blue" href="">全部</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">农、林、牧、渔业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">采矿业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">制造业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">建筑业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">金融业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">房地产业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">教育</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">租赁和商务服务业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">电力、热力、燃气及水生产和供应业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">批发和零售业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">交通运输、仓储和邮政业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">住宿和餐饮业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">教育</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">租赁和商务服务业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">电力、热力、燃气及水生产和供应业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">批发和零售业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">交通运输、仓储和邮政业</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="21" class="" href="">住宿和餐饮业</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="el on" id="multichoices_industry" style="display:none"> <span class="title">行业：</span>
+        <ul>
+          <li data-value="99" class="on" onclick="checkMultipleChoice(this, &#39;industry&#39;)" name="defaultmultichoices"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>全部</a></li>
+          <li data-value="01" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>农、林、牧、渔业</a></li>
+          <li data-value="02" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>采矿业</a></li>
+          <li data-value="03" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>制造业</a></li>
+          <li data-value="04" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>建筑业</a></li>
+          <li data-value="05" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>金融业</a></li>
+          <li data-value="06" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>房地产业</a></li>
+          <li data-value="07" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>教育</a></li>
+          <li data-value="08" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>租赁和商务服务业</a></li>
+          <li data-value="09" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>电力、热力、燃气及水生产和供应业</a></li>
+          <li data-value="10" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>批发和零售业</a></li>
+          <li data-value="11" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>交通运输、仓储和邮政业</a></li>
+          <li data-value="12" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>住宿和餐饮业</a></li>
+          <li data-value="13" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>教育</a></li>
+          <li data-value="14" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>租赁和商务服务业</a></li>
+          <li data-value="15" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>电力、热力、燃气及水生产和供应业</a></li>
+          <li data-value="16" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>批发和零售业</a></li>
+          <li data-value="17" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>交通运输、仓储和邮政业</a></li>
+          <li data-value="18" onclick="checkMultipleChoice(this, &#39;industry&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>住宿和餐饮业</a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="err" style="display:none">最多只能选择5项</div>
+        <div class="btnbox"> <span class="btn btn-info btn-sm" track-type="searchTrackButtonClick" event-type="4" id="submit_industry" onclick="submitMultiChoices(&#39;industry&#39;)">确定</span><span class="btn btn-secondary btn-sm agcloud-btn-margin-l-10" onclick="multipleChoiceShow(&#39;industry&#39;, false)">取消</span> </div>
+      </div>
+      <div class="el" id="filter_investment"> <span class="title">总投资：</span> <span class="dx dicon Dm" onclick="multipleChoiceShow(&#39;investment&#39;, true);">多选</span>
+        <ul>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="22" class="dw_c_blue" href="">全部</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="22" class="" href="">100万以下</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="22" class="" href="">100-500万</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="22" class="" href="">500-1000万</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="22" class="" href="">1000万以上</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="22" class="" href="">其他</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="el on" id="multichoices_investment" style="display:none"> <span class="title">总投资：</span>
+        <ul>
+          <li data-value="99" class="on" onclick="checkMultipleChoice(this, &#39;investment&#39;)" name="defaultmultichoices"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>全部</a></li>
+          <li data-value="01" onclick="checkMultipleChoice(this, &#39;investment&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>100万以下</a></li>
+          <li data-value="02" onclick="checkMultipleChoice(this, &#39;investment&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>100-500万</a></li>
+          <li data-value="03" onclick="checkMultipleChoice(this, &#39;investment&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>500-1000万</a></li>
+          <li data-value="04" onclick="checkMultipleChoice(this, &#39;investment&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>1000万以上</a></li>
+          <li data-value="05" onclick="checkMultipleChoice(this, &#39;investment&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>其他</a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="err" style="display:none">最多只能选择5项</div>
+        <div class="btnbox"> <span class="btn btn-info btn-sm" track-type="searchTrackButtonClick" event-type="5" id="submit_investment" onclick="submitMultiChoices(&#39;investment&#39;)">确定</span><span class="btn btn-secondary btn-sm agcloud-btn-margin-l-10" onclick="multipleChoiceShow(&#39;investment&#39;, false)">取消</span> </div>
+      </div>
+      <div class="el" id="filter_starttime"> <span class="title">拟开工时间：</span> <span class="dx dicon Dm" onclick="multipleChoiceShow(&#39;starttime&#39;, true);">多选</span>
+        <ul>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="dw_c_blue" href="">全部</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="" href="">一个月内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="" href="">半年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="" href="">一年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="" href="">两年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="" href="">五年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="" href="">五年以上</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="23" class="" href="">其他</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="el on" id="multichoices_starttime" style="display:none"> <span class="title">拟开工时间：</span>
+        <ul>
+          <li data-value="99" class="on" onclick="checkMultipleChoice(this, &#39;starttime&#39;)" name="defaultmultichoices"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>全部</a></li>
+          <li data-value="01" onclick="checkMultipleChoice(this, &#39;starttime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>一个月内</a></li>
+          <li data-value="02" onclick="checkMultipleChoice(this, &#39;starttime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>半年内</a></li>
+          <li data-value="03" onclick="checkMultipleChoice(this, &#39;starttime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>一年内</a></li>
+          <li data-value="04" onclick="checkMultipleChoice(this, &#39;starttime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>两年内</a></li>
+          <li data-value="05" onclick="checkMultipleChoice(this, &#39;starttime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>五年内</a></li>
+          <li data-value="06" onclick="checkMultipleChoice(this, &#39;starttime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>五年以上</a></li>
+          <li data-value="07" onclick="checkMultipleChoice(this, &#39;starttime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>其他</a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="err" style="display:none">最多只能选择5项</div>
+        <div class="btnbox"> <span class="btn btn-info btn-sm" track-type="searchTrackButtonClick" event-type="6" id="submit_starttime" onclick="submitMultiChoices(&#39;starttime&#39;)">确定</span><span class="btn btn-secondary btn-sm agcloud-btn-margin-l-10" onclick="multipleChoiceShow(&#39;starttime&#39;, false)">取消</span> </div>
+      </div>
+      <div class="el" id="filter_completiontime"> <span class="title">拟竣工时间：</span> <span class="dx dicon Dm" onclick="multipleChoiceShow(&#39;completiontime&#39;, true);">多选</span>
+        <ul>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="dw_c_blue" href="">全部</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="" href="">一个月内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="" href="">半年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="" href="">一年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="" href="">两年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="" href="">五年内</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="" href="">五年以上</a></li>
+          <li><a track-type="searchConditionTrackButtonClick" event-type="24" class="" href="">其他</a></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="el on" id="multichoices_completiontime" style="display:none"> <span class="title">拟竣工时间：</span>
+        <ul>
+          <li data-value="99" class="on" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)" name="defaultmultichoices"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>全部</a></li>
+          <li data-value="01" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>一个月内</a></li>
+          <li data-value="02" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>半年内</a></li>
+          <li data-value="03" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>一年内</a></li>
+          <li data-value="04" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>两年内</a></li>
+          <li data-value="05" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>五年内</a></li>
+          <li data-value="06" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>五年以上</a></li>
+          <li data-value="07" onclick="checkMultipleChoice(this, &#39;completiontime&#39;)"><a href="javascript:void(0)"><label class="m-checkbox m-checkbox--single m-checkbox--solid m-checkbox--brand">
+                    <input type="checkbox" value="1">
+                    <span></span></label>其他</a></li>
+        </ul>
+        <div class="clear"></div>
+        <div class="err" style="display:none">最多只能选择5项</div>
+        <div class="btnbox"> <span class="btn btn-info btn-sm" track-type="searchTrackButtonClick" event-type="7" id="submit_completiontime" onclick="submitMultiChoices(&#39;completiontime&#39;)">确定</span><span class="btn btn-secondary btn-sm agcloud-btn-margin-l-10" onclick="multipleChoiceShow(&#39;completiontime&#39;, false)">取消</span> </div>
+      </div>
+      
+      <!--排除关键字 -->
+      <div class="el elp" id="">
+        <form name="excludeForm" method="post" action="">
+          <span class="title">排除关键字：</span>
+          <div class="getr">
+            <input type="text" name="excludekeyword" placeholder="在结果中排除关键字" maxlength="100">
+            <a href="javascript:void(0);" onclick="excludeword()" track-type="searchTrackButtonClick" event-type="17"><em></em>确定</a> </div>
+        </form>
+      </div>
+      <div class="op" onclick="collapseExpansionSearch(&#39;&#39;,  &#39;dw_filter&#39;, this);"> <span>收起选项<em class="dicon Dm"></em></span> </div>
+    </div>
+    <!--过滤条件 END--> 
+    
+    <!--列表表格-->
+    <div>
+      <div class="m-portlet__body"> 
+        <!--begin: Search Form -->
+        <div class="m-form m-form--label-align-right  m--margin-bottom-10">
+          <div class="row align-items-center">
+            <div class="col-xl-8 order-2 order-xl-1 float-left m--padding-left-30">
+            <a href="#" class="btn btn-secondary">新增</a>
+            <a href="#" class="btn btn-secondary agcloud-agcloud-btn-margin-l-10-5">修改</a>
+            <a href="#" class="btn btn-secondary agcloud-agcloud-btn-margin-l-10-5">删除</a>
+            <a href="#" class="btn btn-secondary agcloud-agcloud-btn-margin-l-10-5">新增</a>
+            </div>
+            <div class="col-xl-4 order-1 order-xl-2 m--align-right"> <a href="#" class="btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill"> <span> <i class="la la-cart-plus"></i> <span>New Order</span> </span> </a>
+              <div class="m-separator m-separator--dashed d-xl-none"></div>
+            </div>
+          </div>
+        </div>
+        <!--end: Search Form --> 
+        
+        <!--begin: Datatable -->
+
+        <div class="m_datatable m-datatable m-datatable--default m-datatable--loaded" id="local_data" style="position: static; zoom: 1;">
+          <table id="m_d_pq" class="m-datatable__table" style="display: block; min-height: 300px; overflow-x: auto;">
+
+          </table>
+        </div>
+        <!--end: Datatable --> 
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>
+
+<script> var mdatatableId='m_d_pq';</script>
+<script src="${http_base_url}/ui-static/agcloud/bpm/front/view/template/customQuery/bizJs/mertronic-table-render.js" type="text/javascript"></script>

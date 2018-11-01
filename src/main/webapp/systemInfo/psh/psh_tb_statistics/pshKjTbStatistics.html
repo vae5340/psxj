@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html style="height:100%;">
+	<head>
+	    <title></title>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		
+		<link href="/awater_swj/css/bootstrap.min14ed.css" rel="stylesheet"/>
+		<link href="/awater_swj/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+		<link href="/awater_swj/lib/plugins/layer-v3.0.3/layer/skin/default/layer.css" rel="stylesheet" type="text/css"/>
+	   <style>
+			.col-sm-cous{
+				width:75px;padding-right:0px;text-align:left;padding-top: 5px;
+			}
+			/**滚动狂样式*/
+			::-webkit-scrollbar-thumb{background-color:#999;}
+			::-webkit-scrollbar{width:5px;background-color:#F5F5F5;}
+			.layui-layer-btn{
+				background: #eee;
+			}
+		</style>
+  	</head>
+  	<body style="height:100%;">
+  		<div class="panel panel-default" style="height:calc(100% - 20px);">
+			<ul id="myTab" class="nav nav-tabs nav-justified">
+	            <li class="active" id="qu_li"><a href="#qu_Tab" data-toggle="tab">按区统计</a></li>
+	            <li id="zj_li"><a href="#zj_Tab" data-toggle="tab">按镇街统计</a></li>
+	            <li id="sq_li"><a href="#sq_Tab" data-toggle="tab">按社区/村统计</a></li>
+			</ul>
+			<!--tab内容-->
+			<div id="myTabContent" class="tab-content" style="margin-top:0px;overflow-x: auto; overflow-y: auto; height: calc(100% - 42px); width:auto;">
+	            <div  class="tab-pane fade in active" id="qu_Tab">
+	            	<div style="margin-top: 10px;margin-bottom: 10px;">
+		                <!-- 图表开始1 -->
+						<div id="oneChartContainer0" style="height:400px;width:99%;"></div>
+						<div style="width:90%;margin:auto;">
+							<table class="table table-bordered table-hover" id="tab0" ></table>
+						</div>
+						<!-- 图表结束1 -->
+	               </div>
+	            </div>
+	            <div  class="tab-pane" id="zj_Tab">
+	            	<div style="margin-top: 10px;margin-bottom: 10px;">
+		                <!-- 图表开始2 -->
+						<div id="oneChartContainer" style="height:400px;width:99%;"></div>
+						<div style="width:90%;margin:auto;overflow-x:auto">
+							<table class="table table-bordered table-hover" id="tab1" ></table>
+						</div>						<!-- 图表结束2 -->
+	               </div>
+	            </div>
+	            <div  class="tab-pane" id="sq_Tab">
+	            	<div style="margin-top: 10px;margin-bottom: 10px;">
+		                <!-- 图表开始2 -->
+		                <div id="oneChartContainer1" style="height:400px;width:99%;"></div>
+						<div style="width:90%;margin:auto;overflow-x:auto">
+							<table class="table table-bordered table-hover" id="tab2" ></table>
+						</div>	                	<!-- 图表结束2 -->
+	               </div>
+	            </div>
+	        </div>
+		</div>
+	</body>
+	 <script src="/awater_swj/lib/jquery.min.js?v=1.0.0"></script> 
+	  <script src="/awater_swj/lib/bootstrap.min.js?v=3.3.6"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/bootstrap-table.js"></script>
+	  <script src="/awater_swj/lib/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js" charset="UTF-8"></script> 
+	  <script src="/awater_swj/lib/plugins/layer-v3.0.3/layer/layer.js"></script>
+	 <script src="/awater_swj/js/util_date.js" type="text/javascript"></script>
+	<script src="/awater_swj/systemInfo/ssxjxt/lib/echarts/echarts.js"></script>
+	<script src="js/echart_kj_options.js"></script>
+	<script src="js/pshKjTbStatistics.js"></script>
+</html>

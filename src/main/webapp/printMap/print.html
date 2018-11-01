@@ -1,0 +1,267 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+    <HEAD>
+        <TITLE>打印地图</TITLE>
+        <META content="text/html; charset=utf-8" http-equiv=Content-Type>
+        <style>
+        	@import "css/print/print.css";
+			@import "css/dhtmlxcolorpicker.css";
+			.page_size_cu{
+				border-top-width: 1px;
+				border-right-width: 1px;
+				border-bottom-width: 1px;
+				border-left-width: 1px;
+				border-top-style: solid;
+				border-right-style: solid;
+				border-bottom-style: solid;
+				border-left-style: solid;
+				border-color: #fc9;
+			}
+			.scrollStyle{
+				scrollbar-face-color: #FFFFFF;
+				scrollbar-shadow-color: #D2E5F4;
+				scrollbar-highlight-color: #D2E5F4;
+				scrollbar-3dlight-color: #FFFFFF;
+				scrollbar-darkshadow-color: #FFFFFF;
+				scrollbar-track-color: #FFFFFF;
+				scrollbar-arrow-color: #D2E5F4;
+			}
+			select {
+				font-size: 11px;
+				font-family: tahoma, arial, 宋体;
+				color: #696464;
+			}
+			.textbox {FONT-FAMILY: "宋体", "Verdana", "Arial", "Helvetica"; FONT-SIZE: 12px; FONT-color:#cfffff;TEXT-ALIGN: LIFT;}
+        </style>
+		<script  src="js/dhtmlxcommon.js"></script>
+   		<script  src="css/dhtmlxcolorpicker.js"></script>
+        <SCRIPT>
+        	/*
+			 * A0 841 1189
+			 * A1 594 841
+			 * A2 420 594
+			 * A3 297 420
+			 * A4 210 297
+			 * A5 148 210
+			 */
+			var pageSize = {
+				A0 : {w:594,h:420,s:1100},
+				A1 : {w:594,h:420,s:1100},
+				A2 : {w:594,h:420,s:1100},
+				A3 : {w:420,h:297,s:900},
+				A4 : {w:297,h:210,s:700},
+				A5 : {w:210,h:148,s:580}
+			}
+        	var w = 970,h = 670;
+			var dpi = 2.8;
+			var currentSize = 'A4';
+            function changeSize(size){
+				if(pageSize[size] != null){
+					currentSize = size;
+					w = pageSize[size].w * dpi;
+					h = pageSize[size].h * dpi;
+					/* document.getElementById('printBox').style.width = (pageSize[size].s - 20) + "px";
+                    //document.getElementById('printBox').className = "print" + size + (document.getElementById('label_option_panel').style.display == 'block' ? 's' : '');
+                    document.getElementById('printareaDiv').style.width = (pageSize[size].s - 20) + "px";
+                    document.getElementById('mapIframe').style.WIDTH = (pageSize[size].s - 20) + "px";
+					document.getElementById('page_side_memo').style.width = pageSize[size].s - 465;
+					document.getElementById('page_side_nei').style.width = pageSize[size].s - 380; */
+					changeWH();
+				}else{
+					var re = /^[0-9]+.?[0-9]*$/;
+					var w1 = document.getElementById('page_side_w').value;
+					var h1 = document.getElementById('page_side_h').value;
+					if(w1 != null && w1 != "" && re.test(w1) && h1 != null && h1 != "" && re.test(h1)){
+						w = parseInt(w1) * dpi;
+						h = parseInt(h1) * dpi;
+						changeWH();
+					}
+				}
+            }
+            
+			function changeWH(){
+				var w1,h1;
+				if(currentSize == 'A4'){
+					w1 = 970,h1 = 630;
+					if (document.getElementById('page_direction_2').checked) {
+	                    w1 = 630;
+	                    h1 = 970;
+	                }
+				}else if (currentSize == 'A3') {
+					w1 = 1430,h1 = 960;
+					if (document.getElementById('page_direction_2').checked) {
+	                    w1 = 960;
+	                    h1 = 1430;
+	                }
+				}else if (currentSize == 'A2') {
+					w1 = 2080,h1 = 1400;
+					if (document.getElementById('page_direction_2').checked) {
+	                    w1 = 1400;
+	                    h1 = 2080;
+	                }
+				}else if (currentSize == 'A1') {
+					w1 = 2985,h1 = 2080;
+					if (document.getElementById('page_direction_2').checked) {
+	                    w1 = 2080;
+	                    h1 = 2985;
+	                }
+				}else if (currentSize == 'A0') {
+					w1 = 4345,h1 = 2985;
+					if (document.getElementById('page_direction_2').checked) {
+	                    w1 = 2985;
+	                    h1 = 4345;
+	                }
+				}
+//				else {
+//					if (document.getElementById('page_direction_2').checked) {
+//						w1 = h;
+//						h1 = w;
+//					}
+//				}
+				mapIframe.focus();
+                mapIframe.changeSize(w1, h1);
+			}
+			
+            function mapPrint(){
+                mapIframe.focus();
+                mapIframe.mapPrint();
+            }
+			
+			function changeTitle(value){
+				mapIframe.changeTitle(value)
+			}
+			
+			function changeMemo(value){
+				mapIframe.changeMemo(value)
+			}
+			
+			window.onload = function(){
+				/* var myCP1 = new dhtmlXColorPickerInput('dhtmlxColorPicker1');
+				myCP1.setImagePath("css/imgs/");
+				myCP1.init(); */
+//				myCP1.setColor([0,0,0])
+			}
+			
+			
+			function addMarkLabel(){
+//				document.getElementById('self_btn').style.display = 'block';
+//				document.getElementById('self_label').style.display = 'none';
+				var value = document.getElementById('page_side_nei').value;
+				var type = document.getElementById('label_type').value;
+				var size = document.getElementById('print_size').value;
+				var color = document.getElementById('dhtmlxColorPicker1').value;
+				mapIframe.mapPrint.addMarkLabel(value,size,encodeURI(type),color);
+			}
+			
+			function openSelfLabel(){
+				var o = document.getElementById('show_label_config_img');
+				var f = document.getElementById('show_label_config_font');
+				if(f.title == '点击展开添加标签操作面板'){
+					o.src = 'css/print/jt08.png';
+					f.title = '点击收缩标签操作面板';
+					document.getElementById('label_option_panel').style.display = 'block';
+					document.getElementById('printBox').className = document.getElementById('printBox').className + "s";
+				}else{
+					o.src = 'css/print/jt09.png';
+					f.title = '点击展开添加标签操作面板';
+					document.getElementById('label_option_panel').style.display = 'none';
+					document.getElementById('printBox').className = document.getElementById('printBox').className.substring(0,document.getElementById('printBox').className.length - 1);
+				}
+			}
+			//显示图例
+			function openLegend(){
+				debugger;
+				if(!mapIframe.mapPrint.legendTip)
+					{
+						mapIframe.mapPrint.showMapLeng();
+					}
+			}
+			//关闭
+			function closeLegend(){
+				if(mapIframe.mapPrint.legendTip)
+					{
+						mapIframe.mapPrint.closeLegend();						
+					}
+			}
+        </SCRIPT>
+        <META name=GENERATOR content="MSHTML 8.00.6001.18999">
+    </HEAD>
+    <BODY style="BACKGROUND-COLOR: transparent" class=transparentscrollbar2>
+        <DIV id=printBox class=printA4>
+            <H1 class=printh1>打印纸张:
+				<input id="page_size_0" type="radio" name="page_size" onclick="changeSize('A0')" ><label for="page_size_0"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">A0</SPAN></label>
+				<input id="page_size_1" type="radio" name="page_size" onclick="changeSize('A1')" ><label for="page_size_1"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">A1</SPAN></label>
+				<input id="page_size_2" type="radio" name="page_size" onclick="changeSize('A2')" ><label for="page_size_2"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">A2</SPAN></label>
+				<input id="page_size_3" type="radio" name="page_size" onclick="changeSize('A3')" ><label for="page_size_3"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">A3</SPAN></label>
+				<input id="page_size_4" type="radio" name="page_size" onclick="changeSize('A4')" checked ><label for="page_size_4"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">A4</SPAN></label>
+				<!--
+				<input id="page_size_other" type="radio" name="page_size" onclick="changeSize('other')" ><label for="page_size_other"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">
+				宽<input type="text" id="page_side_w" style="width:40px" class="page_size_cu" value="1500">高<input type="text" id="page_side_h" style="width:40px" class="page_size_cu" value="900">(毫米)</SPAN></label>
+                -->
+                <!-- <div class="legendDiv">
+					<input id="open_legend" type="radio" name="legend" onclick="openLegend()"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">显示图例</SPAN>
+					<input id="colse_legend" type="radio" name="legend" onclick="closeLegend()" checked="checked"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">关闭图例</SPAN>
+                </div> -->
+				<DIV id=outlineDivOn>
+					<input id="page_direction_1" type="radio" name="page_direction" onclick="changeWH()" checked><label for="page_direction_1"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">横向</SPAN></label>
+					<input id="page_direction_2" type="radio" name="page_direction" onclick="changeWH()"><label for="page_direction_2"><SPAN style="MARGIN-LEFT: 1px; FONT-SIZE: 12px; FONT-WEIGHT: normal">纵向</SPAN></label>
+                </DIV>
+            </H1>
+			<H1 style="POSITION: relative; PADDING-BOTTOM: 0px; LINE-HEIGHT: 30px; PADDING-LEFT: 45px; PADDING-RIGHT: 10px; DISPLAY: block; HEIGHT: 30px; FONT-SIZE: 14px; FONT-WEIGHT: bold; PADDING-TOP: 0px">
+				打印标题:<input type="text" id="page_side_title" style="width:150px" class="page_size_cu" oninput="changeTitle(this.value)" onpropertychange="changeTitle(this.value)">&nbsp;&nbsp;&nbsp;&nbsp;
+				打印备注:<input type="text" id="page_side_memo" style="width:235px" class="page_size_cu" oninput="changeMemo(this.value)" onpropertychange="changeMemo(this.value)"></SPAN>&nbsp;&nbsp;&nbsp;&nbsp;
+            	<input style="display:none" id="self_btn" type="button" value="自定义标签" onclick="openSelfLabel()">
+                <BUTTON class=toolbts onclick=mapPrint(); type=submit>
+                    打印
+                </BUTTON>
+			</H1>
+			<!-- <div id="self_label" style="PADDING-BOTTOM: 0px; LINE-HEIGHT: 30px; PADDING-LEFT: 45px; PADDING-RIGHT: 10px;">
+				<fieldset style="width:95%;">
+					<legend><font id="show_label_config_font" color="#000000" onclick="openSelfLabel()" style="cursor: pointer" title="点击展开添加标签操作面板">在地图区域添加自定义标签&nbsp;<img id="show_label_config_img" src="css/print/jt09.png">&nbsp;</font></legend>
+					<font id="label_option_panel"  style="font-size:12px;display:none">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td rowspan="3" valign="top">
+									<textarea onfocus="this.select()" class="textbox" id="page_side_nei" rows="4" style="width: 300px; overflow-y: auto">请在这里输入标签内容</textarea>
+								</td>
+								<td>字体:<select id="label_type" style="width:100px">
+					                <option value="宋体" selected="selected">宋体</option>
+					                <option value="黑体">黑体</option>
+					                <option value="仿宋" >仿宋</option>
+					                <option value="隶书">隶书</option>
+					                <option value="幼圆">幼圆</option>
+					                <option value="微软雅黑">微软雅黑</option>
+        						</select>
+								</td>
+								<td>字体大小:<select id="print_size" style="width:50px">
+									<option value="12">12px</option>
+									<option value="14">14px</option>
+									<option value="18">18px</option>
+									<option value="24">24px</option>
+									<option value="30">30px</option>
+									<option value="36">36px</option>
+									<option value="48">48px</option>
+									<option value="60">60px</option>
+									<option value="72">72px</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td >字体颜色:<input id="dhtmlxColorPicker1" type="text" style="width:60px;height:12px" value="#000000"></td>
+								<td align="center">
+									<a href="javascript:void(0)" title="添加标签" class="minButton" onclick="addMarkLabel()">&nbsp;添加标签&nbsp;</a>
+								</td>
+							</tr>
+						</table>
+						</font>
+				</fieldset>
+            	<DIV id=outlineDivOn2 style="display:none">
+                </DIV>
+			</div> -->
+            
+        </DIV>
+        <DIV id=printareaDiv class=printareaDiv style="overflow:hidden">
+            <IFRAME class="scrollStyle" style="WIDTH: 100%; HEIGHT: 100%;scrolling : yes;" id=mapIframe src="../printMapInner.htm" marginWidth=0 frameSpacing=0 marginHeight=0 frameBorder=1 name=mapIframe>
+            </IFRAME>
+        </DIV>
+    </BODY>
+</HTML>
