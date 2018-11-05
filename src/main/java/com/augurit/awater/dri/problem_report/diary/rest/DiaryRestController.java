@@ -20,10 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 
 @RequestMapping("/rest/diary")
-@Controller
+@RestController
 public class DiaryRestController {
 	private IOmUserInfoRestService omUserInfoRestService;
 	@Autowired
@@ -36,8 +37,8 @@ public class DiaryRestController {
 	/**
 	 * 获取数据字典配置值
 	 * */
-	@RequestMapping(value = "/getItemValue")
-	@ResponseBody
+	@RequestMapping(value = "/getItemValue",produces = "application/json;charset=UTF-8")
+	//@ResponseBody
 	public String getItemValue(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
 		String code = req.getParameter("code");
@@ -55,7 +56,7 @@ public class DiaryRestController {
 	/**
 	 * 获取巡检轨迹配置值（改）
 	 * */
-	@RequestMapping(value = "/gettrackConfig")
+	@RequestMapping(value = "/gettrackConfig",produces = "application/json;charset=UTF-8")
 	public String gettrackConfig(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
 		String code = req.getParameter("code");
@@ -71,13 +72,14 @@ public class DiaryRestController {
 			json.put("code", 500);
 			json.put("data", null);
 		}*/
+		json.put("message","暂无配置!");
 		json.put("data",code);
 		return json.toString();
 	}
 	/**
 	 * 删除巡检轨迹线
 	 * */
-	@RequestMapping(value = "/deleteTrackLine")
+	@RequestMapping(value = "/deleteTrackLine",produces = "application/json;charset=UTF-8")
 	public String deleteTrackLine(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
 		String id = req.getParameter("id");
@@ -109,7 +111,7 @@ public class DiaryRestController {
 	/**
 	 * 新增修改巡检轨迹线
 	 * */
-	@RequestMapping(value = "/addTrackLine")
+	@RequestMapping(value = "/addTrackLine",produces = "application/json;charset=UTF-8")
 	public String addTrackLine(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
 		String loginName = req.getParameter("loginName");
@@ -148,7 +150,7 @@ public class DiaryRestController {
 	/**
 	 * 新增巡检轨迹坐标记录
 	 * */
-	@RequestMapping(value = "/addTrackPoint")
+	@RequestMapping(value = "/addTrackPoint",produces = "application/json;charset=UTF-8")
 	public String addTrackPoint(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
 		String x = req.getParameter("x");
@@ -269,16 +271,18 @@ public class DiaryRestController {
 	/**
 	 * 根据用户名获取巡检轨迹
 	 * */
-	@RequestMapping(value = "/getTrackLinesByLoginName")
+	@RequestMapping(value = "/getTrackLinesByLoginName",produces = "application/json;charset=UTF-8")
 	public String getTrackLinesByLoginName(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
 		String loginName = req.getParameter("loginName");
 		List<TrackLineForm> list=trackLineService.getTrackLinesByLoginName(loginName);
 		try {
-			if(list.size()>0){
-				json.put("code", 200);
-				json.put("data",list);
-				json.put("message", "查询成功!");
+			if (list!=null) {
+				if (list.size() > 0) {
+					json.put("code", 200);
+					json.put("data", list);
+					json.put("message", "查询成功!");
+				}
 			}else {
 				json.put("code", 404);
 				json.put("message", "该用户没有巡检轨迹!");
@@ -294,16 +298,18 @@ public class DiaryRestController {
 	/**
 	 * 根据轨迹id获取巡检轨迹
 	 * */
-	@RequestMapping(value = "/getTrackPointsByTrackId")
+	@RequestMapping(value = "/getTrackPointsByTrackId",produces = "application/json;charset=UTF-8")
 	public String getTrackPointsByTrackId(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
 		String trackId = req.getParameter("trackId");
 		List<TrackPointForm> list=trackPointService.getFormByTrackId(trackId);
 		try {
-			if(list.size()>0){
-				json.put("code", 200);
-				json.put("data",list);
-				json.put("message", "查询成功!");
+			if (list!=null) {
+				if (list.size() > 0) {
+					json.put("code", 200);
+					json.put("data", list);
+					json.put("message", "查询成功!");
+				}
 			}else {
 				json.put("code", 404);
 				json.put("message", "找不到该轨迹!");
