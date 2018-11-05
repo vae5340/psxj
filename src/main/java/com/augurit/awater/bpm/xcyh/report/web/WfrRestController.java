@@ -280,9 +280,10 @@ public class WfrRestController extends BpmBusAbstractController<GxProblemReport>
 	 * 获取下一环节办理人的信息(任务派单-->r0)
 	 * */
 	@RequestMapping("/getAssignees")
-	public Result  getAssignees(String loginName,HttpServletRequest request){
+	public Result  getAssignees(HttpServletRequest request){
 		OpusLoginUser user =(OpusLoginUser)request.getAttribute("opusLoginUser");
 		Result res = new Result();
+		String loginName=user.getUser().getLoginName();
 		List<OpuOmUser> userInfos =  gxProblemReportService.getAssignees(R0,loginName);
 		List<Map<String,Object>> listMap= new ArrayList<>();
 		if(userInfos!=null && (user!=null || StringUtils.isNotBlank(loginName))){

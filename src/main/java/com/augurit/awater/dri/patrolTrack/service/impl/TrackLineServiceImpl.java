@@ -258,4 +258,30 @@ public class TrackLineServiceImpl implements ITrackLineService {
 		page.setResult(rows);
 		return page;
 	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<TrackLineForm> getTrackLinesByLoginName(String loginName) {
+		//JSONObject json = new JSONObject();
+		Long total = 0l;
+		// 查询语句及参数
+		StringBuffer hql = new StringBuffer("from TrackLine ps where 1=1  and ps.state='1'");
+		Map<String,Object> values = new HashMap<String,Object>();
+		if(StringUtils.isNotBlank(loginName)){
+			hql.append("  and ps.loginName= :loginName");
+			values.put("loginName",loginName);
+		}
+		//排序
+		hql.append(" Order by ps.markTime desc");
+		// 执行分页查询操作
+		List<TrackLine> entity= trackLineDao.find(hql.toString(),values);
+
+		// 转换为Form对象列表
+		List<TrackLineForm> list = TrackLineConvertor.convertVoListToFormList(entity);
+
+//		json.put("rows", list);
+//		json.put("total", list.size());
+//		json.put("code", 200);
+		return list;
+	}
 }

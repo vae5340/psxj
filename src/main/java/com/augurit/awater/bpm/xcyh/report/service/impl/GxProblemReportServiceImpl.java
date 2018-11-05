@@ -1470,6 +1470,14 @@ public class GxProblemReportServiceImpl extends BpmBusAbstractServiceImpl<GxProb
             List<OpuOmUser> users = psOrgUserService.getGroupByOrgId(org.getOrgId(), new String[]{orgId});
             //List<OpuOmUserInfo> users = omOrgRestService.getUsersByOrgIdAndGroupId("R025-G014",orgId);
             return users;
+        } else if (map.containsKey("parentOrgId") && map.get("parentOrgId") != null) {
+            String orgId = map.get("parentOrgId").toString();
+            if (orgId.contains("ORG_")) {
+                orgId = orgId.substring(4);
+            }
+            List<OpuOmUser> users = psOrgUserService.getGroupByOrgId(org.getOrgId(), new String[]{orgId});
+            //List<OpuOmUserInfo> users = omOrgRestService.getUsersByOrgIdAndGroupId("R025-G014",orgId);
+            return users;
         } else {
             return null;
         }

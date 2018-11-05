@@ -53,11 +53,12 @@ public class DiaryRestController {
 		return json.toString();
 	}
 	/**
-	 * 获取巡检轨迹配置值
+	 * 获取巡检轨迹配置值（改）
 	 * */
 	@RequestMapping(value = "/gettrackConfig")
-	public String gettrackConfig() {
+	public String gettrackConfig(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
+		String code = req.getParameter("code");
 		/*List<SysCodeForm> sysCodeForms= sysCodeService.getItems("APP_PATROL_TRACK");
 		if(sysCodeForms!=null && sysCodeForms.size()>0){
 			Map<String, String> map= new HashMap<String, String>();
@@ -70,6 +71,7 @@ public class DiaryRestController {
 			json.put("code", 500);
 			json.put("data", null);
 		}*/
+		json.put("data",code);
 		return json.toString();
 	}
 	/**
@@ -264,4 +266,53 @@ public class DiaryRestController {
 		}
 	}
 
+	/**
+	 * 根据用户名获取巡检轨迹
+	 * */
+	@RequestMapping(value = "/getTrackLinesByLoginName")
+	public String getTrackLinesByLoginName(HttpServletRequest req) {
+		JSONObject json = new JSONObject();
+		String loginName = req.getParameter("loginName");
+		List<TrackLineForm> list=trackLineService.getTrackLinesByLoginName(loginName);
+		try {
+			if(list.size()>0){
+				json.put("code", 200);
+				json.put("data",list);
+				json.put("message", "查询成功!");
+			}else {
+				json.put("code", 404);
+				json.put("message", "该用户没有巡检轨迹!");
+			}
+		} catch (Exception e) {
+			json.put("code", 500);
+			json.put("message", "异常错误!");
+			e.printStackTrace();
+		}
+		return json.toString();
+	}
+
+	/**
+	 * 根据轨迹id获取巡检轨迹
+	 * */
+	@RequestMapping(value = "/getTrackPointsByTrackId")
+	public String getTrackPointsByTrackId(HttpServletRequest req) {
+		JSONObject json = new JSONObject();
+		String trackId = req.getParameter("trackId");
+		List<TrackPointForm> list=trackPointService.getFormByTrackId(trackId);
+		try {
+			if(list.size()>0){
+				json.put("code", 200);
+				json.put("data",list);
+				json.put("message", "查询成功!");
+			}else {
+				json.put("code", 404);
+				json.put("message", "找不到该轨迹!");
+			}
+		} catch (Exception e) {
+			json.put("code", 500);
+			json.put("message", "异常错误!");
+			e.printStackTrace();
+		}
+		return json.toString();
+	}
 }

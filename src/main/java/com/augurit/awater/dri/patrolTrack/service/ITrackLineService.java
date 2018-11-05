@@ -7,6 +7,7 @@ import com.augurit.awater.common.page.Page;
 import com.augurit.awater.dri.patrolTrack.web.form.TrackLineForm;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 
 public interface ITrackLineService extends ICrudService<TrackLineForm, Long> {
@@ -25,4 +26,7 @@ public interface ITrackLineService extends ICrudService<TrackLineForm, Long> {
     @Transactional(readOnly = true)
     Page<TrackLineForm> getPageListForApp(Page<TrackLineForm> page, TrackLineForm form,
                                           Map<String, Object> map);
+
+    @Transactional(readOnly = true)
+    List<TrackLineForm> getTrackLinesByLoginName(String loginName);
 }

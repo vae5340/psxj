@@ -181,7 +181,7 @@ public class PsOrgUserServiceImpl implements IPsOrgUserService {
             }
             buffer.append(sqlStr);
         }
-        String sql = "select s3.* from(" +
+        String sql = "select distinct s3.* from(" +
                 " select s.user_id from OPU_OM_user_org s where s.ORG_ID = ? )s1,( " +
                 " select s.user_id from OPU_OM_user_org s where s.ORG_ID in (SELECT org_id FROM OPU_OM_org START WITH org_id IN ("+
                 buffer.toString()+") CONNECT BY PRIOR org_id = PARENT_ORG_ID))s2,opu_om_user s3 " +
