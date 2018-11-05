@@ -20866,3 +20866,670 @@ java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
 	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.run(AcquireAsyncJobsDueRunnable.java:62) [flowable-job-service-6.3.0.jar:6.3.0]
 	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
 
+2018-11-05 09:43:47.136 ERROR 8644 --- [flowable-acquire-timer-jobs] o.f.e.c.impl.interceptor.CommandContext  : Error while closing command context
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/TimerJob.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.TimerJobEntityImpl.selectTimerJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_TIMER_JOB RES         where DUEDATE_ <= ?         and LOCK_OWNER_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisTimerJobDataManager.findTimerJobsToExecute(MybatisTimerJobDataManager.java:66) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.TimerJobEntityManagerImpl.findTimerJobsToExecute(TimerJobEntityManagerImpl.java:66) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireTimerJobsCmd.execute(AcquireTimerJobsCmd.java:42) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireTimerJobsCmd.execute(AcquireTimerJobsCmd.java:30) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) [spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireTimerJobsRunnable.run(AcquireTimerJobsRunnable.java:58) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 25 common frames omitted
+
+2018-11-05 09:43:47.153 ERROR 8644 --- [flowable-acquire-timer-jobs] o.f.j.s.i.a.AcquireTimerJobsRunnable     : exception during timer job acquisition: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/TimerJob.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.TimerJobEntityImpl.selectTimerJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_TIMER_JOB RES         where DUEDATE_ <= ?         and LOCK_OWNER_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/TimerJob.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.TimerJobEntityImpl.selectTimerJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_TIMER_JOB RES         where DUEDATE_ <= ?         and LOCK_OWNER_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisTimerJobDataManager.findTimerJobsToExecute(MybatisTimerJobDataManager.java:66) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.TimerJobEntityManagerImpl.findTimerJobsToExecute(TimerJobEntityManagerImpl.java:66) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireTimerJobsCmd.execute(AcquireTimerJobsCmd.java:42) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireTimerJobsCmd.execute(AcquireTimerJobsCmd.java:30) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) ~[spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireTimerJobsRunnable.run(AcquireTimerJobsRunnable.java:58) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 25 common frames omitted
+
+2018-11-05 09:43:49.360 ERROR 8644 --- [flowable-acquire-async-jobs] o.f.e.c.impl.interceptor.CommandContext  : Error while closing command context
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisJobDataManager.findJobsToExecute(MybatisJobDataManager.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.JobInfoEntityManagerImpl.findJobsToExecute(JobInfoEntityManagerImpl.java:44) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:31) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) [spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.acquireAndExecuteJobs(AcquireAsyncJobsDueRunnable.java:84) [flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.run(AcquireAsyncJobsDueRunnable.java:62) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 26 common frames omitted
+
+2018-11-05 09:43:49.511 ERROR 8644 --- [flowable-acquire-async-jobs] o.f.j.s.i.a.AcquireAsyncJobsDueRunnable  : exception during async job acquisition: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisJobDataManager.findJobsToExecute(MybatisJobDataManager.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.JobInfoEntityManagerImpl.findJobsToExecute(JobInfoEntityManagerImpl.java:44) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:31) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) ~[spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.acquireAndExecuteJobs(AcquireAsyncJobsDueRunnable.java:84) [flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.run(AcquireAsyncJobsDueRunnable.java:62) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 26 common frames omitted
+
+2018-11-05 09:44:29.167 ERROR 8644 --- [flowable-acquire-async-jobs] o.f.e.c.impl.interceptor.CommandContext  : Error while closing command context
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisJobDataManager.findJobsToExecute(MybatisJobDataManager.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.JobInfoEntityManagerImpl.findJobsToExecute(JobInfoEntityManagerImpl.java:44) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:31) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) [spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.acquireAndExecuteJobs(AcquireAsyncJobsDueRunnable.java:84) [flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.run(AcquireAsyncJobsDueRunnable.java:62) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 26 common frames omitted
+
+2018-11-05 09:44:29.365 ERROR 8644 --- [flowable-acquire-async-jobs] o.f.j.s.i.a.AcquireAsyncJobsDueRunnable  : exception during async job acquisition: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisJobDataManager.findJobsToExecute(MybatisJobDataManager.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.JobInfoEntityManagerImpl.findJobsToExecute(JobInfoEntityManagerImpl.java:44) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:31) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) ~[spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.acquireAndExecuteJobs(AcquireAsyncJobsDueRunnable.java:84) [flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.run(AcquireAsyncJobsDueRunnable.java:62) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 26 common frames omitted
+
+2018-11-05 09:45:21.696 ERROR 8644 --- [flowable-acquire-timer-jobs] com.alibaba.druid.util.JdbcUtils         : close connection error
+
+java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:406) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:399) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C7Ocommoncall.receive(T4C7Ocommoncall.java:122) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CConnection.logoff(T4CConnection.java:480) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.PhysicalConnection.close(PhysicalConnection.java:3428) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.connection_close(FilterChainImpl.java:175) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.stat.StatFilter.connection_close(StatFilter.java:261) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.connection_close(FilterChainImpl.java:171) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.ConnectionProxyImpl.close(ConnectionProxyImpl.java:115) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.util.JdbcUtils.close(JdbcUtils.java:73) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidDataSource.discardConnection(DruidDataSource.java:1338) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidDataSource.getConnectionDirect(DruidDataSource.java:1273) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.dataSource_connect(FilterChainImpl.java:4619) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.stat.StatFilter.dataSource_getConnection(StatFilter.java:680) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.dataSource_connect(FilterChainImpl.java:4615) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1231) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:1223) [druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidDataSource.getConnection(DruidDataSource.java:90) [druid-1.1.9.jar:1.1.9]
+	at org.hibernate.engine.jdbc.connections.internal.DatasourceConnectionProviderImpl.getConnection(DatasourceConnectionProviderImpl.java:139) [hibernate-core-4.3.5.Final.jar:4.3.5.Final]
+	at org.hibernate.internal.AbstractSessionImpl$NonContextualJdbcConnectionAccess.obtainConnection(AbstractSessionImpl.java:380) [hibernate-core-4.3.5.Final.jar:4.3.5.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.obtainConnection(LogicalConnectionImpl.java:228) [hibernate-core-4.3.5.Final.jar:4.3.5.Final]
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.getConnection(LogicalConnectionImpl.java:171) [hibernate-core-4.3.5.Final.jar:4.3.5.Final]
+	at org.hibernate.engine.transaction.internal.jdbc.JdbcTransaction.doBegin(JdbcTransaction.java:67) [hibernate-core-4.3.5.Final.jar:4.3.5.Final]
+	at org.hibernate.engine.transaction.spi.AbstractTransactionImpl.begin(AbstractTransactionImpl.java:162) [hibernate-core-4.3.5.Final.jar:4.3.5.Final]
+	at org.hibernate.internal.SessionImpl.beginTransaction(SessionImpl.java:1435) [hibernate-core-4.3.5.Final.jar:4.3.5.Final]
+	at org.hibernate.jpa.internal.TransactionImpl.begin(TransactionImpl.java:61) [hibernate-entitymanager-4.3.5.Final.jar:4.3.5.Final]
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.beginTransaction(HibernateJpaDialect.java:189) [spring-orm-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.orm.jpa.JpaTransactionManager.doBegin(JpaTransactionManager.java:380) [spring-orm-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:373) [spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:130) [spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireTimerJobsRunnable.run(AcquireTimerJobsRunnable.java:60) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+
+2018-11-05 09:54:22.804 ERROR 8644 --- [flowable-acquire-async-jobs] o.f.e.c.impl.interceptor.CommandContext  : Error while closing command context
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisJobDataManager.findJobsToExecute(MybatisJobDataManager.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.JobInfoEntityManagerImpl.findJobsToExecute(JobInfoEntityManagerImpl.java:44) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:31) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) [spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) [flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) [flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.acquireAndExecuteJobs(AcquireAsyncJobsDueRunnable.java:84) [flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.run(AcquireAsyncJobsDueRunnable.java:62) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 26 common frames omitted
+
+2018-11-05 09:54:24.855 ERROR 8644 --- [flowable-acquire-async-jobs] o.f.j.s.i.a.AcquireAsyncJobsDueRunnable  : exception during async job acquisition: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+
+org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+### The error may exist in org/flowable/job/service/db/mapping/entity/Job.xml
+### The error may involve org.flowable.job.service.impl.persistence.entity.JobEntityImpl.selectJobsToExecute-Inline
+### The error occurred while setting parameters
+### SQL: select * from ( select a.*, ROWNUM rnum from (          select         RES.*            from ACT_RU_JOB RES         where LOCK_EXP_TIME_ is null          ) a where ROWNUM < ?) where rnum  >= ?
+### Cause: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:199) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectListWithRawParameter(DbSqlSession.java:193) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:155) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:160) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.db.DbSqlSession.selectList(DbSqlSession.java:146) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.data.impl.MybatisJobDataManager.findJobsToExecute(MybatisJobDataManager.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.persistence.entity.JobInfoEntityManagerImpl.findJobsToExecute(JobInfoEntityManagerImpl.java:44) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:53) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.cmd.AcquireJobsCmd.execute(AcquireJobsCmd.java:31) ~[flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.engine.impl.interceptor.CommandInvoker$1.run(CommandInvoker.java:51) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperation(CommandInvoker.java:93) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.executeOperations(CommandInvoker.java:72) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.CommandInvoker.execute(CommandInvoker.java:56) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.impl.interceptor.BpmnOverrideContextInterceptor.execute(BpmnOverrideContextInterceptor.java:25) ~[flowable-engine-6.3.0.jar:na]
+	at org.flowable.engine.common.impl.interceptor.TransactionContextInterceptor.execute(TransactionContextInterceptor.java:53) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.CommandContextInterceptor.execute(CommandContextInterceptor.java:71) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.idm.spring.SpringTransactionInterceptor$1.doInTransaction(SpringTransactionInterceptor.java:49) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:133) ~[spring-tx-4.3.13.RELEASE.jar:4.3.13.RELEASE]
+	at org.flowable.idm.spring.SpringTransactionInterceptor.execute(SpringTransactionInterceptor.java:46) ~[flowable-idm-spring-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.interceptor.LogInterceptor.execute(LogInterceptor.java:30) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:56) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.engine.common.impl.cfg.CommandExecutorImpl.execute(CommandExecutorImpl.java:51) ~[flowable-engine-common-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.acquireAndExecuteJobs(AcquireAsyncJobsDueRunnable.java:84) [flowable-job-service-6.3.0.jar:6.3.0]
+	at org.flowable.job.service.impl.asyncexecutor.AcquireAsyncJobsDueRunnable.run(AcquireAsyncJobsDueRunnable.java:62) [flowable-job-service-6.3.0.jar:6.3.0]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_151]
+Caused by: java.sql.SQLException: ORA-01013: 用户请求取消当前的操作
+
+	at oracle.jdbc.driver.SQLStateMapping.newSQLException(SQLStateMapping.java:70) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.newSQLException(DatabaseError.java:112) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:173) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:455) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:413) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:1030) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.doOall8(T4CPreparedStatement.java:194) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForDescribe(T4CPreparedStatement.java:785) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.T4CPreparedStatement.executeMaybeDescribe(T4CPreparedStatement.java:860) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1186) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3381) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3482) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at oracle.jdbc.driver.OraclePreparedStatementWrapper.execute(OraclePreparedStatementWrapper.java:1373) ~[ojdbc6.jar:Oracle JDBC Driver version - "11.1.0.6.0-Production+"]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3051) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterEventAdapter.preparedStatement_execute(FilterEventAdapter.java:440) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.filter.FilterChainImpl.preparedStatement_execute(FilterChainImpl.java:3049) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.proxy.jdbc.PreparedStatementProxyImpl.execute(PreparedStatementProxyImpl.java:167) ~[druid-1.1.9.jar:1.1.9]
+	at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:498) ~[druid-1.1.9.jar:1.1.9]
+	at sun.reflect.GeneratedMethodAccessor125.invoke(Unknown Source) ~[na:na]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_151]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_151]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:59) ~[mybatis-3.4.5.jar:3.4.5]
+	at com.sun.proxy.$Proxy109.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:79) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:63) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:324) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:156) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:109) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:83) ~[mybatis-3.4.5.jar:3.4.5]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148) ~[mybatis-3.4.5.jar:3.4.5]
+	... 26 common frames omitted
+

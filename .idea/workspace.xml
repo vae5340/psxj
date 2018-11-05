@@ -2,19 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d0b4bd5-fc3a-4d4a-9c99-2fc89b7bcad0" name="Default" comment="问题上报、巡查轨迹修改">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log/log_agcloud.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/log_agcloud.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/augurit/agcloud/org/service/impl/PsOrgUserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/augurit/agcloud/org/service/impl/PsOrgUserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/bpm/xcyh/report/service/impl/GxProblemReportServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/bpm/xcyh/report/service/impl/GxProblemReportServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/bpm/xcyh/report/web/WfrRestController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/bpm/xcyh/report/web/WfrRestController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/bpm/xcyh/report/web/WfrRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/bpm/xcyh/report/web/WfrRestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/dri/problem_report/diary/rest/DiaryRestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/dri/problem_report/diary/rest/DiaryRestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/augurit/agcloud/org/service/impl/PsOrgUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/augurit/agcloud/org/service/impl/PsOrgUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/augurit/awater/bpm/xcyh/report/service/impl/GxProblemReportServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/augurit/awater/bpm/xcyh/report/service/impl/GxProblemReportServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/augurit/awater/bpm/xcyh/report/web/WfrRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/augurit/awater/bpm/xcyh/report/web/WfrRestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/patrolTrack/service/ITrackLineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/patrolTrack/service/ITrackLineService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/patrolTrack/service/impl/TrackLineServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/patrolTrack/service/impl/TrackLineServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/problem_report/diary/rest/DiaryRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/problem_report/diary/rest/DiaryRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/dri/patrolTrack/service/ITrackLineService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/dri/patrolTrack/service/ITrackLineService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/dri/patrolTrack/service/impl/TrackLineServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/com/augurit/awater/dri/patrolTrack/service/impl/TrackLineServiceImpl.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -85,11 +77,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GxProblemReportServiceImpl.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GxProblemReportServiceImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/augurit/awater/bpm/xcyh/report/service/impl/GxProblemReportServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="12" column="64" lean-forward="true" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
+            <state relative-caret-position="99">
+              <caret line="12" column="64" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -98,7 +99,7 @@
         <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/agcloud-opus-common-0.1.jar!/com/augurit/agcloud/opus/common/domain/OpuOmUser.class">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-864">
-              <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -579,6 +580,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/patrolTrack/service/impl/TrackLineServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/patrolTrack/service/ITrackLineService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/augurit/awater/dri/problem_report/diary/rest/DiaryRestController.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -627,8 +629,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="281" />
-    <option name="y" value="92" />
+    <option name="x" value="152" />
+    <option name="y" value="44" />
     <option name="width" value="1440" />
     <option name="height" value="860" />
   </component>
@@ -652,271 +654,6 @@
             <path>
               <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
               <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name=".gradle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud" type="462c0819:PsiDirectoryNode" />
-              <item name="org" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="bpm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="bpm" type="462c0819:PsiDirectoryNode" />
-              <item name="xcyh" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="bpm" type="462c0819:PsiDirectoryNode" />
-              <item name="xcyh" type="462c0819:PsiDirectoryNode" />
-              <item name="report" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="bpm" type="462c0819:PsiDirectoryNode" />
-              <item name="xcyh" type="462c0819:PsiDirectoryNode" />
-              <item name="report" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="bpm" type="462c0819:PsiDirectoryNode" />
-              <item name="xcyh" type="462c0819:PsiDirectoryNode" />
-              <item name="report" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="dri" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="dri" type="462c0819:PsiDirectoryNode" />
-              <item name="problem_report" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="dri" type="462c0819:PsiDirectoryNode" />
-              <item name="problem_report" type="462c0819:PsiDirectoryNode" />
-              <item name="diary" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="augurit" type="462c0819:PsiDirectoryNode" />
-              <item name="awater" type="462c0819:PsiDirectoryNode" />
-              <item name="dri" type="462c0819:PsiDirectoryNode" />
-              <item name="problem_report" type="462c0819:PsiDirectoryNode" />
-              <item name="diary" type="462c0819:PsiDirectoryNode" />
-              <item name="rest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud-opus-common-0.1.jar" type="ab9368bb:PsiFileNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud-opus-common-0.1.jar" type="ab9368bb:PsiFileNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud-opus-common-0.1.jar" type="ab9368bb:PsiFileNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="psxj" type="b2602c69:ProjectViewProjectNode" />
-              <item name="psxj" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="agcloud-opus-common-0.1.jar" type="ab9368bb:PsiFileNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1015,12 +752,20 @@
       <workItem from="1541033779198" duration="8195000" />
       <workItem from="1541120251737" duration="2614000" />
       <workItem from="1541131079280" duration="14953000" />
-      <workItem from="1541379875303" duration="1680000" />
+      <workItem from="1541379875303" duration="2951000" />
     </task>
+    <task id="LOCAL-00001" summary="问题上报、巡查轨迹修改">
+      <created>1541382112234</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1541382112234</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41619000" />
+    <option name="totallyTimeSpent" value="42890000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1032,7 +777,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-11" y="-11" width="1942" height="1102" extended-state="6" />
+    <frame x="477" y="64" width="1440" height="860" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -1046,7 +792,7 @@
       <window_info id="UI Designer" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.08480176" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.24118942" />
-      <window_info anchor="bottom" id="Messages" order="8" visible="true" weight="0.3289183" />
+      <window_info anchor="bottom" id="Messages" order="8" visible="true" weight="0.44879517" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="8" />
@@ -1055,7 +801,7 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.1942605" />
       <window_info anchor="bottom" id="Spring" order="8" weight="0.32929516" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32929516" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.38174945" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5237037" />
       <window_info anchor="right" id="Bean Validation" order="4" weight="0.32991362" />
       <window_info id="Web" order="3" side_tool="true" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.2911111" />
@@ -1087,13 +833,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="729">
-          <caret line="27" column="27" selection-start-line="27" selection-start-column="27" selection-end-line="27" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/augurit/agcloud/org/rest/service/impl/OmRsRoleServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1134">
@@ -1419,7 +1158,7 @@
     <entry file="jar://$PROJECT_DIR$/src/main/webapp/WEB-INF/lib/agcloud-opus-common-0.1.jar!/com/augurit/agcloud/opus/common/domain/OpuOmUser.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-864">
-          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -1439,8 +1178,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/augurit/awater/bpm/xcyh/report/service/impl/GxProblemReportServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" column="64" lean-forward="true" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
+        <state relative-caret-position="99">
+          <caret line="12" column="64" selection-start-line="12" selection-start-column="64" selection-end-line="12" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="5" column="5" lean-forward="true" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
