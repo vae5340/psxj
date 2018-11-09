@@ -13,6 +13,7 @@ import com.augurit.awater.dri.patrolTrack.service.ITrackLineService;
 import com.augurit.awater.dri.patrolTrack.service.ITrackPointService;
 import com.augurit.awater.dri.patrolTrack.web.form.TrackLineForm;
 import com.augurit.awater.dri.patrolTrack.web.form.TrackPointForm;
+import com.augurit.awater.dri.problem_report.diary.entity.TrackConfigResult;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/diary")
 @RestController
 public class DiaryRestController {
+	@Autowired
 	private IOmUserInfoRestService omUserInfoRestService;
 	@Autowired
 	private IOmOrgRestService omOrgService;
@@ -59,7 +61,7 @@ public class DiaryRestController {
 	@RequestMapping(value = "/gettrackConfig",produces = "application/json;charset=UTF-8")
 	public String gettrackConfig(HttpServletRequest req) {
 		JSONObject json = new JSONObject();
-		String code = req.getParameter("code");
+//		String code = req.getParameter("code");
 		/*List<SysCodeForm> sysCodeForms= sysCodeService.getItems("APP_PATROL_TRACK");
 		if(sysCodeForms!=null && sysCodeForms.size()>0){
 			Map<String, String> map= new HashMap<String, String>();
@@ -72,7 +74,15 @@ public class DiaryRestController {
 			json.put("code", 500);
 			json.put("data", null);
 		}*/
-		json.put("message","暂无配置!");
+		TrackConfigResult code = new TrackConfigResult();
+		code.setLocateIntervalDis(10);//定位距离间隔，单位米
+		code.setLocateIntervalTime(10);///定位时间间隔，单位秒
+		code.setTrackMinLength(10);//允许保存的轨迹最短路程，单位米
+		code.setTrackMinPointAmount(2);//允许保存的最少轨迹点数
+		code.setTrackMinTime(1);//允许保存的运动最短时间，单位分钟
+		code.setUploadIntervalTime(1); //上传轨迹记录的间隔，单位分钟
+		json.put("code",200);
+		//json.put("message","暂无配置!");
 		json.put("data",code);
 		return json.toString();
 	}
