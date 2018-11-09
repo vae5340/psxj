@@ -1,7 +1,9 @@
-/target/
-/.idea/
-/.settings/
-/build/
-/out/
+target/
+.idea/
+.settings/
+build/
+out/
 *.iml
-
+.gradle/
+log/
+.vscode/
