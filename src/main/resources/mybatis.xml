@@ -10,6 +10,7 @@
         <setting name="lazyLoadingEnabled" value="false" />
 	</settings>
 	<typeAliases>
+		<package name="com.augurit.awater.awaterMobile.monitoring.station.domain"/>
 		<package name="com.augurit.agcloud.bsc.domain"/>
 		<package name="com.augurit.agcloud.opus.common.domain"/>
 		<package name="com.augurit.agcloud.meta.domain"/>
@@ -33,5 +34,6 @@
 		<mapper resource="org/flowable/app/repository/editor/ModelRelation.xml"/>
 		<mapper resource="org/flowable/app/repository/editor/ModelHistory.xml"/>
 	</mappers>
+
 
 </configuration>

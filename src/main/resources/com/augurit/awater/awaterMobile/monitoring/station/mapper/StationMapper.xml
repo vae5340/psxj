@@ -2,61 +2,273 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="com.augurit.awater.awaterMobile.monitoring.station.mapper.StationMapper">
-    <sql id="stationTable">
-        select STCD,STNM,COOX x,COOY y,RVNM,HNNM,BSNM,LGTD,LTTD,STLC,ADDVCD,USFL,STSYS,COMMENTS,STTP,ALARM_ONE,ALARM_TWO,ALARM_THREE
-        from ST_STBPRP_B where usfl=1 and COOX is not null and COOY is not null
-        <if test="stnm!= null and stnm != ''"> and (stnm like '%' || #{stnm} || '%' or stcd like '%' || #{stnm} || '%')</if>
-        <if test="addvcd!=null and addvcd !=''"> and addvcd = #{addvcd}</if>
-        <if test="sttp!= null and sttp !=''"> and sttp =#{sttp} </if>
-        <if test="stsys!= null and stsys !=''"> and stsys =#{stsys} </if>
-        <if test="null !=stcds and stcds.length gt 0">
-            <foreach collection="stcds" item="item" open=" and (" close=")" separator="or">
-                stcd = #{item}
-            </foreach>
-        </if>
-        <if test="minx != null and maxx !=null ">
-            and COOX&gt;=#{minx} and COOX&lt;=#{maxx}
-        </if>
-        <if test="miny != null and maxy !=null ">
-            and COOY&gt;=#{miny} and COOY&lt;=#{maxy}
-        </if>
-    </sql>
 
-    <sql id="typeTable">
-        select mnit,stcd from ST_STITEM_B where 1=1
-        <if test="mnit!= null and mnit !='' ">
-            and MNIT in (${mnit})
-        </if>
-    </sql>
+<sql id="stationTable">
+    select STCD,STNM,COOX x,COOY y,RVNM,HNNM,BSNM,LGTD,LTTD,STLC,ADDVCD,USFL,STSYS,COMMENTS,STTP,ALARM_ONE,ALARM_TWO,ALARM_THREE
+    from ST_STBPRP_B where usfl=1 and COOX is not null and COOY is not null
+    <if test="stnm!= null and stnm != ''"> and (stnm like '%' || #{stnm} || '%' or stcd like '%' || #{stnm} || '%')</if>
+    <if test="addvcd!=null and addvcd !=''"> and addvcd = #{addvcd}</if>
+    <if test="sttp!= null and sttp !=''"> and sttp =#{sttp} </if>
+    <if test="stsys!= null and stsys !=''"> and stsys =#{stsys} </if>
+    <if test="null !=stcds and stcds.length gt 0">
+        <foreach collection="stcds" item="item" open=" and (" close=")" separator="or">
+            stcd = #{item}
+        </foreach>
+    </if>
+    <if test="minx != null and maxx !=null ">
+        and COOX&gt;=#{minx} and COOX&lt;=#{maxx}
+    </if>
+    <if test="miny != null and maxy !=null ">
+        and COOY&gt;=#{miny} and COOY&lt;=#{maxy}
+    </if>
+</sql>
 
-    <!-- 查询所有测站信息 -->
-    <select id="getAllStation" resultType="map" parameterType="map">
-        select s.*,t.MNIT , CONCAT(CONCAT(STTP,'-'),mnit)  LAYERTYPE from
-        (<include refid="stationTable"/>) s
-        join
-        (<include refid="typeTable"/>) t
-        on s.stcd=t.stcd
-    </select>
+<sql id="typeTable">
+    select mnit,stcd from ST_STITEM_B where 1=1
+    <if test="mnit!= null and mnit !='' ">
+        and MNIT in (${mnit})
+    </if>
+</sql>
 
-    <!-- 根据地图上所选点击的点，获取全部的监控信息 -->
-    <select id="getStationByMap" resultType="map" parameterType="map">
-        select * from
-        (select s.*,t.MNIT,CONCAT(CONCAT(STTP,'-'),mnit) LAYERTYPE
-        from
-        (<include refid="stationTable"/>) s
-        join
-        (<include refid="typeTable"/>) t
-        on s.stcd=t.stcd
+<!-- 查询所有测站信息-->
+<select id="getAllStation" resultType="map" parameterType="map">
+    select s.*,t.MNIT , CONCAT(CONCAT(STTP,'-'),mnit)  LAYERTYPE from
+    (<include refid="stationTable"/>) s
+    join
+    (<include refid="typeTable"/>) t
+    on s.stcd=t.stcd
+</select>
+
+<!-- 查询测站 最新检测值-->
+<select id="getAllStationValue" resultType="map" parameterType="map">
+    select s.*,t.MNIT, CONCAT(CONCAT(STTP,'-'),mnit)  LAYERTYPE,t1.z,t1.upz,t1.dwnz,t1.drp,t1.v,t1.q
+    from
+    (<include refid="stationTable"/>) s
+    join
+    (<include refid="typeTable"/>) t
+    on s.stcd=t.stcd
+    left join ST_STBPRP_B_REAL t1 on t1.stcd=s.stcd
+</select>
+
+<select id="getStationByMap" resultType="map" parameterType="map">
+    select * from
+    (select s.*,t.MNIT,CONCAT(CONCAT(STTP,'-'),mnit) LAYERTYPE
+    from
+    (<include refid="stationTable"/>) s
+    join
+    (<include refid="typeTable"/>) t
+    on s.stcd=t.stcd
+    )
+    where 1=1
+    <if test="null !=sttps">
+        <foreach collection="sttps" item="item" open=" and (" close=")" separator="or">
+            LAYERTYPE = #{item}
+        </foreach>
+    </if>
+    <if test="layertype!= null and layertype !='' ">
+        and LAYERTYPE =#{layertype}
+    </if>
+</select>
+
+
+<!--按照时间，查询有监控数据的所有有数据的测站信息-->
+<select id="getStationByTm" resultType="map" parameterType="map">
+    SELECT *  FROM (
+    select s.*,t.MNIT ,CONCAT(CONCAT(STTP,'-'),mnit)  LAYERTYPE
+    from
+    (<include refid="stationTable"/>) s
+    join
+    (<include refid="typeTable"/>) t
+    on s.stcd=t.stcd
+    where  s.stcd in(
+    select DISTINCT stcd from ST_CONDUIT_R t where
+    t.TM &gt;= to_date(#{sdate}, 'yyyy-MM-dd hh24:mi:ss')
+    and t.TM &lt;= to_date(#{edate}, 'yyyy-MM-dd hh24:mi:ss')
+    )
+    or s.stcd in(
+    select DISTINCT stcd from ST_SURDEP_R t where
+    t.TM &gt;= to_date(#{sdate}, 'yyyy-MM-dd hh24:mi:ss')
+    and t.TM &lt;= to_date(#{edate}, 'yyyy-MM-dd hh24:mi:ss')
+    )
+    or s.stcd in (
+    select DISTINCT stcd from ST_PUMP_R  t where
+    t.TM &gt;= to_date(#{sdate}, 'yyyy-MM-dd hh24:mi:ss')
+    and t.TM &lt;= to_date(#{edate}, 'yyyy-MM-dd hh24:mi:ss')
+    )
+    or s.stcd in (
+    select DISTINCT stcd from ST_WAS_R t where
+    t.TM &gt;= to_date(#{sdate}, 'yyyy-MM-dd hh24:mi:ss')
+    and t.TM &lt;= to_date(#{edate}, 'yyyy-MM-dd hh24:mi:ss')
+    )
+    <if test="mnit!= null and mnit =='3'">
+        or s.stcd in (
+        select DISTINCT stcd from ST_PPTN_R t where
+        t.TM &gt;= to_date(#{sdate}, 'yyyy-MM-dd hh24:mi:ss')
+        and t.TM &lt;= to_date(#{edate}, 'yyyy-MM-dd hh24:mi:ss')
         )
-        where 1=1
-        <if test="null !=sttps">
-            <foreach collection="sttps" item="item" open=" and (" close=")" separator="or">
-                LAYERTYPE = #{item}
-            </foreach>
-        </if>
-        <if test="layertype != null and layertype !='' ">
-            and LAYERTYPE =#{layertype}
-        </if>
-    </select>
+    </if>
+    )
+    where   1=1
+    <if test="layertype!= null and layertype !=''"> and LAYERTYPE =#{layertype} </if>
 
+
+</select>
+
+<!-- 查询测站信息 返回station-->
+<select id="getStation" resultType="Station" parameterType="map">
+    select * from (
+    select s.*,t.MNIT , CONCAT(CONCAT(sttp,'-'),mnit)  LAYERTYPE
+    from
+    (<include refid="stationTable"/>) s
+    join
+    (<include refid="typeTable"/>)  t
+    on s.stcd=t.stcd
+    )
+    where 1=1
+    <if test="null !=layertypes">
+        <foreach collection="layertypes" item="item" open=" and (" close=")" separator="or">
+            LAYERTYPE = #{item}
+        </foreach>
+    </if>
+    <if test="null !=layertype"> and LAYERTYPE = #{layertype}</if>
+</select>
+
+<select id="getHisDataByTm" resultType="HisData">
+    select hist.* from (
+    <if test="hisTableName =='ST_SURDEP_R'">
+        select stcd,tm,z from ST_SURDEP_R a where 1=1
+        <if test="sdate != null and sdate != ''">
+            and tm &gt;= to_date(#{sdate}, 'yyyy-MM-dd')
+        </if>
+        <if test="edate != null and edate != ''">
+            and tm &lt; to_date(#{edate}, 'yyyy-MM-dd')
+        </if>
+        <if test="stcd != null and stcd != ''">
+            and stcd = #{stcd}
+        </if>
+    </if>
+
+    <if test="hisTableName =='ST_CONDUIT_R'">
+        select a.stcd,a.tm,a.z,a.q,c.WNDEP jjsw from
+        (select stcd,tm,z,q from ST_CONDUIT_R where 1=1
+        <if test="sdate != null and sdate != ''">
+            and tm &gt;= to_date(#{sdate}, 'yyyy-MM-dd')
+        </if>
+        <if test="edate != null and edate != ''">
+            and tm &lt; to_date(#{edate}, 'yyyy-MM-dd')
+        </if>
+        <if test="stcd != null and stcd != ''">
+            and stcd = #{stcd}
+        </if>
+        ) a
+        LEFT JOIN ST_CONDUITCH_B c on a.stcd = c.stcd
+    </if>
+
+    <if test="hisTableName =='ST_PUMP_R'">
+        select a.stcd,a.tm,a.PPUPZ upz, a.PPDWZ dwz,a.CHANB chanbz,a.PUMPPT pz,a.PMPQ q from
+        (select stcd,tm,PPUPZ,PPDWZ,CHANB,PUMPPT,PMPQ from ST_PUMP_R where 1=1
+        <if test="sdate != null and sdate != ''">
+            and tm &gt;= to_date(#{sdate}, 'yyyy-MM-dd')
+        </if>
+        <if test="edate != null and edate != ''">
+            and tm &lt; to_date(#{edate}, 'yyyy-MM-dd')
+        </if>
+        <if test="stcd != null and stcd != ''">
+            and stcd = #{stcd}
+        </if>
+        ) a
+    </if>
+
+    <if test="hisTableName =='ST_WAS_R'">
+        select a.stcd,a.tm, a.UPZ , a.DWZ,a.CHANB chanbz,a.TGTQ q from (
+        select stcd,tm,UPZ,DWZ,TGTQ,CHANB from ST_WAS_R where 1=1
+        <if test="sdate != null and sdate != ''">
+            and tm &gt;= to_date(#{sdate}, 'yyyy-MM-dd')
+        </if>
+        <if test="edate != null and edate != ''">
+            and tm &lt; to_date(#{edate}, 'yyyy-MM-dd')
+        </if>
+        <if test="stcd != null and stcd != ''">
+            and stcd = #{stcd}
+        </if>
+        ) a
+    </if>
+
+    <if test="hisTableName =='ST_RSVR_R'">
+        select a.stcd,a.tm,a.rz z,a.inq q,c.FSLTDZ jjsw from
+        (select stcd,tm,rz,inq from ST_RSVR_R where 1=1
+        <if test="sdate != null and sdate != ''">
+            and tm &gt;= to_date(#{sdate}, 'yyyy-MM-dd')
+        </if>
+        <if test="edate != null and edate != ''">
+            and tm &lt; to_date(#{edate}, 'yyyy-MM-dd')
+        </if>
+        <if test="stcd != null and stcd != ''">
+            and stcd =#{stcd}
+        </if>
+        ) a
+        LEFT JOIN ST_RSVRFSR_B c on a.stcd = c.stcd
+    </if>
+
+    <if test="hisTableName =='ST_RIVER_R'">
+        select a.stcd,a.tm,a.z,a.q,c.wrz as jjsw from
+        (select stcd,tm,z,q from ST_RIVER_R where 1=1
+        <if test="sdate != null and sdate != ''">
+            and tm &gt;= to_date(#{sdate}, 'yyyy-MM-dd')
+        </if>
+        <if test="edate != null and edate != ''">
+            and tm &lt; to_date(#{edate}, 'yyyy-MM-dd')
+        </if>
+        <if test="stcd != null and stcd != ''">
+            and stcd =#{stcd}
+        </if>
+        ) a
+        LEFT JOIN ST_RVFCCH_B c on a.stcd = c.stcd
+    </if>
+    <if test="hisTableName == 'ST_PPTN_R'">
+        select a.tm,a.drp,a.stcd from ST_PPTN_R a where 1=1
+        <if test="sdate != null and sdate != ''">
+            and tm &gt;= to_date(#{sdate}, 'yyyy-mm-dd')
+        </if>
+        <if test="edate != null and edate != ''">
+            and tm &lt; to_date(#{edate}, 'yyyy-mm-dd')
+        </if>
+        <if test="stcd != null and stcd != ''">
+            and stcd = #{stcd}
+        </if>
+    </if>
+
+    ) hist
+    order by tm
+</select>
+
+<!-- 分页查询 获取监控预警站点信息搜索列表-->
+<select id="getAlarmStation" resultType="map" parameterType="map">
+    <if test="jkType == null or jkType == '' or jkType == 1">
+        select  s.stcd,s.stnm,s.sttp,s1.Z alarmValue,s1.TM alarmDate,s.coox x,s.cooy y,'窨井水位' jktype,2 mnit,
+        case when (S1.Z &gt;= s.alarm_one-0.1) THEN '满管预警' else '警戒水位' END alarmtype,CONCAT (CONCAT(STTP, '-'), 2) LAYERTYPE,
+        s.RVNM,s.HNNM,s.BSNM,s.LGTD,s.LTTD,s.STLC,s.ADDVCD,s.USFL,s.STSYS,s.COMMENTS,s.ALARM_ONE,s.ALARM_TWO,s.ALARM_THREE
+        from (SELECT * from ST_STBPRP_B t WHERE t.STTP='UP') s,ST_STBPRP_B_REAL s1
+        WHERE s.stcd = S1.STCD and S1.Z > s.alarm_one-0.2
+    </if>
+    <if test="jkType == null or jkType == ''">
+        UNION
+    </if>
+    <if test="jkType == null or jkType == '' or jkType == 2">
+        select  s.stcd,s.stnm,s.sttp,s1.Z alarmValue,s1.TM alarmDate,s.coox x,s.cooy y,'积水点水位' jktype,2 mnit,
+        case  when (s1.Z &lt;=0.15 and s1.Z &gt;=0.05) THEN '轻度积水'
+        when (s1.Z &lt;=0.25 and s1.Z &gt;=0.15) THEN '中度积水'
+        when (s1.Z &lt;= 0.25) THEN '严重积水'
+        END alarmtype,CONCAT (CONCAT(STTP, '-'), 2) LAYERTYPE,
+        s.RVNM,s.HNNM,s.BSNM,s.LGTD,s.LTTD,s.STLC,s.ADDVCD,s.USFL,s.STSYS,s.COMMENTS,s.ALARM_ONE,s.ALARM_TWO,s.ALARM_THREE
+        from (SELECT * from ST_STBPRP_B t WHERE t.STTP='WL') s,ST_STBPRP_B_REAL s1
+        WHERE s.stcd = S1.STCD and s1.Z > 0.05
+    </if>
+
+</select>
+
+<!-- 获取积水点名称列表-->
+    <select id="getAllSPStation" resultType="map" parameterType="map">
+        select s.stcd,s.stnm,s.sttp FROM ST_STBPRP_B s WHERE s.sttp='SP'
+    </select>
 </mapper>
