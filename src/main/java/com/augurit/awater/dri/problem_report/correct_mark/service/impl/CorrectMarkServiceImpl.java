@@ -425,10 +425,12 @@ public class CorrectMarkServiceImpl implements ICorrectMarkService {
 		for(Object obj : list){
 			Map<String,Object> maps = new HashMap<>();
 			Object[] ob =  (Object[]) obj;
-			if(!"广州市水务局".equals(ob[0].toString())){
-				maps.put("name", ob[0]);
-				maps.put("total", ob[1]);
-				listTotal.add(maps);
+			if (ob[0]!=null) {
+				if(!"广州市水务局".equals(ob[0].toString())){
+					maps.put("name", ob[0]);
+					maps.put("total", ob[1]);
+					listTotal.add(maps);
+				}
 			}
 		}
 		return listTotal;

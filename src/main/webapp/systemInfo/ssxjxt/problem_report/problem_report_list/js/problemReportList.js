@@ -149,7 +149,7 @@ function format_oper(val,row,index){
 //格式化时间
 function format_date(val,rows,index){
 	if(val)
-		return getLocalTime(val.time?val.time:val);
+		return val;
 	else
 		return "";
 }

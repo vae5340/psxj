@@ -245,7 +245,7 @@
 <!-- 分页查询 获取监控预警站点信息搜索列表-->
 <select id="getAlarmStation" resultType="map" parameterType="map">
     <if test="jkType == null or jkType == '' or jkType == 1">
-        select  s.stcd,s.stnm,s.sttp,s1.Z alarmValue,s1.TM alarmDate,s.coox x,s.cooy y,'窨井水位' jktype,2 mnit,
+        select  s.stcd,s.stnm,s.sttp,s1.Z alarmValue,to_char(s1.TM, 'yyyy-MM-dd HH24:mi:ss') alarmDate,s.coox x,s.cooy y,'窨井水位' jktype,2 mnit,
         case when (S1.Z &gt;= s.alarm_one-0.1) THEN '满管预警' else '警戒水位' END alarmtype,CONCAT (CONCAT(STTP, '-'), 2) LAYERTYPE,
         s.RVNM,s.HNNM,s.BSNM,s.LGTD,s.LTTD,s.STLC,s.ADDVCD,s.USFL,s.STSYS,s.COMMENTS,s.ALARM_ONE,s.ALARM_TWO,s.ALARM_THREE
         from (SELECT * from ST_STBPRP_B t WHERE t.STTP='UP') s,ST_STBPRP_B_REAL s1
@@ -255,13 +255,13 @@
         UNION
     </if>
     <if test="jkType == null or jkType == '' or jkType == 2">
-        select  s.stcd,s.stnm,s.sttp,s1.Z alarmValue,s1.TM alarmDate,s.coox x,s.cooy y,'积水点水位' jktype,2 mnit,
+        select  s.stcd,s.stnm,s.sttp,s1.Z alarmValue,to_char(s1.TM, 'yyyy-MM-dd HH24:mi:ss') alarmDate,s.coox x,s.cooy y,'积水点水位' jktype,2 mnit,
         case  when (s1.Z &lt;=0.15 and s1.Z &gt;=0.05) THEN '轻度积水'
         when (s1.Z &lt;=0.25 and s1.Z &gt;=0.15) THEN '中度积水'
         when (s1.Z &lt;= 0.25) THEN '严重积水'
         END alarmtype,CONCAT (CONCAT(STTP, '-'), 2) LAYERTYPE,
         s.RVNM,s.HNNM,s.BSNM,s.LGTD,s.LTTD,s.STLC,s.ADDVCD,s.USFL,s.STSYS,s.COMMENTS,s.ALARM_ONE,s.ALARM_TWO,s.ALARM_THREE
-        from (SELECT * from ST_STBPRP_B t WHERE t.STTP='WL') s,ST_STBPRP_B_REAL s1
+        from (SELECT * from ST_STBPRP_B t WHERE t.STTP='SP') s,ST_STBPRP_B_REAL s1
         WHERE s.stcd = S1.STCD and s1.Z > 0.05
     </if>
 
